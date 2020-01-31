@@ -87,7 +87,7 @@ Sentinel 在阿里内部被广泛使用，为多年双11、双12、年货节、6
 
 - 自定义资源
 
-在个别场景中，业务需要对流控做异常处理，默认资源不满足业务需求，支持通过注解`@SentinelResource`自定义资源。
+在个别场景中，业务需要对流控做异常处理，或者需要配置降级熔断，默认资源定义不满足业务需求，支持通过注解`@SentinelResource`自定义资源。
 
 ```java
 @GetMapping(value = "/hello")
@@ -101,7 +101,24 @@ public String blockHandler(BlockException ex) {
     return "block !!!";
 }
 ```
-修改对应的流控规则配置，资源名称为`@SentinelResource`中的value值。
+修改对应的流控规则配置，资源名称为`@SentinelResource`中的value值。`@SentinelResource`注解具体参数说明如下：
+
+| 参数名             | 参数说明                                                     | 备注                           |
+| ------------------ | ------------------------------------------------------------ | ------------------------------ |
+| value              | 资源名称                                                     | 必填项                         |
+| entryType          | entry 类型                                                   | 可选项（默认为 EntryType.OUT） |
+| resourceType       | 资源类型                                                     | 可选项                         |
+| blockHandler       | 处理流控异常的方法名称，返回值类型必须与原方法返回值类型一致，参数列表需要和原方法一致，最后加一个额外的类型为BlockException的参数 | 可选项                         |
+| blockHandlerClass  | 处理流控异常对应类的Class对象，与blockHandler搭配使用        | 可选项                         |
+| fallback           | 处理任何异常的方法名称，返回值类型必须与原方法返回值类型一致，参数列表需要和原方法一致，可以额外多一个Throwable类型的参数用于接收对应的异常 | 可选项                         |
+| defaultFallback    | 返回值类型必须与原方法返回值类型一致，但方法参数列表需要为空，可以额外多一个Throwable类型的参数用于接收对应的异常，如果与fallback同时配置仅fallback生效 | 可选项                         |
+| fallbackClass      | 处理任何异常对应类的Class对象，与fallback搭配使用            | 可选项                         |
+| exceptionsToTrace  | 指定哪些异常被trace跟踪记录                                  | 可选项                         |
+| exceptionsToIgnore | 指定哪些异常被忽略掉，不计入异常统计中，也不进入fallback 逻辑 | 可选项                         |
+
+blockHandler和fallback的区别在于限流降级时抛出的BlockException时只会进入blockHandler处理，fallback可处理业务异常。如果blockHandler、blockHandlerClass、fallback、defaultFallback、fallbackClass都未配置，限流降级时BlockException会直接抛出给调用方。
+
+
 
 ```java
 private static void initFlowRules(){
@@ -332,9 +349,13 @@ public class DefaultSlotChainBuilder implements SlotChainBuilder {
 
 
 
+接下来笔者将根据执行顺序依次详细讲解各个Slot
+
+
+
 #### 调用链路构建
 
-NodeSelectorSlot是执行的第一个Slot，仅负责构建一个树形结构的请求链。
+Sentinel支持按调用链路配置流控规则，所以需要收集资源的调用路径。NodeSelectorSlot是执行的第一个Slot，仅负责构建一个树形结构的请求链。
 
 ```java
 private volatile Map<String, DefaultNode> map = new HashMap<String, DefaultNode>(10);
@@ -389,7 +410,7 @@ EntranceNode是入口节点，每一种入口都会在上下文Context中创建�
 
 #### 统计簇点构建
 
-ClusterBuilderSlot 负责创建以资源名维度统计的ClusterNode，以及创建每个ClusterNode下按调用来源origin的StatisticNode
+ClusterBuilderSlot 负责创建以资源名维度统计的ClusterNode，以及创建每个ClusterNode下按调用来源origin的StatisticNode。如果从调用链的角度看，ClusterNode是一个横向的切面，ClusterBuilderSlot和NodeSelectorSlot一样也是为后续统计runtime信息做准备工作。
 
 ```java
 private static volatile Map<ResourceWrapper, ClusterNode> clusterNodeMap = new HashMap<>();
@@ -462,7 +483,7 @@ LogSlot类的代码就是这么简单，正常情况下不需要做任何事情�
 
 #### 来源访问控制
 
-AuthoritySlot 用于做权限控制，支持黑名单和白名单2种策略。
+来源访问控制属于权限控制，权限控制也几乎是任何系统必备的。哪些流量允许请求被保护的资源，哪些流量又不允许请求被保护的资源，从这开始就会涉及到规则配置（rule）。AuthoritySlot 用于做权限控制，支持黑名单和白名单2种策略。
 
 ```java
 @Override
@@ -538,7 +559,7 @@ AuthoritySlot的代码总结如下：
 
 #### 系统保护
 
-SystemSlot 控制总的入口流量，限制条件依次是总qps、总线程数、RT阈值、操作系统当前load1、操作系统当前cpu利用率
+我们通常会设置一些限流或降级熔断规则，这些规则都是根据线上实际情况，或者是我们的经验和其他方法预估出来的。但由人来主观设置的规则往往不是绝对的可靠，原因是可能因为误操作规则中的阈值写错了，可能是突发流量超出我们的预估，也可能是操作系统或物理机不稳定等。在这些场景下原有配置好的规则不足以保护我们的服务，Sentinel采用了自动保护机制来应对。自动保护机制是当发现系统不稳定时优先进行流控，来达到保护系统的目的。具体实现在`SystemSlot`类，`SystemSlot`控制总的入口流量，限制的指标依次是总qps、总线程数、RT阈值、操作系统当前load1、操作系统当前cpu利用率
 
 ```java
 @Override
@@ -627,7 +648,7 @@ private final Function<String, Collection<FlowRule>> ruleProvider = new Function
     }
 };
 ```
-实际干活的流量检查代码在FlowRuleChecker类的checkFlow方法
+根据资源名拿到所有限流规则，遍历每个限流规则，其中一个规则触发限流则抛出限流异常
 
 ```java
 public void checkFlow(Function<String, Collection<FlowRule>> ruleProvider, ResourceWrapper resource, Context context, DefaultNode node, int count, boolean prioritized) throws BlockException {
@@ -653,7 +674,7 @@ public boolean canPassCheck(/*@NonNull*/ FlowRule rule, Context context, Default
     return passLocalCheck(rule, context, node, acquireCount, prioritized);
 }
 ```
-单机模式的限流是在本机独立完成，不需要依赖集群环境，也是最常用的场景。 笔者介绍一下单机模式
+单机模式的限流是在本机独立完成，不需要依赖集群环境，也是最常用的场景。
 
 ```java
 private static boolean passLocalCheck(FlowRule rule, Context context, DefaultNode node, int acquireCount, boolean prioritized) {
@@ -722,10 +743,12 @@ static Node selectNodeByRequesterAndStrategy(/*@NonNull*/ FlowRule rule, Context
 
 
 
-#### 熔断降级
-熔断降级机制是避免服务调用链路出现雪崩效应的一种保护机制。
+#### 降级熔断
+降级熔断机制是避免服务调用链路出现雪崩效应的一种保护机制。
 
-除了流量控制以外，对调用链路中不稳定的资源进行熔断降级也是保障高可用的重要措施之一。由于调用关系的复杂性，如果调用链路中的某个资源不稳定，最终会导致请求发生堆积。Sentinel 熔断降级会在调用链路中某个资源出现不稳定状态时（例如调用超时或异常比例升高），对这个资源的调用进行限制，让请求快速失败，避免影响到其它的资源而导致级联错误。当资源被降级后，在接下来的降级时间窗口之内，对该资源的调用都自动熔断。
+除了流量控制以外，对调用链路中不稳定的资源进行降级熔断也是保障高可用的重要措施之一。由于调用关系的复杂性，如果调用链路中的某个资源（服务）不稳定，最终会导致请求发生堆积。Sentinel 熔断降级会在调用链路中某个资源出现不稳定状态时（例如调用超时或异常比例升高），对这个资源的调用进行限制，让请求快速失败，避免影响到其它的资源而导致级联错误。当资源被降级后，在接下来的降级时间窗口之内，对该资源的调用都自动熔断。
+
+举个例子说明，有2条调用链路，A服务-->B服务 和 A服务-->C服务，如果C服务不稳定出现大量超时，如果不做降级熔断处理的情况下，C服务的请求发生堆积可能会导致A服务也发生堆积。A服务-->C服务这条链路肯定是服务不可用了，但另外一条链路A服务-->B服务是无辜的，也由于A服务发生堆积导致不可用，这就容易造成大量调用链路出现雪崩。而如果采用降级熔断处理，当发现C服务不稳定时，掐断A服务-->C服务的链路，保护A服务不受影响，从而保护了另外一条调用链路不受影响。
 
 熔断降级有3种策略，在创建规则可以设置
 - RT (response time)
