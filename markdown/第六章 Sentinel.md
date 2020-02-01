@@ -51,7 +51,9 @@ Sentinel 在阿里内部被广泛使用，为多年双11、双12、年货节、6
   }
   ```
 
-  定义资源只需要使用@SentinelResource，如果不需要处理限流异常，则可以省略`blockHandler`参数和方法。
+  这里提供了一个最为常见的http接口，Sentinel会自动把`/hello`接口定义成一个受保护的资源。
+
+  
 
 - step3  定义限流规则
 
@@ -67,9 +69,13 @@ Sentinel 在阿里内部被广泛使用，为多年双11、双12、年货节、6
   }
   ```
 
+  这里定义一个限流规则，资源名称为`/hello`，限制允许通过的QPS为2，系统初始化时候加载限流规则。
+
+  
+
 - step4 查看效果
 
-  Demo 运行之后，当有大量请求访问http://{ip}:{port}/hello能够看到每秒限流2次，日志在 `~/logs/csp/${包名-类名}-metrics.log.xxx` 里看到下面的输出:
+  Demo 运行之后，可以用测试工具或者浏览器模拟大量请求访问http://{ip}:{port}/hello，能够看到每秒限流2次，日志在 `~/logs/csp/${包名-类名}-metrics.log.xxx` 里看到下面的输出:
 
   `1579460708000|2020-01-20 03:05:08|/hello|1|0|1|0|2|0|0|0
   1579460709000|2020-01-20 03:05:09|/hello|2|4|2|0|0|0|0|0
@@ -160,7 +166,7 @@ private static void initFlowRules(){
 
 #### 集成在非Spring Cloud 应用中使用
 
-Sentinel在Spring Cloud Alibaba之前就已经诞生了，所以Sentinel也可以作为独立工具使用。
+Sentinel在Spring Cloud Alibaba之前就已经诞生了，所以Sentinel也可以作为独立工具使用，需要使用Sentinel提供的API来完成。
 
 - step1  在代码工程的pom.xml中引用jar包
 
@@ -225,11 +231,132 @@ Demo 运行之后，我们可以在日志 `~/logs/csp/${包名-类名}-metrics.l
 
 
 
-通过这两个demo相信大家已经掌握了sentinel的基本用法，并且接触到了其中的一些概念，例如资源、规则等，接下来我们先学习Sentinel中有哪些重要的概念，对于我们后续理解其整体设计和核心模块有较大的帮助。
+### 6.1.2 自动装配Sentienl
+
+在第一个Demo中我们演示了添加一个限流规则，Sentinel就自动保护了/hello接口，并未侵入我们的Controller类，这又是如何做到的呢？
+
+我们在前面的章节里已经学习过SpringBoot的自动装配，在代码pom.xml中引入了`spring-cloud-starter-alibaba-sentinel`组件，这个starter就会自动装配一些Filter来对http接口进行拦截，在拦截过程中完成调用Sentinel的API对接口进行保护，接下来看下具体实现过程吧。
+
+`spring-cloud-alibaba-sentienl:2.2.1.RELEASE.jar`包中META-INF下有个spring.factories文件。
+
+```
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.alibaba.cloud.sentinel.SentinelWebAutoConfiguration,\
+com.alibaba.cloud.sentinel.SentinelWebFluxAutoConfiguration,\
+com.alibaba.cloud.sentinel.endpoint.SentinelEndpointAutoConfiguration,\
+com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration,\
+com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration
+
+org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker=\
+com.alibaba.cloud.sentinel.custom.SentinelCircuitBreakerConfiguration
+```
+
+这里EnableAutoConfiguration装配了5个配置，和Web相关的有SentinelWebAutoConfiguration和SentinelWebFluxAutoConfiguration，我们没有使用webFlux，那就是在SentinelWebAutoConfiguration。如果未在application.yml等配置文件中自定义url，那默认就是拦截`/*`所有请求。
+
+```java
+@Bean
+@ConditionalOnProperty(
+    name = {"spring.cloud.sentinel.filter.enabled"},
+    matchIfMissing = true
+)
+public FilterRegistrationBean sentinelFilter() {
+    FilterRegistrationBean<Filter> registration = new FilterRegistrationBean();
+    com.alibaba.cloud.sentinel.SentinelProperties.Filter filterConfig = this.properties.getFilter();
+    if (filterConfig.getUrlPatterns() == null || filterConfig.getUrlPatterns().isEmpty()) {
+        List<String> defaultPatterns = new ArrayList();
+        defaultPatterns.add("/*");
+        filterConfig.setUrlPatterns(defaultPatterns);
+    }
+
+    registration.addUrlPatterns((String[])filterConfig.getUrlPatterns().toArray(new String[0]));
+    Filter filter = new CommonFilter();
+    registration.setFilter(filter);
+    registration.setOrder(filterConfig.getOrder());
+    registration.addInitParameter("HTTP_METHOD_SPECIFY", String.valueOf(this.properties.getHttpMethodSpecify()));
+    log.info("[Sentinel Starter] register Sentinel CommonFilter with urlPatterns: {}.", filterConfig.getUrlPatterns());
+    return registration;
+}
+```
+
+这里可以看到注册了一个Filter，并且启动时日志打印出来拦截哪些url。
+
+<img src="image/sentinel-log_1.jpg" alt="sentinel-log_1" style="zoom:50%;" />
+
+具体实现是CommonFilter类
+
+```java
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    HttpServletRequest sRequest = (HttpServletRequest)request;
+    Entry urlEntry = null;
+
+    try {
+        String target = FilterUtil.filterTarget(sRequest);
+        UrlCleaner urlCleaner = WebCallbackManager.getUrlCleaner();
+        if (urlCleaner != null) {
+            target = urlCleaner.clean(target);
+        }
+
+        if (!StringUtil.isEmpty(target)) {
+            String origin = this.parseOrigin(sRequest);
+            String contextName = this.webContextUnify ? "sentinel_web_servlet_context" : target;
+            ContextUtil.enter(contextName, origin);
+            if (this.httpMethodSpecify) {
+                String pathWithHttpMethod = sRequest.getMethod().toUpperCase() + ":" + target;
+                urlEntry = SphU.entry(pathWithHttpMethod, 1, EntryType.IN);
+            } else {
+                urlEntry = SphU.entry(target, 1, EntryType.IN);
+            }
+        }
+
+        chain.doFilter(request, response);
+    } catch (BlockException var15) {
+        HttpServletResponse sResponse = (HttpServletResponse)response;
+        WebCallbackManager.getUrlBlockHandler().blocked(sRequest, sResponse, var15);
+    } catch (ServletException | RuntimeException | IOException var16) {
+        Tracer.traceEntry(var16, urlEntry);
+        throw var16;
+    } finally {
+        if (urlEntry != null) {
+            urlEntry.exit();
+        }
+
+        ContextUtil.exit();
+    }
+
+}
+```
+
+CommonFilter中`FilterUtil.filterTarget(sRequest)`解析了http请求的url，以RequestMapping的路径作为资源名称调用Sentinel的API，即`SphU.entry(target, 1, EntryType.IN);`。
+
+```java
+public static String filterTarget(HttpServletRequest request) {
+    String pathInfo = getResourcePath(request);
+    if (!pathInfo.startsWith("/")) {
+        pathInfo = "/" + pathInfo;
+    }
+
+    if ("/".equals(pathInfo)) {
+        return pathInfo;
+    } else {
+        int lastSlashIndex = pathInfo.lastIndexOf("/");
+        if (lastSlashIndex >= 0) {
+            pathInfo = pathInfo.substring(0, lastSlashIndex) + "/" + StringUtil.trim(pathInfo.substring(lastSlashIndex + 1));
+        } else {
+            pathInfo = "/" + StringUtil.trim(pathInfo);
+        }
+
+        return pathInfo;
+    }
+}
+```
+
+通过这两个demo相信大家已经掌握了sentinel的基本用法，并且接触到了其中的一些概念，例如资源、规则等，也学习了通过SpringBoot自动装配机制可以不侵入业务代码来使用sentinel保护http接口，对于保护dubbo服务做到自动集成的原理也是相同的，这里就不展开了。
+
+关于Sentinel的API，我们在前面Demo也有介绍到，最后会执行到我接下来要给大家讲解部分，读者有兴趣可以查阅源码继续跟读，这里也不再展开了。接下来我们先学习Sentinel中有哪些重要的概念，对于我们后续理解其整体设计和核心模块有较大的帮助。
 
 
 
-### 6.1.2 Sentinel 基本概念
+### 6.1.3 Sentinel 基本概念
 
 我们使用Sentinel的核心目的如果用一句话概括，那就是通过一切办法来做流量控制。
 
