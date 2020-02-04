@@ -307,7 +307,210 @@ RocketMQ架构上主要分为四部分，如上图所示:
 
 
 
-## 2. 消息发送
+### 自动装配RocketMQ
+
+rocketmq-spring-boot-2.0.3.jar
+
+spring.factories
+
+```
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
+```
+
+发送消息
+
+RocketMQAutoConfiguration，RocketMQTemplate封装DefaultMQProducer
+
+消费消息
+
+ListenerContainerConfiguration，DefaultRocketMQListenerContainer封装MessageListenerOrderly
+
+
+
+## 2. 为什么放弃Zookeeper选择NameServer
+
+
+
+
+
+## 3. 如何实现顺序消息
+
+### 
+
+
+
+## 4. 如何实现事务消息
+
+### 事务消息的场景
+
+事务消息使用的场景很多，例如在电商系统中用户下单后新增了订单记录，对应的商品库存需要减少，怎么保证新增订单后商品库存减少？又例如红包业务，张三给李四发红包，张三的账户余额需要扣减，李四的账户余额需要增加，怎么保证张三账户扣钱后李四账户加钱？
+
+此类问题都是事务问题，可以简单理解为一个表的数据更新后，如何保证另外一个表的数据也更新成功？如果是使用同一个数据库实例，那问题很简单，可以使用本地事务来解决，spring的`@Transactional`注解就能支持。
+
+```
+begin transaction 
+	insert into 订单表 values(xxx);
+	update 库存表 set xxx where xxx;
+end transaction
+commit;
+```
+
+但实际场景不是这么简单，互联网应用的流量大，系统规模通常比较大，会存在许多数据库实例、分库分表等。我们需要修改的表往往不在同一个数据库实例或同一个数据库中，此时就不能使用本地事务来解决问题，这就需要用到分布式事务。
+
+RocketMQ的一大特点就是支持事务消息，支持一些分布式事务场景，下面我们看下RocketMQ事务消息的具体用法。
+
+
+
+### 应用举例
+
+我们使用RocketMQ事务消息来模拟一下下单减库存的场景
+
+- step1 发送订单的事务消息，预提交
+
+```java
+public String sendTransactionMsg() {
+    Order order = new Order("123", "浙江杭州");
+    String transactionId = UUID.randomUUID().toString();
+    MessageBuilder builder = MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId);
+    Message message = builder.build();
+
+    TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup","TopicOrder", message, order.getOrderId());
+    return sendResult.getMsgId();
+}
+```
+
+Order对象保存了订单信息被发送到`TopicOrder`，随机生成一个ID作为消息的事务ID，定义了一个名为OrderTransactionGroup的事务组，用于下一步接收本地事务的监听。
+
+此时消息已经发送到broker中，但还未投递出去，Consumer暂时还不能消费这条消息。
+
+
+
+- step2 执行订单信息入库的事务操作，提交或回滚事务消息
+
+```java
+@RocketMQTransactionListener(txProducerGroup = "OrderTransactionGroup")
+public class TransactionMsgListener implements RocketMQLocalTransactionListener {
+
+    @Override
+    public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) 		{
+        try {
+            // 拿到前面生成的事务ID
+            String transactionId = (String) message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
+            // 以事务ID为主键，执行本地事务
+            Order order = (Order) message.getPayload();
+            boolean result = this.saveOrder(order, transactionId);
+            return result ? RocketMQLocalTransactionState.COMMIT : RocketMQLocalTransactionState.ROLLBACK;
+        } catch (Exception e) {
+            return RocketMQLocalTransactionState.ROLLBACK;
+        }
+    }
+
+    private boolean saveOrder(Order order, String transactionId){
+      	// 事务ID 设置为 唯一键
+        // 调用数据库 insert into 订单表
+        return true;
+    }
+
+    @Override
+    public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
+        // 拿到事务ID
+        String transactionId = (String) message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
+        // 以事务ID为主键，查询本地事务执行情况
+        if (isSuccess(transactionId)) {
+            return RocketMQLocalTransactionState.COMMIT;
+        }
+        return RocketMQLocalTransactionState.ROLLBACK;
+    }
+
+    private boolean isSuccess(String transactionId) {
+        // 查询数据库 select from 订单表
+        return true;
+    }
+}
+```
+
+实现`RocketMQLocalTransactionListener`接口和使用`@RocketMQTransactionListener`注解用于接收本地事务的监听，txProducerGroup是事务组名称，和前面定义的OrderTransactionGroup保持一致。`RocketMQLocalTransactionListener`接口有2个实现方法：
+
+executeLocalTransaction ：执行本地事务，在step1中消息发送成功会回调执行，一旦事务提交成功之后，下游应用的Consumer是能收到该消息，在这里demo的本地事务就是保存订单信息入库。
+
+checkLocalTransaction：检查本地事务执行状态，如果`executeLocalTransaction`方法中返回的状态是未知`UNKNOWN`或者未返回状态，默认会在预处理发送的1分钟后由broker通知producer检查本地事务，在producer中回调本地事务监听器中的`checkLocalTransaction`方法。检查本地事务时，可以根据事务ID查询本地事务的状态，再返回具体事务状态给broker。
+
+
+
+- step3 消费订单消息
+
+```java
+@Component
+@RocketMQMessageListener(topic = "TopicOrder", consumerGroup = "CONSUMER_GROUP_ORDER")
+public class OrderListener implements RocketMQListener<Order> {
+
+    @Override
+    public void onMessage(Order order) {
+        // 调用数据库 update 库存表
+    }
+}
+```
+
+这里需要注意的是，如果消费失败需要人工介入处理，通常这种情况都是业务bug导致，人工修复后继续消费即可。
+
+
+
+### 技术原理
+
+RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向broker发送预处理消息（也称半消息），此时消息还未被投递出去，Consumer不能消费；第二阶段Producer向broker发送提交或回滚消息，具体流程如下：
+
+发送预处理消息成功后，执行本地事务
+
+本地事务执行成功，发送提交请求消息，消息会投递给Consumer
+
+![rocketmq_architecture_8](image/rocketmq_architecture_8.jpg)
+
+本地事务执行失败，发送回滚请求消息，消息不会投递给Consumer
+
+![rocketmq_architecture_9](image/rocketmq_architecture_9.jpg)
+
+本地事务状态未知，网络故障或Producer宕机，Broker未收到二次确认的消息。由Broker端发请求给Producer发起消息回查，确认提交或回滚。如果消息状态一直未被确认，需要人工介入处理。
+
+![rocketmq_architecture_10](image/rocketmq_architecture_10.jpg)
+
+
+
+
+
+##5. 高性能设计
+
+RocketMQ的高性能在于顺序写盘(CommitLog)、零拷贝和跳跃读(尽量命中PageCache)
+
+RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计
+
+动态伸缩能力，伸缩性体现在Topic和Broker两个维度
+
+Topic维度：假如一个Topic的消息量特别大，但集群水位压力还是很低，就可以扩大该Topic的队列数，Topic的队列数跟发送、消费速度成正比。
+
+Broker维度：如果集群水位很高了，需要扩容，直接加机器部署Broker就可以。Broker起来后向Namesrv注册，Producer、Consumer通过Namesrv 发现新Broker，立即跟该Broker直连，收发消息。
+
+
+
+## 6. 高可用设计
+
+服务发现的高可用，NameServer全部挂掉不影响已经运行的Broker,Producer,Consumer。	
+
+消息发送的高可用，故障规避机制
+
+消息存储的高可用，在于刷盘和Master/Slave
+
+消息消费的高可用，消费重试机制，ACK机制
+
+
+
+
+
+
+
+
+
+## （待调整）消息发送
 
 ### 消息类型
 
@@ -395,21 +598,7 @@ receiveTime = 1579797318182
 
 #### 事务消息
 
-RocketMQ的一大特点就是支持事务消息，RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向broker发送预处理消息（也称半消息），此时消息还未被投递出去，Consumer不能消费；第二阶段Producer向broker发送提交或回滚消息，具体流程如下：
 
-发送预处理消息成功后，执行本地事务
-
-本地事务执行成功，发送提交请求消息，消息会投递给Consumer
-
-![rocketmq_architecture_8](image/rocketmq_architecture_8.jpg)
-
-本地事务执行失败，发送回滚请求消息，消息不会投递给Consumer
-
-![rocketmq_architecture_9](image/rocketmq_architecture_9.jpg)
-
-本地事务状态未知，网络故障或Producer宕机，Broker未收到二次确认的消息。由Broker端发请求给Producer发起消息回查，确认提交或回滚。如果消息状态一直未被确认，需要人工介入处理。
-
-![rocketmq_architecture_10](image/rocketmq_architecture_10.jpg)
 
 
 
@@ -905,7 +1094,7 @@ FaultItem存储了broker名称、响应时长、故障规避开始时间，最�
 
 
 
-## 3. 消息存储
+## （待调整） 消息存储
 
 ### 消息存储整体设计
 
@@ -1320,7 +1509,7 @@ RocketMQ的consumer在拉取消息时，broker会判断Master服务器的消息�
 
 
 
-## 4. 消息消费
+## （待调整）消息消费
 
 ### 集群消费和广播消费
 
@@ -1379,7 +1568,7 @@ RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费�
 
 
 
-##5. 运维
+##（待调整）运维
 
 ### 集群部署
 

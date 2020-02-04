@@ -64,12 +64,13 @@ public class TestController {
     }
 
     @GetMapping(value = "/transaction")
-    public String transaction() {
+    public String sendTransactionMsg() {
         Order order = new Order("123", "浙江杭州");
-        MessageBuilder builder = MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, UUID.randomUUID().toString());
+        String transactionId = UUID.randomUUID().toString();
+        MessageBuilder builder = MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId);
         Message message = builder.build();
 
-        TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup","TopicTest", message, order.getOrderId());
+        TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup","TopicOrder", message, order.getOrderId());
         return sendResult.getMsgId();
     }
 }
