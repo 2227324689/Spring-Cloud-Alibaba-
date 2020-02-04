@@ -1,0 +1,74 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: sample-order-service
+mybatis:
+    mapper-locations: classpath*:com/gupaoedu/seata/orderprovider/dal/mappers/*Mapper.xml
+    type-aliases-package: com.gupaoedu.seata.orderprovider.dal.entitys
+dubbo:
+  application:
+    name: sample-order-service
+  registry:
+    address: nacos://192.168.216.128:8848
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: com.gupaoedu.seata.orderprovider.impl
+seata:
+  enabled: true
+  tx-service-group: sample-order-service
+  transport:
+    type: TCP
+    server: NIO
+    heartbeat: true
+    enable-client-batch-send-request: true
+    thread-factory:
+      boss-thread-prefix: NettyBoss
+      worker-thread-prefix: NettyServerNIOWorker
+      server-executor-thread-prefix: NettyServerBizHandler
+      share-boss-worker: false
+      client-selector-thread-prefix: NettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: NettyClientWorkerThread
+      boss-thread-size: 1
+      worker-thread-size: 8
+    shutdown:
+      wait: 3
+    serialization: seata
+    compressor: none
+  service:
+    vgroup-mapping: default
+    enable-degrade: false
+    disable-global-transaction: false
+    #grouplist: 192.168.216.128:8091
+  client:
+    rm:
+      lock:
+        lock-retry-interval: 10
+        lock-retry-policy-branch-rollback-on-conflict: true
+        lock-retry-times: 30
+    rm-async-commit-buffer-limit: 10000
+    rm-report-retry-count: 5
+    rm-table-meta-check-enable: false
+    rm-report-success-enable: true
+    tm-commit-retry-count: 5
+    tm-rollback-retry-count: 5
+    undo:
+      undo-log-table: undo_log
+      undo-data-validation: true
+      undo-log-serialization: jackson
+    log:
+      exception-rate: 100
+    support:
+      spring:
+        datasource-autoproxy: true
+  registry:
+    type: nacos
+    nacos:
+      cluster: default
+      server-addr: 192.168.216.128:8848

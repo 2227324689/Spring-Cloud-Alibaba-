@@ -6,14 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sample-provider" />
         <module name="sample-api" />
+        <module name="sample-provider" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="sample-provider" options="" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="sample-api" target="1.7" />
+      <module name="sample-provider" target="1.8" />
+      <module name="springboot-provider" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

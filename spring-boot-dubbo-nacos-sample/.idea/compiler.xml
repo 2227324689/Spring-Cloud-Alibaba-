@@ -10,10 +10,10 @@
         <module name="nacos-sample-provider" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="nacos-sample-provider" options="-parameters" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="nacos-sample-api" target="1.7" />
+      <module name="nacos-sample-provider" target="1.8" />
+      <module name="spring-boot-dubbo-nacos-sample" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

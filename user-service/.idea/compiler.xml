@@ -10,5 +10,10 @@
         <module name="user-provider" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="user-api" target="1.7" />
+      <module name="user-provider" target="1.7" />
+      <module name="user-service" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

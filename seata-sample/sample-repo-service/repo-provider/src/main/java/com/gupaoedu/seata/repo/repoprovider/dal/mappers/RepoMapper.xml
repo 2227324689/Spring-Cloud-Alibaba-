@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gupaoedu.seata.repo.repoprovider.dal.mappers.RepoMapper">
+    <resultMap id="BaseResultMap" type="com.gupaoedu.seata.repo.repoprovider.dal.entitys.Repo">
+        <id column="id" property="id" />
+        <result column="product_code" property="productCode" />
+        <result column="name" property="name" />
+        <result column="count" property="count" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, commodity_code, name, count
+    </sql>
+    <update id="decreaseRepo">
+        update tbl_repo set count=count-${count} where product_code = #{productCode} and count>0
+    </update>
+</mapper>
