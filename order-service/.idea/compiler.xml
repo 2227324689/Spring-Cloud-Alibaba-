@@ -9,5 +9,8 @@
         <module name="order-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="order-service" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gupaoedu.seata.orderprovider.dal.mappers.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.gupaoedu.seata.orderprovider.dal.entitys.Order">
+        <id column="id" property="id" />
+        <result column="order_no" property="orderNo" />
+        <result column="user_id" property="userId" />
+        <result column="product_code" property="productCode" />
+        <result column="count" property="count" />
+        <result column="amount" property="amount" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, order_no, user_id, product_code, count, amount
+    </sql>
+
+    <insert id="createOrder" keyProperty="id" useGeneratedKeys="true"
+            parameterType="com.gupaoedu.seata.orderprovider.dal.entitys.Order">
+        insert into tbl_order values(null,#{orderNo},#{userId},#{productCode},${count},${amount})
+    </insert>
+</mapper>
