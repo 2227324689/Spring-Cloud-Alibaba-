@@ -34,7 +34,7 @@ RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消
 
 ### 如何使用
 
-#### 集成在Spring Cloud Alibaba 中使用
+RocketMQ集成在Spring Cloud Alibaba 中使用，有2种方式可以方便使用：springboot集成的RocketMQ组件，以及使用SpringCloudStream，当然直接使用RocketMQ的API也是可以的。
 
 - 使用`rocketMQTemplate`发送消息
 
@@ -268,24 +268,377 @@ public class Application {
 
 
 
-前面分别简单介绍了Springboot中和SpringCloudStream中如何发送和消息消息，笔者个人偏好喜欢使用Springboot集成的RocketMQ注解，开发更便捷。SpringCloudStream统一消息模型在编程模型上是一种好的设计，但笔者认为在实际开发过程中并不实用。主要原因是消息中间件通常不会轻易变更，也很少会在一个应用中使用多个消息中间件。
+前面分别简单介绍了Springboot中和SpringCloudStream中如何发送和消息消息，那在平常开发过程中该如何选择呢？笔者个人偏好喜欢使用Springboot集成的`RocketMQTemplate`和`@RocketMQMessageListener`注解等，优点是开发简单更便捷，包装的API更贴合RocketMQ的功能和概念。SpringCloudStream是统一消息模型，在编程模型上是一种好的设计，优点是多数情况下更换消息中间件业务代码仅需修改配置，例如从使用kafka换成使用RocketMQ，但笔者认为在实际开发过程中并不是很实用，主要原因是消息中间件通常不会轻易变更，也很少会在一个应用中使用多个消息中间件。
 
 
 
-### 总体设计
+### 技术原理
 
-![](image/rocketmq_architecture_1.png)
+前面演示的demo中引入了`spring-cloud-starter-stream-rocketmq`，maven会传递依赖`rocketmq-spring-boot-2.0.2.jar`，从名字上也能看出来是SpringBoot自动装配机制来集成RocketMQ。
 
-RocketMQ架构上主要分为四部分，如上图所示:
+找到`rocketmq-spring-boot-2.0.2.jar`中的`META-INF\spring.factories`文件
 
-- Producer：消息发布的角色，支持分布式集群方式部署。producer通过MQ的负载均衡模块选择相应的Broker集群队列进行消息投递，投递的过程支持快速失败并且低延迟。
-
-- Consumer：消息消费者的角色，支持分布式集群方式部署。支持以push推、pull拉两种模式对消息进行消费。同时也支持集群方式和广播形式的消费，它提供实时消息订阅机制，可以满足大多数用户的需求。
-
-- Broker：Broker主要负责消息的存储、投递和查询以及服务高可用保证。
-- NameServer：NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo中的zookeeper，支持Broker的动态注册与发现。主要包括两个功能：Broker管理，NameServer接受Broker集群的注册信息并且保存下来作为路由信息的基本数据。然后提供心跳检测机制，检查Broker是否还存活。路由信息管理。每个NameServer将保存关于Broker集群的整个路由信息和用于客户端查询的队列信息。然后Producer和Conumser通过NameServer就可以知道整个Broker集群的路由信息，从而进行消息的投递和消费。NameServer通常也是集群的方式部署，各实例间相互不进行信息通讯。Broker是向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。当某个NameServer因某种原因下线了，Broker仍然可以向其它NameServer同步其路由信息，Produce和Consumer仍然可以动态感知Broker的路由的信息。
+```
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
+```
 
 
+
+根据spring.factories中的配置找到RocketMQAutoConfiguration类，其中定义了`RocketMQTemplate`这个Bean
+
+```java
+@Bean(destroyMethod = "destroy")
+@ConditionalOnBean(DefaultMQProducer.class)
+@ConditionalOnMissingBean(RocketMQTemplate.class)
+public RocketMQTemplate rocketMQTemplate(DefaultMQProducer mqProducer, ObjectMapper rocketMQMessageObjectMapper) {
+    RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
+    rocketMQTemplate.setProducer(mqProducer);
+    rocketMQTemplate.setObjectMapper(rocketMQMessageObjectMapper);
+    return rocketMQTemplate;
+}
+```
+
+`RocketMQTemplate`依赖`DefaultMQProducer`这个Bean，Bean的定义也是在RocketMQAutoConfiguration类中。`DefaultMQProducer`是RocketMQ源码中提供的客户端API，`RocketMQTemplate`中所有发送消息的接口都是封装了它。
+
+```java
+@Bean
+@ConditionalOnMissingBean(DefaultMQProducer.class)
+@ConditionalOnProperty(prefix = "rocketmq", value = {"name-server", "producer.group"})
+public DefaultMQProducer defaultMQProducer(RocketMQProperties rocketMQProperties) {
+    RocketMQProperties.Producer producerConfig = rocketMQProperties.getProducer();
+    String nameServer = rocketMQProperties.getNameServer();
+    String groupName = producerConfig.getGroup();
+    Assert.hasText(nameServer, "[rocketmq.name-server] must not be null");
+    Assert.hasText(groupName, "[rocketmq.producer.group] must not be null");
+
+    DefaultMQProducer producer;
+    String ak = rocketMQProperties.getProducer().getAccessKey();
+    String sk = rocketMQProperties.getProducer().getSecretKey();
+    if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
+        producer = new DefaultMQProducer(groupName, new AclClientRPCHook(new SessionCredentials(ak, sk)),
+            rocketMQProperties.getProducer().isEnableMsgTrace(),
+            rocketMQProperties.getProducer().getCustomizedTraceTopic());
+        producer.setVipChannelEnabled(false);
+    } else {
+        producer = new DefaultMQProducer(groupName, rocketMQProperties.getProducer().isEnableMsgTrace(),
+            rocketMQProperties.getProducer().getCustomizedTraceTopic());
+    }
+
+    producer.setNamesrvAddr(nameServer);
+    producer.setSendMsgTimeout(producerConfig.getSendMessageTimeout());
+    producer.setRetryTimesWhenSendFailed(producerConfig.getRetryTimesWhenSendFailed());
+    		producer.setRetryTimesWhenSendAsyncFailed(producerConfig.getRetryTimesWhenSendAsyncFailed());
+    producer.setMaxMessageSize(producerConfig.getMaxMessageSize());
+    producer.setCompressMsgBodyOverHowmuch(producerConfig.getCompressMessageBodyThreshold());
+    producer.setRetryAnotherBrokerWhenNotStoreOK(producerConfig.isRetryNextServer());
+
+    return producer;
+}
+```
+
+DefaultMQProducer的参数在RocketMQProperties类中设置，前面我们只设置了NameServer的地址，发送超时时间、发送失败重试次数、消息大小限制等参数默认值也在RocketMQProperties类中查看，可以在配置文件中修改。
+
+
+
+在RocketMQAutoConfiguration类只初始化了发送消息相关的Bean，并没有消费消息相关的Bean信息。初始化消息监听器的过程要复杂很多，其中涉及许多spring容器的知识。RocketMQAutoConfiguration类引入了另外一个配置类ListenerContainerConfiguration。
+
+```java
+@Import({ JacksonFallbackConfiguration.class, ListenerContainerConfiguration.class })
+public class RocketMQAutoConfiguration {
+}
+
+@Configuration
+public class ListenerContainerConfiguration implements ApplicationContextAware, SmartInitializingSingleton {
+  	@Override
+    public void afterSingletonsInstantiated() {
+      	// 用了@RocketMQMessageListener注解的Bean
+        Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(RocketMQMessageListener.class);
+
+        if (Objects.nonNull(beans)) {
+            beans.forEach(this::registerContainer);
+        }
+    }
+}
+
+public interface SmartInitializingSingleton {
+    void afterSingletonsInstantiated();
+}
+```
+
+ListenerContainerConfiguration类实现了SmartInitializingSingleton接口，SmartInitializingSingleton接口由spring容器提供，仅定义了afterSingletonsInstantiated()方法，作用是spring容器等所有单例Bean初始化完成之后进行回调。在回调过程中，获取所有使用了`@RocketMQMessageListener`注解的Bean，调用registerContainer()方法对这些Bean进行注册，这些Bean都是消息监听器，分别监听不同Topic的消息。
+
+```java
+private void registerContainer(String beanName, Object bean) {
+    Class<?> clazz = AopProxyUtils.ultimateTargetClass(bean);
+
+    if (!RocketMQListener.class.isAssignableFrom(bean.getClass())) {
+        throw new IllegalStateException(clazz + " is not instance of " + RocketMQListener.class.getName());
+    }
+
+    RocketMQMessageListener annotation = clazz.getAnnotation(RocketMQMessageListener.class);
+    validate(annotation);
+
+    String containerBeanName = String.format("%s_%s", DefaultRocketMQListenerContainer.class.getName(),
+        counter.incrementAndGet());
+    GenericApplicationContext genericApplicationContext = (GenericApplicationContext) applicationContext;
+		// DefaultRocketMQListenerContainer初始化Bean
+    genericApplicationContext.registerBean(containerBeanName, DefaultRocketMQListenerContainer.class,
+        () -> createRocketMQListenerContainer(bean, annotation));
+    DefaultRocketMQListenerContainer container = genericApplicationContext.getBean(containerBeanName,
+        DefaultRocketMQListenerContainer.class);
+    if (!container.isRunning()) {
+        try {
+            container.start();
+        } catch (Exception e) {
+            log.error("Started container failed. {}", container, e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    log.info("Register the listener to container, listenerBeanName:{}, containerBeanName:{}", beanName, containerBeanName);
+}
+```
+
+这里的关键代码是通过createRocketMQListenerContainer(bean, annotation)生成了DefaultRocketMQListenerContainer对象，并完成注册Bean的过程，以及start()启动。DefaultRocketMQListenerContainer是一个包装类，持有消息监听器RocketMQListener的实例。
+
+```java
+private DefaultRocketMQListenerContainer createRocketMQListenerContainer(Object bean, RocketMQMessageListener annotation) {
+    DefaultRocketMQListenerContainer container = new DefaultRocketMQListenerContainer();
+    container.setNameServer(rocketMQProperties.getNameServer());
+    container.setTopic(environment.resolvePlaceholders(annotation.topic()));
+    container.setConsumerGroup(environment.resolvePlaceholders(annotation.consumerGroup()));
+    container.setRocketMQMessageListener(annotation);
+    container.setRocketMQListener((RocketMQListener) bean);
+    container.setObjectMapper(objectMapper);
+    return container;
+}
+```
+
+DefaultRocketMQListenerContainer类实现InitializingBean接口，InitializingBean接口也是spring容器提供，仅定义了afterPropertiesSet()方法，作用是在初始化bean的时候都会执行该方法。
+
+**DefaultMQPushConsumer是RocketMQ提供的客户端API，在DefaultRocketMQListenerContainer初始化Bean的时候完成了对其初始化。**
+
+```java
+public class DefaultRocketMQListenerContainer implements InitializingBean,
+    RocketMQListenerContainer, SmartLifecycle, ApplicationContextAware {
+      
+		@Override
+    public void afterPropertiesSet() throws Exception {
+        initRocketMQPushConsumer();
+        this.messageType = getMessageType();
+    }
+    
+    private void initRocketMQPushConsumer() throws MQClientException {
+        // 准备注册钩子函数
+        RPCHook rpcHook = RocketMQUtil.getRPCHookByAkSk(applicationContext.getEnvironment(),
+            this.rocketMQMessageListener.accessKey(), this.rocketMQMessageListener.secretKey());
+        boolean enableMsgTrace = rocketMQMessageListener.enableMsgTrace();
+      	// 初始化DefaultMQPushConsumer
+        if (Objects.nonNull(rpcHook)) {
+            consumer = new DefaultMQPushConsumer(consumerGroup, rpcHook, new AllocateMessageQueueAveragely(),
+                enableMsgTrace, this.applicationContext.getEnvironment().
+                resolveRequiredPlaceholders(this.rocketMQMessageListener.customizedTraceTopic()));
+            consumer.setVipChannelEnabled(false);
+            consumer.setInstanceName(RocketMQUtil.getInstanceName(rpcHook, consumerGroup));
+        } else {
+            log.debug("Access-key or secret-key not configure in " + this + ".");
+            consumer = new DefaultMQPushConsumer(consumerGroup, enableMsgTrace,
+                    this.applicationContext.getEnvironment().
+                    resolveRequiredPlaceholders(this.rocketMQMessageListener.customizedTraceTopic()));
+        }
+
+        consumer.setNamesrvAddr(nameServer);
+        consumer.setConsumeThreadMax(consumeThreadMax);
+        if (consumeThreadMax < consumer.getConsumeThreadMin()) {
+            consumer.setConsumeThreadMin(consumeThreadMax);
+        }
+				
+      	// 消息模式:集群消费 or 广播消费
+        switch (messageModel) {
+            case BROADCASTING:
+                consumer.setMessageModel(org.apache.rocketmq.common.protocol.heartbeat.MessageModel.BROADCASTING);
+                break;
+            case CLUSTERING:
+                consumer.setMessageModel(org.apache.rocketmq.common.protocol.heartbeat.MessageModel.CLUSTERING);
+                break;
+            default:
+                throw new IllegalArgumentException("Property 'messageModel' was wrong.");
+        }
+				// 消费过滤方式
+        switch (selectorType) {
+            case TAG:
+                consumer.subscribe(topic, selectorExpression);
+                break;
+            case SQL92:
+                consumer.subscribe(topic, MessageSelector.bySql(selectorExpression));
+                break;
+            default:
+                throw new IllegalArgumentException("Property 'selectorType' was wrong.");
+        }
+				// 消费模式: 顺序消费 or 并发消费
+        switch (consumeMode) {
+            case ORDERLY:
+                consumer.setMessageListener(new DefaultMessageListenerOrderly());
+                break;
+            case CONCURRENTLY:
+                consumer.setMessageListener(new DefaultMessageListenerConcurrently());
+                break;
+            default:
+                throw new IllegalArgumentException("Property 'consumeMode' was wrong.");
+        }
+
+        if (rocketMQListener instanceof RocketMQPushConsumerLifecycleListener) {
+            ((RocketMQPushConsumerLifecycleListener) rocketMQListener).prepareStart(consumer);
+        }
+    }  
+}
+```
+
+RocketMQ提供了两种消费模式：顺序消费、并发消费，顺序消费的默认监听器是DefaultMessageListenerOrderly类，并发消费的默认监听器是DefaultMessageListenerConcurrently类，客户端收到RocketMQ的消息是先回调默认监听器。无论是哪种消费模式，在默认监听器中收到消息都会再回调我们在业务代码中定义的消息监听器RocketMQListener。
+
+```java
+public class DefaultMessageListenerOrderly implements MessageListenerOrderly {
+    @SuppressWarnings("unchecked")
+    @Override
+    public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
+        for (MessageExt messageExt : msgs) {
+            log.debug("received msg: {}", messageExt);
+            try {
+                long now = System.currentTimeMillis();
+                // 回调业务代码中定义的消息监听器RocketMQListener
+                rocketMQListener.onMessage(doConvertMessage(messageExt));
+                long costTime = System.currentTimeMillis() - now;
+                log.info("consume {} cost: {} ms", messageExt.getMsgId(), costTime);
+            } catch (Exception e) {
+                log.warn("consume message failed. messageExt:{}", messageExt, e);
+                context.setSuspendCurrentQueueTimeMillis(suspendCurrentQueueTimeMillis);
+                return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
+            }
+        }
+        return ConsumeOrderlyStatus.SUCCESS;
+    }
+}
+```
+
+业务代码中接收消息才会如此简单，回顾一下前面Demo中接收消息的代码。
+
+```java
+@Component
+@RocketMQMessageListener(topic = "TopicTest", consumerGroup = "CONSUMER_GROUP_TOPIC_TEST")
+public class MessageListener implements RocketMQListener<String> {
+    @Override
+    public void onMessage(String s) {
+        System.out.println("TopicTest receive: " + s + ", receiveTime = " + System.currentTimeMillis());
+    }
+}
+```
+
+
+
+接下来笔者将为大家讲解RocketMQ中的常见的使用场景和技术原理，以及RocketMQ的架构设计。
+
+
+
+## 2. 为什么放弃Zookeeper选择NameServer
+
+不得不说几句与Kafka的渊源，kafka是一款高性能的消息中间件，由于kafka不支持消费失败重试、定时消息、事务消息，顺序消息也有明显缺陷，难以支撑淘宝交易、订单、充值等复杂场景，淘宝中间件团队参考Kafka之后重新设计并用java编写了RocketMQ，所以在RocketMQ中会有一些概念和kafka相似。
+
+在分布式服务SOA架构中，服务发现机制是必备的。服务实例有多个，且数量是动态变化的。注册中心会提供服务管理，服务调用方在注册中心获取到服务提供者的信息，从而进行远程调用。
+
+所有常用的消息中间件都是基于订阅发布机制，消息发送者（Producer）把消息发送到消息服务器，消息消费者（Consumer）从消息服务器订阅感兴趣的消息。这个过程中消息发送者和消息消费者是客户端，消息服务器是服务端，客户端与服务端双方通过注册中心感知对方的存在。
+
+![9-1](image/rocketmq_architecture_1.png)
+
+RocketMQ部署架构上主要分为四部分，如上图所示:
+
+- Producer：消息发布的角色，主要负责把消息发送到Broker，支持分布式集群方式部署。
+- Consumer：消息消费者的角色，主要负责从Broker订阅消息消费，支持分布式集群方式部署。
+- Broker：消息存储的角色，主要负责消息的存储、投递和查询以及服务高可用保证，支持分布式集群方式部署。
+- NameServer：服务管理的角色，主要负责管理Broker集群的路由信息，支持分布式集群方式部署。
+
+
+
+NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo中的zookeeper，支持Broker的动态注册与发现。主要包括两个功能：
+
+1. 服务注册：NameServer接收Broker集群的注册信息保存下来作为路由信息的基本数据，并提供心跳检测机制，检查Broker是否还存活。
+
+2. 路由信息管理：NameServer保存了Broker集群的路由信息，用于提供给客户端查询Broker的队列信息。Producer和Conumser通过NameServer可以知道Broker集群的路由信息，从而进行消息的投递和消费。
+
+   
+
+在kafka中的服务注册与发现通常是用Zookeeper来完成的，RocketMQ早期也使用了Zookeeper做集群的管理，但后来放弃了转而使用自己开发NameServer。说到这里大家可能会有个疑问，这些能力Zookeeper早就有了，为什么要重复造轮子自己再写一个服务注册中心呢？带着这个疑问我们先来看两者部署拓扑图的对比。
+
+
+
+在Kafka中Topic是逻辑概念，分区是物理概念。1个topic可以设置多个分区（partition），每个分区可以设置多个副本（replication），即有1个master分区 + 多个slave分区。Kafka的部署拓扑图如下：
+
+![](image/rocketmq_architecture_11.jpg)
+
+例如搭建3个Broker构成一个集群，创建了一个Topic取名为TopicA，分区是3个，副本数也是3个。图中part表示分区，M表示Master，S表示Slave。在Kafka中消息只能发送到Master分区中，消息发送给Topic时会发送到具体某个分区。如果是发送给part0就只会发送到Broker0这个实例，再由Broker0同步到Broker1和Broker2中的part0副本中去；如果是发送给part1就只会发送到Broker1这个实例，再由Broker1同步到Broker0和Broker2中的part1副本中去。
+
+
+
+在RocketMQ中Topic是逻辑概念，队列是物理概念（对应Kafka中的分区）。1个topic可以设置多个队列（queue），每个队列也可以有多个副本，即有1个master队列 + 多个slave队列。RocketMQ的部署拓扑图如下：
+
+![](image/rocketmq_architecture_12.jpg)
+
+为了好对比，同样创建了一个Topic取名为TopicA，队列是3个，副本数也是3个，但构成Broker集群的实例有9个。
+
+两者在概念上相似，但又有明显的差异：
+
+- 在Kafka中，Master和Slave在同一台Broker机器上，Broker机器具有双重身份，分区的Master/Slave身份是在运行过程中选举出来的。
+- 在RocketMQ中，Master和Slave不在同一台Broker机器上，每台Broker机器不是Master就是Slave，Broker的Master/Slave身份是在Broker的配置文件中写死的。
+
+那这个差异影响在哪呢？Kafka的Master/Slave需要通过Zookeeper选举出来的，而RocketMQ不需要。问题就在这个选举上，Zookeeper的选举机制需要Zookeeper集群多个实例来完成，Zookeeper集群中的多个实例必须相互通信，如果实例数很多，网络通讯就会变得非常复杂且低效。网络通信变简单了，性能就能会有极大的提升。NameServer是无状态的，可以任意部署多个实例。
+
+为了避免单点故障，NameServer必须以集群的方式部署，但集群中各实例间相互不进行网络通讯。Broker向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。NameServer与每台Broker机器保持长连接，间隔30秒发心跳包检查Broker是否存活，如果检测到Broker宕机， 则从路由注册表中将故障机器移除。NameServer为了降低实现的复杂度，并不会立刻通知客户端的Producer和Consumer。
+
+集群环境下实例很多，偶尔会出现各种各样的问题，可能会出现以下几种场景：
+
+1. 当某个NameServer因宕机或网络问题下线了，Broker仍然可以向其它NameServer同步其路由信息，Produce和Consumer仍然可以动态感知Broker的路由的信息。
+2. NameServer如果检测到Broker宕机，没有通知客户端。Producer将消息发送到故障的Broker怎么办？Consumer从Broker订阅消息失败怎么办？ 这两个问题都是在客户端中进行解决，具体将在后续9.6章节高可用设计中解答。
+3. 由于NameServer集群中的实例相互不通讯，在某个时间点可能不同NameServer实例保存的路由注册信息不一致，但这对发送消息和消费消息也不会有什么影响。
+
+
+
+## 3. 如何实现顺序消息
+
+### 顺序消息的场景
+
+
+
+### 应用举例
+
+RocketMQ支持顺序消息，顺序消息是指消息按顺序发送和消费。RocketMQ的顺序消息分2种情况，局部有序和全局有序。
+
+- 局部有序：发送同一个queue的消息有序，可以在发送消息时指定queue，在消费消息时也按顺序消费。 例如同一个订单ID的消息要保证有序，不同订单ID的消息可以无序，就可以通过订单ID取模计算queue的索引来获取相同的queue。
+
+  ```java
+  @GetMapping(value = "/orderly")
+  public String hello() {
+      Order order = new Order("123", "浙江杭州");
+      MessageBuilder builder = MessageBuilder.withPayload(order);
+      Message message = builder.build();
+      SendResult sendResult = rocketMQTemplate.syncSendOrderly("TopicTest", message, order.getOrderId());
+      return sendResult.getMsgId() + " , " + sendResult.getMessageQueue().getQueueId();
+  }
+  ```
+
+  使用`rocketMQTemplate.syncSendOrderly()`指定hashKey为订单ID，相同订单ID的多条消息会发送到同一个Queue，执行结果为MsgId不同，而QueueId相同。
+
+  ```txt
+  MsgId = C0A801697CDF18B4AAC2768B85830001, QueueId = 2
+  MsgId = C0A801697CDF18B4AAC2768B85D10002, QueueId = 2
+  MsgId = C0A801697CDF18B4AAC2768B87090003, QueueId = 2
+  MsgId = C0A801697CDF18B4AAC2768B88DB0004, QueueId = 2
+  ```
+
+- 全局有序：设置topic只有1个queue可以来实现全局有序，创建Topic时手动设置。 此类场景少，性能差通常不推荐使用。
+
+
+
+### 技术原理
 
 ### 基本概念
 
@@ -299,44 +652,18 @@ RocketMQ架构上主要分为四部分，如上图所示:
 
 
 
-![rocketmq_architecture_5](image/rocketmq_architecture_5.jpg)
+
+
+####  顺序发送
 
 
 
-本章后续章节笔者将为大家介绍消息发送、消息存储、消息消费的重要内容，本章节篇幅有限，只讲解高可用设计部分的源码，源码取自release-4.4.0版本。
+#### 并发消费与顺序消费
 
+我们在业务代码中要实现一个Consumer，需要注册一个监听器Listener，用于在收到消息时进行业务逻辑处理。监听有2种模式：并发消费、顺序消费。 默认是并发消费，使用`@RocketMQMessageListener`可以设置consumeMode参数修改。
 
-
-### 自动装配RocketMQ
-
-rocketmq-spring-boot-2.0.3.jar
-
-spring.factories
-
-```
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
-```
-
-发送消息
-
-RocketMQAutoConfiguration，RocketMQTemplate封装DefaultMQProducer
-
-消费消息
-
-ListenerContainerConfiguration，DefaultRocketMQListenerContainer封装MessageListenerOrderly
-
-
-
-## 2. 为什么放弃Zookeeper选择NameServer
-
-
-
-
-
-## 3. 如何实现顺序消息
-
-### 
+- 并发消费：也称为乱序消费，Consumer中会维护一个消费线程池，消费线程可以并发去同一个消息队列Queue中拉取消息进行消费。如果某个消费线程在监听器中进行业务处理时抛出异常，当前消费线程拉取的消息会进行重试，不影响其他消费线程和Queue的消费进度。消息重试是按照时间衰减的方式，重试达到最大次数时该条消息则进入失败队列（也称死信队列）不再重试。
+- 顺序消费：也称为有序消费，同一个消息队列Queue只允许Consumer一个消费线程拉取消费。在消费线程请求到broker时会先申请独占锁，拿到锁的请求则允许消费。如果消费线程在监听器中进行业务处理时抛出异常，消费进度会阻塞在当前这条消息，并不会继续消费该Queue中后续的消息，从而保证顺序消费。在顺序消费的场景下，特别需要注意对异常的处理，如果重试也失败的话会一直阻塞在当前消息，无法消费后续消息造成队列消息堆积。
 
 
 
@@ -480,33 +807,615 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 ##5. 高性能设计
 
-RocketMQ的高性能在于顺序写盘(CommitLog)、零拷贝和跳跃读(尽量命中PageCache)
+RocketMQ以高性能主要得益于其在数据存储设计、动态伸缩的能力、读写分离几个方面。
 
-RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计
+
+
+顺序写盘(CommitLog)、零拷贝和跳跃读(尽量命中PageCache)
+
+
+
+### 数据存储设计
+
+RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计。而数据存储的核心有3部分组成：commitlog数据存储文件、consumequeue消费队列文件、index索引文件。
+
+从Producer将消息发送到broker服务器，broker会把所有消息存储在CommitLog文件，再由CommitLog转发到ConsumeQueue文件提供给各个Consumer消费。整体流程图如下：
+
+![rocketmq_architecture_4](image/rocketmq_architecture_4.png)
+
+
+
+
+
+#### 消息持久化
+
+commitlog目录是负责存储消息数据的文件，所有Topic的消息都会先存在`{ROCKETMQ_HOME}/store/commitlog`文件夹下的文件中，消息数据写入`commitlog`文件是加锁串行追加写入。
+
+RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所有Topic的消息，从而保证消息存储是完全的磁盘顺序写，但这样给文件读取（消费消息）同样带来了困难。
+
+当消息到达`commitlog`文件后，会通过`ReputMessageService`线程异步的几乎实时将消息转发给消费队列文件与索引文件。在commitlog目录里，每个文件默认大小是1G，文件名按照该文件起始的总的字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。所以第一个文件名是00000000000000000000，第二个文件起始偏移量是1024 * 1024 * 1024 = 1073741824（1GB = 1073741824B ），即文件名是0000000001073741824。
+
+文件名这样设计的目的是为了在消费消息时能够根据偏移量offset快速定位到消息存储在某个commitlog文件，从而加快消息检索速度。
+
+消息数据文件中每条消息数据具体格式如下：
+
+| **序号** | 消息存储结构                | 备注                                                         | 长度(字节)         |
+| -------- | --------------------------- | ------------------------------------------------------------ | ------------------ |
+| **1**    | TOTALSIZE                   | 消息总大小                                                   | 4                  |
+| **2**    | MAGICCODE                   | 消息magic code，区分数据消息和空消息                         | 4                  |
+| **3**    | BODYCRC                     | 消息体的CRC，当broker重启时会校验                            | 4                  |
+| **4**    | QUEUEID                     | 区分同一个topic的不同queue                                   | 4                  |
+| **5**    | FLAG                        | 不处理                                                       | 4                  |
+| **6**    | QUEUEOFFSET                 | queue中的消息偏移量，即queue中的消息个数，*20=物理偏移量     | 8                  |
+| **7**    | PHYSICALOFFSET              | 在commitlog中的物理起始偏移量                                | 8                  |
+| **8**    | SYSFLAG                     | 消息标志，指名消息是事务状态等消息特征                       | 4                  |
+| **9**    | BORNTIMESTAMP               | Producer的时间戳                                             | 8                  |
+| **10**   | BORNHOST(IP+HOST)           | Producer地址                                                 | 8                  |
+| **11**   | STORETIMESTAMP              | 存储时间戳                                                   | 8                  |
+| **12**   | STOREHOST(IP+PORT)          | 消息存储到broker的地址                                       | 8                  |
+| **13**   | RECONSUMETIMES              | 消息被某个consumer group重新消费次数（consumer group之间独立计数） | 8                  |
+| **14**   | PREPARED TRANSACTION OFFSET | 表示该消息是prepared状态的事务消息                           | 8                  |
+| **15**   | BODY                        | 前4字节：bodyLength，后bodyLength存放消息体内容              | 4+bodyLength       |
+| **16**   | TOPIC                       | 前1字节：topicLength，后topicLength存放topic内容             | 1+topicLength      |
+| **17**   | Properties                  | 前2字节：propertiesLength，后propertiesLength存放属性数据    | 2+propertiesLength |
+
+
+
+#### 消费队列
+
+消息broker中存储消息的实际工作就是读取文件，但消息数据文件中是所有Topic的消息数据混合在一起的，消费消息时是区分Topic去消费，这就导致如果消费时也读取CommitLog文件会使得消费消息的性能差吞吐量低。为了解决消息数据文件顺序写难以读取的问题，RocketMQ中设计通过消费队列ConsumeQueue文件来解决。
+
+consumequeue：负责存储消费者队列文件，在消息写入到commitlog文件，会异步转发到consumequeue文件，然后提供给consumer消费。 consumequeue文件中并不存储具体的消息数据，只存commitlog的 偏移量offset、消息大小size、消息Tag Hashcode。
+
+每个Topic在某个broker下对应多个队列queue，默认是4个消费队列queue。每一条记录的大小是20B，默认一个文件存储30w个记录，文件名同样也按照字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。所以第一个文件名是00000000000000000000，第二个文件起始偏移量是20 * 30w=6000000，第二个文件名是00000000000006000000。
+
+| 序号 | 消息存储结构         | 备注                      | 长度(字节) |
+| :--- | :------------------- | :------------------------ | :--------- |
+| 1    | CommitLog Offset     | 在commitLog里的物理偏移量 | 8          |
+| 2    | Size                 | 消息大小                  | 4          |
+| 3    | Message Tag Hashcode | 用于订阅时消息过滤        | 8          |
+
+在集群模式下，broker会记录客户端对每个消费队列的消费偏移量，定位到consumequeue里相应的记录，并通过CommitLog Offset定位到commitlog里的该条消息，如下图所示。RocketMQ也提供索引查询，此处暂不进行详细描述。
+
+![rocketmq_architecture_6](image/rocketmq_architecture_6.png)
+
+
+
+#### 索引文件
+
+index：消息的索引文件，存储了消息KEY和offset。消息索引是为了支持能够根据消息属性快速检索消息，但仅支持用消息KEY检索，这也是为了简化索引设计，毕竟消息中间件不是数据库，索引不是其核心功能。
+
+索引文件总共包含3部分：lndexHeader、 Hash槽、 索引数据。
+
+![rocketmq_architecture_7](image/rocketmq_architecture_7.jpg)
+
+| 序号 | 消息存储结构 | 备注                                           | 长度(字节)  |
+| :--- | :----------- | :--------------------------------------------- | :---------- |
+| 1    | lndexHeader  | 索引头信息，存储该索引文件的概要信息           | 40          |
+| 2    | Hash槽       | 500万个hash槽，存储消息Key的hash值对应索引位置 | 4 * 500万   |
+| 3    | 索引数据     | 2000万条索引数据构成的列表                     | 20 * 2000万 |
+
+1. IndexHeader索引头信息包含：
+
+   - beginTimestamp: 索引文件中消息的最小存储时间。
+
+   - endTimestamp: 索引文件中消息的最大存储时间。
+
+   - beginPhyoffset: 索引文件中消息的最小偏移量，来自commitlog文件偏移量。
+
+   - endPhyoffset: 索引文件中消息的最大偏移量，来自commitlog文件偏移量。
+   - hashslotCount: hash槽的个数，默认是500万个。 
+
+   - indexCount: 索引数据列表当前已使用的个数。
+
+2. Hash槽：一个索引文件默认有500万个Hash槽，每个Hash槽存储的值是位置信息，落在该Hash槽的消息Key对应最新的索引数据位置。
+
+3. 索引数据： 索引数据在索引数据列表中按顺序存储，默认一个索引文件包含2000万个索引数据，每一个索引数据结构如下。
+
+   - hashcode：消息key的hashcode。 
+   - phyOffset：消息对应的物理偏移量。
+   - timeDiff：该消息存储时间与第一条消息的时间戳的差值，小于0该消息无效。 
+   - prelndexPos：该索引的前一条索引位置，当出现hash冲突时，构建的链表结构。 
+
+   
+
+使用hashcode存储数据，必须要考虑的问题就是hash冲突。举例说明，假设有2个消息Message1、Message2的Key值相同，且都发送到同一台broker，此时写索引文件时这2条消息的索引就一定会出现Hash冲突，如果是Message1先写入，Message1的index值中的preIndex为0，Hash槽中的值指向Message1的index的位置。然后Message2后写入，则Message2的index值中的preIndex为Message1的位置，此时Hash槽中的值会修改指向Message2的index的位置。如果通过Key检索消息，可以先找到Message2，通过Message2的preIndex再找到Message1。
+
+
+
+### 动态伸缩
 
 动态伸缩能力，伸缩性体现在Topic和Broker两个维度
 
+#### 消息队列Rebalance
+
 Topic维度：假如一个Topic的消息量特别大，但集群水位压力还是很低，就可以扩大该Topic的队列数，Topic的队列数跟发送、消费速度成正比。
+
+#### 集群扩容
 
 Broker维度：如果集群水位很高了，需要扩容，直接加机器部署Broker就可以。Broker起来后向Namesrv注册，Producer、Consumer通过Namesrv 发现新Broker，立即跟该Broker直连，收发消息。
 
 
 
+### 消息实时投递
+
+#### 推模式与拉模式
+
+任何一款消息中间件都会有两种获取消息的方式：Push推模式、Pull拉模式。这两种模式各有优缺点，并适用于不同的场景。
+
+- Push推模式：当消息发送到服务端时，由服务端主动推送给客户端Consumer。优点是客户端Consumer能实时的接收到新的消息数据；也有2个缺点，缺点1是如果Consumer消费一条消息耗时很长，消费推送速度大于消费速度时，Consumer消费不过来会缓冲区溢出。缺点2则是一个Topic往往会对应多个ConsumerGroup，服务端一条消息会产生多次推送，可能对服务端造成压力。
+- Pull拉模式：由客户端Consumer主动发请求每间隔一段时间轮询去服务端拉取消息。优点是Consumer可以根据当前消费速度选择合适的时机触发拉取；缺点则是拉取的间隔时间不好控制，间隔时间如果很长，会导致消息消费不及时，服务端容易积压消息。间隔时间如果很短，服务端收到的消息少，会导致Consumer可能多数拉取请求都是无效的（拿不到消息），从而浪费网络资源和服务端资源。
+
+这两种获取消息方式的缺点都很明显，单一的方式难以应对复杂的消费场景，所以RocketMQ中提供一种推/拉结合的长轮询机制来平衡推/拉模式各自的缺点。长轮询本质上是对普通pull模式的优化，即还是客户端Consumer轮询的方式主动发送拉取请求到服务端broker后，broker如果检测到有新的消息就立即返回Consumer，但如果没有新消息则暂时不返回任何信息，挂起当前请求缓存到本地，broker后台有个线程去检查挂起请求，等到新消息产生时再返回Consumer。平常使用的DefaultMQPushConsumer的实现就是推/拉结合的，既能解决资源浪费问题，也能解决消费不及时问题。
+
+
+
+#### 长轮询拉取
+
+
+
+
+
+### 读写分离机制
+
+
+
+
+
 ## 6. 高可用设计
 
-服务发现的高可用，NameServer全部挂掉不影响已经运行的Broker,Producer,Consumer。	
-
-消息发送的高可用，故障规避机制
-
-消息存储的高可用，在于刷盘和Master/Slave
-
-消息消费的高可用，消费重试机制，ACK机制
+计算机系统的可用性用平均无故障时间来度量，系统的可用性越高，则平均无故障时间越长。高可用性也是分布式中间件的重要特性，RocketMQ的高可用设计主要从集群管理、消息发送、消息存储、消息消费四个方面体现。
 
 
 
+### 消息发送的高可用
+
+在消息发送时可能会遇到网络问题、broker宕机等情况，而NameServer检测broker是有延迟的，虽然NameServer每间隔10秒会扫码所有Broker信息，但要broker的最后心跳时间超过120秒以上才认为该Broker不可用，所以Producer不能及时感知broker下线。如果在这期间消息一直发送失败，那么消息发送失败率会很高，这在业务上是无法接受的。于是RocketMQ采用了一些在发送端的高可用方案，来解决发送失败的问题，其中最为重要的两个设计是重试机制与故障延迟机制。
+
+这里大家可能会有一个疑问，为什么NameServer不及时检查broker和通知Producer？这是因为那样做的话会使得网络通信和架构设计变得非常复杂，而NameServer的设计初衷就是尽可能的简单，所以这块的高可用方案在Producer中来实现。
 
 
 
+#### 消息发送重试机制
+
+重试机制比较简单，仅支持同步发送方式，不支持异步和单向发送方式。根据发送失败的异常策略略有不同，如果是网络异常RemotingException和客户端异常MQClientException会重试，而broker服务端异常MQBrokerException和线程中断异常InterruptedException则不会再重试且抛出异常。
+
+```java
+// DefaultMQProducerImpl#sendDefaultImpl
+
+int timesTotal = communicationMode == CommunicationMode.SYNC ? 1 + this.defaultMQProducer.getRetryTimesWhenSendFailed() : 1;
+int times = 0;
+for (; times < timesTotal; times++) {
+    try {
+        sendResult = this.sendKernelImpl(msg, mq, communicationMode, sendCallback, topicPublishInfo, timeout - costTime);
+      	endTimestamp = System.currentTimeMillis();
+      	this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, false);
+    } catch (RemotingException e) {
+      	endTimestamp = System.currentTimeMillis();
+        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, true);
+        continue;
+    } catch (MQClientException e) {
+      	endTimestamp = System.currentTimeMillis();
+        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, true);
+        continue;
+    } catch (MQBrokerException e) {
+      	endTimestamp = System.currentTimeMillis();
+        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, true);
+        throw e;
+    } catch (InterruptedException e) {
+      	endTimestamp = System.currentTimeMillis();
+        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, false);
+        throw e;
+    }
+}
+```
+
+
+
+#### 故障规避机制
+
+默认是不开启的，如果在开启的情况下，消息发送失败的时候会将失败的broker暂时排除在队列选择列表中。规避时间是衰减的，如果broker一直不可用，会被NameServer检测到并在Producer更新路由信息时进行剔除。
+
+在选择查找路由时，选择消息队列的关键步骤如下：
+
+1. 先按轮询算法选择一个Queue
+2. 从故障列表判断该Queue是否可用
+
+```java
+// MQFaultStrategy#selectOneMessageQueue
+public MessageQueue selectOneMessageQueue(final TopicPublishInfo tpInfo, final String lastBrokerName) {
+    // 故障延迟机制
+    if (this.sendLatencyFaultEnable) {
+        try {
+          	// 轮询选queue
+            int index = tpInfo.getSendWhichQueue().getAndIncrement();
+            for (int i = 0; i < tpInfo.getMessageQueueList().size(); i++) {
+                int pos = Math.abs(index++) % tpInfo.getMessageQueueList().size();
+                if (pos < 0)
+                    pos = 0;
+                MessageQueue mq = tpInfo.getMessageQueueList().get(pos);
+              	// 判断queue是否可用
+                if (latencyFaultTolerance.isAvailable(mq.getBrokerName())) {
+                    if (null == lastBrokerName || mq.getBrokerName().equals(lastBrokerName))
+                        return mq;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error occurred when selecting message queue", e);
+        }
+
+        return tpInfo.selectOneMessageQueue();
+    }
+		// 默认轮询机制
+    return tpInfo.selectOneMessageQueue(lastBrokerName);
+}
+```
+
+Queue是否可用也有2个步骤：
+
+1. 先判断其是否在故障列表，不在故障列表代表可用；
+2. 在故障列表`faultItemTable`还需判断当前时间是否大于等于故障规避的开始时间`startTimestamp`，这个时间判断是因为通常故障时间是有限制的，broker宕机之后会有相关运维去恢复。
+
+```java
+public boolean isAvailable(final String name) {
+    final FaultItem faultItem = this.faultItemTable.get(name);
+    if (faultItem != null) {
+        return faultItem.isAvailable();
+    }
+    return true;
+}
+
+public boolean isAvailable() {
+  	return (System.currentTimeMillis() - startTimestamp) >= 0;
+}
+```
+
+这部分重点在于故障机器 `FaultItem`是在什么场景下进入到故障列表`faultItemTable`中，相信大家应该也能猜到了，消息发送失败时那就可能是机器故障了。回顾一下前面重试机制中的消息发送代码，可以看到两个情况会调用`updateFaultItem()`，消息发送结束后和发送出现异常时。
+
+只有在开启故障规避机制时才会更新故障机器信息，根据`isolation`计算故障周期时长，故障时长`duration`的单位是毫秒。
+
+```java
+public void updateFaultItem(final String brokerName, final long currentLatency, boolean isolation) {
+    if (this.sendLatencyFaultEnable) {
+        long duration = computeNotAvailableDuration(isolation ? 30000 : currentLatency);
+        this.latencyFaultTolerance.updateFaultItem(brokerName, currentLatency, duration);
+    }
+}
+
+private long computeNotAvailableDuration(final long currentLatency) {
+    for (int i = latencyMax.length - 1; i >= 0; i--) {
+      if (currentLatency >= latencyMax[i])
+        return this.notAvailableDuration[i];
+    }
+  	return 0;
+}
+
+private long[] latencyMax = {50L, 100L, 550L, 1000L, 2000L, 3000L, 15000L};
+private long[] notAvailableDuration = {0L, 0L, 30000L, 60000L, 120000L, 180000L, 600000L};
+```
+
+`currentLatency`代表响应时间，`computeNotAvailableDuration()`根据响应时间来计算故障周期时长，响应时间越长则故障周期也越长。网络异常、broker异常、客户端异常都是固定响应时长30秒，所以它们的故障周期时长为10分钟。而消息发送成功和线程中断异常如果响应时长咋在100毫秒内，则故障周期时长为0。
+
+```java
+public void updateFaultItem(final String name, final long currentLatency, final long notAvailableDuration) {
+    FaultItem old = this.faultItemTable.get(name);
+    if (null == old) {
+        final FaultItem faultItem = new FaultItem(name);
+        faultItem.setCurrentLatency(currentLatency);
+        faultItem.setStartTimestamp(System.currentTimeMillis() + notAvailableDuration);
+				// 加入故障列表
+        old = this.faultItemTable.putIfAbsent(name, faultItem);
+        if (old != null) {
+            old.setCurrentLatency(currentLatency);
+            old.setStartTimestamp(System.currentTimeMillis() + notAvailableDuration);
+        }
+    } else {
+        old.setCurrentLatency(currentLatency);
+        old.setStartTimestamp(System.currentTimeMillis() + notAvailableDuration);
+    }
+}
+```
+
+FaultItem存储了broker名称、响应时长、故障规避开始时间，最要的是这个故障规避开始时间，前面有提到会用来判断Queue是否可用。那么故障周期时长为0就代表了没有故障，当响应时长超过100毫秒时代表broker可能机器出现问题也会进入故障列表，网络异常、broker异常、客户端异常则设定为故障10分钟。
+
+
+
+### 消息存储的高可用
+
+在RocketMQ中消息存储的高可用体现在发送成功的消息不能丢、Broker不能发生单点故障，出现broker异常宕机、操作系统crash、机房断电或断网等情况保证数据不丢。RocketMQ主要是通过消息持久化（也称刷盘）、主从复制、读写分离机制来保证。
+
+
+
+#### 同步刷盘
+
+同步刷盘的模式下当消息写到内存后，会等待数据写入到磁盘的CommitLog文件。具体实现源码在`CommitLog#handleDiskFlush`，`GroupCommitRequest`是刷盘任务，提交刷盘任务后，会在刷盘队列中等待刷盘，而刷盘线程`GroupCommitService`是每间隔10毫秒写一批数据到磁盘。为什么不直接写呢？主要原因是磁盘IO压力大写入性能低，每间隔10毫秒可以提升磁盘IO效率和写入性能。
+
+```java
+// CommitLog#handleDiskFlush
+public void handleDiskFlush(AppendMessageResult result, PutMessageResult putMessageResult, MessageExt messageExt) {
+    final GroupCommitService service = (GroupCommitService) this.flushCommitLogService;
+    GroupCommitRequest request = new GroupCommitRequest(result.getWroteOffset() + result.getWroteBytes());
+    service.putRequest(request);
+    // 等待刷盘完成
+    boolean flushOK = request.waitForFlush(this.defaultMessageStore.getMessageStoreConfig().getSyncFlushTimeout());
+    if (!flushOK) {
+      putMessageResult.setPutMessageStatus(PutMessageStatus.FLUSH_DISK_TIMEOUT);
+    }
+}
+
+public static class GroupCommitRequest {
+    private final long nextOffset;
+    private final CountDownLatch countDownLatch = new CountDownLatch(1);
+    private volatile boolean flushOK = false;
+
+    public GroupCommitRequest(long nextOffset) {
+        this.nextOffset = nextOffset;
+    }
+
+    public long getNextOffset() {
+        return nextOffset;
+    }
+
+    public void wakeupCustomer(final boolean flushOK) {
+        this.flushOK = flushOK;
+        this.countDownLatch.countDown();
+    }
+
+    public boolean waitForFlush(long timeout) {
+        try {
+            this.countDownLatch.await(timeout, TimeUnit.MILLISECONDS);
+            return this.flushOK;
+        } catch (InterruptedException e) {
+            log.error("Interrupted", e);
+            return false;
+        }
+    }
+}
+```
+
+`GroupCommitService`是刷盘线程，内部有两个刷盘任务列表，在`service.putRequest(request)`时仅仅是把提交刷盘任务到任务列表，`request.waitForFlush`会同步等待`GroupCommitService`将任务列表中的任务刷盘完成。
+
+```java
+private volatile List<GroupCommitRequest> requestsWrite = new ArrayList<GroupCommitRequest>();
+private volatile List<GroupCommitRequest> requestsRead = new ArrayList<GroupCommitRequest>();
+
+public synchronized void putRequest(final GroupCommitRequest request) {
+    synchronized (this.requestsWrite) {
+        this.requestsWrite.add(request);
+    }
+    if (hasNotified.compareAndSet(false, true)) {
+        waitPoint.countDown(); // notify
+    }
+}
+```
+
+这里有两个队列读写分离，requestsWrite是写队列，用于保存添加进来的刷盘任务，requestsRead是读队列，在刷盘之前会把写队列的数据放到读队列。
+
+```java
+private void swapRequests() {
+    List<GroupCommitRequest> tmp = this.requestsWrite;
+    this.requestsWrite = this.requestsRead;
+    this.requestsRead = tmp;
+}
+```
+
+刷盘的时候依次读取requestsRead中的数据写入到磁盘，写入完成后清空requestsRead。读写分离设计的目的是为了在刷盘时不影响任务提交到列表。
+
+```java
+for (GroupCommitRequest req : this.requestsRead) {
+  boolean flushOK = false;
+  for (int i = 0; i < 2 && !flushOK; i++) {
+    // 根据文件offset判断是否已经刷盘
+    flushOK = CommitLog.this.mappedFileQueue.getFlushedWhere() >= req.getNextOffset();
+    if (!flushOK) {
+      CommitLog.this.mappedFileQueue.flush(0);
+    }
+  }
+
+  req.wakeupCustomer(flushOK);
+}
+
+long storeTimestamp = CommitLog.this.mappedFileQueue.getStoreTimestamp();
+  if (storeTimestamp > 0) {
+// 更新checkpoint
+ CommitLog.this.defaultMessageStore.getStoreCheckpoint().setPhysicMsgTimestamp(storeTimestamp);
+}
+// 清空已刷盘完成的列表
+this.requestsRead.clear();
+```
+
+`mappedFileQueue.flush(0)`是刷盘操作，通过`MappedFile`映射的`CommitLog`文件写入磁盘。
+
+```java
+public boolean flush(final int flushLeastPages) {
+    boolean result = true;
+    MappedFile mappedFile = this.findMappedFileByOffset(this.flushedWhere, this.flushedWhere == 0);
+    if (mappedFile != null) {
+        long tmpTimeStamp = mappedFile.getStoreTimestamp();
+        int offset = mappedFile.flush(flushLeastPages);
+        long where = mappedFile.getFileFromOffset() + offset;
+        result = where == this.flushedWhere;
+        this.flushedWhere = where;
+        if (0 == flushLeastPages) {
+            this.storeTimestamp = tmpTimeStamp;
+        }
+    }
+    return result;
+}
+```
+
+
+
+#### 异步刷盘
+
+RocketMQ默认是采用异步刷盘，异步刷盘又有两种策略：开启缓冲池、不开启缓冲池。
+
+```java
+if (!this.defaultMessageStore.getMessageStoreConfig().isTransientStorePoolEnable()) {
+  	// 不开启堆外内存池
+    flushCommitLogService.wakeup();
+} else {
+  	// 开启堆外内存池
+    commitLogService.wakeup();
+}
+```
+
+- 不开启缓冲池：默认是不开启，刷盘线程`FlushRealTimeService`会每间隔500毫秒尝试去Flush到磁盘。这间隔500毫秒仅仅是尝试，实际去刷盘还得满足一些前提条件，即距离上次刷盘时间超过10秒，或者是写入内存的数据超过4页（16K），这样即使服务器宕机丢失的数据也在10秒内的或是大小在16K内。	
+
+  ```java
+  class FlushRealTimeService extends FlushCommitLogService {
+      private long lastFlushTimestamp = 0;
+      private long printTimes = 0;
+  
+      public void run() {
+          while (!this.isStopped()) {
+              boolean flushCommitLogTimed = CommitLog.this.defaultMessageStore.getMessageStoreConfig().isFlushCommitLogTimed();
+  						// 每次flush间隔500毫秒
+              int interval = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getFlushIntervalCommitLog();
+            	// 每次flush最少4页内存数据 (16k)
+              int flushPhysicQueueLeastPages = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getFlushCommitLogLeastPages();
+  						// 距离上次刷盘时间阈值10秒
+              int flushPhysicQueueThoroughInterval =
+                  CommitLog.this.defaultMessageStore.getMessageStoreConfig().getFlushCommitLogThoroughInterval();
+  
+              boolean printFlushProgress = false;
+  
+              // 判断是否超过10秒没刷盘了，需要强制刷盘
+              long currentTimeMillis = System.currentTimeMillis();
+              if (currentTimeMillis >= (this.lastFlushTimestamp + flushPhysicQueueThoroughInterval)) {
+                  this.lastFlushTimestamp = currentTimeMillis;
+                  flushPhysicQueueLeastPages = 0;
+                  printFlushProgress = (printTimes++ % 10) == 0;
+              }
+  
+              try {
+                	// 等待flush间隔500毫秒
+                  if (flushCommitLogTimed) {
+                      Thread.sleep(interval);
+                  } else {
+                      this.waitForRunning(interval);
+                  }
+  								
+                	// 通过MappedFile刷盘
+                  long begin = System.currentTimeMillis();
+                  CommitLog.this.mappedFileQueue.flush(flushPhysicQueueLeastPages);
+                	// 设置checkPoint文件的刷盘时间点
+                  long storeTimestamp = CommitLog.this.mappedFileQueue.getStoreTimestamp();
+                  if (storeTimestamp > 0) {
+  CommitLog.this.defaultMessageStore.getStoreCheckpoint().setPhysicMsgTimestamp(storeTimestamp);
+                  }
+                	// 超过500毫秒的刷盘记录日志
+                  long past = System.currentTimeMillis() - begin;
+                  if (past > 500) {
+                      log.info("Flush data to disk costs {} ms", past);
+                  }
+              } catch (Throwable e) {
+                  CommitLog.log.warn(this.getServiceName() + " service has exception. ", e);
+                  this.printFlushProgress();
+              }
+          }
+  
+          // broker正常停止前，把内存page中的数据刷盘
+          boolean result = false;
+          for (int i = 0; i < RETRY_TIMES_OVER && !result; i++) {
+              result = CommitLog.this.mappedFileQueue.flush(0);
+              CommitLog.log.info(this.getServiceName() + " service shutdown, retry " + (i + 1) + " times " + (result ? "OK" : "Not OK"));
+          }
+  		}
+  }
+  ```
+
+- 开启缓冲池：RocketMQ会申请一块和commitlog文件相同大小的堆外内存用来做缓冲池，数据会先写入到缓冲池，提交线程`CommitRealTimeService`也是每间隔500毫秒尝试提交到文件通道等待刷盘，刷盘最终还是由`FlushRealTimeService`来完成，和不开启缓冲池处理一致。使用缓冲池的目的是为了多条消息合并写入，从而提高IO性能。
+
+  ```java
+  class CommitRealTimeService extends FlushCommitLogService {
+  		
+      private long lastCommitTimestamp = 0;
+  
+      @Override
+      public void run() {
+          CommitLog.log.info(this.getServiceName() + " service started");
+          while (!this.isStopped()) {
+            	// 每次提交间隔200毫秒
+              int interval = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getCommitIntervalCommitLog();
+  						// 每次提交最少4页内存数据 (16k)
+              int commitDataLeastPages = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getCommitCommitLogLeastPages();
+  						// 距离上次提交时间阈值200毫秒
+              int commitDataThoroughInterval =
+  CommitLog.this.defaultMessageStore.getMessageStoreConfig().getCommitCommitLogThoroughInterval();
+  						// 判断是否超过200毫秒没提交了，需要强制提交
+              long begin = System.currentTimeMillis();
+              if (begin >= (this.lastCommitTimestamp + commitDataThoroughInterval)) {
+                  this.lastCommitTimestamp = begin;
+                  commitDataLeastPages = 0;
+              }
+  
+              try {
+                	// 提交到MappedFile，此时还未刷盘
+                  boolean result = CommitLog.this.mappedFileQueue.commit(commitDataLeastPages);
+                  long end = System.currentTimeMillis();
+                  if (!result) {
+                      this.lastCommitTimestamp = end; 
+          						// 唤醒刷盘线程
+                      flushCommitLogService.wakeup();
+                  }
+  								
+                  if (end - begin > 500) {
+                      log.info("Commit data to file costs {} ms", end - begin);
+                  }
+                  this.waitForRunning(interval);
+              } catch (Throwable e) {
+                  CommitLog.log.error(this.getServiceName() + " service has exception. ", e);
+              }
+          }
+        
+  				// broker正常停止前，把内存page中的数据提交
+          boolean result = false;
+          for (int i = 0; i < RETRY_TIMES_OVER && !result; i++) {
+              result = CommitLog.this.mappedFileQueue.commit(0);
+              CommitLog.log.info(this.getServiceName() + " service shutdown, retry " + (i + 1) + " times " + (result ? "OK" : "Not OK"));
+          }
+          CommitLog.log.info(this.getServiceName() + " service end");
+      }
+  }
+  ```
+
+
+
+#### 主从复制
+
+RocketMQ为了提高消息消费的高可用性，避免Broker发生单点故障引起存储在Broker上的消息无法及时消费， RocketMQ采用Broker数据主从复制机制， 当消息发送到Master服务器后会将消息同步到Slave服务器，如果Master宕机后，消息消费者还可以继续从Slave拉取消息。
+
+消息从Master服务器复制到Slave服务器上，有2种复制方式：同步复制`SYNC_MASTER`、异步复制`ASYNC_MASTER`，在配置文件`${ROCKETMQ_HOME}/conf/broker.conf`里的`brokerRole`参数进行设置。
+
+- 同步复制：Master服务器和Slave服务器都写成功后才返回给客户端写成功的状态。优点是如果Master服务器出现故障，Slave服务器上有全部的备份数据，很容易恢复到Master服务器。缺点是同步复制由于多了一次同步等待的步骤，会增加数据写入延迟，并且降低系统吞吐量。
+- 异步复制：仅Master服务器写成功即可返回给客户端写成功的状态。优点刚好是同步复制的缺点，由于没有那一次同步等待的步骤，服务器的延迟较低且吞吐量较高。缺点显而易见，如果Master服务器出现故障，有些数据因为没有被写入Slave服务器，未同步的数据有可能会丢失。
+
+在实际应用中需要结合业务场景，合理设置刷盘方式和主从复制方式。不建议使用`SYNC_FLUSH`同步刷盘方式，因为会频繁的触发写磁盘操作，性能下降很明显。高性能是RocketMQ的一个明显特点，所以放弃性能是不合适的选择。通常可以把Master和Slave设置成`ASYNC_FLUSH`异步刷盘、`SYNC_MASTER`同步复制，这样即使有一台服务器出故障，仍然可以保证数据不丢。
+
+
+
+#### 读写分离
+
+读写分离机制也是高性能、高可用架构中常见的设计。例如MySQL也实现了读写分离机制，Client只能从Master服务器写数据，但可以从Master服务器和Slave服务器都读数据。RocketMQ的设计也是如此，但在实现方式上又有一些区别。
+
+RocketMQ的consumer在拉取消息时，broker会判断Master服务器的消息堆积量来决定consumer是否从Slave服务器拉取消息消费。默认开始是从Master服务器上拉取消息，如果Master服务器的消息堆积超过了物理内存的40%，则会在返回给consumer的消息结果里告知consumer，下次需要从其他Slave服务器上去拉取消息。
+
+
+
+### 消息消费的高可用
+
+#### 消费重试机制
+
+
+
+#### ACK机制
+
+
+
+### 集群管理的高可用
+
+集群管理的高可用主要体现在NameServer的设计上，当部分NameServer节点宕机不会有什么糟糕的影响，即使是NameServer全部宕机，也不影响已经运行的Broker、Producer、Consumer。前面有详细介绍NameServer，不再复述。
 
 
 
@@ -539,33 +1448,7 @@ MsgId = C0A801697F5F18B4AAC276A06AF10001,C0A801697F5F18B4AAC276A06AF10002,C0A801
 
 
 
-#### 顺序消息
-
-RocketMQ支持顺序消息，顺序消息是指消息按顺序发送和消费。RocketMQ的顺序消息分2种情况，局部有序和全局有序。
-
-- 局部有序：发送同一个queue的消息有序，可以在发送消息时指定queue，在消费消息时也按顺序消费。 例如同一个订单ID的消息要保证有序，不同订单ID的消息可以无序，就可以通过订单ID取模计算queue的索引来获取相同的queue。
-
-  ```java
-  @GetMapping(value = "/orderly")
-  public String hello() {
-      Order order = new Order("123", "浙江杭州");
-      MessageBuilder builder = MessageBuilder.withPayload(order);
-      Message message = builder.build();
-      SendResult sendResult = rocketMQTemplate.syncSendOrderly("TopicTest", message, order.getOrderId());
-      return sendResult.getMsgId() + " , " + sendResult.getMessageQueue().getQueueId();
-  }
-  ```
-
-  使用`rocketMQTemplate.syncSendOrderly()`指定hashKey为订单ID，相同订单ID的多条消息会发送到同一个Queue，执行结果为MsgId不同，而QueueId相同。
-
-  ```txt
-  MsgId = C0A801697CDF18B4AAC2768B85830001, QueueId = 2
-  MsgId = C0A801697CDF18B4AAC2768B85D10002, QueueId = 2
-  MsgId = C0A801697CDF18B4AAC2768B87090003, QueueId = 2
-  MsgId = C0A801697CDF18B4AAC2768B88DB0004, QueueId = 2
-  ```
-
-- 全局有序：设置topic只有1个queue可以来实现全局有序，创建Topic时手动设置。 此类场景少，性能差通常不推荐使用。
+- 
 
 
 
@@ -593,74 +1476,6 @@ public String delay() {
 SendTime = 1579797258174
 receiveTime = 1579797318182
 ```
-
-
-
-#### 事务消息
-
-
-
-
-
-以支付红包来举个简单的例子，支付完成后需要发送红包。支付系统负责扣款，支付完成后发送支付成功的消息，红包系统收到支付成功的消息后负责给账户加钱。
-
-1. 发送预处理消息，生成一个随机的UUID作为事务ID，事务ID是用来关联本地事务的唯一标识。
-
-```java
-@GetMapping(value = "/transaction")
-public String transaction() {
-    Order order = new Order("123", "浙江杭州");
-    MessageBuilder builder = MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, UUID.randomUUID().toString());
-    Message message = builder.build();
-
-    TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup","TopicTest", message, order.getOrderId());
-    return sendResult.getMsgId();
-}
-```
-
-2. 实现一个本地事务监听器，事务组`txProducerGroup`与前面发预处理时设置相同，预处理发送成功后，会回调本地事务监听器的`executeLocalTransaction`方法。以事务ID为主键，执行本地事务，执行成功则提交事务，执行失败则回滚事务。
-
-```java
-@Component
-@RocketMQTransactionListener(txProducerGroup = "OrderTransactionGroup")
-public class TransactionMsgListener implements RocketMQLocalTransactionListener {
-
-    @Override
-    public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
-        try {
-            // 拿到事务ID
-            String transactionId = (String) message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
-            System.out.println("transactionId = " + transactionId);
-            // 执行本地事务（例子中的支付扣款），以事务ID为唯一键，便于后续查询
-            return RocketMQLocalTransactionState.COMMIT;
-        } catch (Exception e) {
-            return RocketMQLocalTransactionState.ROLLBACK;
-        }
-    }
-
-    @Override
-    public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
-        // 拿到事务ID
-        String transactionId = (String) message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
-        // 通过事务ID查询本地事务执行情况 （例子中的支付扣款是否成功）
-        if (isSuccess(transactionId)) {
-            return RocketMQLocalTransactionState.COMMIT;
-        }
-        return RocketMQLocalTransactionState.ROLLBACK;
-    }
-
-    private boolean isSuccess(String transactionId) {
-        // 查询本地事务执行情况
-        return true;
-    }
-}
-```
-
-如果`executeLocalTransaction`方法中返回的状态是未知`UNKNOWN`或者未返回状态，默认会在预处理发送的1分钟后由broker通知producer检查本地事务，在producer中回调本地事务监听器中的`checkLocalTransaction`方法。检查本地事务时，可以根据事务ID查询本地事务的状态，再返回具体事务状态给broker。
-
-这里需要注意的是一旦事务提交成功之后，下游应用的Consumer是能收到该消息，如果消费失败需要人工介入处理，通常这种情况都是业务bug导致，人工修复后继续消费即可。
-
-其他更多分布式事务知识点在此不做介绍了，详见SEATA章节。
 
 
 
@@ -944,569 +1759,6 @@ public class TransactionMsgListener implements RocketMQLocalTransactionListener 
 
 
 
-### 消息发送的高可用
-
-在消息发送时可能会遇到网络问题、broker宕机等情况，而NameServer检测broker是有延迟的，虽然NameServer每间隔10秒会扫码所有Broker信息，但要broker的最后心跳时间超过120秒以上才认为该Broker不可用，所以Producer不能及时感知broker下线。如果在这期间消息一直发送失败，那么消息发送失败率会很高，这在业务上是无法接受的。于是RocketMQ采用了一些在发送端的高可用方案，来解决发送失败的问题，其中最为重要的两个设计是重试机制与故障延迟机制。
-
-这里大家可能会有一个疑问，为什么NameServer不及时检查broker和通知Producer？这是因为那样做的话会使得网络通信和架构设计变得非常复杂，而NameServer的设计初衷就是尽可能的简单，所以这块的高可用方案在Producer中来实现。
-
-#### 消息发送重试机制
-
-重试机制比较简单，仅支持同步发送方式，不支持异步和单向发送方式。根据发送失败的异常策略略有不同，如果是网络异常RemotingException和客户端异常MQClientException会重试，而broker服务端异常MQBrokerException和线程中断异常InterruptedException则不会再重试且抛出异常。
-
-```java
-// DefaultMQProducerImpl#sendDefaultImpl
-
-int timesTotal = communicationMode == CommunicationMode.SYNC ? 1 + this.defaultMQProducer.getRetryTimesWhenSendFailed() : 1;
-int times = 0;
-for (; times < timesTotal; times++) {
-    try {
-        sendResult = this.sendKernelImpl(msg, mq, communicationMode, sendCallback, topicPublishInfo, timeout - costTime);
-      	endTimestamp = System.currentTimeMillis();
-      	this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, false);
-    } catch (RemotingException e) {
-      	endTimestamp = System.currentTimeMillis();
-        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, true);
-        continue;
-    } catch (MQClientException e) {
-      	endTimestamp = System.currentTimeMillis();
-        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, true);
-        continue;
-    } catch (MQBrokerException e) {
-      	endTimestamp = System.currentTimeMillis();
-        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, true);
-        throw e;
-    } catch (InterruptedException e) {
-      	endTimestamp = System.currentTimeMillis();
-        this.updateFaultItem(mq.getBrokerName(), endTimestamp - beginTimestampPrev, false);
-        throw e;
-    }
-}
-```
-
-
-
-#### 故障规避机制
-
-默认是不开启的，如果在开启的情况下，消息发送失败的时候会将失败的broker暂时排除在队列选择列表中。规避时间是衰减的，如果broker一直不可用，会被NameServer检测到并在Producer更新路由信息时进行剔除。
-
-在选择查找路由时，选择消息队列的关键步骤如下：
-
-1. 先按轮询算法选择一个Queue
-2. 从故障列表判断该Queue是否可用
-
-```java
-// MQFaultStrategy#selectOneMessageQueue
-public MessageQueue selectOneMessageQueue(final TopicPublishInfo tpInfo, final String lastBrokerName) {
-    // 故障延迟机制
-    if (this.sendLatencyFaultEnable) {
-        try {
-          	// 轮询选queue
-            int index = tpInfo.getSendWhichQueue().getAndIncrement();
-            for (int i = 0; i < tpInfo.getMessageQueueList().size(); i++) {
-                int pos = Math.abs(index++) % tpInfo.getMessageQueueList().size();
-                if (pos < 0)
-                    pos = 0;
-                MessageQueue mq = tpInfo.getMessageQueueList().get(pos);
-              	// 判断queue是否可用
-                if (latencyFaultTolerance.isAvailable(mq.getBrokerName())) {
-                    if (null == lastBrokerName || mq.getBrokerName().equals(lastBrokerName))
-                        return mq;
-                }
-            }
-        } catch (Exception e) {
-            log.error("Error occurred when selecting message queue", e);
-        }
-
-        return tpInfo.selectOneMessageQueue();
-    }
-		// 默认轮询机制
-    return tpInfo.selectOneMessageQueue(lastBrokerName);
-}
-```
-
-Queue是否可用也有2个步骤：
-
-1. 先判断其是否在故障列表，不在故障列表代表可用；
-2. 在故障列表`faultItemTable`还需判断当前时间是否大于等于故障规避的开始时间`startTimestamp`，这个时间判断是因为通常故障时间是有限制的，broker宕机之后会有相关运维去恢复。
-
-```java
-public boolean isAvailable(final String name) {
-    final FaultItem faultItem = this.faultItemTable.get(name);
-    if (faultItem != null) {
-        return faultItem.isAvailable();
-    }
-    return true;
-}
-
-public boolean isAvailable() {
-  	return (System.currentTimeMillis() - startTimestamp) >= 0;
-}
-```
-
-这部分重点在于故障机器 `FaultItem`是在什么场景下进入到故障列表`faultItemTable`中，相信大家应该也能猜到了，消息发送失败时那就可能是机器故障了。回顾一下前面重试机制中的消息发送代码，可以看到两个情况会调用`updateFaultItem()`，消息发送结束后和发送出现异常时。
-
-只有在开启故障规避机制时才会更新故障机器信息，根据`isolation`计算故障周期时长，故障时长`duration`的单位是毫秒。
-
-```java
-public void updateFaultItem(final String brokerName, final long currentLatency, boolean isolation) {
-    if (this.sendLatencyFaultEnable) {
-        long duration = computeNotAvailableDuration(isolation ? 30000 : currentLatency);
-        this.latencyFaultTolerance.updateFaultItem(brokerName, currentLatency, duration);
-    }
-}
-
-private long computeNotAvailableDuration(final long currentLatency) {
-    for (int i = latencyMax.length - 1; i >= 0; i--) {
-      if (currentLatency >= latencyMax[i])
-        return this.notAvailableDuration[i];
-    }
-  	return 0;
-}
-
-private long[] latencyMax = {50L, 100L, 550L, 1000L, 2000L, 3000L, 15000L};
-private long[] notAvailableDuration = {0L, 0L, 30000L, 60000L, 120000L, 180000L, 600000L};
-```
-
-`currentLatency`代表响应时间，`computeNotAvailableDuration()`根据响应时间来计算故障周期时长，响应时间越长则故障周期也越长。网络异常、broker异常、客户端异常都是固定响应时长30秒，所以它们的故障周期时长为10分钟。而消息发送成功和线程中断异常如果响应时长咋在100毫秒内，则故障周期时长为0。
-
-```java
-public void updateFaultItem(final String name, final long currentLatency, final long notAvailableDuration) {
-    FaultItem old = this.faultItemTable.get(name);
-    if (null == old) {
-        final FaultItem faultItem = new FaultItem(name);
-        faultItem.setCurrentLatency(currentLatency);
-        faultItem.setStartTimestamp(System.currentTimeMillis() + notAvailableDuration);
-				// 加入故障列表
-        old = this.faultItemTable.putIfAbsent(name, faultItem);
-        if (old != null) {
-            old.setCurrentLatency(currentLatency);
-            old.setStartTimestamp(System.currentTimeMillis() + notAvailableDuration);
-        }
-    } else {
-        old.setCurrentLatency(currentLatency);
-        old.setStartTimestamp(System.currentTimeMillis() + notAvailableDuration);
-    }
-}
-```
-
-FaultItem存储了broker名称、响应时长、故障规避开始时间，最要的是这个故障规避开始时间，前面有提到会用来判断Queue是否可用。那么故障周期时长为0就代表了没有故障，当响应时长超过100毫秒时代表broker可能机器出现问题也会进入故障列表，网络异常、broker异常、客户端异常则设定为故障10分钟。
-
-
-
-## （待调整） 消息存储
-
-### 消息存储整体设计
-
-RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计。而数据存储的核心有3部分组成：commitlog数据存储文件、consumequeue消费队列文件、index索引文件。
-
-从Producer将消息发送到broker服务器，broker会把所有消息存储在CommitLog文件，再由CommitLog转发到ConsumeQueue文件提供给各个Consumer消费。整体流程图如下：
-
-![rocketmq_architecture_4](image/rocketmq_architecture_4.png)
-
-
-
-通过${ROCKETMQ_HOME}/store目录可以看到存储相关的文件目录，如下图所示
-
-![rocketmq-store](image/rocketmq-store.jpg)
-
-
-
-#### 消息持久化
-
-commitlog目录是负责存储消息数据的文件，所有Topic的消息都会先存在`{ROCKETMQ_HOME}/store/commitlog`文件夹下的文件中，消息数据写入`commitlog`文件是加锁串行追加写入。
-
-RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所有Topic的消息，从而保证消息存储是完全的磁盘顺序写，但这样给文件读取（消费消息）同样带来了困难。
-
-当消息到达`commitlog`文件后，会通过`ReputMessageService`线程异步的几乎实时将消息转发给消费队列文件与索引文件。在commitlog目录里，每个文件默认大小是1G，文件名按照该文件起始的总的字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。所以第一个文件名是00000000000000000000，第二个文件起始偏移量是1024 * 1024 * 1024=1073741824，即文件名是0000000001073741824。
-
-文件名这样设计的目的是为了在消费消息时能够根据偏移量offset快速定位到消息存储在某个commitlog文件，从而加快消息检索速度。
-
-消息数据文件中每条消息数据具体格式如下：
-
-| **序号** | 消息存储结构                | 备注                                                         | 长度(字节)         |
-| -------- | --------------------------- | ------------------------------------------------------------ | ------------------ |
-| **1**    | TOTALSIZE                   | 消息总大小                                                   | 4                  |
-| **2**    | MAGICCODE                   | 消息magic code，区分数据消息和空消息                         | 4                  |
-| **3**    | BODYCRC                     | 消息体的CRC，当broker重启时会校验                            | 4                  |
-| **4**    | QUEUEID                     | 区分同一个topic的不同queue                                   | 4                  |
-| **5**    | FLAG                        | 不处理                                                       | 4                  |
-| **6**    | QUEUEOFFSET                 | queue中的消息偏移量，即queue中的消息个数，*20=物理偏移量     | 8                  |
-| **7**    | PHYSICALOFFSET              | 在commitlog中的物理起始偏移量                                | 8                  |
-| **8**    | SYSFLAG                     | 消息标志，指名消息是事务状态等消息特征                       | 4                  |
-| **9**    | BORNTIMESTAMP               | Producer的时间戳                                             | 8                  |
-| **10**   | BORNHOST(IP+HOST)           | Producer地址                                                 | 8                  |
-| **11**   | STORETIMESTAMP              | 存储时间戳                                                   | 8                  |
-| **12**   | STOREHOST(IP+PORT)          | 消息存储到broker的地址                                       | 8                  |
-| **13**   | RECONSUMETIMES              | 消息被某个consumer group重新消费次数（consumer group之间独立计数） | 8                  |
-| **14**   | PREPARED TRANSACTION OFFSET | 表示该消息是prepared状态的事务消息                           | 8                  |
-| **15**   | BODY                        | 前4字节：bodyLength，后bodyLength存放消息体内容              | 4+bodyLength       |
-| **16**   | TOPIC                       | 前1字节：topicLength，后topicLength存放topic内容             | 1+topicLength      |
-| **17**   | Properties                  | 前2字节：propertiesLength，后propertiesLength存放属性数据    | 2+propertiesLength |
-
-
-
-#### 消费队列
-
-消息broker中存储消息的实际工作就是读取文件，但消息数据文件中是所有Topic的消息数据混合在一起的，消费消息时是区分Topic去消费，这就导致如果消费时也读取CommitLog文件会使得消费消息的性能差吞吐量低。为了解决消息数据文件顺序写难以读取的问题，RocketMQ中设计通过消费队列ConsumeQueue文件来解决。
-
-consumequeue：负责存储消费者队列文件，在消息写入到commitlog文件，会异步转发到consumequeue文件，然后提供给consumer消费。 consumequeue文件中并不存储具体的消息数据，只存commitlog的 偏移量offset、消息大小size、消息Tag Hashcode。
-
-每个Topic在某个broker下对应多个队列queue，默认是4个消费队列queue。每一条记录的大小是20B，默认一个文件存储30w个记录，文件名同样也按照字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。所以第一个文件名是00000000000000000000，第二个文件起始偏移量是20 * 30w=6000000，第二个文件名是00000000000006000000。
-
-| 序号 | 消息存储结构         | 备注                      | 长度(字节) |
-| :--- | :------------------- | :------------------------ | :--------- |
-| 1    | CommitLog Offset     | 在commitLog里的物理偏移量 | 8          |
-| 2    | Size                 | 消息大小                  | 4          |
-| 3    | Message Tag Hashcode | 用于订阅时消息过滤        | 8          |
-
-在集群模式下，broker会记录客户端对每个消费队列的消费偏移量，定位到consumequeue里相应的记录，并通过CommitLog Offset定位到commitlog里的该条消息，如下图所示。RocketMQ也提供索引查询，此处暂不进行详细描述。
-
-![rocketmq_architecture_6](image/rocketmq_architecture_6.png)
-
-
-
-#### 索引文件
-
-index：消息的索引文件，存储了消息KEY和offset。消息索引是为了支持能够根据消息属性快速检索消息，但仅支持用消息KEY检索，这也是为了简化索引设计，毕竟消息中间件不是数据库，索引不是其核心功能。
-
-索引文件总共包含3部分：lndexHeader、 Hash槽、 索引数据。
-
-![rocketmq_architecture_7](image/rocketmq_architecture_7.jpg)
-
-| 序号 | 消息存储结构 | 备注                                           | 长度(字节)  |
-| :--- | :----------- | :--------------------------------------------- | :---------- |
-| 1    | lndexHeader  | 索引头信息，存储该索引文件的概要信息           | 40          |
-| 2    | Hash槽       | 500万个hash槽，存储消息Key的hash值对应索引位置 | 4 * 500万   |
-| 3    | 索引数据     | 2000万条索引数据构成的列表                     | 20 * 2000万 |
-
-1. IndexHeader索引头信息包含：
-
-   - beginTimestamp: 索引文件中消息的最小存储时间。
-
-   - endTimestamp: 索引文件中消息的最大存储时间。
-
-   - beginPhyoffset: 索引文件中消息的最小偏移量，来自commitlog文件偏移量。
-
-   - endPhyoffset: 索引文件中消息的最大偏移量，来自commitlog文件偏移量。
-   - hashslotCount: hash槽的个数，默认是500万个。 
-
-   - indexCount: 索引数据列表当前已使用的个数。
-
-2. Hash槽：一个索引文件默认有500万个Hash槽，每个Hash槽存储的值是位置信息，落在该Hash槽的消息Key对应最新的索引数据位置。
-
-3. 索引数据： 索引数据在索引数据列表中按顺序存储，默认一个索引文件包含2000万个索引数据，每一个索引数据结构如下。
-
-   - hashcode：消息key的hashcode。 
-   - phyOffset：消息对应的物理偏移量。
-   - timeDiff：该消息存储时间与第一条消息的时间戳的差值，小于0该消息无效。 
-   - prelndexPos：该索引的前一条索引位置，当出现hash冲突时，构建的链表结构。 
-
-   
-
-使用hashcode存储数据，必须要考虑的问题就是hash冲突。举例说明，假设有2个消息Message1、Message2的Key值相同，且都发送到同一台broker，此时写索引文件时这2条消息的索引就一定会出现Hash冲突，如果是Message1先写入，Message1的index值中的preIndex为0，Hash槽中的值指向Message1的index的位置。然后Message2后写入，则Message2的index值中的preIndex为Message1的位置，此时Hash槽中的值会修改指向Message2的index的位置。如果通过Key检索消息，可以先找到Message2，通过Message2的preIndex再找到Message1。
-
-
-
-#### 配置
-
-- config：负责存储topic配置、消费进度、订阅关系。
-
-
-
-#### 刷盘时间
-
-- checkpoint：负责记录commitlog文件、consumequeue文件、index文件的刷盘时间点。
-
-
-
-#### 异常检测
-
-- abort：用于记录`Broker`的上次关闭是正常关闭还是异常关闭，在重启 `Broker`时为了保证 `commitlog`文件、消费队列文件与索引文件的正确性，分别采取不同的策略来恢复文件。
-
-
-
-### 消息存储的高可用
-
-高可用性是分布式系统中必不可少的，在RocketMQ中发送成功的消息不能丢、Broker不能发生单点故障，出现broker异常宕机、操作系统crash、机房断电或断网等情况保证数据不丢。RocketMQ主要是通过消息持久化（也称刷盘）、主从复制、读写分离机制来保证。
-
-
-
-#### 同步刷盘
-
-同步刷盘的模式下当消息写到内存后，会等待数据写入到磁盘的CommitLog文件。具体实现源码在`CommitLog#handleDiskFlush`，`GroupCommitRequest`是刷盘任务，提交刷盘任务后，会在刷盘队列中等待刷盘，而刷盘线程`GroupCommitService`是每间隔10毫秒写一批数据到磁盘。为什么不直接写呢？主要原因是磁盘IO压力大写入性能低，每间隔10毫秒可以提升磁盘IO效率和写入性能。
-
-```java
-// CommitLog#handleDiskFlush
-public void handleDiskFlush(AppendMessageResult result, PutMessageResult putMessageResult, MessageExt messageExt) {
-    final GroupCommitService service = (GroupCommitService) this.flushCommitLogService;
-    GroupCommitRequest request = new GroupCommitRequest(result.getWroteOffset() + result.getWroteBytes());
-    service.putRequest(request);
-    // 等待刷盘完成
-    boolean flushOK = request.waitForFlush(this.defaultMessageStore.getMessageStoreConfig().getSyncFlushTimeout());
-    if (!flushOK) {
-      putMessageResult.setPutMessageStatus(PutMessageStatus.FLUSH_DISK_TIMEOUT);
-    }
-}
-
-public static class GroupCommitRequest {
-    private final long nextOffset;
-    private final CountDownLatch countDownLatch = new CountDownLatch(1);
-    private volatile boolean flushOK = false;
-
-    public GroupCommitRequest(long nextOffset) {
-        this.nextOffset = nextOffset;
-    }
-
-    public long getNextOffset() {
-        return nextOffset;
-    }
-
-    public void wakeupCustomer(final boolean flushOK) {
-        this.flushOK = flushOK;
-        this.countDownLatch.countDown();
-    }
-
-    public boolean waitForFlush(long timeout) {
-        try {
-            this.countDownLatch.await(timeout, TimeUnit.MILLISECONDS);
-            return this.flushOK;
-        } catch (InterruptedException e) {
-            log.error("Interrupted", e);
-            return false;
-        }
-    }
-}
-```
-
-`GroupCommitService`是刷盘线程，内部有两个刷盘任务列表，在`service.putRequest(request)`时仅仅是把提交刷盘任务到任务列表，`request.waitForFlush`会同步等待`GroupCommitService`将任务列表中的任务刷盘完成。
-
-```java
-private volatile List<GroupCommitRequest> requestsWrite = new ArrayList<GroupCommitRequest>();
-private volatile List<GroupCommitRequest> requestsRead = new ArrayList<GroupCommitRequest>();
-
-public synchronized void putRequest(final GroupCommitRequest request) {
-    synchronized (this.requestsWrite) {
-        this.requestsWrite.add(request);
-    }
-    if (hasNotified.compareAndSet(false, true)) {
-        waitPoint.countDown(); // notify
-    }
-}
-```
-
-这里有两个队列读写分离，requestsWrite是写队列，用于保存添加进来的刷盘任务，requestsRead是读队列，在刷盘之前会把写队列的数据放到读队列。
-
-```java
-private void swapRequests() {
-    List<GroupCommitRequest> tmp = this.requestsWrite;
-    this.requestsWrite = this.requestsRead;
-    this.requestsRead = tmp;
-}
-```
-
-刷盘的时候依次读取requestsRead中的数据写入到磁盘，写入完成后清空requestsRead。读写分离设计的目的是为了在刷盘时不影响任务提交到列表。
-
-```java
-for (GroupCommitRequest req : this.requestsRead) {
-  boolean flushOK = false;
-  for (int i = 0; i < 2 && !flushOK; i++) {
-    // 根据文件offset判断是否已经刷盘
-    flushOK = CommitLog.this.mappedFileQueue.getFlushedWhere() >= req.getNextOffset();
-    if (!flushOK) {
-      CommitLog.this.mappedFileQueue.flush(0);
-    }
-  }
-
-  req.wakeupCustomer(flushOK);
-}
-
-long storeTimestamp = CommitLog.this.mappedFileQueue.getStoreTimestamp();
-  if (storeTimestamp > 0) {
-// 更新checkpoint
- CommitLog.this.defaultMessageStore.getStoreCheckpoint().setPhysicMsgTimestamp(storeTimestamp);
-}
-// 清空已刷盘完成的列表
-this.requestsRead.clear();
-```
-
-`mappedFileQueue.flush(0)`是刷盘操作，通过`MappedFile`映射的`CommitLog`文件写入磁盘。
-
-```java
-public boolean flush(final int flushLeastPages) {
-    boolean result = true;
-    MappedFile mappedFile = this.findMappedFileByOffset(this.flushedWhere, this.flushedWhere == 0);
-    if (mappedFile != null) {
-        long tmpTimeStamp = mappedFile.getStoreTimestamp();
-        int offset = mappedFile.flush(flushLeastPages);
-        long where = mappedFile.getFileFromOffset() + offset;
-        result = where == this.flushedWhere;
-        this.flushedWhere = where;
-        if (0 == flushLeastPages) {
-            this.storeTimestamp = tmpTimeStamp;
-        }
-    }
-    return result;
-}
-```
-
-
-
-#### 异步刷盘
-
-RocketMQ默认是采用异步刷盘，异步刷盘又有两种策略：开启缓冲池、不开启缓冲池。
-
-```java
-if (!this.defaultMessageStore.getMessageStoreConfig().isTransientStorePoolEnable()) {
-  	// 不开启堆外内存池
-    flushCommitLogService.wakeup();
-} else {
-  	// 开启堆外内存池
-    commitLogService.wakeup();
-}
-```
-
-- 不开启缓冲池：默认是不开启，刷盘线程`FlushRealTimeService`会每间隔500毫秒尝试去Flush到磁盘。这间隔500毫秒仅仅是尝试，实际去刷盘还得满足一些前提条件，即距离上次刷盘时间超过10秒，或者是写入内存的数据超过4页（16K），这样即使服务器宕机丢失的数据也在10秒内的或是大小在16K内。	
-
-  ```java
-  class FlushRealTimeService extends FlushCommitLogService {
-      private long lastFlushTimestamp = 0;
-      private long printTimes = 0;
-  
-      public void run() {
-          while (!this.isStopped()) {
-              boolean flushCommitLogTimed = CommitLog.this.defaultMessageStore.getMessageStoreConfig().isFlushCommitLogTimed();
-  						// 每次flush间隔500毫秒
-              int interval = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getFlushIntervalCommitLog();
-            	// 每次flush最少4页内存数据 (16k)
-              int flushPhysicQueueLeastPages = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getFlushCommitLogLeastPages();
-  						// 距离上次刷盘时间阈值10秒
-              int flushPhysicQueueThoroughInterval =
-                  CommitLog.this.defaultMessageStore.getMessageStoreConfig().getFlushCommitLogThoroughInterval();
-  
-              boolean printFlushProgress = false;
-  
-              // 判断是否超过10秒没刷盘了，需要强制刷盘
-              long currentTimeMillis = System.currentTimeMillis();
-              if (currentTimeMillis >= (this.lastFlushTimestamp + flushPhysicQueueThoroughInterval)) {
-                  this.lastFlushTimestamp = currentTimeMillis;
-                  flushPhysicQueueLeastPages = 0;
-                  printFlushProgress = (printTimes++ % 10) == 0;
-              }
-  
-              try {
-                	// 等待flush间隔500毫秒
-                  if (flushCommitLogTimed) {
-                      Thread.sleep(interval);
-                  } else {
-                      this.waitForRunning(interval);
-                  }
-  								
-                	// 通过MappedFile刷盘
-                  long begin = System.currentTimeMillis();
-                  CommitLog.this.mappedFileQueue.flush(flushPhysicQueueLeastPages);
-                	// 设置checkPoint文件的刷盘时间点
-                  long storeTimestamp = CommitLog.this.mappedFileQueue.getStoreTimestamp();
-                  if (storeTimestamp > 0) {
-  CommitLog.this.defaultMessageStore.getStoreCheckpoint().setPhysicMsgTimestamp(storeTimestamp);
-                  }
-                	// 超过500毫秒的刷盘记录日志
-                  long past = System.currentTimeMillis() - begin;
-                  if (past > 500) {
-                      log.info("Flush data to disk costs {} ms", past);
-                  }
-              } catch (Throwable e) {
-                  CommitLog.log.warn(this.getServiceName() + " service has exception. ", e);
-                  this.printFlushProgress();
-              }
-          }
-  
-          // broker正常停止前，把内存page中的数据刷盘
-          boolean result = false;
-          for (int i = 0; i < RETRY_TIMES_OVER && !result; i++) {
-              result = CommitLog.this.mappedFileQueue.flush(0);
-              CommitLog.log.info(this.getServiceName() + " service shutdown, retry " + (i + 1) + " times " + (result ? "OK" : "Not OK"));
-          }
-  		}
-  }
-  ```
-
-- 开启缓冲池：RocketMQ会申请一块和commitlog文件相同大小的堆外内存用来做缓冲池，数据会先写入到缓冲池，提交线程`CommitRealTimeService`也是每间隔500毫秒尝试提交到文件通道等待刷盘，刷盘最终还是由`FlushRealTimeService`来完成，和不开启缓冲池处理一致。使用缓冲池的目的是为了多条消息合并写入，从而提高IO性能。
-
-  ```java
-  class CommitRealTimeService extends FlushCommitLogService {
-  		
-      private long lastCommitTimestamp = 0;
-  
-      @Override
-      public void run() {
-          CommitLog.log.info(this.getServiceName() + " service started");
-          while (!this.isStopped()) {
-            	// 每次提交间隔200毫秒
-              int interval = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getCommitIntervalCommitLog();
-  						// 每次提交最少4页内存数据 (16k)
-              int commitDataLeastPages = CommitLog.this.defaultMessageStore.getMessageStoreConfig().getCommitCommitLogLeastPages();
-  						// 距离上次提交时间阈值200毫秒
-              int commitDataThoroughInterval =
-  CommitLog.this.defaultMessageStore.getMessageStoreConfig().getCommitCommitLogThoroughInterval();
-  						// 判断是否超过200毫秒没提交了，需要强制提交
-              long begin = System.currentTimeMillis();
-              if (begin >= (this.lastCommitTimestamp + commitDataThoroughInterval)) {
-                  this.lastCommitTimestamp = begin;
-                  commitDataLeastPages = 0;
-              }
-  
-              try {
-                	// 提交到MappedFile，此时还未刷盘
-                  boolean result = CommitLog.this.mappedFileQueue.commit(commitDataLeastPages);
-                  long end = System.currentTimeMillis();
-                  if (!result) {
-                      this.lastCommitTimestamp = end; 
-          						// 唤醒刷盘线程
-                      flushCommitLogService.wakeup();
-                  }
-  								
-                  if (end - begin > 500) {
-                      log.info("Commit data to file costs {} ms", end - begin);
-                  }
-                  this.waitForRunning(interval);
-              } catch (Throwable e) {
-                  CommitLog.log.error(this.getServiceName() + " service has exception. ", e);
-              }
-          }
-        
-  				// broker正常停止前，把内存page中的数据提交
-          boolean result = false;
-          for (int i = 0; i < RETRY_TIMES_OVER && !result; i++) {
-              result = CommitLog.this.mappedFileQueue.commit(0);
-              CommitLog.log.info(this.getServiceName() + " service shutdown, retry " + (i + 1) + " times " + (result ? "OK" : "Not OK"));
-          }
-          CommitLog.log.info(this.getServiceName() + " service end");
-      }
-  }
-  ```
-
-
-
-#### 主从复制
-
-RocketMQ为了提高消息消费的高可用性，避免Broker发生单点故障引起存储在Broker上的消息无法及时消费， RocketMQ采用Broker数据主从复制机制， 当消息发送到Master服务器后会将消息同步到Slave服务器，如果Master宕机后，消息消费者还可以继续从Slave拉取消息。
-
-消息从Master服务器复制到Slave服务器上，有2种复制方式：同步复制`SYNC_MASTER`、异步复制`ASYNC_MASTER`，在配置文件`${ROCKETMQ_HOME}/conf/broker.conf`里的`brokerRole`参数进行设置。
-
-- 同步复制：Master服务器和Slave服务器都写成功后才返回给客户端写成功的状态。优点是如果Master服务器出现故障，Slave服务器上有全部的备份数据，很容易恢复到Master服务器。缺点是同步复制由于多了一次同步等待的步骤，会增加数据写入延迟，并且降低系统吞吐量。
-- 异步复制：仅Master服务器写成功即可返回给客户端写成功的状态。优点刚好是同步复制的缺点，由于没有那一次同步等待的步骤，服务器的延迟较低且吞吐量较高。缺点显而易见，如果Master服务器出现故障，有些数据因为没有被写入Slave服务器，未同步的数据有可能会丢失。
-
-在实际应用中需要结合业务场景，合理设置刷盘方式和主从复制方式。不建议使用`SYNC_FLUSH`同步刷盘方式，因为会频繁的触发写磁盘操作，性能下降很明显。高性能是RocketMQ的一个明显特点，所以放弃性能是不合适的选择。通常可以把Master和Slave设置成`ASYNC_FLUSH`异步刷盘、`SYNC_MASTER`同步复制，这样即使有一台服务器出故障，仍然可以保证数据不丢。
-
-
-
-#### 读写分离
-
-读写分离机制也是高性能、高可用架构中常见的设计。例如MySQL也实现了读写分离机制，Client只能从Master服务器写数据，但可以从Master服务器和Slave服务器都读数据。RocketMQ的设计也是如此，但在实现方式上又有一些区别。
-
-RocketMQ的consumer在拉取消息时，broker会判断Master服务器的消息堆积量来决定consumer是否从Slave服务器拉取消息消费。默认开始是从Master服务器上拉取消息，如果Master服务器的消息堆积超过了物理内存的40%，则会在返回给consumer的消息结果里告知consumer，下次需要从其他Slave服务器上去拉取消息。
-
 
 
 ## （待调整）消息消费
@@ -1532,13 +1784,6 @@ RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费�
 
 
 
-### 并发消费与顺序消费
-
-我们在业务代码中要实现一个Consumer，需要注册一个监听器Listener，用于在收到消息时进行业务逻辑处理。监听有2种模式：并发消费、顺序消费。 默认是并发消费，使用`@RocketMQMessageListener`可以设置consumeMode参数修改。
-
-- 并发消费：也称为乱序消费，Consumer中会维护一个消费线程池，消费线程可以并发去同一个消息队列Queue中拉取消息进行消费。如果某个消费线程在监听器中进行业务处理时抛出异常，当前消费线程拉取的消息会进行重试，不影响其他消费线程和Queue的消费进度。消息重试是按照时间衰减的方式，重试达到最大次数时该条消息则进入失败队列（也称死信队列）不再重试。
-- 顺序消费：也称为有序消费，同一个消息队列Queue只允许Consumer一个消费线程拉取消费。在消费线程请求到broker时会先申请独占锁，拿到锁的请求则允许消费。如果消费线程在监听器中进行业务处理时抛出异常，消费进度会阻塞在当前这条消息，并不会继续消费该Queue中后续的消息，从而保证顺序消费。在顺序消费的场景下，特别需要注意对异常的处理，如果重试也失败的话会一直阻塞在当前消息，无法消费后续消息造成队列消息堆积。
-
 
 
 ### 消息过滤
@@ -1555,14 +1800,7 @@ RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费�
 
 
 
-### 推模式与拉模式
 
-任何一款消息中间件都会有两种获取消息的方式：Push推模式、Pull拉模式。这两种模式各有优缺点，并适用于不同的场景。
-
-- Push推模式：当消息发送到服务端时，由服务端主动推送给客户端Consumer。优点是客户端Consumer能实时的接收到新的消息数据；也有2个缺点，缺点1是如果Consumer消费一条消息耗时很长，消费推送速度大于消费速度时，Consumer消费不过来会缓冲区溢出。缺点2则是一个Topic往往会对应多个ConsumerGroup，服务端一条消息会产生多次推送，可能对服务端造成压力。
-- Pull拉模式：由客户端Consumer主动发请求每间隔一段时间轮询去服务端拉取消息。优点是Consumer可以根据当前消费速度选择合适的时机触发拉取；缺点则是拉取的间隔时间不好控制，间隔时间如果很长，会导致消息消费不及时，服务端容易积压消息。间隔时间如果很短，服务端收到的消息少，会导致Consumer可能多数拉取请求都是无效的（拿不到消息），从而浪费网络资源和服务端资源。
-
-这两种获取消息方式的缺点都很明显，单一的方式难以应对复杂的消费场景，所以RocketMQ中提供一种推/拉结合的长轮询机制来平衡推/拉模式各自的缺点。长轮询本质上是对普通pull模式的优化，即还是客户端Consumer轮询的方式主动发送拉取请求到服务端broker后，broker如果检测到有新的消息就立即返回Consumer，但如果没有新消息则暂时不返回任何信息，挂起当前请求缓存到本地，broker后台有个线程去检查挂起请求，等到新消息产生时再返回Consumer。平常使用的DefaultMQPushConsumer的实现就是推/拉结合的，既能解决资源浪费问题，也能解决消费不及时问题。
 
 
 
