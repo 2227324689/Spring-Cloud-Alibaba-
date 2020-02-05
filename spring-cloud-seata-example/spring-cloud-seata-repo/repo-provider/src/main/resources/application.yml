@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/seata_repo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: spring-cloud-seata-repo
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.128:8848
+mybatis:
+    mapper-locations: classpath*:com/gupaoedu/springcloud/seata/repoprovider/dal/mappers/*Mapper.xml
+    type-aliases-package: com.gupaoedu.springcloud.seata.repoprovider.dal.entitys
+dubbo:
+  application:
+    name: spring-cloud-seata-repo
+  registry:
+    address: spring-cloud://localhost
+  protocol:
+    name: dubbo
+    port: 20881
+  scan:
+    base-packages: com.gupaoedu.springcloud.seata.repoprovider.impl

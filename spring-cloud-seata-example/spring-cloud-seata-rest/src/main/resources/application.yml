@@ -1,0 +1,12 @@
+dubbo:
+  scan:
+    base-packages: com.gupaoedu.springcloud.seata.springcloudseatarest
+  cloud:
+    subscribed-services: spring-cloud-seata-order,spring-cloud-seata-repo
+spring:
+  application:
+    name: spring-cloud-seata-rest
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.128:8848

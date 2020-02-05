@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: spring-cloud-seata-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.128:8848
+mybatis:
+    mapper-locations: classpath*:com/gupaoedu/springcloud/seata/orderprovider/dal/mappers/*Mapper.xml
+    type-aliases-package: com.gupaoedu.springcloud.seata.orderprovider.dal.entitys
+dubbo:
+  application:
+    name: spring-cloud-seata-order
+  registry:
+    address: spring-cloud://localhost
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: com.gupaoedu.springcloud.seata.orderprovider.impl
