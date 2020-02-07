@@ -6,8 +6,6 @@ dubbo:
 spring:
   application:
     name: sample-rest-web
-  aop:
-    proxy-target-class: true
 
 seata:
   enabled: true
