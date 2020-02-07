@@ -14,6 +14,8 @@ import org.springframework.messaging.Message;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -39,18 +41,21 @@ public class TestController {
         org.apache.rocketmq.common.message.Message msg1 = new org.apache.rocketmq.common.message.Message("TopicTest", "msg1".getBytes());
         org.apache.rocketmq.common.message.Message msg2 = new org.apache.rocketmq.common.message.Message("TopicTest", "msg2".getBytes());
         org.apache.rocketmq.common.message.Message msg3 = new org.apache.rocketmq.common.message.Message("TopicTest", "msg3".getBytes());
-        SendResult sendResult =  rocketMQTemplate.getProducer().send(Lists.newArrayList(msg1, msg2, msg3));
+        SendResult sendResult = rocketMQTemplate.getProducer().send(Lists.newArrayList(msg1, msg2, msg3));
         return sendResult.getMsgId();
     }
 
     @GetMapping(value = "/orderly")
-    public String orderly(String orderId) {
-        Order order = new Order(orderId, "浙江杭州");
-        MessageBuilder builder = MessageBuilder.withPayload(order);
-        Message message = builder.build();
-        SendResult sendResult = rocketMQTemplate.syncSendOrderly("TopicTest", message, order.getOrderId());
-        System.out.println("MsgId = " + sendResult.getMsgId() + ", QueueId = " + sendResult.getMessageQueue().getQueueId());
-        return sendResult.getMsgId();
+    public String orderly() {
+        List<String> typeList = Arrays.asList("创建", "支付", "退款");
+        for (String type : typeList) {
+            Order order = new Order("123", type);
+            MessageBuilder builder = MessageBuilder.withPayload(order);
+            Message message = builder.build();
+            SendResult sendResult = rocketMQTemplate.syncSendOrderly("TopicTest", message, order.getOrderId());
+            System.out.println("MsgId = " + sendResult.getMsgId() + ", QueueId = " + sendResult.getMessageQueue().getQueueId());
+        }
+        return "OK";
     }
 
     @GetMapping(value = "/delay")
@@ -70,7 +75,7 @@ public class TestController {
         MessageBuilder builder = MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId);
         Message message = builder.build();
 
-        TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup","TopicOrder", message, order.getOrderId());
+        TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup", "TopicOrder", message, order.getOrderId());
         return sendResult.getMsgId();
     }
 }

@@ -2,39 +2,39 @@
 
 ## 1. 整体介绍
 
-RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消息中间件，经过阿里巴巴多年双11验证，由阿里巴巴开源捐献给Apache的顶级项目。
+RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消息中间件（也称消息队列），经过阿里巴巴多年双11验证，由阿里巴巴开源捐献给Apache的顶级项目。
 
 ### 应用场景
 
 - 削峰填谷
 
-  诸如秒杀、抢红包、企业开门红等大型活动时皆会带来较高的流量脉冲，或因没做相应的保护而导致系统超负荷甚至崩溃，或因限制太过导致请求大量失败而影响用户体验，消息队列 RocketMQ 版可提供削峰填谷的服务来解决该问题。
+  诸如秒杀、抢红包、企业开门红等大型活动时皆会带来较高的流量脉冲，或因没做相应的保护而导致系统超负荷甚至崩溃，或因限制太过导致请求大量失败而影响用户体验，RocketMQ可提供削峰填谷的服务来解决该问题。
 
 - 异步解耦
 
-  交易系统作为淘宝/天猫主站最核心的系统，每笔交易订单数据的产生会引起几百个下游业务系统的关注，包括物流、购物车、积分、流计算分析等等，整体业务系统庞大而且复杂，消息队列 RocketMQ 版可实现异步通信和应用解耦，确保主站业务的连续性。
+  交易系统作为淘宝/天猫主站最核心的系统，每笔交易订单数据的产生会引起几百个下游业务系统的关注，包括物流、购物车、积分、流计算分析等等，整体业务系统庞大而且复杂，RocketMQ可实现异步通信和应用解耦，确保主站业务的连续性。
 
 - 顺序收发
 
-  细数日常中需要保证顺序的应用场景非常多，例如证券交易过程时间优先原则，交易系统中的订单创建、支付、退款等流程，航班中的旅客登机消息处理等等。与先进先出（First In First Out，缩写 FIFO）原理类似，消息队列 RocketMQ 版提供的顺序消息即保证消息 FIFO。
+  细数日常中需要保证顺序的应用场景非常多，例如证券交易过程时间优先原则，交易系统中的订单创建、支付、退款等流程，航班中的旅客登机消息处理等等。与先进先出（First In First Out，缩写 FIFO）原理类似，RocketMQ提供的顺序消息即保证消息 FIFO。
 
 - 分布式事务一致性
 
-  交易系统、支付红包等场景需要确保数据的最终一致性，大量引入消息队列 RocketMQ 版的分布式事务，既可以实现系统之间的解耦，又可以保证最终的数据一致性。
+  交易系统、支付红包等场景需要确保数据的最终一致性，大量引入RocketMQ的分布式事务，既可以实现系统之间的解耦，又可以保证最终的数据一致性。
 
 - 大数据分析
 
-  数据在“流动”中产生价值，传统数据分析大多是基于批量计算模型，而无法做到实时的数据分析，利用阿里云消息队列 RocketMQ 版与流式计算引擎相结合，可以很方便的实现将业务数据进行实时分析。
+  数据在“流动”中产生价值，传统数据分析大多是基于批量计算模型，而无法做到实时的数据分析，利用RocketMQ与流式计算引擎相结合，可以很方便的实现将业务数据进行实时分析。
 
 - 分布式缓存同步
 
-  天猫双 11 大促，各个分会场琳琅满目的商品需要实时感知价格变化，大量并发访问数据库导致会场页面响应时间长，集中式缓存因为带宽瓶颈限制商品变更的访问流量，通过消息队列 RocketMQ 版构建分布式缓存，实时通知商品数据的变化。
+  天猫双 11 大促，各个分会场琳琅满目的商品需要实时感知价格变化，大量并发访问数据库导致会场页面响应时间长，集中式缓存因为带宽瓶颈限制商品变更的访问流量，通过RocketMQ构建分布式缓存，实时通知商品数据的变化。
 
 
 
 ### 如何使用
 
-RocketMQ集成在Spring Cloud Alibaba 中使用，有2种方式可以方便使用：springboot集成的RocketMQ组件，以及使用SpringCloudStream，当然直接使用RocketMQ的API也是可以的。
+RocketMQ集成在Spring Cloud Alibaba 中使用，有2种方式可以方便使用：springboot集成的RocketMQ组件、SpringCloudStream集成的RocketMQ组件，当然直接使用RocketMQ的API也是可以的。
 
 - 使用`rocketMQTemplate`发送消息
 
@@ -268,80 +268,101 @@ public class Application {
 
 
 
-前面分别简单介绍了Springboot中和SpringCloudStream中如何发送和消息消息，那在平常开发过程中该如何选择呢？笔者个人偏好喜欢使用Springboot集成的`RocketMQTemplate`和`@RocketMQMessageListener`注解等，优点是开发简单更便捷，包装的API更贴合RocketMQ的功能和概念。SpringCloudStream是统一消息模型，在编程模型上是一种好的设计，优点是多数情况下更换消息中间件业务代码仅需修改配置，例如从使用kafka换成使用RocketMQ，但笔者认为在实际开发过程中并不是很实用，主要原因是消息中间件通常不会轻易变更，也很少会在一个应用中使用多个消息中间件。
+前面分别简单介绍了Springboot中和SpringCloudStream中如何发送和消息消息，那在平常开发过程中该如何选择呢？笔者个人偏好喜欢使用Springboot集成的`RocketMQTemplate`和`@RocketMQMessageListener`注解等，优点是开发简单更便捷，包装的API更贴合RocketMQ的功能和概念。SpringCloudStream是统一消息模型，在编程模型上是一种好的设计，优点是多数情况下更换消息中间件业务代码仅需修改配置，例如从使用kafka换成RocketMQ，但笔者认为在实际开发过程中并不是很实用，主要原因是消息中间件通常不会轻易变更，也很少会在一个应用中使用多个消息中间件。
 
 
 
 ### 技术原理
 
-前面演示的demo中引入了`spring-cloud-starter-stream-rocketmq`，maven会传递依赖`rocketmq-spring-boot-2.0.2.jar`，从名字上也能看出来是SpringBoot自动装配机制来集成RocketMQ。
+前面演示的demo中引入了`spring-cloud-starter-stream-rocketmq`，maven会传递依赖`rocketmq-spring-boot-2.0.2.jar`、`spring-cloud-stream-binder-rocketmq-2.1.1.RELEASE.jar`，从名字上也能看出来是SpringBoot自动装配机制来集成RocketMQ。
 
-找到`rocketmq-spring-boot-2.0.2.jar`中的`META-INF\spring.factories`文件
+找到`spring-cloud-stream-binder-rocketmq-2.1.1.RELEASE.jar`中的`META-INF\spring.factories`文件
 
 ```
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
+com.alibaba.cloud.stream.binder.rocketmq.config.RocketMQComponent4BinderAutoConfiguration
 ```
 
-
-
-根据spring.factories中的配置找到RocketMQAutoConfiguration类，其中定义了`RocketMQTemplate`这个Bean
+根据spring.factories中的配置找到RocketMQComponent4BinderAutoConfiguration类，其中定义了`RocketMQTemplate`这个Bean。
 
 ```java
 @Bean(destroyMethod = "destroy")
-@ConditionalOnBean(DefaultMQProducer.class)
-@ConditionalOnMissingBean(RocketMQTemplate.class)
-public RocketMQTemplate rocketMQTemplate(DefaultMQProducer mqProducer, ObjectMapper rocketMQMessageObjectMapper) {
-    RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
-    rocketMQTemplate.setProducer(mqProducer);
-    rocketMQTemplate.setObjectMapper(rocketMQMessageObjectMapper);
-    return rocketMQTemplate;
+@ConditionalOnMissingBean
+public RocketMQTemplate rocketMQTemplate(DefaultMQProducer mqProducer,
+			ObjectMapper objectMapper) {
+		RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
+		rocketMQTemplate.setProducer(mqProducer);
+		rocketMQTemplate.setObjectMapper(objectMapper);
+		return rocketMQTemplate;
 }
 ```
 
-`RocketMQTemplate`依赖`DefaultMQProducer`这个Bean，Bean的定义也是在RocketMQAutoConfiguration类中。`DefaultMQProducer`是RocketMQ源码中提供的客户端API，`RocketMQTemplate`中所有发送消息的接口都是封装了它。
+**`RocketMQTemplate`依赖`DefaultMQProducer`这个Bean，Bean的定义也是在RocketMQAutoConfiguration类中。`DefaultMQProducer`是RocketMQ提供的客户端API，`RocketMQTemplate`中所有发送消息的接口都是封装了它。**
 
 ```java
 @Bean
 @ConditionalOnMissingBean(DefaultMQProducer.class)
-@ConditionalOnProperty(prefix = "rocketmq", value = {"name-server", "producer.group"})
-public DefaultMQProducer defaultMQProducer(RocketMQProperties rocketMQProperties) {
-    RocketMQProperties.Producer producerConfig = rocketMQProperties.getProducer();
-    String nameServer = rocketMQProperties.getNameServer();
-    String groupName = producerConfig.getGroup();
-    Assert.hasText(nameServer, "[rocketmq.name-server] must not be null");
-    Assert.hasText(groupName, "[rocketmq.producer.group] must not be null");
-
+public DefaultMQProducer defaultMQProducer() {
     DefaultMQProducer producer;
-    String ak = rocketMQProperties.getProducer().getAccessKey();
-    String sk = rocketMQProperties.getProducer().getSecretKey();
+    String configNameServer = environment.resolveRequiredPlaceholders(
+      "${spring.cloud.stream.rocketmq.binder.name-server:${rocketmq.producer.name-server:}}");
+    String ak = environment.resolveRequiredPlaceholders(
+      "${spring.cloud.stream.rocketmq.binder.access-key:${rocketmq.producer.access-key:}}");
+    String sk = environment.resolveRequiredPlaceholders(
+      "${spring.cloud.stream.rocketmq.binder.secret-key:${rocketmq.producer.secret-key:}}");
     if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
-        producer = new DefaultMQProducer(groupName, new AclClientRPCHook(new SessionCredentials(ak, sk)),
-            rocketMQProperties.getProducer().isEnableMsgTrace(),
-            rocketMQProperties.getProducer().getCustomizedTraceTopic());
-        producer.setVipChannelEnabled(false);
-    } else {
-        producer = new DefaultMQProducer(groupName, rocketMQProperties.getProducer().isEnableMsgTrace(),
-            rocketMQProperties.getProducer().getCustomizedTraceTopic());
+      producer = new DefaultMQProducer(RocketMQBinderConstants.DEFAULT_GROUP,
+                                       new AclClientRPCHook(new SessionCredentials(ak, sk)));
+      producer.setVipChannelEnabled(false);
     }
-
-    producer.setNamesrvAddr(nameServer);
-    producer.setSendMsgTimeout(producerConfig.getSendMessageTimeout());
-    producer.setRetryTimesWhenSendFailed(producerConfig.getRetryTimesWhenSendFailed());
-    		producer.setRetryTimesWhenSendAsyncFailed(producerConfig.getRetryTimesWhenSendAsyncFailed());
-    producer.setMaxMessageSize(producerConfig.getMaxMessageSize());
-    producer.setCompressMsgBodyOverHowmuch(producerConfig.getCompressMessageBodyThreshold());
-    producer.setRetryAnotherBrokerWhenNotStoreOK(producerConfig.isRetryNextServer());
-
+    else {
+      producer = new DefaultMQProducer(RocketMQBinderConstants.DEFAULT_GROUP);
+    }
+    if (StringUtils.isEmpty(configNameServer)) {
+      configNameServer = RocketMQBinderConstants.DEFAULT_NAME_SERVER;
+    }
+    producer.setNamesrvAddr(configNameServer);
     return producer;
 }
 ```
 
-DefaultMQProducer的参数在RocketMQProperties类中设置，前面我们只设置了NameServer的地址，发送超时时间、发送失败重试次数、消息大小限制等参数默认值也在RocketMQProperties类中查看，可以在配置文件中修改。
+DefaultMQProducer的参数只需要设置3个：NameServer的地址、access-key、secret-key。access-key和secret-key是RocketMQ用来做权限控制的，在Broker端配置，如果没有可以不设置。
 
 
 
-在RocketMQAutoConfiguration类只初始化了发送消息相关的Bean，并没有消费消息相关的Bean信息。初始化消息监听器的过程要复杂很多，其中涉及许多spring容器的知识。RocketMQAutoConfiguration类引入了另外一个配置类ListenerContainerConfiguration。
+RocketMQComponent4BinderAutoConfiguration类是由SpringCloudStream提供，兼容了SpringBoot的自动装配，在SpringBoot中是由RocketMQAutoConfiguration类完成对RocketMQ的自动装配。SpringBoot装配在`rocketmq-spring-boot-2.0.2.jar`完成，这个jar包也是被maven传递依赖了，这两个jar包都能完成RocketMQ的自动装配，但SpringCloudStream需要兼容解决冲突问题。
+
+```java
+@Configuration
+@AutoConfigureAfter(RocketMQAutoConfiguration.class)
+@ConditionalOnMissingBean(DefaultMQProducer.class)
+public class RocketMQComponent4BinderAutoConfiguration {
+}
+```
+
+通过`@AutoConfigureAfter`指定了加载顺序，如果先加载SpringCloudStream装配，就会加载完成后再加载SpringBoot装配。SpringBoot装配代码这里就不详细分析了，和前面的类似。
+
+```java
+public class RocketMQAutoConfiguration {
+  	// 省略...
+  
+		@Bean(destroyMethod = "destroy")
+    @ConditionalOnBean(DefaultMQProducer.class)
+    @ConditionalOnMissingBean(RocketMQTemplate.class)
+    public RocketMQTemplate rocketMQTemplate(DefaultMQProducer mqProducer, ObjectMapper rocketMQMessageObjectMapper) {
+        RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
+        rocketMQTemplate.setProducer(mqProducer);
+        rocketMQTemplate.setObjectMapper(rocketMQMessageObjectMapper);
+        return rocketMQTemplate;
+    }
+}
+```
+
+通过`@ConditionalOnMissingBean`，RocketMQTemplate的Bean前面SpringCloudStream包里已经加载存在了，到这里就不会再重复加载，这是Spring里一种很好的向下兼容设计。
+
+
+
+初始化消息监听器的过程要复杂很多，其中涉及更多spring容器的知识。RocketMQAutoConfiguration类引入了另外一个配置类ListenerContainerConfiguration。
 
 ```java
 @Import({ JacksonFallbackConfiguration.class, ListenerContainerConfiguration.class })
@@ -534,9 +555,7 @@ public class MessageListener implements RocketMQListener<String> {
 }
 ```
 
-
-
-接下来笔者将为大家讲解RocketMQ中的常见的使用场景和技术原理，以及RocketMQ的架构设计。
+SpringCloudStream的Binder模式在此就不再介绍了，接下来笔者将为大家重点讲解RocketMQ中的常见的使用场景和技术原理，以及RocketMQ的架构设计。
 
 
 
@@ -579,7 +598,7 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 
 
 
-在RocketMQ中Topic是逻辑概念，队列是物理概念（对应Kafka中的分区）。1个topic可以设置多个队列（queue），每个队列也可以有多个副本，即有1个master队列 + 多个slave队列。RocketMQ的部署拓扑图如下：
+在RocketMQ中Topic也是逻辑概念，队列是物理概念（对应Kafka中的分区）。1个topic可以设置多个队列（queue），每个队列也可以有多个副本，即有1个master队列 + 多个slave队列。RocketMQ的部署拓扑图如下：
 
 ![](image/rocketmq_architecture_12.jpg)
 
@@ -590,15 +609,15 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 - 在Kafka中，Master和Slave在同一台Broker机器上，Broker机器具有双重身份，分区的Master/Slave身份是在运行过程中选举出来的。
 - 在RocketMQ中，Master和Slave不在同一台Broker机器上，每台Broker机器不是Master就是Slave，Broker的Master/Slave身份是在Broker的配置文件中写死的。
 
-那这个差异影响在哪呢？Kafka的Master/Slave需要通过Zookeeper选举出来的，而RocketMQ不需要。问题就在这个选举上，Zookeeper的选举机制需要Zookeeper集群多个实例来完成，Zookeeper集群中的多个实例必须相互通信，如果实例数很多，网络通讯就会变得非常复杂且低效。网络通信变简单了，性能就能会有极大的提升。NameServer是无状态的，可以任意部署多个实例。
+那这个差异影响在哪呢？Kafka的Master/Slave需要通过Zookeeper选举出来的，而RocketMQ不需要。问题就在这个选举上，Zookeeper的选举机制需要Zookeeper集群多个实例来完成，Zookeeper集群中的多个实例必须相互通信，如果实例数很多，网络通讯就会变得非常复杂且低效。NameServer的设计目标是当网络通信变简单了，性能就会有极大的提升。
 
-为了避免单点故障，NameServer必须以集群的方式部署，但集群中各实例间相互不进行网络通讯。Broker向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。NameServer与每台Broker机器保持长连接，间隔30秒发心跳包检查Broker是否存活，如果检测到Broker宕机， 则从路由注册表中将故障机器移除。NameServer为了降低实现的复杂度，并不会立刻通知客户端的Producer和Consumer。
+为了避免单点故障，NameServer必须以集群的方式部署，但集群中各实例间相互不进行网络通讯。NameServer是无状态的，可以任意部署多个实例。Broker向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。NameServer与每台Broker机器保持长连接，间隔30秒发心跳包检查Broker是否存活，如果检测到Broker宕机， 则从路由注册表中将故障机器移除。NameServer为了降低实现的复杂度，并不会立刻通知客户端的Producer和Consumer。
 
 集群环境下实例很多，偶尔会出现各种各样的问题，可能会出现以下几种场景：
 
 1. 当某个NameServer因宕机或网络问题下线了，Broker仍然可以向其它NameServer同步其路由信息，Produce和Consumer仍然可以动态感知Broker的路由的信息。
 2. NameServer如果检测到Broker宕机，没有通知客户端。Producer将消息发送到故障的Broker怎么办？Consumer从Broker订阅消息失败怎么办？ 这两个问题都是在客户端中进行解决，具体将在后续9.6章节高可用设计中解答。
-3. 由于NameServer集群中的实例相互不通讯，在某个时间点可能不同NameServer实例保存的路由注册信息不一致，但这对发送消息和消费消息也不会有什么影响。
+3. 由于NameServer集群中的实例相互不通讯，在某个时间点可能不同NameServer实例保存的路由注册信息不一致，但这对发送消息和消费消息也不会有什么影响，所以NameServer是AP架构。
 
 
 
@@ -606,64 +625,223 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 
 ### 顺序消息的场景
 
+日常中需要保证顺序的应用场景非常多，例如交易系统中的订单创建、支付、退款等流程，先创建订单才能支付，支付完成的订单才能退款，这需要顺序保证先进先出（First In First Out，缩写 FIFO）。例如数据库的BinLog消息，也必须保证先进先出。
+
 
 
 ### 应用举例
 
-RocketMQ支持顺序消息，顺序消息是指消息按顺序发送和消费。RocketMQ的顺序消息分2种情况，局部有序和全局有序。
+我们使用RocketMQ顺序消息来模拟一下订单的场景，顺序消息分为顺序发送和顺序消费。
 
-- 局部有序：发送同一个queue的消息有序，可以在发送消息时指定queue，在消费消息时也按顺序消费。 例如同一个订单ID的消息要保证有序，不同订单ID的消息可以无序，就可以通过订单ID取模计算queue的索引来获取相同的queue。
+- step1 顺序发消息
 
-  ```java
-  @GetMapping(value = "/orderly")
-  public String hello() {
-      Order order = new Order("123", "浙江杭州");
+```java
+public String orderly() {
+    List<String> typeList = Arrays.asList("创建", "支付", "退款");
+    for (String type : typeList) {
+      Order order = new Order("123", type);
       MessageBuilder builder = MessageBuilder.withPayload(order);
       Message message = builder.build();
       SendResult sendResult = rocketMQTemplate.syncSendOrderly("TopicTest", message, order.getOrderId());
-      return sendResult.getMsgId() + " , " + sendResult.getMessageQueue().getQueueId();
-  }
-  ```
+      System.out.println("MsgId = " + sendResult.getMsgId() + ", QueueId = " + sendResult.getMessageQueue().getQueueId());
+    }
+    return "OK";
+}
+```
 
-  使用`rocketMQTemplate.syncSendOrderly()`指定hashKey为订单ID，相同订单ID的多条消息会发送到同一个Queue，执行结果为MsgId不同，而QueueId相同。
+Order对象保存了订单信息，为了简化模拟代码，订单ID都固定为123，模拟按顺序依次发送创建、支付、退款消息到`TopicTest`。与普通消息相比只是调用API不一样，顺序消息使用`syncSendOrderly()`方法。
 
-  ```txt
-  MsgId = C0A801697CDF18B4AAC2768B85830001, QueueId = 2
-  MsgId = C0A801697CDF18B4AAC2768B85D10002, QueueId = 2
-  MsgId = C0A801697CDF18B4AAC2768B87090003, QueueId = 2
-  MsgId = C0A801697CDF18B4AAC2768B88DB0004, QueueId = 2
-  ```
+通过打印的日志可以看到相同订单ID的多条消息会发送到同一个Queue，消息ID（MsgId）不同，而队列ID（QueueId）相同。
 
-- 全局有序：设置topic只有1个queue可以来实现全局有序，创建Topic时手动设置。 此类场景少，性能差通常不推荐使用。
+```
+MsgId = C0A80066853E18B4AAC21A508110000A, QueueId = 2
+MsgId = C0A80066853E18B4AAC21A508113000B, QueueId = 2
+MsgId = C0A80066853E18B4AAC21A508116000C, QueueId = 2
+```
+
+
+
+- step2 顺序收消息
+
+```java
+@Component
+@RocketMQMessageListener(topic = "TopicTest", consumerGroup = "CONSUMER_GROUP_DEMO", consumeMode = ConsumeMode.ORDERLY)
+public class OrderListener implements RocketMQListener<String> {
+
+    @Override
+    public void onMessage(String order) {
+        System.out.println("TopicTest receive: " + order + ", receiveTime = " + System.currentTimeMillis());
+    }
+}
+```
+
+在`@RocketMQMessageListener`注解中添加`consumeMode = ConsumeMode.ORDERLY`表示按顺序消费，查看打印的日志：
+
+```java
+TopicTest receive: {"orderId":"123","address":"创建"}, receiveTime = 1580927883989
+TopicTest receive: {"orderId":"123","address":"支付"}, receiveTime = 1580927883990
+TopicTest receive: {"orderId":"123","address":"退款"}, receiveTime = 1580927883991
+```
 
 
 
 ### 技术原理
 
-### 基本概念
+RocketMQ的顺序消息分2种情况，局部有序和全局有序，前面的例子就是局部有序场景。
 
-- Message：消息，系统所传输信息的物理载体，生产和消费数据的最小单位。每条消息必须属于一个Topic，RocketMQ中每个消息拥有唯一的MessageID，且可以携带具有业务标识的Key。
-- Topic：主题，表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是RocketMQ进行消息订阅的基本单位。
-- Queue：消息队列，组成Topic的最小单元。默认情况下一个Topic会对应多个Queue，Topic是逻辑概念，Queue是物理存储，在Consumer消费Topic消息时底层实际则是拉取Queue的消息。
-- Tag：为消息设置的标志，用于同一主题下区分不同类型的消息。来自同一业务单元的消息，可以根据不同业务目的在同一主题下设置不同标签。标签能够有效地保持代码的清晰度和连贯性，并优化RocketMQ提供的查询系统。消费者可以根据Tag实现对不同子主题的不同消费逻辑，实现更好的扩展性。
-- UserProperties：用户自定义的属性集合，属于Message的一部分。
-- ProducerGroup：同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致。如果发送的是事物消息且原始生产者在发送之后崩溃，则Broker服务器会联系同一生产者组的其他生产者实例以提交或回溯消费。
-- ConsumerGroup：同一类Consumer的集合，这类Consumer通常消费同一类消息且消费逻辑一致。消费者组使得在消息消费方面，实现负载均衡和容错的目标变得非常容易。要注意的是，消费者组的消费者实例必须订阅完全相同的Topic。
+- 局部有序：指发送同一个队列的消息有序，可以在发送消息时指定队列，在消费消息时也按顺序消费。 例如同一个订单ID的消息要保证有序，不同订单ID的消息可以无序，相互不影响。
+- 全局有序：设置topic只有1个队列可以来实现全局有序，创建Topic时手动设置。 此类场景极少，性能差通常不推荐使用。
 
 
 
+#### 顺序发送
+
+RocketMQ中消息发送有三种方式：同步、异步、单向。同步发送需要等待broker服务器的返回结果，异步发送网络请求不会阻塞当前线程，单向发送原理和异步一致，没有回调
+
+- 同步：发送网络请求后会同步等待broker服务器的返回结果，支持发送失败重试，适用于较重要的消息通知场景。
+- 异步：异步发送网络请求不会阻塞当前线程，不支持失败重试，适用于对响应时间要求更高的场景。
+- 单向：单向发送原理和异步一致，但不支持回调。适用于响应时间非常短，对可靠性要求不高的场景，例如日志收集。
 
 
-####  顺序发送
+
+顺序消息发送的原理很简单，同一类消息发送到相同的队列即可。为了保证先发送的消息先存储到消息队列，必须使用同步发送的方式。否则可能出现先发消息后到消息队列，此时消息就已经乱序了。
+
+```java
+public SendResult syncSendOrderly(String destination, Message<?> message, String hashKey) {
+    return syncSendOrderly(destination, message, hashKey, producer.getSendMsgTimeout());
+}
+
+private MessageQueueSelector messageQueueSelector = new SelectMessageQueueByHash();
+
+public SendResult syncSendOrderly(String destination, Message<?> message, String hashKey, long timeout) {
+    try {
+      	// 转成RocketMQ API中的Message对象
+        org.apache.rocketmq.common.message.Message rocketMsg = RocketMQUtil.convertToRocketMessage(objectMapper,
+            charset, destination, message);
+      	// 调用发送消息接口
+        SendResult sendResult = producer.send(rocketMsg, messageQueueSelector, hashKey, timeout);
+        return sendResult;
+    } catch (Exception e) {
+        log.error("syncSendOrderly failed. destination:{}, message:{} ", destination, message);
+        throw new MessagingException(e.getMessage(), e);
+    }
+}
+```
+
+选择队列的过程由`messageQueueSelector`和`hashKey`在实现类`SelectMessageQueueByHash`完成。
+
+```java
+public class SelectMessageQueueByHash implements MessageQueueSelector {
+
+    @Override
+    public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
+        int value = arg.hashCode();
+        if (value < 0) {
+            value = Math.abs(value);
+        }
+				
+        value = value % mqs.size();
+        return mqs.get(value);
+    }
+}
+```
+
+1. 根据hashKey计算hash值，hashKey是我们前面例子中的订单ID，所以相同订单ID的hash值相同。
+2. 用hash值和队列数`mqs.size()`取模，得到一个索引值，结果是小于队列数。
+3. 根据索引值从队列列表中取出一个队列`mqs.get(value)`，hash值相同则队列相同。
+
+队列列表的获取过程：由Producer从NameServer根据Topic查询Broker列表，缓存在本地内存中，以便于下次从缓存中读取。
 
 
 
-#### 并发消费与顺序消费
+#### 普通发送
 
-我们在业务代码中要实现一个Consumer，需要注册一个监听器Listener，用于在收到消息时进行业务逻辑处理。监听有2种模式：并发消费、顺序消费。 默认是并发消费，使用`@RocketMQMessageListener`可以设置consumeMode参数修改。
+普通消息与顺序消息在发送时选择消息队列的策略不同，普通消息发送选择队列有2种机制：轮询机制、故障规避机制（也称故障延迟机制）。默认是使用轮询机制，一个Topic有多个队列，轮询选择其中一个队列。
 
-- 并发消费：也称为乱序消费，Consumer中会维护一个消费线程池，消费线程可以并发去同一个消息队列Queue中拉取消息进行消费。如果某个消费线程在监听器中进行业务处理时抛出异常，当前消费线程拉取的消息会进行重试，不影响其他消费线程和Queue的消费进度。消息重试是按照时间衰减的方式，重试达到最大次数时该条消息则进入失败队列（也称死信队列）不再重试。
-- 顺序消费：也称为有序消费，同一个消息队列Queue只允许Consumer一个消费线程拉取消费。在消费线程请求到broker时会先申请独占锁，拿到锁的请求则允许消费。如果消费线程在监听器中进行业务处理时抛出异常，消费进度会阻塞在当前这条消息，并不会继续消费该Queue中后续的消息，从而保证顺序消费。在顺序消费的场景下，特别需要注意对异常的处理，如果重试也失败的话会一直阻塞在当前消息，无法消费后续消息造成队列消息堆积。
+轮询机制的原理是路由信息`TopicPublishInfo`中维护了一个计数器`sendWhichQueue`，每发送一次消息需要查询一次路由，计算器就进行+1，通过计算器的值index与队列的数量取模计算来实现轮询算法。
+
+```java
+// TopicPublishInfo#selectOneMessageQueue
+public MessageQueue selectOneMessageQueue(final String lastBrokerName) {
+  	// 第一次执行时lastBrokerName = null
+    if (lastBrokerName == null) {
+        return selectOneMessageQueue();
+    } else {
+        int index = this.sendWhichQueue.getAndIncrement();
+        for (int i = 0; i < this.messageQueueList.size(); i++) {
+            int pos = Math.abs(index++) % this.messageQueueList.size();
+            if (pos < 0)
+                pos = 0;
+            MessageQueue mq = this.messageQueueList.get(pos);
+          	// 当前选中的Queue所在broker，不是上次发送的broker
+            if (!mq.getBrokerName().equals(lastBrokerName)) {
+                return mq;
+            }
+        }
+        return selectOneMessageQueue();
+    }
+}
+
+public MessageQueue selectOneMessageQueue() {
+    int index = this.sendWhichQueue.getAndIncrement();
+    int pos = Math.abs(index) % this.messageQueueList.size();
+    if (pos < 0)
+      pos = 0;
+    return this.messageQueueList.get(pos);
+}
+```
+
+轮询算法简单好用，但有个弊端。如果选择的队列是在宕机的broker上会导致消息发送失败，即使消息发送重试的时候重新选择队列也可能还是在宕机的broker上，这样无法规避发送失败的情况，所以有了故障规避机制来解决，后续章节会仔细讲解。
+
+
+
+#### 顺序消费
+
+RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。两者的区别是广播消费模式时每条消息会被ConsumerGroup的每个Consumer都消费，集群消费是每条消息只会被ConsumerGroup的其中一个Consumer消费。
+
+多数场景都属于集群消费，消息每消费一次代表一次业务处理，集群消费表示每条消息由业务应用集群中任意一个服务实例来处理。少数场景使用广播消费，例如数据发生变化，更新业务应用集群中每个服务的本地缓存，这就需要一条消息整个集群都消费一次。 默认是集群消费，消息模式是前提条件，我们下面也仅分析这种模式下的情况。
+
+
+
+顺序消费也称为有序消费，原理是同一个消息队列只允许Consumer中的一个消费线程拉取消费。Consumer中有个消费线程池，多个线程会同时消费消息。在顺序消费的场景下消费线程请求到broker时会先申请独占锁，拿到锁的请求则允许消费。
+
+```java
+// ConsumeMessageOrderlyService#ConsumeRequest#run
+
+private final Lock lockConsume = new ReentrantLock();
+
+try {
+    this.processQueue.getLockConsume().lock();
+    if (this.processQueue.isDropped()) {
+        break;
+    }
+    status = messageListener.consumeMessage(Collections.unmodifiableList(msgs), context);
+} catch (Throwable e) {
+    hasException = true;
+} finally {
+    this.processQueue.getLockConsume().unlock();
+}
+```
+
+消息消费成功的情况下，会向broker提交消费进度更新消费位点信息，避免下次拉取到已消费的消息。 顺序消费中如果消费线程在监听器中进行业务处理时抛出异常，则不会提交消费进度，消费进度会阻塞在当前这条消息，并不会继续消费该队列中后续的消息，从而保证顺序消费。在顺序消费的场景下，特别需要注意对异常的处理，如果重试也失败的话会一直阻塞在当前消息，直到超出最大重试次数，很长一段时间内无法消费后续消息造成队列消息堆积。
+
+
+
+#### 并发消费
+
+并发消费也称为乱序消费，原理是同一个消息队列允许Consumer中的多个消费线程拉取消费。Consumer中会维护一个消费线程池，多个消费线程可以并发去同一个消息队列中拉取消息进行消费。如果某个消费线程在监听器中进行业务处理时抛出异常，当前消费线程拉取的消息会进行重试，不影响其他消费线程和消息队列的消费进度，消费成功的线程正常提交消费进度。
+
+
+
+#### 消息幂等性
+
+说到并发消费不得不提消息幂等性，RocketMQ不保证消息不被重复消息。如果业务对消费重复非常敏感，必须要在业务层面进行去重处理，具体实现可以通过分布式锁来完成。
+
+在所有消息系统中消费消息有三种模式，at-most-once最多一次，at-least-once最少一次和exactly-only-once精确仅一次，分布式消息系统都是在三者间取平衡，前两者是可行的并且被广泛使用。
+
+- at-most-once：消息投递后不论消费是否成功，不会再重复投递，有可能会导致消息未被消费，RocketMQ未使用该方式。
+- at-least-once：消息投递后，消费完成后，向服务器返回ack，没有消费则一定不会ack消息。由于网络异常、客户端重启等原因，服务器未能收到客户端返回的ack，服务器则会再次投递，这就会导致可能重复消费，RocketMQ通过消费确认机制(ACK)来确保消息至少被消费一次。
+- exactly-only-once：必须要两个条件都满足情况下，才能认为消息是“Exactly Only Once”：发送消息阶段，不允许发送重复的消息；消费消息阶段，不允许消费重复的消息。在分布式系统环境下，如果要实现该模式，不可避免要产生巨大的开销。RocketMQ为了追求高性能，并不保证此特性，无法避免消息重复，由业务上进行幂等性处理。
 
 
 
@@ -807,11 +985,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 ##5. 高性能设计
 
-RocketMQ以高性能主要得益于其在数据存储设计、动态伸缩的能力、读写分离几个方面。
-
-
-
-顺序写盘(CommitLog)、零拷贝和跳跃读(尽量命中PageCache)
+RocketMQ以高性能主要得益于其在数据存储设计以及动态伸缩的能力。
 
 
 
@@ -827,13 +1001,13 @@ RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设�
 
 
 
-#### 消息持久化
+#### 顺序写盘（消息持久化）
 
-commitlog目录是负责存储消息数据的文件，所有Topic的消息都会先存在`{ROCKETMQ_HOME}/store/commitlog`文件夹下的文件中，消息数据写入`commitlog`文件是加锁串行追加写入。
+commitlog文件是负责存储消息数据的文件，所有Topic的消息都会先存在`{ROCKETMQ_HOME}/store/commitlog`文件夹下的文件中，消息数据写入`commitlog`文件是加锁串行追加写入。
 
 RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所有Topic的消息，从而保证消息存储是完全的磁盘顺序写，但这样给文件读取（消费消息）同样带来了困难。
 
-当消息到达`commitlog`文件后，会通过`ReputMessageService`线程异步的几乎实时将消息转发给消费队列文件与索引文件。在commitlog目录里，每个文件默认大小是1G，文件名按照该文件起始的总的字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。所以第一个文件名是00000000000000000000，第二个文件起始偏移量是1024 * 1024 * 1024 = 1073741824（1GB = 1073741824B ），即文件名是0000000001073741824。
+当消息到达`commitlog`文件后，会通过线程异步的几乎实时将消息转发给消费队列文件。每个commitlog文件默认大小是1G，写满1G了再写新的文件，大量数据IO都在顺序写同一个commitlog文件。文件名按照该文件起始的总的字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。第一个文件名是00000000000000000000，第二个文件起始偏移量是1024 * 1024 * 1024 = 1073741824（1GB = 1073741824B ），即文件名是0000000001073741824。
 
 文件名这样设计的目的是为了在消费消息时能够根据偏移量offset快速定位到消息存储在某个commitlog文件，从而加快消息检索速度。
 
@@ -863,9 +1037,9 @@ RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所�
 
 #### 消费队列
 
-消息broker中存储消息的实际工作就是读取文件，但消息数据文件中是所有Topic的消息数据混合在一起的，消费消息时是区分Topic去消费，这就导致如果消费时也读取CommitLog文件会使得消费消息的性能差吞吐量低。为了解决消息数据文件顺序写难以读取的问题，RocketMQ中设计通过消费队列ConsumeQueue文件来解决。
+消费broker中存储消息的实际工作就是读取文件，但消息数据文件中是所有Topic的消息数据混合在一起的，消费消息时是区分Topic去消费，这就导致如果消费时也读取CommitLog文件会使得消费消息的性能差吞吐量低。为了解决消息数据文件顺序写难以读取的问题，RocketMQ中设计通过消费队列ConsumeQueue文件来解决。
 
-consumequeue：负责存储消费者队列文件，在消息写入到commitlog文件，会异步转发到consumequeue文件，然后提供给consumer消费。 consumequeue文件中并不存储具体的消息数据，只存commitlog的 偏移量offset、消息大小size、消息Tag Hashcode。
+ConsumeQueue负责存储消费者队列文件，在消息写入到commitlog文件，会异步转发到ConsumeQueue文件，然后提供给consumer消费。 ConsumeQueue文件中并不存储具体的消息数据，只存commitlog的偏移量offset、消息大小size、消息Tag Hashcode。
 
 每个Topic在某个broker下对应多个队列queue，默认是4个消费队列queue。每一条记录的大小是20B，默认一个文件存储30w个记录，文件名同样也按照字节偏移量offset命名，文件名固定长度20位，不足20位前面补0。所以第一个文件名是00000000000000000000，第二个文件起始偏移量是20 * 30w=6000000，第二个文件名是00000000000006000000。
 
@@ -875,90 +1049,52 @@ consumequeue：负责存储消费者队列文件，在消息写入到commitlog�
 | 2    | Size                 | 消息大小                  | 4          |
 | 3    | Message Tag Hashcode | 用于订阅时消息过滤        | 8          |
 
-在集群模式下，broker会记录客户端对每个消费队列的消费偏移量，定位到consumequeue里相应的记录，并通过CommitLog Offset定位到commitlog里的该条消息，如下图所示。RocketMQ也提供索引查询，此处暂不进行详细描述。
+在集群模式下，broker会记录客户端对每个消费队列的消费偏移量，定位到ConsumeQueue里相应的记录，并通过CommitLog Offset定位到commitlog里的该条消息，如下图所示。
 
 ![rocketmq_architecture_6](image/rocketmq_architecture_6.png)
 
 
 
-#### 索引文件
+#### 零拷贝
 
-index：消息的索引文件，存储了消息KEY和offset。消息索引是为了支持能够根据消息属性快速检索消息，但仅支持用消息KEY检索，这也是为了简化索引设计，毕竟消息中间件不是数据库，索引不是其核心功能。
 
-索引文件总共包含3部分：lndexHeader、 Hash槽、 索引数据。
 
-![rocketmq_architecture_7](image/rocketmq_architecture_7.jpg)
+#### 消息跳跃读
 
-| 序号 | 消息存储结构 | 备注                                           | 长度(字节)  |
-| :--- | :----------- | :--------------------------------------------- | :---------- |
-| 1    | lndexHeader  | 索引头信息，存储该索引文件的概要信息           | 40          |
-| 2    | Hash槽       | 500万个hash槽，存储消息Key的hash值对应索引位置 | 4 * 500万   |
-| 3    | 索引数据     | 2000万条索引数据构成的列表                     | 20 * 2000万 |
+消费broker中存储消息的实际工作就是读取文件，前面讲了消息队列文件的设计，这是一种数据结构上的设计。为了高性能读数据，除此之外还使用了操作系统中的page cache机制。RocketMQ读取消息依赖操作系统PageCache，PageCache命中率越高则读性能越高，操作系统会尽量预读数据，使得应用直接访问磁盘的概率降低。消息队列文件的读取流程如下：
 
-1. IndexHeader索引头信息包含：
+1. 检查要读的数据是否在上次预读的cache中；
+2. 如果没有命中cache，操作系统从磁盘中读取对应的数据页，并将该数据页之后的连续几页一起读入到cache中，再将应用需要的数据返回给应用，这种方式称之为跳跃读取。
+3. 如果命中cache，上次缓存的数据则有效，操作系统认为顺序读盘，则继续扩大缓存的数据范围，将之前缓存的数据页往后几页数据再读取到cache中。
 
-   - beginTimestamp: 索引文件中消息的最小存储时间。
-
-   - endTimestamp: 索引文件中消息的最大存储时间。
-
-   - beginPhyoffset: 索引文件中消息的最小偏移量，来自commitlog文件偏移量。
-
-   - endPhyoffset: 索引文件中消息的最大偏移量，来自commitlog文件偏移量。
-   - hashslotCount: hash槽的个数，默认是500万个。 
-
-   - indexCount: 索引数据列表当前已使用的个数。
-
-2. Hash槽：一个索引文件默认有500万个Hash槽，每个Hash槽存储的值是位置信息，落在该Hash槽的消息Key对应最新的索引数据位置。
-
-3. 索引数据： 索引数据在索引数据列表中按顺序存储，默认一个索引文件包含2000万个索引数据，每一个索引数据结构如下。
-
-   - hashcode：消息key的hashcode。 
-   - phyOffset：消息对应的物理偏移量。
-   - timeDiff：该消息存储时间与第一条消息的时间戳的差值，小于0该消息无效。 
-   - prelndexPos：该索引的前一条索引位置，当出现hash冲突时，构建的链表结构。 
-
-   
-
-使用hashcode存储数据，必须要考虑的问题就是hash冲突。举例说明，假设有2个消息Message1、Message2的Key值相同，且都发送到同一台broker，此时写索引文件时这2条消息的索引就一定会出现Hash冲突，如果是Message1先写入，Message1的index值中的preIndex为0，Hash槽中的值指向Message1的index的位置。然后Message2后写入，则Message2的index值中的preIndex为Message1的位置，此时Hash槽中的值会修改指向Message2的index的位置。如果通过Key检索消息，可以先找到Message2，通过Message2的preIndex再找到Message1。
+在计算机系统中，CPU、RAM、DISK的速度不相同，按速度高低排列为：CPU>RAM>DISK。CPU与RAM之间、RAM与DISK之间的速度和容量差异是指数级。为了在速度和容量上折中，在CPU与RAM之间使用CPU cache以提高访存速度，在RAM与磁盘之间，操作系统使用page cache提高系统对文件的访问速度。
 
 
 
 ### 动态伸缩
 
-动态伸缩能力，伸缩性体现在Topic和Broker两个维度
+动态伸缩（水平扩容）能力是分布式应用很重要的能力，RocketMQ中动态伸缩能力主要体现在消息队列扩容和集群扩容两个方面，需要根据实际场景进行选择。
 
-#### 消息队列Rebalance
+#### 消息队列扩容
 
-Topic维度：假如一个Topic的消息量特别大，但集群水位压力还是很低，就可以扩大该Topic的队列数，Topic的队列数跟发送、消费速度成正比。
+一个Consumer实例，可以同时消费多个消息队列中的消息。假如一个Topic的消息量特别大，但broker集群水位压力还是很低，就可以对该Topic的消息队列进行扩容，Topic的消息队列数跟消费速度成正比。消息队列数在创建Topic时可以指定，也可以在运行中修改。
 
 #### 集群扩容
 
-Broker维度：如果集群水位很高了，需要扩容，直接加机器部署Broker就可以。Broker起来后向Namesrv注册，Producer、Consumer通过Namesrv 发现新Broker，立即跟该Broker直连，收发消息。
+同样假如一个Topic的消息量特别大，但broker集群水位很高，此时就需要对Broker机器扩容。扩容方式很简单，直接加机器部署Broker即可。新的Broker启动后会向NameServer注册，Producer和Consumer通过NameServer发现新Broker并更新路由信息。
 
 
 
 ### 消息实时投递
 
-#### 推模式与拉模式
-
-任何一款消息中间件都会有两种获取消息的方式：Push推模式、Pull拉模式。这两种模式各有优缺点，并适用于不同的场景。
+消息的高性能还体现在消息发送到存储之后，能否立即被客户端消费，这涉及消息的实时投递。任何一款消息中间件都会有两种获取消息的方式：Push推模式、Pull拉模式。这两种模式各有优缺点，并适用于不同的场景。
 
 - Push推模式：当消息发送到服务端时，由服务端主动推送给客户端Consumer。优点是客户端Consumer能实时的接收到新的消息数据；也有2个缺点，缺点1是如果Consumer消费一条消息耗时很长，消费推送速度大于消费速度时，Consumer消费不过来会缓冲区溢出。缺点2则是一个Topic往往会对应多个ConsumerGroup，服务端一条消息会产生多次推送，可能对服务端造成压力。
 - Pull拉模式：由客户端Consumer主动发请求每间隔一段时间轮询去服务端拉取消息。优点是Consumer可以根据当前消费速度选择合适的时机触发拉取；缺点则是拉取的间隔时间不好控制，间隔时间如果很长，会导致消息消费不及时，服务端容易积压消息。间隔时间如果很短，服务端收到的消息少，会导致Consumer可能多数拉取请求都是无效的（拿不到消息），从而浪费网络资源和服务端资源。
 
-这两种获取消息方式的缺点都很明显，单一的方式难以应对复杂的消费场景，所以RocketMQ中提供一种推/拉结合的长轮询机制来平衡推/拉模式各自的缺点。长轮询本质上是对普通pull模式的优化，即还是客户端Consumer轮询的方式主动发送拉取请求到服务端broker后，broker如果检测到有新的消息就立即返回Consumer，但如果没有新消息则暂时不返回任何信息，挂起当前请求缓存到本地，broker后台有个线程去检查挂起请求，等到新消息产生时再返回Consumer。平常使用的DefaultMQPushConsumer的实现就是推/拉结合的，既能解决资源浪费问题，也能解决消费不及时问题。
+这两种获取消息方式的缺点都很明显，单一的方式难以应对复杂的消费场景，所以RocketMQ中提供一种推/拉结合的长轮询机制来平衡推/拉模式各自的缺点。
 
-
-
-#### 长轮询拉取
-
-
-
-
-
-### 读写分离机制
-
-
+长轮询本质上是对普通pull模式的优化，即还是客户端Consumer轮询的方式主动发送拉取请求到服务端broker后，broker如果检测到有新的消息就立即返回Consumer，但如果没有新消息则暂时不返回任何信息，挂起当前请求缓存到本地，broker后台有个线程去检查挂起请求，等到新消息产生时再返回Consumer。平常使用的DefaultMQPushConsumer的实现就是推/拉结合的，既能解决资源浪费问题，也能解决消费不及时问题。
 
 
 
@@ -1018,8 +1154,8 @@ for (; times < timesTotal; times++) {
 
 在选择查找路由时，选择消息队列的关键步骤如下：
 
-1. 先按轮询算法选择一个Queue
-2. 从故障列表判断该Queue是否可用
+1. 先按轮询算法选择一个消息队列
+2. 从故障列表判断该消息队列是否可用
 
 ```java
 // MQFaultStrategy#selectOneMessageQueue
@@ -1051,7 +1187,7 @@ public MessageQueue selectOneMessageQueue(final TopicPublishInfo tpInfo, final S
 }
 ```
 
-Queue是否可用也有2个步骤：
+消息队列是否可用也有2个步骤：
 
 1. 先判断其是否在故障列表，不在故障列表代表可用；
 2. 在故障列表`faultItemTable`还需判断当前时间是否大于等于故障规避的开始时间`startTimestamp`，这个时间判断是因为通常故障时间是有限制的，broker宕机之后会有相关运维去恢复。
@@ -1407,420 +1543,44 @@ RocketMQ的consumer在拉取消息时，broker会判断Master服务器的消息�
 
 #### 消费重试机制
 
+实际业务场景中无法避免消费消息失败的情况，消费失败可能是由于业务处理中调用远程服务网络问题失败，不代表消息一定不能被消费，通过重试可以解决。在介绍RocketMQ的消费重试机制之前，需要先介绍下“重试队列”和“死信队列”。
+
+- 重试队列：在Consumer由于业务异常导致消费消息失败时，将消费失败的消息重新发送给Broker保存在重试队列，这样设计的原因是不能影响整体消费进度又必须防止消费失败的消息丢失。重试队列的消息存在一个单独的Topic中，不在原消息的Topic，Consumer自动订阅该Topic。重试队列的Topic名称格式为“%RETRY%+consumerGroup”，每个业务Topic会有多个ConsumerGroup，每个ConsumerGroup消费失败的情况不一样，所以各对应一个重试队列的Topic。
+- 死信队列：由于业务逻辑bug等原因，导致Consumer对部分消息长时间消费重试也一直失败，为了保证这部分消息不丢失，同时不能阻塞其它能重试消费成功的消息，超过最大重试消费次数之后的消息会进入到死信队列。消息到死信队列之后就不再自动消费，需要人工干预处理。死信队列也存在一个单独的Topic中，名称格式为“%DLQ%+consumerGroup“，原理和重试队列一致。
+
+
+
+通常故障恢复需要一定的时间，如果不间断的重试，重试又失败的情况下会占用并浪费资源，所以RocketMQ的消费重试机制采用时间衰减的方式。首次在10秒后重试消费，如果消费成功则不再重试，如果消费失败则继续重试消费，第二次在30秒后重试消费，依次类推下去，每次重试的间隔时间都会加长，直到超出最大重试次数（默认16次），则进入死信队列不再重试。重试消费过程中的间隔时间使用了定时消息，重试的消息数据并非直接写入重试队列，而是先写入定时消息队列，再通过定时消息的功能转发到重试队列。
+
+RocketMQ 支持定时消息（也称延迟消息），延迟消息是指消息发送之后，等待指定的延迟时间后再进行消费。除了支持消费重试机制以外，延迟消息也适用于一些处理异步任务的场景，例如调用某个服务，调用结果需要异步在1分钟内返回，此时就可以发送一个延迟消息，延迟时间为1分钟，等1分钟后收到该消息去查询上次的调用结果是否返回。
+
+RocketMQ不支持任意时间精确的延迟消息，仅支持1s、5s、10s、30s、1m、2m、3m、4m、5m、6m、7m、8m、9m、10m、20m、30m、1h、2h这个范围内的。
+
 
 
 #### ACK机制
+
+广播模式的消费进度保存在客户端本地，集群模式的消费进度保存在broker上。集群模式中RocketMQ中采用ACK机制（即消息确认）确保消息一定被消费。在消息投递过程中，不是消息从broker发送到Consumer就算消费成功了，需要Consumer明确给broker返回消费成功状态才算。如果从broker发送到Consumer后，已经完成了业务处理，但在给broker返回消费成功状态之前，Consumer发生宕机或断电断网等情况，broker未收到反馈则不会保存消费进度。Consumer重启之后，消息会重新投递，此时也会出现重复消费的场景，前面讲过消息幂等性需要业务自行保证。
 
 
 
 ### 集群管理的高可用
 
-集群管理的高可用主要体现在NameServer的设计上，当部分NameServer节点宕机不会有什么糟糕的影响，即使是NameServer全部宕机，也不影响已经运行的Broker、Producer、Consumer。前面有详细介绍NameServer，不再复述。
+集群管理的高可用主要体现在NameServer的设计上，当部分NameServer节点宕机不会有什么糟糕的影响，只剩一个NameServer节点RocketMQ集群也能正常运行，即使是NameServer全部宕机，也不影响已经运行的Broker、Producer、Consumer。前面有详细介绍NameServer，不再复述。
 
 
 
-## （待调整）消息发送
+## 附录
 
-### 消息类型
+### 基本概念
 
-#### 普通消息
-
-支持每次只发送一条消息，也支持发送批量消息，对同一个topic的多条消息打包在一起发送到broke服务器，从而减少网络调用次数，可以提高网络传输效率和性能。但一批消息的数量也不是越多越好，默认消息总大小不能超过4M，建议消息大小在1k以内。
-
-普通消息在前面Demo中已经演示过了，不过`RocketMQTemplate`并没有提供批量消息接口，可以使用RocketMQ客户端中的`DefaultMQProducer`发送，`RocketMQTemplate`也是对其接口进行包装。
-
-```java
-@GetMapping(value = "/batch")
-public String batch() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
-    org.apache.rocketmq.common.message.Message msg1 = new org.apache.rocketmq.common.message.Message("TopicTest", "msg1".getBytes());
-    org.apache.rocketmq.common.message.Message msg2 = new org.apache.rocketmq.common.message.Message("TopicTest", "msg2".getBytes());
-    org.apache.rocketmq.common.message.Message msg3 = new org.apache.rocketmq.common.message.Message("TopicTest", "msg3".getBytes());
-    SendResult sendResult =  rocketMQTemplate.getProducer().send(Lists.newArrayList(msg1, msg2, msg3));
-    return sendResult.getMsgId();
-}
-```
-
-这里发了3个消息，返回的MsgId则有3个，使用
-
-```
-MsgId = C0A801697F5F18B4AAC276A06AF10001,C0A801697F5F18B4AAC276A06AF10002,C0A801697F5F18B4AAC276A06AF10003
-```
-
-
-
-- 
-
-
-
-#### 延迟消息
-
-RocketMQ支持延迟消息（也称定时消息），延迟消息是指消息发送之后，等待指定的延迟时间后再进行消费。延迟消息适用于一些处理异步任务的场景，例如调用某个服务，调用结果需要异步在1分钟内返回，此时就可以发送一个延迟消息，延迟时间为1分钟，等1分钟后收到该消息去查询上次的调用结果是否返回。
-
-RocketMQ不支持任意时间精确的延迟消息，仅支持1s、5s、10s、30s、1m、2m、3m、4m、5m、6m、7m、8m、9m、10m、20m、30m、1h、2h这个范围内的。
-
-```java
-@GetMapping(value = "/delay")
-public String delay() {
-    Order order = new Order("123", "浙江杭州");
-    MessageBuilder builder = MessageBuilder.withPayload(order);
-    Message message = builder.build();
-    SendResult sendResult = rocketMQTemplate.syncSend("TopicTest", message, 10, 5);
-    System.out.println("SendTime = " + System.currentTimeMillis());
-    return sendResult.getMsgId();
-}
-```
-
-这里`delayLevel`设置为5，`delayLevel=5`对应是延迟1分钟，Consumer会在1分钟后收到该消息，可以看到发送消息和收到消息的时间相差1分钟。
-
-```
-SendTime = 1579797258174
-receiveTime = 1579797318182
-```
-
-
-
-### 消息发送三种方式
-
-- 同步：发送网络请求后会同步等待broker服务器的返回结果，支持发送失败重试，适用于较重要的消息通知场景。
-- 异步：异步发送网络请求不会阻塞当前线程，异步发送也支持失败重试，但出现网络异常、超时等将不会重试，适用于对响应时间要求更高的场景。
-- 单向：单向发送原理和异步一致，但没有重试和回调。适用于响应时间非常短，对可靠性要求不高的场景，例如日志收集。
-
-
-
-### 消息发送基本流程
-
-消息发送的基本流程：验证消息 --> 查找路由 --> 消息发送。
-
-#### 消息验证
-
-消息发送之前会对消息字段进行参数验证，例如消息体和topic名称不能为空、消息大小默认不能超过4M。太大的消息会影响网络传输效率，并且在发送失败重试时容易引起网络堵塞等情况。
-
-
-
-#### 查找路由
-
-1. 获取Topic路由信息，Producer会先从NameServer根据Topic查询Broker列表，缓存在本地TopicPublishInfo对象中，以便于下次从缓存中读。 
-
-2. 选择消息队列Queue，有2种机制：轮询机制、故障规避机制（也称故障延迟机制）。默认是使用轮询机制，一个Topic有多个Queue，轮询选择其中一个Queue。
-
-   轮询机制的原理是TopicPublishInfo中维护了一个计数器sendWhichQueue，每发送一次消息需要查询一次路由，计算器就进行+1，通过计算器的值index与Queue的数量取模计算来实现轮询算法。但这个算法有个弊端，如果选择的Queue也是在宕机的broker上会导致消息发送失败，即使消息发送重试的时候重新选择Queue也可能还是在宕机的broker上，这样无法规避发送失败的情况，所以有了故障规避机制来解决，后续章节会仔细讲解。
-
-   ```java
-   // TopicPublishInfo#selectOneMessageQueue
-   
-   public MessageQueue selectOneMessageQueue(final String lastBrokerName) {
-     	// 第一次执行时lastBrokerName = null
-       if (lastBrokerName == null) {
-           return selectOneMessageQueue();
-       } else {
-           int index = this.sendWhichQueue.getAndIncrement();
-           for (int i = 0; i < this.messageQueueList.size(); i++) {
-               int pos = Math.abs(index++) % this.messageQueueList.size();
-               if (pos < 0)
-                   pos = 0;
-               MessageQueue mq = this.messageQueueList.get(pos);
-             	// 当前选中的Queue所在broker，不是上次发送的broker
-               if (!mq.getBrokerName().equals(lastBrokerName)) {
-                   return mq;
-               }
-           }
-           return selectOneMessageQueue();
-       }
-   }
-   
-   public MessageQueue selectOneMessageQueue() {
-       int index = this.sendWhichQueue.getAndIncrement();
-       int pos = Math.abs(index) % this.messageQueueList.size();
-       if (pos < 0)
-         pos = 0;
-       return this.messageQueueList.get(pos);
-   }
-   ```
-
-
-
-#### 消息发送
-
-消息发送的核心代码在`DefaultMQProducerImpl#sendKernelImpl`，关键步骤如下：
-
-1. 获取Broker的服务器IP和端口，如果获取不到则请求NameServer更新一下，还获取不到就抛异常
-
-   ```java
-   String brokerAddr = this.mQClientFactory.findBrokerAddressInPublish(mq.getBrokerName());
-   if (null == brokerAddr) {
-       tryToFindTopicPublishInfo(mq.getTopic());
-       brokerAddr = this.mQClientFactory.findBrokerAddressInPublish(mq.getBrokerName());
-   }
-   ```
-
-2. 如果是批量消息则生成批次ID，批次ID由FIX_STRING + 时间差 + 批次号组成。FIX_STRING是固定值，由IP + 进程ID + 类加载器的hashcode组成。
-
-   ```java
-   if (!(msg instanceof MessageBatch)) {
-       MessageClientIDSetter.setUniqID(msg);
-   }
-   
-   public static String createUniqID() {
-       StringBuilder sb = new StringBuilder(LEN * 2);
-       sb.append(FIX_STRING);
-       sb.append(UtilAll.bytes2string(createUniqIDBuffer()));
-       return sb.toString();
-   }
-   
-   private static byte[] createUniqIDBuffer() {
-       ByteBuffer buffer = ByteBuffer.allocate(4 + 2);
-       long current = System.currentTimeMillis();
-       if (current >= nextStartTime) {
-         	setStartTime(current);
-       }
-       buffer.position(0);
-       buffer.putInt((int) (System.currentTimeMillis() - startTime));
-       buffer.putShort((short) COUNTER.getAndIncrement());
-       return buffer.array();
-   }
-   ```
-
-3. 消息大小压缩，默认如果消息体超过4K则进行zip压缩，如果进行了压缩则标记该消息压缩。单条消息支持压缩，批量消息不支持压缩。
-
-   ```java
-   int sysFlag = 0;
-   boolean msgBodyCompressed = false;
-   if (this.tryToCompressMessage(msg)) {
-       sysFlag |= MessageSysFlag.COMPRESSED_FLAG;
-       msgBodyCompressed = true;
-   }
-   
-   private int compressMsgBodyOverHowmuch = 1024 * 4;
-   
-   private boolean tryToCompressMessage(final Message msg) {
-       if (msg instanceof MessageBatch) {
-         return false;
-       }
-     
-       byte[] body = msg.getBody();
-       if (body.length >= this.defaultMQProducer.getCompressMsgBodyOverHowmuch()) {
-        		byte[] data = UtilAll.compress(body, zipCompressLevel);
-           if (data != null) {
-             msg.setBody(data);
-             return true;
-           }
-       }
-       return false;
-   }
-   
-   // UtilAll#compress
-   public static byte[] compress(final byte[] src, final int level) throws IOException {
-       byte[] result = src;
-       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(src.length);
-       java.util.zip.Deflater defeater = new java.util.zip.Deflater(level);
-       DeflaterOutputStream deflaterOutputStream = new DeflaterOutputStream(byteArrayOutputStream, defeater);
-       try {
-           deflaterOutputStream.write(src);
-           deflaterOutputStream.finish();
-           deflaterOutputStream.close();
-           result = byteArrayOutputStream.toByteArray();
-       } catch (IOException e) {
-           defeater.end();
-           throw e;
-       } finally {
-           try {
-             byteArrayOutputStream.close();
-           } catch (IOException ignored) {
-           }
-         	defeater.end();
-       }
-       return result;
-   }
-   ```
-
-4. 从UserProperties中判断该消息是否是事务消息，如果是事务消息则对消息Flag打事务标记。
-
-   ```java
-   final String tranMsg = msg.getProperty(MessageConst.PROPERTY_TRANSACTION_PREPARED);
-   if (tranMsg != null && Boolean.parseBoolean(tranMsg)) {
-       sysFlag |= MessageSysFlag.TRANSACTION_PREPARED_TYPE;
-   }
-   ```
-
-   压缩标记和事务标记都是修改`sysFlag`字段，如果一条消息既是事务消息，且大小又超过4K需要压缩，`sysFlag`字段该如何标识呢？这里使用了位运算，或运算`|`将多个叠加状态存储在一个字段上，比使用多个字段标识的好处是可以节省存储空间。查看MessageSysFlag源码可以看到压缩消息、批量消息、事务消息3种状态（预处理、提交、回滚）都是通过`sysFlag`字段标识。
-
-   ```java
-   public class MessageSysFlag {
-       public final static int COMPRESSED_FLAG = 0x1;
-       public final static int MULTI_TAGS_FLAG = 0x1 << 1;
-       public final static int TRANSACTION_NOT_TYPE = 0;
-       public final static int TRANSACTION_PREPARED_TYPE = 0x1 << 2;
-       public final static int TRANSACTION_COMMIT_TYPE = 0x2 << 2;
-       public final static int TRANSACTION_ROLLBACK_TYPE = 0x3 << 2;
-   
-       public static int getTransactionValue(final int flag) {
-           return flag & TRANSACTION_ROLLBACK_TYPE;
-       }
-   
-       public static int resetTransactionValue(final int flag, final int type) {
-           return (flag & (~TRANSACTION_ROLLBACK_TYPE)) | type;
-       }
-   
-       public static int clearCompressedFlag(final int flag) {
-           return flag & (~COMPRESSED_FLAG);
-       }
-   }
-   ```
-
-5. 检查禁止消息发送的钩子函数处理
-
-   ```java
-   if (hasCheckForbiddenHook()) {
-       CheckForbiddenContext checkForbiddenContext = new CheckForbiddenContext();
-       checkForbiddenContext.setNameSrvAddr(this.defaultMQProducer.getNamesrvAddr());
-       checkForbiddenContext.setGroup(this.defaultMQProducer.getProducerGroup());
-       checkForbiddenContext.setCommunicationMode(communicationMode);
-       checkForbiddenContext.setBrokerAddr(brokerAddr);
-       checkForbiddenContext.setMessage(msg);
-       checkForbiddenContext.setMq(mq);
-       checkForbiddenContext.setUnitMode(this.isUnitMode());
-       this.executeCheckForbiddenHook(checkForbiddenContext);
-   }
-   
-   public void executeCheckForbiddenHook(final CheckForbiddenContext context) throws MQClientException {
-       if (hasCheckForbiddenHook()) {
-           for (CheckForbiddenHook hook : checkForbiddenHookList) {
-             	hook.checkForbidden(context);
-           }
-       }
-   }
-   ```
-
-6. 消息发送前的钩子函数处理
-
-   ```java
-   if (this.hasSendMessageHook()) {
-       context = new SendMessageContext();
-       context.setProducer(this);
-       context.setProducerGroup(this.defaultMQProducer.getProducerGroup());
-       context.setCommunicationMode(communicationMode);
-       context.setBornHost(this.defaultMQProducer.getClientIP());
-       context.setBrokerAddr(brokerAddr);
-       context.setMessage(msg);
-       context.setMq(mq);
-       String isTrans = msg.getProperty(MessageConst.PROPERTY_TRANSACTION_PREPARED);
-       if (isTrans != null && isTrans.equals("true")) {
-           context.setMsgType(MessageType.Trans_Msg_Half);
-       }
-   
-       if (msg.getProperty("__STARTDELIVERTIME") != null || msg.getProperty(MessageConst.PROPERTY_DELAY_TIME_LEVEL) != null) {
-           context.setMsgType(MessageType.Delay_Msg);
-       }
-       this.executeSendMessageHookBefore(context);
-   }
-   ```
-
-7. 对消息打包，包含生产者组producerGroup、topic、队列queueId、消息标记、创建时间、重试次数、扩展属性、是否批消息等。
-
-   ```java
-   SendMessageRequestHeader requestHeader = new SendMessageRequestHeader();
-   requestHeader.setProducerGroup(this.defaultMQProducer.getProducerGroup());
-   requestHeader.setTopic(msg.getTopic());
-   requestHeader.setDefaultTopic(this.defaultMQProducer.getCreateTopicKey());
-   requestHeader.setDefaultTopicQueueNums(this.defaultMQProducer.getDefaultTopicQueueNums());
-   requestHeader.setQueueId(mq.getQueueId());
-   requestHeader.setSysFlag(sysFlag);
-   requestHeader.setBornTimestamp(System.currentTimeMillis());
-   requestHeader.setFlag(msg.getFlag());
-   requestHeader.setProperties(MessageDecoder.messageProperties2String(msg.getProperties()));
-   requestHeader.setReconsumeTimes(0);
-   requestHeader.setUnitMode(this.isUnitMode());
-   requestHeader.setBatch(msg instanceof MessageBatch);
-   if (requestHeader.getTopic().startsWith(MixAll.RETRY_GROUP_TOPIC_PREFIX)) {
-       String reconsumeTimes = MessageAccessor.getReconsumeTime(msg);
-       if (reconsumeTimes != null) {
-           requestHeader.setReconsumeTimes(Integer.valueOf(reconsumeTimes));
-           MessageAccessor.clearProperty(msg, MessageConst.PROPERTY_RECONSUME_TIME);
-       }
-   
-       String maxReconsumeTimes = MessageAccessor.getMaxReconsumeTimes(msg);
-       if (maxReconsumeTimes != null) {
-           requestHeader.setMaxReconsumeTimes(Integer.valueOf(maxReconsumeTimes));
-           MessageAccessor.clearProperty(msg, MessageConst.PROPERTY_MAX_RECONSUME_TIMES);
-       }
-   }
-   ```
-
-8. 发送消息到网络中，底层使用NettyRemotingClient发送到broker服务器
-
-9. 消息发送后的钩子函数处理
-
-   ```java
-   if (this.hasSendMessageHook()) {
-       context.setSendResult(sendResult);
-       this.executeSendMessageHookAfter(context);
-   }
-   ```
-
-
-
-
-
-## （待调整）消息消费
-
-### 集群消费和广播消费
-
-RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。默认是集群消费，使用`@RocketMQMessageListener`可以设置messageModel参数修改。
-
-- 集群消费：默认消费方式，相同ConsumerGroup的每个Consumer实例平均分摊消息，一条消息只会被一个ConsumerGroup中的一个Consumer实例消费。概念上好像有点难理解，那就举个例子吧。例如某应用部署了2台机器A和B，此时实例A启动了一个Consumer实例，实例B也启用了一个Consumer实例，它们属于同一个ConsumerGroup。当服务端有一条消息过来的时候，如果被实例A消费了，那么实例B就不会再消费了。相反，如果被实例B消费了，实例A就不会再消费了。当然，除了网络或其他异常导致的消费重试或被重复消费。 多数场景下我们都是使用集群消费，因为一条消息下游消费一次即可，例如订单完成要发短信通知，短信服务的集群中任意一个实例收到消息后完成发送短信，其它实例就不会去消费这条消息了。
-- 广播消费：相同ConsumerGroup的每个Consumer实例都接收全量的消息，一条消息会被一个ConsumerGroup中的每个Consumer实例消费。同样用上面例子来说明，某应用部署了2台机器A和B属于同一个ConsumerGroup，当服务端有一条消息过来的时候，实例A和实例B都会消费这一条相同的消息。使用场景：例如我们有个服务查询流量特别大，我们需要在应用集群的每台机器本地缓存一份数据来应对大流量查询，当数据发生变更时，每台机器的本地缓存中的数据都会过期需要重新从DB读取，此时就可以通过广播消费的方式来实现。
-
-
-
-### 消息幂等性
-
-在所有消息系统中消费消息有三种模式，at-most-once最多一次，at-least-once最少一次和exactly-once精确仅一次，分布式消息系统都是在三者间取平衡，前两者是可行的并且被广泛使用。
-
-- at-most-once：消息投递后不论消费是否成功，不会再重复投递，有可能会导致消息未被消费，RocketMQ未使用该方式。
-- at-least-once：消息投递后，消费完成后，向服务器返回ack，没有消费则一定不会ack消息。由于网络异常、客户端重启等原因，服务器未能收到客户端返回的ack，服务器则会再次投递，这就会导致可能重复消费，RocketMQ通过消费确认机制(ACK)来确保消息至少被消费一次。
-- exactly-once：必须要两个条件都满足情况下，才能认为消息是“Exactly Only Once”：发送消息阶段，不允许发送重复的消息；消费消息阶段，不允许消费重复的消息。在分布式系统环境下，如果要实现该模式，不可避免要产生巨大的开销。RocketMQ为了追求高性能，并不保证此特性，无法避免消息重复，由业务上进行幂等性处理。
-
-如果业务对消费重复非常敏感，必须要在业务层面进行去重处理，具体实现可以通过分布式锁来完成。
-
-
-
-
-
-### 消息过滤
-
-在实际应用中消息过滤也是经常会用到的，多数场景中发送者Producer和消费者Consumer是属于两个不同的业务系统，并且是一对多的关系（一个Topic对应多个Consumer）。Producer不关心下游怎么处理消息，把消息发送到Topic之后，每个业务系统的Consumer会根据自身业务情况去筛选过滤需要处理的消息。
-
-举个简单例子，订单完成以后需要给客户发送邮件通知，超过100元的订单还需要发送短信通知。此时，订单系统在订单完成时就会把消息发送到Topic，邮件系统会接收所有订单完成消息，而短信系统只需要接收超过100元的订单完成消息，那么短信系统就需要消息过滤。
-
-在RocketMQ中有2种消息过滤方式：表达式过滤、类模式，表达式过滤又分为Tag模式和SQL模式。
-
-- Tag模式：Producer在消息发送前可以设置Tag值，Consumer只接收有指定Tag值的消息。Tags的过滤需要经过两次比对，首先会在Broker端通过Tag hashcode进行一次比对过滤，匹配成功传到consumer端后再对具体Tags进行比对，以防止Tag hashcode重复的情况。
-- SQL模式：Producer在消息发送前除了可以设置Tag值，还可以设置多个属性值，因为仅tag值不能满足复杂一点的过滤场景。SQL模式是使用SQL92的语法，支持同时使用多个条件进行过滤。
-- 类模式：类模式属于高级过滤模式，具体实现是Consumer中自定义一个过滤类，在broker中部署一个FilterServer，Consumer启动时向FilterServer上传过滤类，消息会在FilterServer的自定义过滤类中完成过滤后返回给Consumer。
-
-
-
-
-
-
-
-
-
-##（待调整）运维
-
-### 集群部署
-
-https://rocketmq-1.gitbook.io/rocketmq-connector/quick-start/qian-qi-zhun-bei/rocketmq-ji-qun-da-jian#duo-master-duo-slave-mo-shi-tong-bu-shuang-xie
-
-####单Master
-
-#### 多Master
-
-#### 多Master多Slave模式-异步复制
-
-#### 多Master多Slave模式-同步复制
-
-
+- Message：消息，系统所传输信息的物理载体，生产和消费数据的最小单位。每条消息必须属于一个Topic，RocketMQ中每个消息拥有唯一的MessageID，且可以携带具有业务标识的Key。
+- Topic：主题，表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是RocketMQ进行消息订阅的基本单位。
+- Queue：消息队列，组成Topic的最小单元。默认情况下一个Topic会对应多个Queue，Topic是逻辑概念，Queue是物理存储，在Consumer消费Topic消息时底层实际则是拉取Queue的消息。
+- Tag：为消息设置的标志，用于同一主题下区分不同类型的消息。来自同一业务单元的消息，可以根据不同业务目的在同一主题下设置不同标签。标签能够有效地保持代码的清晰度和连贯性，并优化RocketMQ提供的查询系统。消费者可以根据Tag实现对不同子主题的不同消费逻辑，实现更好的扩展性。
+- UserProperties：用户自定义的属性集合，属于Message的一部分。
+- ProducerGroup：同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致。如果发送的是事物消息且原始生产者在发送之后崩溃，则Broker服务器会联系同一生产者组的其他生产者实例以提交或回溯消费。
+- ConsumerGroup：同一类Consumer的集合，这类Consumer通常消费同一类消息且消费逻辑一致。消费者组使得在消息消费方面，实现负载均衡和容错的目标变得非常容易。要注意的是，消费者组的消费者实例必须订阅完全相同的Topic。
 
 
 
