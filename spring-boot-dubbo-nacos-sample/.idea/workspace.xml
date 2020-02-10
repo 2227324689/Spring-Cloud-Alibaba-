@@ -38,13 +38,208 @@
         <entry file="file://$PROJECT_DIR$/nacos-sample-provider/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="144">
-              <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="NamingService.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-api/1.1.4/nacos-api-1.1.4.jar!/com/alibaba/nacos/api/naming/NamingService.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="88" column="15" lean-forward="false" selection-start-line="88" selection-start-column="15" selection-end-line="88" selection-end-column="15" />
+              <folding>
+                <marker date="1580560460578" expanded="false" signature="0:104" ph="/.../" />
+                <marker date="1580560460578" expanded="false" signature="152:494" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DelegatingNamingService.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-spring-context/0.3.4/nacos-spring-context-0.3.4.jar!/com/alibaba/nacos/spring/factory/DelegatingNamingService.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="172" column="25" lean-forward="false" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
+              <folding>
+                <marker date="1580560628752" expanded="false" signature="0:104" ph="/.../" />
+                <marker date="1580560628752" expanded="false" signature="156:641" ph="..." />
+                <marker date="1580560628752" expanded="true" signature="881:960" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="1058:1128" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="1244:1325" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="1443:1526" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="1662:1756" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="1852:1922" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="2036:2117" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="2217:2289" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="2407:2490" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="2610:2695" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="2833:2929" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="3027:3097" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="3213:3296" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="3382:3448" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="3552:3629" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="3734:3811" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="3934:4022" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="4131:4207" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="4334:4421" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="4549:4636" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="4782:4880" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="4983:5058" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="5179:5265" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="5387:5473" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="5613:5710" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="5836:5921" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="6065:6161" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="6306:6402" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="6565:6672" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="6761:6836" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="6943:7029" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="7137:7223" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="7349:7446" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="7558:7643" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="7773:7869" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="8000:8096" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="8245:8352" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="8446:8509" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="8621:8695" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="8812:8885" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="9020:9104" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="9200:9265" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="9379:9455" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="9574:9649" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="9786:9872" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="9970:10045" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="10161:10247" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="10372:10457" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="10600:10696" ph="{...}" />
+                <marker date="1580560628752" expanded="true" signature="10772:10832" ph="{...}" />
+                <marker date="1580560628752" expanded="false" signature="10869:10880" ph=" { " />
+                <marker date="1580560628752" expanded="false" signature="10919:10925" ph=" }" />
+                <marker date="1580560628752" expanded="false" signature="10964:10975" ph=" { " />
+                <marker date="1580560628752" expanded="false" signature="10998:11004" ph=" }" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NacosNamingService.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/NacosNamingService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HostReactor.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/core/HostReactor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="281" column="16" lean-forward="false" selection-start-line="281" selection-start-column="16" selection-end-line="281" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PushReceiver.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/core/PushReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="39" column="26" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NamingProxy.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/net/NamingProxy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-540">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Instance.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-api/1.1.4/nacos-api-1.1.4.jar!/com/alibaba/nacos/api/naming/pojo/Instance.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+              <folding>
+                <marker date="1580560460578" expanded="false" signature="0:104" ph="/.../" />
+                <marker date="1580560460578" expanded="false" signature="157:323" ph="..." />
+                <marker date="1580560460578" expanded="true" signature="714:721" ph="{}" />
+                <marker date="1580560460578" expanded="false" signature="756:767" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="790:796" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="846:857" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="886:892" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="919:930" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="945:951" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="985:996" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1009:1015" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1041:1052" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1069:1075" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1110:1121" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1138:1144" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1175:1186" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1205:1211" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1253:1264" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1285:1291" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1323:1334" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1354:1360" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1405:1416" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1439:1445" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1481:1492" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1516:1522" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1574:1585" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1616:1622" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1658:1669" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1693:1699" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1751:1762" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1793:1799" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1845:1856" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1877:1883" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="1942:1953" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="1978:1984" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2039:2050" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2080:2086" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2118:2129" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2149:2155" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2200:2211" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2234:2240" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2274:2285" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2307:2313" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2362:2373" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2400:2406" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2436:2447" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2478:2484" ph=" }" />
+                <marker date="1580560460578" expanded="false" signature="2516:2527" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2560:2566" ph=" }" />
+                <marker date="1580560460578" expanded="true" signature="2606:2815" ph="{...}" />
+                <marker date="1580560460578" expanded="false" signature="2842:2853" ph=" { " />
+                <marker date="1580560460578" expanded="false" signature="2887:2893" ph=" }" />
+                <marker date="1580560460578" expanded="true" signature="2958:3029" ph="{...}" />
+                <marker date="1580560460578" expanded="true" signature="3078:3206" ph="{...}" />
+                <marker date="1580560460578" expanded="true" signature="3254:3380" ph="{...}" />
+                <marker date="1580560460578" expanded="true" signature="3419:3543" ph="{...}" />
+                <marker date="1580560460578" expanded="true" signature="3588:3689" ph="{...}" />
+                <marker date="1580560460578" expanded="true" signature="3767:4085" ph="{...}" />
+                <marker date="1580560460578" expanded="true" signature="4167:4303" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>subscribe</find>
+    </findStrings>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -69,8 +264,8 @@
     <option name="jreName" value="1.8" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="215" />
-    <option name="y" value="42" />
+    <option name="x" value="282" />
+    <option name="y" value="57" />
     <option name="width" value="1621" />
     <option name="height" value="940" />
   </component>
@@ -141,9 +336,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -199,6 +391,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -209,7 +404,8 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../springboot-provider" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spring-cloud-nacos-sample" />
+    <property name="SearchEverywhereHistoryKey" value="NamingS&#9;PSI&#9;JAVA://com.alibaba.nacos.api.naming.NamingService" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -328,14 +524,16 @@
       <workItem from="1580560610496" duration="2151000" />
       <workItem from="1580617792964" duration="806000" />
       <workItem from="1580831517590" duration="17000" />
+      <workItem from="1580967050907" duration="2206000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2974000" />
+    <option name="totallyTimeSpent" value="5180000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -344,27 +542,56 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25751072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2607296" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26126608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -377,6 +604,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nacos-sample-provider/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1908">
+          <caret line="53" column="65" lean-forward="false" selection-start-line="53" selection-start-column="65" selection-end-line="53" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nacos-sample-provider/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -433,10 +684,342 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-api/1.1.4/nacos-api-1.1.4.jar!/com/alibaba/nacos/api/naming/pojo/Instance.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+          <folding>
+            <marker date="1580560460578" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460578" expanded="false" signature="157:323" ph="..." />
+            <marker date="1580560460578" expanded="true" signature="714:721" ph="{}" />
+            <marker date="1580560460578" expanded="false" signature="756:767" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="790:796" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="846:857" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="886:892" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="919:930" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="945:951" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="985:996" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1009:1015" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1041:1052" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1069:1075" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1110:1121" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1138:1144" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1175:1186" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1205:1211" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1253:1264" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1285:1291" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1323:1334" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1354:1360" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1405:1416" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1439:1445" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1481:1492" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1516:1522" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1574:1585" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1616:1622" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1658:1669" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1693:1699" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1751:1762" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1793:1799" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1845:1856" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1877:1883" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="1942:1953" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="1978:1984" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2039:2050" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2080:2086" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2118:2129" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2149:2155" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2200:2211" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2234:2240" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2274:2285" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2307:2313" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2362:2373" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2400:2406" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2436:2447" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2478:2484" ph=" }" />
+            <marker date="1580560460578" expanded="false" signature="2516:2527" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2560:2566" ph=" }" />
+            <marker date="1580560460578" expanded="true" signature="2606:2815" ph="{...}" />
+            <marker date="1580560460578" expanded="false" signature="2842:2853" ph=" { " />
+            <marker date="1580560460578" expanded="false" signature="2887:2893" ph=" }" />
+            <marker date="1580560460578" expanded="true" signature="2958:3029" ph="{...}" />
+            <marker date="1580560460578" expanded="true" signature="3078:3206" ph="{...}" />
+            <marker date="1580560460578" expanded="true" signature="3254:3380" ph="{...}" />
+            <marker date="1580560460578" expanded="true" signature="3419:3543" ph="{...}" />
+            <marker date="1580560460578" expanded="true" signature="3588:3689" ph="{...}" />
+            <marker date="1580560460578" expanded="true" signature="3767:4085" ph="{...}" />
+            <marker date="1580560460578" expanded="true" signature="4167:4303" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-api/1.1.4/nacos-api-1.1.4.jar!/com/alibaba/nacos/api/naming/NamingService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="88" column="15" lean-forward="false" selection-start-line="88" selection-start-column="15" selection-end-line="88" selection-end-column="15" />
+          <folding>
+            <marker date="1580560460578" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460578" expanded="false" signature="152:494" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-spring-context/0.3.4/nacos-spring-context-0.3.4.jar!/com/alibaba/nacos/spring/factory/DelegatingNamingService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="172" column="25" lean-forward="false" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
+          <folding>
+            <marker date="1580560628752" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560628752" expanded="false" signature="156:641" ph="..." />
+            <marker date="1580560628752" expanded="true" signature="881:960" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="1058:1128" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="1244:1325" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="1443:1526" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="1662:1756" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="1852:1922" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="2036:2117" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="2217:2289" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="2407:2490" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="2610:2695" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="2833:2929" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="3027:3097" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="3213:3296" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="3382:3448" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="3552:3629" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="3734:3811" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="3934:4022" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="4131:4207" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="4334:4421" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="4549:4636" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="4782:4880" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="4983:5058" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="5179:5265" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="5387:5473" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="5613:5710" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="5836:5921" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="6065:6161" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="6306:6402" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="6565:6672" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="6761:6836" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="6943:7029" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="7137:7223" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="7349:7446" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="7558:7643" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="7773:7869" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="8000:8096" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="8245:8352" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="8446:8509" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="8621:8695" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="8812:8885" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="9020:9104" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="9200:9265" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="9379:9455" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="9574:9649" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="9786:9872" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="9970:10045" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="10161:10247" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="10372:10457" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="10600:10696" ph="{...}" />
+            <marker date="1580560628752" expanded="true" signature="10772:10832" ph="{...}" />
+            <marker date="1580560628752" expanded="false" signature="10869:10880" ph=" { " />
+            <marker date="1580560628752" expanded="false" signature="10919:10925" ph=" }" />
+            <marker date="1580560628752" expanded="false" signature="10964:10975" ph=" { " />
+            <marker date="1580560628752" expanded="false" signature="10998:11004" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4.jar!/com/alibaba/nacos/client/naming/NacosNamingService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="314" column="61" lean-forward="false" selection-start-line="314" selection-start-column="61" selection-end-line="314" selection-end-column="61" />
+          <folding>
+            <marker date="1580560460443" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460443" expanded="false" signature="155:1396" ph="..." />
+            <marker date="1580560460443" expanded="true" signature="1924:2070" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="2124:2135" ph=" { " />
+            <marker date="1580560460443" expanded="false" signature="2157:2163" ph=" }" />
+            <marker date="1580560460443" expanded="true" signature="2210:2917" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="2984:3194" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="3258:3457" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="3521:3829" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="3886:4115" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="4169:4625" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="4659:4906" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="5004:5076" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="5192:5275" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="5393:5484" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="5620:5876" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="5972:6050" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="6164:7068" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="7168:7242" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="7360:7445" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="7565:7658" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="7796:8020" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8118:8198" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8314:8611" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8697:8779" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8883:8968" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="9073:9166" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="9289:9385" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="9494:9567" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="9694:9778" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="9906:10001" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="10147:10693" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="10796:10887" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11008:11091" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11213:11315" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11455:11560" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11686:11768" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11912:12005" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12150:12254" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12417:12875" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12964:13055" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="13162:13245" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="13353:13455" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="13581:13686" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="13798:13880" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="14010:14103" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="14234:14338" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="14487:14830" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="14924:15003" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15115:15197" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15314:15395" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15530:15740" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15836:15917" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16031:16115" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16234:16317" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16454:16601" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16699:16789" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16905:17006" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="17131:17224" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="17367:17461" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="17514:17525" ph=" { " />
+            <marker date="1580560460443" expanded="false" signature="17576:17582" ph=" }" />
+            <marker date="1580560460443" expanded="false" signature="17619:17630" ph=" { " />
+            <marker date="1580560460443" expanded="false" signature="17686:17692" ph=" }" />
+            <marker date="1580560460443" expanded="true" signature="17779:18422" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="18463:18474" ph=" { " />
+            <marker date="1580560460443" expanded="false" signature="18498:18504" ph=" }" />
+            <marker date="1580560460443" expanded="true" signature="18517:18593" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4.jar!/com/alibaba/nacos/client/naming/net/NamingProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="239" column="18" lean-forward="false" selection-start-line="239" selection-start-column="18" selection-end-line="239" selection-end-column="18" />
+          <folding>
+            <marker date="1580560460443" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460443" expanded="false" signature="159:1991" ph="..." />
+            <marker date="1580560460443" expanded="true" signature="2498:2921" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="2963:3717" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="3106:3181" ph="newThread(r) → {" />
+            <marker date="1580560460443" expanded="false" signature="3394:3413" ph="}" />
+            <marker date="1580560460443" expanded="false" signature="3467:3519" ph="run() → {" />
+            <marker date="1580560460443" expanded="false" signature="3589:3608" ph="}" />
+            <marker date="1580560460443" expanded="true" signature="3771:4773" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="4811:5789" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="5902:6865" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="6962:7607" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="7719:8606" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8700:9256" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="9354:9985" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="10080:10573" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="10671:11301" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11424:11897" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="11943:12876" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12913:13274" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="13385:13481" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="13619:14674" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="14613:14624" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="14763:14987" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15091:15323" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15434:15504" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="15630:16697" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16786:16850" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="16954:18957" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="19019:19634" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="19677:19964" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="20024:20178" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="20213:20495" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="20360:20419" ph="call() → {" />
+            <marker date="1580560460443" expanded="false" signature="20472:20487" ph="}" />
+            <marker date="1580560460443" expanded="true" signature="20530:20829" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="20677:20753" ph="call() → {" />
+            <marker date="1580560460443" expanded="false" signature="20806:20821" ph="}" />
+            <marker date="1580560460443" expanded="true" signature="20884:20963" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="20999:21010" ph=" { " />
+            <marker date="1580560460443" expanded="false" signature="21034:21040" ph=" }" />
+            <marker date="1580560460443" expanded="true" signature="21088:21307" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4.jar!/com/alibaba/nacos/client/naming/core/HostReactor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1146">
+          <caret line="82" column="33" lean-forward="false" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <folding>
+            <marker date="1580560460443" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460443" expanded="false" signature="160:1215" ph="..." />
+            <marker date="1580560460443" expanded="true" signature="1857:1967" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="2117:3034" ph="{...}" />
+            <marker date="1580560460443" expanded="false" signature="2235:2306" ph="newThread(r) → {" />
+            <marker date="1580560460443" expanded="false" signature="2508:2523" ph="}" />
+            <marker date="1580560460443" expanded="false" signature="3091:3102" ph=" { " />
+            <marker date="1580560460443" expanded="false" signature="3129:3135" ph=" }" />
+            <marker date="1580560460443" expanded="true" signature="3217:3299" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="3356:8307" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8386:8515" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8632:8837" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="8914:10241" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="10319:10832" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="10904:12251" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12318:12588" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12638:14150" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12822:12915" ph="{...}" />
+            <marker date="1580560460443" expanded="true" signature="12943:14144" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/NacosNamingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/net/NamingProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-540">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/core/HostReactor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="281" column="16" lean-forward="false" selection-start-line="281" selection-start-column="16" selection-end-line="281" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/nacos/nacos-client/1.1.4/nacos-client-1.1.4-sources.jar!/com/alibaba/nacos/client/naming/core/PushReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="39" column="26" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nacos-sample-provider/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
-          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
         </state>
       </provider>
