@@ -1,10 +1,10 @@
 # 消息中间件——RocketMQ
 
-## 9.1 整体介绍
+## 9.1 什么是RocketMQ
 
 RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消息中间件（也称消息队列），经过阿里巴巴多年双11验证，由阿里巴巴开源捐献给Apache的顶级项目。
 
-### 应用场景
+### 9.1.1 应用场景
 
 - 削峰填谷
 
@@ -32,51 +32,82 @@ RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消
 
 
 
-### 如何使用
+### 9.1.2 如何使用
 
-RocketMQ 已集成在Spring Cloud Alibaba ，有两种方式可以方便使用：Spring Cloud Stream 的统一消息模型、兼容 Spring Boot 集成的RocketMQ组件。
+在本章中，我们初步来了解 RocketMQ 的基本使用。
 
-- 发送消息
+#### RocketMQ 安装
 
-Step1 pom.xml中引入jar包
+RocketMQ依赖 Java 环境，要求 JDK1.8以上版本。RocketMQ 支持四种集群部署模式，本书使用最简单的单机部署演示。
+
+安装方式有两种，一种是源码安装，另一种是已经编译好直接可用的安装包，以下是按源码的方式安装。
+
+* 在`http://rocketmq.apache.org/docs/quick-start/` 下载 RocketMQ 的最新版本 4.6.0。
+
+* 解压源码并编译打包。
+
+  ```
+    > unzip rocketmq-all-4.6.0-source-release.zip
+    > cd rocketmq-all-4.6.0/
+    > mvn -Prelease-all -DskipTests clean install -U
+    > cd distribution/target/apache-rocketmq
+  ```
+
+* 启动集群管理 NameServer，默认端口是9876
+
+  ```
+    > nohup sh bin/mqnamesrv &
+    > tail -f ~/logs/rocketmqlogs/namesrv.log
+    The Name Server boot success...
+  ```
+
+* 启动消息服务器 Broker 
+
+  ```
+    > nohup sh bin/mqbroker -n localhost:9876 &
+    > tail -f ~/logs/rocketmqlogs/broker.log 
+    The broker[%s, 172.30.30.233:10911] boot success...
+  ```
+
+
+
+#### 发送消息
+
+Spring Cloud Alibaba 已集成 RocketMQ ，使用 Spring Cloud Stream 对 RocketMQ 发送和接收消息。
+
+- Step1 pom.xml中引入jar包
 
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
+  <groupId>com.alibaba.cloud</groupId>
+  <artifactId>spring-cloud-stream-binder-rocketmq</artifactId>
 </dependency>
 
 <dependency>
-    <groupId>com.alibaba.cloud</groupId>
-    <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
 ```
 
-Step2 配置application.yml
 
-```yml
-spring:
-  cloud:
-    stream:
-      rocketmq:
-        binder:
-          name-server: 127.0.0.1:9876
-      bindings:
-        output:
-          destination: TopicTest
-          group: PRODUCER_GROUP_TOPIC_TEST
-server:
-  port: 8081
+
+- Step2 配置application.properties
+
+```properties
+server.port=8081
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.output.destination=TopicTest
+spring.cloud.stream.rocketmq.bindings.output.producer.group=demo-group
 ```
 
-Step3 使用binder发送消息
+`name-server`指定 RocketMQ 的NameServer地址，指定名称为 output 的 Binding 消息发送到TopicTest。
+
+
+
+- Step3 使用binder发送消息
 
 ```java
-@EnableBinding(value = {Source.class})
+@EnableBinding({Source.class})
 @SpringBootApplication
 public class ProducerApplication {
 
@@ -86,94 +117,75 @@ public class ProducerApplication {
 }
 
 @RestController
-public class TestController {
-  
-    private Source source;
+public class SendController {
 
     @Autowired
-    public TestController(Source source) {
-        this.source = source;
-    }
+    private Source source;
 
-    @GetMapping(value = "/hello")
-    public String test(String msg) {
+    @GetMapping(value = "/send")
+    public String send(String msg) {
         MessageBuilder builder = MessageBuilder.withPayload(msg);
         Message message = builder.build();
         source.output().send(message);
-        return "Hello RocketMQ，Binder send " + msg;
+        return "Hello RocketMQ Binder, send " + msg;
     }
 }
 ```
 
-Step2 配置application.yml
-
-```yml
-server:
-  port: 8082
-  
-rocketmq:
-  name-server: 127.0.0.1:9876
-```
+@EnableBinding({Source.class}) 表示绑定配置文件中名称为output的 Binding，发送http请求 `http://localhost:8081/send?msg=tcever` 将消息发送到 RocketMQ 中。
 
 
 
-- 消费消息
+#### 消费消息
 
-Step1 pom.xml中引入jar包
+- Step1 pom.xml中引入jar包
 
 ```xml
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
+  <groupId>com.alibaba.cloud</groupId>
+  <artifactId>spring-cloud-stream-binder-rocketmq</artifactId>
 </dependency>
 
 <dependency>
-    <groupId>com.alibaba.cloud</groupId>
-    <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
 ```
 
-Step2 配置application.yml
 
-```yml
-spring:
-  cloud:
-    stream:
-      rocketmq:
-        binder:
-          name-server: 127.0.0.1:9876
-      bindings:
-        input:
-          destination: TopicTest
-          group: CONSUMER_GROUP_TOPIC_TEST
 
-server:
-  port: 8082
+- Step2 配置application.properties
+
+```properties
+server.port=8082
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.input.destination=TopicTest
+spring.cloud.stream.bindings.input.group=test-group1
 ```
 
-Step3 定义消息监听
+`name-server`指定 RocketMQ 的NameServer地址，destination指定Topic名称，指定名称为 input 的 Binding 接收TopicTest的消息。
+
+
+
+- Step3 定义消息监听
 
 ```java
 @EnableBinding({ Sink.class})
 @SpringBootApplication
-public class Application {
+public class ConsumerApplication {
 
     @StreamListener(value = Sink.INPUT)
     public void receive(String receiveMsg) {
-        System.out.println("TopicTest receive: " + receiveMsg);
+        System.out.println("TopicTest receive: " + receiveMsg + "，receiveTime = " + System.currentTimeMillis());
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(ConsumerApplication.class, args);
     }
 }
 ```
 
-`SpringCloudStream`方式消费消息需要使用`@StreamListener`注解
+@EnableBinding({Sink.class}) 表示绑定配置文件中名称为input的 Binding，@StreamListener 表示定义一个消息监听器，接收 RocketMQ 中的消息。
 
 
 
@@ -189,8 +201,6 @@ Spring Cloud Stream是 Spring Cloud 体系内的一个框架，用于构建与�
 
 
 
-Spring Cloud Stream官方提供了Kafka Binder和RabbitMQ Binder用于集成Kafka和RabbitMQ，Spring Cloud Alibaba中加入了RocketMQ Binder用于集成RocketMQ到Spring Cloud Stream。
-
 Spring Cloud Stream 核心由四部分构成：Spring Framework 中的**Spring Messaging**和**Spring Integration**、Spring Cloud Stream中的**Binders**和**Bindings**。
 
 - Spring Messaging：Spring Framework 中统一消息的编程模型，其核心对象如下：
@@ -203,28 +213,28 @@ Spring Cloud Stream 核心由四部分构成：Spring Framework 中的**Spring M
   - Filter：消息的过滤注解，用于配置消息过滤表达式
   - Aggregator：消息的聚合注解，用于多条消息聚合成一条
   - Splitter：消息的分割，用于一条消息拆分成多条
-- Binders：负责与外部消息中间件系统集成的组件。
-  - doBindProducer：绑定消息中间件客户端发送消息的API模块
-  - doBindConsumer：绑定消息中间件客户端接收消息的API模块
+- Binders：目标绑定器，负责与外部消息中间件系统集成的组件。
+  - doBindProducer：绑定消息中间件客户端发送消息模块
+  - doBindConsumer：绑定消息中间件客户端接收消息模块
 - Bindings：外部消息中间件系统与应用程序提供的消息生产者和消费者（由Binders创建）之间的桥梁。
 
 
 
-### Spring Cloud Stream 消息发送流程
+Spring Cloud Stream官方提供了Kafka Binder和RabbitMQ Binder用于集成Kafka和RabbitMQ，Spring Cloud Alibaba中加入了RocketMQ Binder用于集成RocketMQ到Spring Cloud Stream。
 
 Spring Cloud Stream RocketMQ的架构图如下：
 
 ![spring-cloud-stream_2](image/spring-cloud-stream_2.png)
 
-架构图中间部分是RocketMQ Binder的实现，简单点说就是RocketMQ Binder使用RocketMQ 客户端提供的 API 接口做了转换和映射来遵循Spring Cloud Stream Binder的 标准协议。
+架构图中间部分是RocketMQ Binder的实现，简单点说就是RocketMQ Binder使用RocketMQ 客户端提供的 API 接口做了转换和映射，遵循Spring Cloud Stream Binder的标准协议。
+
+以9.1.2章节中代码为例，结合Spring Cloud Stream RocketMQ的架构图，通过源码分析Spring Cloud Stream RocketMQ。
 
 
 
-Spring Cloud Stream的Output发送消息的流程细节如下：
+### 9.2.1 Spring Cloud Stream 消息发送流程
 
-![spring-cloud-stream_1](image/spring-cloud-stream_1.jpg)
-
-- 业务代码中调用 MessageChannel 接口的 Send() 方法
+- 业务代码中调用 MessageChannel 接口的 Send() 方法，例如`source.output().send(message);`
 
 ```java
 public interface MessageChannel {
@@ -409,7 +419,7 @@ AbstractMessageChannelBinder 的初始化由AbstractBindingLifecycle 在Spring �
 
 
 
-### RocketMQ Binder 集成消息发送
+### 9.2.2 RocketMQ Binder 集成消息发送
 
 AbstractMessageChannelBinder 类中提供了创建 MessageHandler 的规范，createProducerMessageHandler方法在初始化Binder的时候会加载。
 
@@ -501,9 +511,75 @@ producer.setMaxMessageSize(
       producerProperties.getExtension().getMaxMessageSize());
 ```
 
+RocketMQMessageHandler 消息发送的处理逻辑，解析Message对象头中的参数，调用RocketMQTemplate中不同的发送消息接口。
+
+```java
+public class RocketMQMessageHandler extends AbstractMessageHandler implements Lifecycle {
+  	// 省略...
+  
+  	@Override
+		protected void handleMessageInternal(org.springframework.messaging.Message<?> message)
+      throws Exception {
+    		final StringBuilder topicWithTags = new StringBuilder(destination);
+      	SendResult sendRes = null;
+      	// 发送事务消息
+        if (transactional) {
+          sendRes = rocketMQTemplate.sendMessageInTransaction(groupName,
+              topicWithTags.toString(), message, message.getHeaders()
+                  .get(RocketMQBinderConstants.ROCKET_TRANSACTIONAL_ARG));
+        }
+      	else {
+          	// 设置定时消息的参数
+          	int delayLevel = 0;
+            try {
+                Object delayLevelObj = message.getHeaders()
+                    .getOrDefault(MessageConst.PROPERTY_DELAY_TIME_LEVEL, 0);
+                if (delayLevelObj instanceof Number) {
+                  	delayLevel = ((Number) delayLevelObj).intValue();
+                }
+                else if (delayLevelObj instanceof String) {
+                  	delayLevel = Integer.parseInt((String) delayLevelObj);
+                }
+            }
+            catch (Exception e) {
+              // ignore
+            }
+          	boolean needSelectQueue = message.getHeaders()
+										.containsKey(BinderHeaders.PARTITION_HEADER);
+          	// 同步发送
+          	if (sync) {
+              		// 顺序消息
+                  if (needSelectQueue) {
+                    sendRes = rocketMQTemplate.syncSendOrderly(
+                        topicWithTags.toString(), message, "",
+                        rocketMQTemplate.getProducer().getSendMsgTimeout());
+                  }
+              		// 普通消息
+                  else {
+                    sendRes = rocketMQTemplate.syncSend(topicWithTags.toString(),
+                        message,
+                        rocketMQTemplate.getProducer().getSendMsgTimeout(),
+                        delayLevel);
+                  }
+            } 
+          	// 异步发送和回调
+          	else {
+              	rocketMQTemplate.asyncSend(topicWithTags.toString(), message,
+										new SendCallback() {
+                    // 省略...
+                    }});
+            }
+        }
+      	// 省略...
+    }
+}
+```
+
+发送普通消息、事务消息、定时消息、顺序消息由Message对象的消息头Header中的属性决定，业务代码创建Message对象时设置。
 
 
-### RocketMQ Binder 集成消息订阅
+
+### 9.2.3 RocketMQ Binder 集成消息订阅
 
 AbstractMessageChannelBinder 类中提供了创建 MessageProducer 的协议，createConsumerEndpoint方法在初始化Binder的时候会加载。
 
@@ -700,7 +776,7 @@ DefaultMessageListenerOrderly 对象收到RocketMQ 消息，会先回调 Binding
 
 
 
-### Spring Cloud Stream 消息订阅流程
+### 9.2.4 Spring Cloud Stream 消息订阅流程
 
 对于Spring Cloud Stream 的消息模型来说，接收消息中间件的消息也是发布/订阅模型，接收到的消息先发送到MessageChannel ，由订阅的MessageChannel 通过Dispatcher转发到对应的 MessageHandler 进行处理。
 
@@ -869,11 +945,13 @@ private void registerHandlerMethodOnListenedChannel(Method method,
 }
 ```
 
+
+
 到此，Spring Cloud Stream RocketMQ 相关知识介绍完了，其他内容不再展开，总结一下前面的内容。
 
 - Spring Cloud Stream 提供了简单易用的消息编程模型，内部基于发布/订阅模型实现。
 - Spring Cloud Stream 的Binder提供标准协议，不同的消息中间件都可以按照标准协议接入进来。
-- Binder 提供 bindConsumer 和 bindProducer 两个方法，分别用于构造生产者和消费者。
+- Binder 提供 bindConsumer 和 bindProducer 接口协议，分别用于构造生产者和消费者。
 
 
 
@@ -881,13 +959,17 @@ private void registerHandlerMethodOnListenedChannel(Method method,
 
 
 
-## 9.3 为什么放弃Zookeeper选择NameServer
+## 9.3 整体架构设计
 
-介绍RocketMQ的架构设计，不得不说几句与Kafka的渊源，kafka是一款高性能的消息中间件，由于kafka不支持消费失败重试、定时消息、事务消息，顺序消息也有明显缺陷，难以支撑淘宝交易、订单、充值等复杂场景，淘宝中间件团队参考Kafka之后重新设计并用java编写了RocketMQ，所以在RocketMQ中会有一些概念和kafka相似。
+本章中会介绍 RocketMQ 的整体架构设计，涉及到 RocketMQ 中一些重要的概念。
 
-在分布式服务SOA架构中，服务发现机制是必备的。服务实例有多个，且数量是动态变化的。注册中心会提供服务管理，服务调用方在注册中心获取到服务提供者的信息，从而进行远程调用。
+### 9.3.1 架构设计
 
-所有常用的消息中间件都是基于订阅发布机制，消息发送者（Producer）把消息发送到消息服务器，消息消费者（Consumer）从消息服务器订阅感兴趣的消息。这个过程中消息发送者和消息消费者是客户端，消息服务器是服务端，客户端与服务端双方通过注册中心感知对方的存在。
+介绍RocketMQ的架构设计，不得不说几句与Kafka的渊源。Kafka是一款高性能的消息中间件，由于Kafka不支持消费失败重试、定时消息、事务消息，顺序消息也有明显缺陷，难以支撑淘宝交易、订单、充值等复杂场景，淘宝中间件团队参考Kafka之后重新设计并用java编写了RocketMQ，所以在RocketMQ中会有一些概念和Kafka相似。
+
+在分布式服务SOA架构中，服务发现机制是必备的。服务实例有多个，且数量是动态变化的。注册中心会提供服务管理能力，服务调用方在注册中心获取到服务提供者的信息，从而进行远程调用。
+
+常见的消息中间件Kafka、RabbitMQ、RocketMQ 等都是基于发布/订阅机制，消息发送者（Producer）把消息发送到消息服务器，消息消费者（Consumer）从消息服务器订阅感兴趣的消息。这个过程中消息发送者和消息消费者是客户端，消息服务器是服务端，客户端与服务端双方都需要通过注册中心感知对方的存在。
 
 ![9-1](image/rocketmq_architecture_1.png)
 
@@ -900,13 +982,15 @@ RocketMQ部署架构上主要分为四部分，如上图所示:
 
 
 
-NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo中的zookeeper，支持Broker的动态注册与发现。主要包括两个功能：
+NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo中依赖的Zookeeper，支持Broker的动态注册与发现。主要包括两个功能：
 
 1. 服务注册：NameServer接收Broker集群的注册信息保存下来作为路由信息的基本数据，并提供心跳检测机制，检查Broker是否还存活。
 
 2. 路由信息管理：NameServer保存了Broker集群的路由信息，用于提供给客户端查询Broker的队列信息。Producer和Conumser通过NameServer可以知道Broker集群的路由信息，从而进行消息的投递和消费。
 
-   
+
+
+### 9.3.2 为什么放弃Zookeeper选择NameServer
 
 在kafka中的服务注册与发现通常是用Zookeeper来完成的，RocketMQ早期也使用了Zookeeper做集群的管理，但后来放弃了转而使用自己开发NameServer。说到这里大家可能会有个疑问，这些能力Zookeeper早就有了，为什么要重复造轮子自己再写一个服务注册中心呢？带着这个疑问我们先来看两者部署拓扑图的对比。
 
@@ -914,7 +998,7 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 
 在Kafka中Topic是逻辑概念，分区是物理概念。1个topic可以设置多个分区（partition），每个分区可以设置多个副本（replication），即有1个master分区 + 多个slave分区。Kafka的部署拓扑图如下：
 
-![](image/rocketmq_architecture_11.jpg)
+<img src="image/rocketmq_architecture_11.jpg" style="zoom:50%;" />
 
 例如搭建3个Broker构成一个集群，创建了一个Topic取名为TopicA，分区是3个，副本数也是3个。图中part表示分区，M表示Master，S表示Slave。在Kafka中消息只能发送到Master分区中，消息发送给Topic时会发送到具体某个分区。如果是发送给part0就只会发送到Broker0这个实例，再由Broker0同步到Broker1和Broker2中的part0副本中去；如果是发送给part1就只会发送到Broker1这个实例，再由Broker1同步到Broker0和Broker2中的part1副本中去。
 
@@ -922,92 +1006,123 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 
 在RocketMQ中Topic也是逻辑概念，队列是物理概念（对应Kafka中的分区）。1个topic可以设置多个队列（queue），每个队列也可以有多个副本，即有1个master队列 + 多个slave队列。RocketMQ的部署拓扑图如下：
 
-![](image/rocketmq_architecture_12.jpg)
+<img src="image/rocketmq_architecture_12.jpg" style="zoom:50%;" />
 
 为了好对比，同样创建了一个Topic取名为TopicA，队列是3个，副本数也是3个，但构成Broker集群的实例有9个。
 
-两者在概念上相似，但又有明显的差异：
+Kafka 与 RocketMQ 两者在概念上相似，但又有明显的差异：
 
-- 在Kafka中，Master和Slave在同一台Broker机器上，Broker机器具有双重身份，分区的Master/Slave身份是在运行过程中选举出来的。
-- 在RocketMQ中，Master和Slave不在同一台Broker机器上，每台Broker机器不是Master就是Slave，Broker的Master/Slave身份是在Broker的配置文件中写死的。
+- 在Kafka中，Master和Slave在同一台Broker机器上，Broker机器上有多个分区，每个分区的Master/Slave身份是在运行过程中选举出来的，Broker机器具有双重身份。
+- 在RocketMQ中，Master和Slave不在同一台Broker机器上，每台Broker机器不是Master就是Slave，Broker的Master/Slave身份是在Broker的配置文件中预先定义好的。
 
-那这个差异影响在哪呢？Kafka的Master/Slave需要通过Zookeeper选举出来的，而RocketMQ不需要。问题就在这个选举上，Zookeeper的选举机制需要Zookeeper集群多个实例来完成，Zookeeper集群中的多个实例必须相互通信，如果实例数很多，网络通讯就会变得非常复杂且低效。NameServer的设计目标是当网络通信变简单了，性能就会有极大的提升。
+那这个差异影响在哪呢？Kafka的Master/Slave需要通过Zookeeper选举出来的，而RocketMQ不需要。问题就在这个选举上，Zookeeper的选举机制需要Zookeeper集群多个实例来完成，Zookeeper集群中的多个实例必须相互通信，如果实例数很多，网络通讯就会变得非常复杂且低效。
 
-为了避免单点故障，NameServer必须以集群的方式部署，但集群中各实例间相互不进行网络通讯。NameServer是无状态的，可以任意部署多个实例。Broker向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。NameServer与每台Broker机器保持长连接，间隔30秒发心跳包检查Broker是否存活，如果检测到Broker宕机， 则从路由注册表中将故障机器移除。NameServer为了降低实现的复杂度，并不会立刻通知客户端的Producer和Consumer。
+NameServer的设计目标是让网络通信变简单，从而使性能得到极大的提升。为了避免单点故障，NameServer也必须以集群的方式部署，但集群中各实例间相互不进行网络通信。NameServer是无状态的，可以任意部署多个实例。Broker向每一台NameServer注册自己的路由信息，所以每一个NameServer实例上面都保存一份完整的路由信息。NameServer与每台Broker机器保持长连接，间隔30秒发心跳包检查Broker是否存活，如果检测到Broker宕机， 则从路由注册表中将故障机器移除。NameServer为了降低实现的复杂度，并不会立刻通知客户端的Producer和Consumer。
 
 集群环境下实例很多，偶尔会出现各种各样的问题，可能会出现以下几种场景：
 
 1. 当某个NameServer因宕机或网络问题下线了，Broker仍然可以向其它NameServer同步其路由信息，Produce和Consumer仍然可以动态感知Broker的路由的信息。
-2. NameServer如果检测到Broker宕机，没有通知客户端。Producer将消息发送到故障的Broker怎么办？Consumer从Broker订阅消息失败怎么办？ 这两个问题都是在客户端中进行解决，具体将在后续9.6章节高可用设计中解答。
-3. 由于NameServer集群中的实例相互不通讯，在某个时间点可能不同NameServer实例保存的路由注册信息不一致，但这对发送消息和消费消息也不会有什么影响，所以NameServer是AP架构。
+2. NameServer如果检测到Broker宕机，没有通知客户端。Producer将消息发送到故障的Broker怎么办？Consumer从Broker订阅消息失败怎么办？ 这两个问题都是在客户端中进行解决，具体将在后续"高可用设计"的章节中解答。
+3. 由于NameServer集群中的实例相互不通讯，在某个时间点可能不同NameServer实例保存的路由注册信息不一致，但这对发送消息和消费消息也不会有什么影响，从这能看出NameServer是CAP中的AP架构。
 
 
 
 ## 9.4 如何实现顺序消息
 
-### 顺序消息的场景
+### 9.4.1 顺序消息场景
 
-日常中需要保证顺序的应用场景非常多，例如交易系统中的订单创建、支付、退款等流程，先创建订单才能支付，支付完成的订单才能退款，这需要顺序保证先进先出（First In First Out，缩写 FIFO）。例如数据库的BinLog消息，也必须保证先进先出。
+日常中需要保证顺序的应用场景非常多，例如交易系统中的订单创建、支付、退款等流程，先创建订单才能支付，支付完成的订单才能退款，这需要顺序保证先进先出（First In First Out，缩写 FIFO）。例如数据库的BinLog消息，数据库执行新增语句、修改语句，BinLog消息的顺序也必须保证是新增消息、修改消息。
 
 
 
-### 应用举例
+### 9.4.2 代码示例
 
-我们使用RocketMQ顺序消息来模拟一下订单的场景，顺序消息分为顺序发送和顺序消费。
+我们使用RocketMQ顺序消息来模拟一下订单的场景，顺序消息分为两部分：顺序发送、顺序消费。
 
 - step1 顺序发消息
 
+```properties
+server.port=8081
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.output.destination=TopicTest
+spring.cloud.stream.rocketmq.bindings.output.producer.group=demo-group
+# 设置同步发送
+spring.cloud.stream.rocketmq.bindings.output.producer.sync=true
+```
+
 ```java
-public String orderly() {
-    List<String> typeList = Arrays.asList("创建", "支付", "退款");
-    for (String type : typeList) {
-      Order order = new Order("123", type);
-      MessageBuilder builder = MessageBuilder.withPayload(order);
-      Message message = builder.build();
-      SendResult sendResult = rocketMQTemplate.syncSendOrderly("TopicTest", message, order.getOrderId());
-      System.out.println("MsgId = " + sendResult.getMsgId() + ", QueueId = " + sendResult.getMessageQueue().getQueueId());
+@RestController
+public class OrderlyController {
+
+    @Autowired
+    private Source source;
+
+    @GetMapping(value = "/orderly")
+    public String orderly() {
+        List<String> typeList = Arrays.asList("创建", "支付", "退款");
+
+        for (String type : typeList) {
+            MessageBuilder builder = MessageBuilder.withPayload(type)
+                    .setHeader(BinderHeaders.PARTITION_HEADER, 0);
+            Message message = builder.build();
+            source.output().send(message);
+        }
+        return "OK";
     }
-    return "OK";
 }
 ```
 
-Order对象保存了订单信息，为了简化模拟代码，订单ID都固定为123，模拟按顺序依次发送创建、支付、退款消息到`TopicTest`。与普通消息相比只是调用API不一样，顺序消息使用`syncSendOrderly()`方法。
+为了简化代码，模拟按顺序依次发送创建、支付、退款消息到`TopicTest`。
 
-通过打印的日志可以看到相同订单ID的多条消息会发送到同一个Queue，消息ID（MsgId）不同，而队列ID（QueueId）相同。
+这里发送顺序消息的代码，相比9.1.2章节中发送普通消息，修改了两处地方：
 
-```
-MsgId = C0A80066853E18B4AAC21A508110000A, QueueId = 2
-MsgId = C0A80066853E18B4AAC21A508113000B, QueueId = 2
-MsgId = C0A80066853E18B4AAC21A508116000C, QueueId = 2
-```
+1. spring.propeties配置文件中指定`producer.sync=true`，默认是异步发送，此处改为同步发送。
+2. MessageBuilder 设置Header信息头，表示这是一条顺序消息，将消息固定地发送到第0个消息队列。
 
 
 
 - step2 顺序收消息
 
 ```java
-@Component
-@RocketMQMessageListener(topic = "TopicTest", consumerGroup = "CONSUMER_GROUP_DEMO", consumeMode = ConsumeMode.ORDERLY)
-public class OrderListener implements RocketMQListener<String> {
+@EnableBinding({ Sink.class})
+@SpringBootApplication
+public class ConsumerApplication {
 
-    @Override
-    public void onMessage(String order) {
-        System.out.println("TopicTest receive: " + order + ", receiveTime = " + System.currentTimeMillis());
+    @StreamListener(value = Sink.INPUT)
+    public void receive(String receiveMsg) {
+        System.out.println("TopicTest receive: " + receiveMsg + "，receiveTime = " + System.currentTimeMillis());
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumerApplication.class, args);
     }
 }
 ```
 
-在`@RocketMQMessageListener`注解中添加`consumeMode = ConsumeMode.ORDERLY`表示按顺序消费，查看打印的日志：
+```properties
+server.port=8082
+
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+
+spring.cloud.stream.bindings.input.destination=TopicTest
+spring.cloud.stream.bindings.input.group=test-group1
+# 指定顺序消费
+spring.cloud.stream.rocketmq.bindings.input.consumer.orderly=true
+```
+
+相比9.1.2章节中消费普通消息，仅修改了spring.properties配置文件`consumer.orderly=true`，默认是并发消费，此处改成顺序消费。
+
+程序运行之后查看控制台日志的输出，也是按顺序打印出来的。
 
 ```java
-TopicTest receive: {"orderId":"123","address":"创建"}, receiveTime = 1580927883989
-TopicTest receive: {"orderId":"123","address":"支付"}, receiveTime = 1580927883990
-TopicTest receive: {"orderId":"123","address":"退款"}, receiveTime = 1580927883991
+TopicTest receive: 创建，receiveTime = 1581359411181
+TopicTest receive: 支付，receiveTime = 1581359411184
+TopicTest receive: 退款，receiveTime = 1581359411185
 ```
 
 
 
-### 技术原理
+### 9.4.3 技术原理
 
 RocketMQ的顺序消息分2种情况，局部有序和全局有序，前面的例子就是局部有序场景。
 
@@ -1016,7 +1131,7 @@ RocketMQ的顺序消息分2种情况，局部有序和全局有序，前面的�
 
 
 
-#### 顺序发送
+#### 顺序发送与普通发送
 
 RocketMQ中消息发送有三种方式：同步、异步、单向。
 
@@ -1027,6 +1142,8 @@ RocketMQ中消息发送有三种方式：同步、异步、单向。
 
 
 顺序消息发送的原理很简单，同一类消息发送到相同的队列即可。为了保证先发送的消息先存储到消息队列，必须使用同步发送的方式。否则可能出现先发消息后到消息队列，此时消息就已经乱序了。
+
+RocketMQ 核心源码如下：
 
 ```java
 public SendResult syncSendOrderly(String destination, Message<?> message, String hashKey) {
@@ -1076,8 +1193,6 @@ public class SelectMessageQueueByHash implements MessageQueueSelector {
 
 
 
-#### 普通发送
-
 普通消息与顺序消息在发送时选择消息队列的策略不同，普通消息发送选择队列有2种机制：轮询机制、故障规避机制（也称故障延迟机制）。默认是使用轮询机制，一个Topic有多个队列，轮询选择其中一个队列。
 
 轮询机制的原理是路由信息`TopicPublishInfo`中维护了一个计数器`sendWhichQueue`，每发送一次消息需要查询一次路由，计算器就进行+1，通过计算器的值index与队列的数量取模计算来实现轮询算法。
@@ -1117,7 +1232,7 @@ public MessageQueue selectOneMessageQueue() {
 
 
 
-#### 顺序消费
+#### 顺序消费与并发消费
 
 RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。两者的区别是广播消费模式时每条消息会被ConsumerGroup的每个Consumer都消费，集群消费是每条消息只会被ConsumerGroup的其中一个Consumer消费。
 
@@ -1149,9 +1264,7 @@ try {
 
 
 
-#### 并发消费
-
-并发消费也称为乱序消费，原理是同一个消息队列允许Consumer中的多个消费线程拉取消费。Consumer中会维护一个消费线程池，多个消费线程可以并发去同一个消息队列中拉取消息进行消费。如果某个消费线程在监听器中进行业务处理时抛出异常，当前消费线程拉取的消息会进行重试，不影响其他消费线程和消息队列的消费进度，消费成功的线程正常提交消费进度。
+并发消费也称为乱序消费，其原理是同一个消息队列提供给Consumer中的多个消费线程拉取消费。Consumer中会维护一个消费线程池，多个消费线程可以并发去同一个消息队列中拉取消息进行消费。如果某个消费线程在监听器中进行业务处理时抛出异常，当前消费线程拉取的消息会进行重试，不影响其他消费线程和消息队列的消费进度，消费成功的线程正常提交消费进度。
 
 
 
@@ -1169,7 +1282,7 @@ try {
 
 ## 9.5 如何实现事务消息
 
-### 事务消息的场景
+### 9.5.1 事务消息场景
 
 事务消息使用的场景很多，例如在电商系统中用户下单后新增了订单记录，对应的商品库存需要减少，怎么保证新增订单后商品库存减少？又例如红包业务，张三给李四发红包，张三的账户余额需要扣减，李四的账户余额需要增加，怎么保证张三账户扣钱后李四账户加钱？
 
@@ -1189,25 +1302,41 @@ RocketMQ的一大特点就是支持事务消息，支持一些分布式事务场
 
 
 
-### 应用举例
+### 9.5.2 代码示例
 
 我们使用RocketMQ事务消息来模拟一下下单减库存的场景
 
 - step1 发送订单的事务消息，预提交
 
 ```java
-public String sendTransactionMsg() {
-    Order order = new Order("123", "浙江杭州");
-    String transactionId = UUID.randomUUID().toString();
-    MessageBuilder builder = MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId);
-    Message message = builder.build();
+@RestController
+public class TransactionalController {
 
-    TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderTransactionGroup","TopicOrder", message, order.getOrderId());
-    return sendResult.getMsgId();
+    @Autowired
+    private Source source;
+
+    @GetMapping(value = "/transactional")
+    public String transactional() {
+        Order order = new Order("123", "浙江杭州");
+
+        String transactionId = UUID.randomUUID().toString();
+        MessageBuilder builder = MessageBuilder.withPayload(order)
+                .setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId);
+        Message message = builder.build();
+        source.output().send(message);
+        return "OK";
+    }
 }
 ```
 
-Order对象保存了订单信息被发送到`TopicOrder`，随机生成一个ID作为消息的事务ID，定义了一个名为OrderTransactionGroup的事务组，用于下一步接收本地事务的监听。
+```properties
+server.port=8082
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.input.destination=TopicTest
+spring.cloud.stream.bindings.input.group=test-group1
+```
+
+Order对象保存了订单信息，随机生成一个ID作为消息的事务ID，定义了一个名为OrderTransactionGroup的事务组，用于下一步接收本地事务的监听。
 
 此时消息已经发送到broker中，但还未投递出去，Consumer暂时还不能消费这条消息。
 
@@ -1268,22 +1397,33 @@ checkLocalTransaction：检查本地事务执行状态，如果`executeLocalTran
 - step3 消费订单消息
 
 ```java
-@Component
-@RocketMQMessageListener(topic = "TopicOrder", consumerGroup = "CONSUMER_GROUP_ORDER")
-public class OrderListener implements RocketMQListener<Order> {
+@EnableBinding({ Sink.class})
+@SpringBootApplication
+public class ConsumerApplication {
 
-    @Override
-    public void onMessage(Order order) {
-        // 调用数据库 update 库存表
+    @StreamListener(value = Sink.INPUT)
+    public void receive(String receiveMsg) {
+        System.out.println("TopicTest receive: " + receiveMsg + "，receiveTime = " + System.currentTimeMillis());
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumerApplication.class, args);
     }
 }
 ```
 
-这里需要注意的是，如果消费失败需要人工介入处理，通常这种情况都是业务bug导致，人工修复后继续消费即可。
+```properties
+server.port=8082
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.input.destination=TopicTest
+spring.cloud.stream.bindings.input.group=test-group1
+```
+
+消费事务消息与消费普通消息代码是一样的，无须做任何修改。
 
 
 
-### 技术原理
+### 9.5.3 技术原理
 
 RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向broker发送预处理消息（也称半消息），此时消息还未被投递出去，Consumer不能消费；第二阶段Producer向broker发送提交或回滚消息，具体流程如下：
 
@@ -1311,7 +1451,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 
 
-### 数据存储设计
+### 9.6.1 数据存储设计
 
 RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计。而数据存储的核心由两部分组成：commitlog数据存储文件、consumequeue消费队列文件。
 
@@ -1335,25 +1475,28 @@ RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所�
 
 消息数据文件中每条消息数据具体格式如下：
 
-| **序号** | 消息存储结构                | 备注                                                         | 长度(字节)         |
-| -------- | --------------------------- | ------------------------------------------------------------ | ------------------ |
-| **1**    | TOTALSIZE                   | 消息总大小                                                   | 4                  |
-| **2**    | MAGICCODE                   | 消息magic code，区分数据消息和空消息                         | 4                  |
-| **3**    | BODYCRC                     | 消息体的CRC，当broker重启时会校验                            | 4                  |
-| **4**    | QUEUEID                     | 区分同一个topic的不同queue                                   | 4                  |
-| **5**    | FLAG                        | 未使用                                                       | 4                  |
-| **6**    | QUEUEOFFSET                 | queue中的消息偏移量，即queue中的消息个数，*20=物理偏移量     | 8                  |
-| **7**    | PHYSICALOFFSET              | 在commitlog中的物理起始偏移量                                | 8                  |
-| **8**    | SYSFLAG                     | 消息标志，消息是事务状态等消息特征                           | 4                  |
-| **9**    | BORNTIMESTAMP               | Producer的时间戳                                             | 8                  |
-| **10**   | BORNHOST(IP+HOST)           | Producer地址                                                 | 8                  |
-| **11**   | STORETIMESTAMP              | 存储时间戳                                                   | 8                  |
-| **12**   | STOREHOST(IP+PORT)          | 消息存储到broker的地址                                       | 8                  |
-| **13**   | RECONSUMETIMES              | 消息被某个consumer group重新消费次数（consumer group之间独立计数） | 8                  |
-| **14**   | PREPARED TRANSACTION OFFSET | 表示该消息是prepared状态的事务消息                           | 8                  |
-| **15**   | BODY                        | 前4字节：bodyLength，后bodyLength存放消息体内容              | 4+bodyLength       |
-| **16**   | TOPIC                       | 前1字节：topicLength，后topicLength存放topic内容             | 1+topicLength      |
-| **17**   | Properties                  | 前2字节：propertiesLength，后propertiesLength存放属性数据    | 2+propertiesLength |
+| **序号** | 消息存储结构                | 备注                                                         | 长度(字节) |
+| -------- | --------------------------- | ------------------------------------------------------------ | ---------- |
+| **1**    | TOTALSIZE                   | 消息总大小                                                   | 4          |
+| **2**    | MAGICCODE                   | 消息magic code，区分数据消息和空消息                         | 4          |
+| **3**    | BODYCRC                     | 消息体的CRC，当broker重启时会校验                            | 4          |
+| **4**    | QUEUEID                     | 区分同一个topic的不同queue                                   | 4          |
+| **5**    | FLAG                        | 未使用                                                       | 4          |
+| **6**    | QUEUEOFFSET                 | queue中的消息偏移量，即queue中的消息个数，*20=物理偏移量     | 8          |
+| **7**    | PHYSICALOFFSET              | 在commitlog中的物理起始偏移量                                | 8          |
+| **8**    | SYSFLAG                     | 消息标志，消息是事务状态等消息特征                           | 4          |
+| **9**    | BORNTIMESTAMP               | Producer的时间戳                                             | 8          |
+| **10**   | BORNHOST(IP+HOST)           | Producer地址                                                 | 8          |
+| **11**   | STORETIMESTAMP              | 存储时间戳                                                   | 8          |
+| **12**   | STOREHOST(IP+PORT)          | 消息存储到broker的地址                                       | 8          |
+| **13**   | RECONSUMETIMES              | 消息被某个consumer group重新消费次数（consumer group之间独立计数） | 8          |
+| **14**   | PREPARED TRANSACTION OFFSET | 表示该消息是prepared状态的事务消息                           | 8          |
+| **15**   | BODY Length                 | 前4字节：bodyLength，后bodyLength存放消息体内容              | 4          |
+| **16**   | BODY                        | 消息体数据                                                   | 变长       |
+| **17**   | TOPIC Length                | 前1字节：topicLength，后topicLength存放topic内容             | 1          |
+| **18**   | TOPIC                       | Topic名称                                                    | 变长       |
+| **19**   | Properties Length           | 前2字节：propertiesLength，后propertiesLength存放属性数据    | 2          |
+| **20**   | Properties                  | 属性数据                                                     | 变长       |
 
 
 
@@ -1397,7 +1540,7 @@ RocketMQ中的文件读写主要就是通过Java NIO中MappedByteBuffer来进行
 
 
 
-### 动态伸缩
+### 9.6.2 动态伸缩
 
 动态伸缩（水平扩容）能力是分布式应用很重要的能力，RocketMQ中动态伸缩能力主要体现在消息队列扩容和集群扩容两个方面，需要根据实际场景进行选择。
 
@@ -1411,7 +1554,7 @@ RocketMQ中的文件读写主要就是通过Java NIO中MappedByteBuffer来进行
 
 
 
-### 消息实时投递
+### 9.6.3 消息实时投递
 
 消息的高性能还体现在消息发送到存储之后，能否立即被客户端消费，这涉及消息的实时投递。任何一款消息中间件都会有两种获取消息的方式：Push推模式、Pull拉模式。这两种模式各有优缺点，并适用于不同的场景。
 
@@ -1430,7 +1573,7 @@ RocketMQ中的文件读写主要就是通过Java NIO中MappedByteBuffer来进行
 
 
 
-### 消息发送的高可用
+### 9.7.1 消息发送的高可用
 
 在消息发送时可能会遇到网络问题、broker宕机等情况，而NameServer检测broker是有延迟的，虽然NameServer每间隔10秒会扫码所有Broker信息，但要broker的最后心跳时间超过120秒以上才认为该Broker不可用，所以Producer不能及时感知broker下线。如果在这期间消息一直发送失败，那么消息发送失败率会很高，这在业务上是无法接受的。于是RocketMQ采用了一些在发送端的高可用方案，来解决发送失败的问题，其中最为重要的两个设计是重试机制与故障延迟机制。
 
@@ -1582,7 +1725,7 @@ FaultItem存储了broker名称、响应时长、故障规避开始时间，最�
 
 
 
-### 消息存储的高可用
+### 9.7.2 消息存储的高可用
 
 在RocketMQ中消息存储的高可用体现在发送成功的消息不能丢、Broker不能发生单点故障，出现broker异常宕机、操作系统crash、机房断电或断网等情况保证数据不丢。RocketMQ主要是通过消息持久化（也称刷盘）、主从复制、读写分离机制来保证。
 
@@ -1865,7 +2008,7 @@ RocketMQ的consumer在拉取消息时，broker会判断Master服务器的消息�
 
 
 
-### 消息消费的高可用
+### 9.7.3 消息消费的高可用
 
 #### 消费重试机制
 
@@ -1890,15 +2033,15 @@ RocketMQ不支持任意时间精确的延迟消息，仅支持1s、5s、10s、30
 
 
 
-### 集群管理的高可用
+### 9.7.4 集群管理的高可用
 
-集群管理的高可用主要体现在NameServer的设计上，当部分NameServer节点宕机不会有什么糟糕的影响，只剩一个NameServer节点RocketMQ集群也能正常运行，即使是NameServer全部宕机，也不影响已经运行的Broker、Producer、Consumer。前面有详细介绍NameServer，不再复述。
+集群管理的高可用主要体现在NameServer的设计上，当部分NameServer节点宕机不会有什么糟糕的影响，只剩一个NameServer节点RocketMQ集群也能正常运行，即使是NameServer全部宕机，也不影响已经运行的Broker、Producer和Consumer。
 
 
 
 ## 9.8 附录
 
-### 基本概念
+### 9.8.1 基本概念
 
 - Message：消息，系统所传输信息的物理载体，生产和消费数据的最小单位。每条消息必须属于一个Topic，RocketMQ中每个消息拥有唯一的MessageID，且可以携带具有业务标识的Key。
 - Topic：主题，表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是RocketMQ进行消息订阅的基本单位。
