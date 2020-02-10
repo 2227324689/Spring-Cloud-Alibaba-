@@ -1,0 +1,26 @@
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: define_filter
+          predicates:
+            - Path=/gateway/**
+          filters:
+            - name: GpDefine
+              args:
+                name: Gp_Mic
+            - name: RequestRateLimiter
+              args:
+                denyEmptyKey: false
+                emptyKeyStatus: SERVICE_UNAVAILABLE
+                keyResolver: '#{@ipAddressKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+            - StripPrefix=1
+          uri: http://localhost:8080/say
+  redis:
+    host: 192.168.216.128
+    port: 6379
+server:
+  port: 8088

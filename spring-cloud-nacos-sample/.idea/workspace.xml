@@ -13,22 +13,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+    <leaf>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1811">
-              <caret line="66" column="25" lean-forward="false" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="1109">
+              <caret line="68" column="19" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="68" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -37,18 +27,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpringCloudNacosSampleProviderApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/SpringCloudNacosSampleProviderApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            <state relative-caret-position="-1076">
+              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -56,9 +36,32 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>start(</find>
+    </findStrings>
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/HelloController.java" />
+        <option value="$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/HelloServiceImpl.java" />
+        <option value="$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/SpringCloudNacosSampleProviderApplication.java" />
+        <option value="$PROJECT_DIR$/spring-cloud-nacos-sample-provider/pom.xml" />
+      </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -78,7 +81,7 @@
   <component name="MavenRunner">
     <option name="jreName" value="1.8" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="282" />
     <option name="y" value="57" />
     <option name="width" value="1621" />
@@ -151,6 +154,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -161,59 +166,14 @@
             <path>
               <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
               <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-nacos-sample-api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -225,6 +185,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SearchEverywhereHistoryKey" value="DubboServiceAutoConfiguration&#9;PSI&#9;JAVA://com.alibaba.cloud.dubbo.autoconfigure.DubboServiceAutoConfiguration&#10;ApplicationLis&#9;FILE&#9;jar://D:/repository/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/ApplicationListener.class&#10;ApplicationEve&#9;FILE&#9;jar://D:/repository/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/ApplicationEvent.class&#10;NacosServiceRegistry&#9;PSI&#9;JAVA://com.alibaba.cloud.nacos.registry.NacosServiceRegistry&#10;Life&#9;PSI&#9;JAVA://org.springframework.context.Lifecycle&#10;AbstractAutoServiceRegistration&#9;FILE&#9;jar://D:/repository/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/org/springframework/cloud/client/serviceregistry/AbstractAutoServiceRegistration.class&#10;AutoServiceRegistration&#9;PSI&#9;JAVA://org.springframework.cloud.client.serviceregistry.AutoServiceRegistration&#10;AutoServiceRegistrationAutoConfiguration&#9;FILE&#9;jar://D:/repository/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/org/springframework/cloud/client/serviceregistry/AutoServiceRegistrationAutoConfiguration.class&#10;spring.factories&#9;FILE&#9;jar://D:/repository/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/META-INF/spring.factories&#10;AnnotationConfig&#9;PSI&#9;JAVA://org.springframework.context.annotation.AnnotationConfigApplicationContext&#10;ClasspathXml&#9;PSI&#9;JAVA://org.springframework.context.support.ClassPathXmlApplicationContext&#10;Lifecycle &#9;PSI&#9;JAVA://org.springframework.context.Lifecycle" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -344,15 +311,16 @@
       <workItem from="1580823603756" duration="1702000" />
       <workItem from="1580825865263" duration="12000" />
       <workItem from="1580826507937" duration="1247000" />
+      <workItem from="1580970443361" duration="8129000" />
+      <workItem from="1580991229799" duration="1446000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3181000" />
+    <option name="totallyTimeSpent" value="12756000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -368,21 +336,57 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26126608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26877683" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5819861" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36374134" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26502147" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -391,7 +395,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-nacos-discovery/2.1.1.RELEASE/spring-cloud-alibaba-nacos-discovery-2.1.1.RELEASE.jar!/com/alibaba/cloud/nacos/registry/NacosServiceRegistry.class</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -435,34 +452,936 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="uml://JAVA/org.springframework.lang.Nullable">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>org.springframework.lang.Nullable</OriginalElement>
+          <nodes>
+            <node x="" y="">javax.annotation.meta.TypeQualifierNickname</node>
+            <node x="" y="">java.lang.annotation.Annotation</node>
+            <node x="" y="">java.lang.annotation.Target</node>
+            <node x="" y="">org.springframework.lang.Nullable</node>
+            <node x="" y="">java.lang.annotation.Documented</node>
+            <node x="" y="">javax.annotation.Nonnull</node>
+            <node x="" y="">java.lang.annotation.Retention</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="268.0" y="254.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/annotation/AnnotationConfigApplicationContext.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="324">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/pom.xml">
+    <entry file="uml://JAVA/org.springframework.context.annotation.AnnotationConfigApplicationContext">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>org.springframework.context.annotation.AnnotationConfigApplicationContext</OriginalElement>
+          <nodes>
+            <node x="0.0" y="88.0">org.springframework.beans.factory.HierarchicalBeanFactory</node>
+            <node x="1311.034420289855" y="0.0">org.springframework.core.io.ResourceLoader</node>
+            <node x="1838.75" y="362.0">org.springframework.beans.factory.support.BeanDefinitionRegistry</node>
+            <node x="664.0000000000001" y="186.0">org.springframework.context.ApplicationContext</node>
+            <node x="1496.0" y="88.0">java.lang.AutoCloseable</node>
+            <node x="1020.090579710145" y="538.0">org.springframework.context.annotation.AnnotationConfigApplicationContext</node>
+            <node x="1201.340579710145" y="450.0">org.springframework.context.support.GenericApplicationContext</node>
+            <node x="517.0000000000001" y="186.0">org.springframework.context.Lifecycle</node>
+            <node x="525.0" y="0.0">java.lang.FunctionalInterface</node>
+            <node x="1877.75" y="274.0">org.springframework.core.AliasRegistry</node>
+            <node x="1061.840579710145" y="362.0">org.springframework.context.support.AbstractApplicationContext</node>
+            <node x="1689.0" y="88.0">org.springframework.core.io.DefaultResourceLoader</node>
+            <node x="169.5" y="0.0">org.springframework.beans.factory.BeanFactory</node>
+            <node x="1514.5" y="186.0">java.io.Closeable</node>
+            <node x="614.5000000000001" y="274.0">org.springframework.context.ConfigurableApplicationContext</node>
+            <node x="1052.0" y="88.0">org.springframework.core.env.EnvironmentCapable</node>
+            <node x="500.0" y="88.0">org.springframework.context.ApplicationEventPublisher</node>
+            <node x="781.0" y="88.0">org.springframework.core.io.support.ResourcePatternResolver</node>
+            <node x="921.340579710145" y="450.0">org.springframework.context.annotation.AnnotationConfigRegistry</node>
+            <node x="1294.0" y="88.0">org.springframework.context.MessageSource</node>
+            <node x="266.0" y="88.0">org.springframework.beans.factory.ListableBeanFactory</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.core.env.EnvironmentCapable">
+              <point x="52.25" y="-19.0" />
+              <point x="820.7500000000001" y="156.0" />
+              <point x="1163.0" y="156.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.annotation.AnnotationConfigApplicationContext" target="org.springframework.context.annotation.AnnotationConfigRegistry">
+              <point x="-86.5" y="-19.0" />
+              <point x="1106.590579710145" y="513.0" />
+              <point x="1051.340579710145" y="513.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.core.io.support.ResourcePatternResolver" target="org.springframework.core.io.ResourceLoader">
+              <point x="0.0" y="-19.0" />
+              <point x="906.5" y="63.0" />
+              <point x="1357.034420289855" y="63.0" />
+              <point x="-46.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.beans.factory.HierarchicalBeanFactory" target="org.springframework.beans.factory.BeanFactory">
+              <point x="0.0" y="-19.0" />
+              <point x="123.0" y="63.0" />
+              <point x="208.75" y="63.0" />
+              <point x="-39.25" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractApplicationContext" target="org.springframework.core.io.DefaultResourceLoader">
+              <point x="68.0" y="-19.0" />
+              <point x="1265.840579710145" y="337.0" />
+              <point x="1809.0" y="337.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.annotation.AnnotationConfigApplicationContext" target="org.springframework.context.support.GenericApplicationContext">
+              <point x="86.5" y="-19.0" />
+              <point x="1279.590579710145" y="513.0" />
+              <point x="1334.840579710145" y="513.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.GenericApplicationContext" target="org.springframework.context.support.AbstractApplicationContext">
+              <point x="-66.75" y="-19.0" />
+              <point x="1268.090579710145" y="425.0" />
+              <point x="1197.840579710145" y="425.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.beans.factory.ListableBeanFactory" target="org.springframework.beans.factory.BeanFactory">
+              <point x="0.0" y="-19.0" />
+              <point x="373.0" y="63.0" />
+              <point x="287.25" y="63.0" />
+              <point x="39.25" y="19.0" />
+            </edge>
+            <edge source="org.springframework.core.io.DefaultResourceLoader" target="org.springframework.core.io.ResourceLoader">
+              <point x="0.0" y="-19.0" />
+              <point x="1809.0" y="63.0" />
+              <point x="1449.034420289855" y="63.0" />
+              <point x="46.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.beans.factory.support.BeanDefinitionRegistry" target="org.springframework.core.AliasRegistry">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ConfigurableApplicationContext" target="org.springframework.context.ApplicationContext">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.beans.factory.HierarchicalBeanFactory">
+              <point x="-87.08333333333337" y="-19.0" />
+              <point x="681.4166666666667" y="166.0" />
+              <point x="123.0" y="166.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ConfigurableApplicationContext" target="java.io.Closeable">
+              <point x="102.66666666666674" y="-19.0" />
+              <point x="871.1666666666669" y="249.0" />
+              <point x="1582.5" y="249.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.context.ApplicationEventPublisher">
+              <point x="-17.41666666666663" y="-19.0" />
+              <point x="751.0833333333335" y="146.0" />
+              <point x="630.5" y="146.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="java.io.Closeable" target="java.lang.AutoCloseable">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.beans.factory.ListableBeanFactory">
+              <point x="-52.25" y="-19.0" />
+              <point x="716.2500000000001" y="156.0" />
+              <point x="373.0" y="156.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.context.MessageSource">
+              <point x="87.08333333333326" y="-19.0" />
+              <point x="855.5833333333334" y="166.0" />
+              <point x="1385.0" y="166.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationEventPublisher" target="java.lang.FunctionalInterface">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.core.io.support.ResourcePatternResolver">
+              <point x="17.41666666666663" y="-19.0" />
+              <point x="785.9166666666667" y="146.0" />
+              <point x="906.5" y="146.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractApplicationContext" target="org.springframework.context.ConfigurableApplicationContext">
+              <point x="-68.0" y="-19.0" />
+              <point x="1129.840579710145" y="337.0" />
+              <point x="768.5000000000001" y="337.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.GenericApplicationContext" target="org.springframework.beans.factory.support.BeanDefinitionRegistry">
+              <point x="66.75" y="-19.0" />
+              <point x="1401.590579710145" y="425.0" />
+              <point x="1956.75" y="425.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ConfigurableApplicationContext" target="org.springframework.context.Lifecycle">
+              <point x="-102.66666666666674" y="-19.0" />
+              <point x="665.8333333333334" y="249.0" />
+              <point x="580.5000000000001" y="249.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.6539379474940334" x="357.0" y="46.0" />
+          <SelectedNodes>
+            <node>org.springframework.context.annotation.AnnotationConfigApplicationContext</node>
+            <node>org.springframework.beans.factory.ListableBeanFactory</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/support/AbstractXmlApplicationContext.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1811">
-          <caret line="66" column="25" lean-forward="false" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+        <state relative-caret-position="216">
+          <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/support/AbstractRefreshableConfigApplicationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="14" column="99" lean-forward="false" selection-start-line="14" selection-start-column="99" selection-end-line="14" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/support/AbstractRefreshableApplicationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="15" column="80" lean-forward="true" selection-start-line="15" selection-start-column="80" selection-end-line="15" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.1.12.RELEASE/spring-core-5.1.12.RELEASE.jar!/org/springframework/core/io/ResourceLoader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.1.12.RELEASE/spring-core-5.1.12.RELEASE.jar!/org/springframework/core/io/DefaultResourceLoader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/org.springframework.context.support.ClassPathXmlApplicationContext">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>org.springframework.context.support.ClassPathXmlApplicationContext</OriginalElement>
+          <nodes>
+            <node x="0.0" y="88.0">org.springframework.beans.factory.HierarchicalBeanFactory</node>
+            <node x="1348.7849999999999" y="0.0">org.springframework.core.io.ResourceLoader</node>
+            <node x="1077.9583333333333" y="626.0">org.springframework.context.support.AbstractXmlApplicationContext</node>
+            <node x="1433.1499999999999" y="362.0">org.springframework.beans.factory.Aware</node>
+            <node x="664.0" y="186.0">org.springframework.context.ApplicationContext</node>
+            <node x="1496.0" y="88.0">java.lang.AutoCloseable</node>
+            <node x="811.1499999999999" y="450.0">org.springframework.beans.factory.InitializingBean</node>
+            <node x="517.0" y="186.0">org.springframework.context.Lifecycle</node>
+            <node x="1022.4583333333333" y="538.0">org.springframework.context.support.AbstractRefreshableConfigApplicationContext</node>
+            <node x="525.0" y="0.0">java.lang.FunctionalInterface</node>
+            <node x="1054.6499999999999" y="362.0">org.springframework.context.support.AbstractApplicationContext</node>
+            <node x="1689.0" y="88.0">org.springframework.core.io.DefaultResourceLoader</node>
+            <node x="169.5" y="0.0">org.springframework.beans.factory.BeanFactory</node>
+            <node x="1514.5" y="186.0">java.io.Closeable</node>
+            <node x="614.5" y="274.0">org.springframework.context.ConfigurableApplicationContext</node>
+            <node x="1052.0" y="88.0">org.springframework.core.env.EnvironmentCapable</node>
+            <node x="500.0" y="88.0">org.springframework.context.ApplicationEventPublisher</node>
+            <node x="1072.9583333333333" y="714.0">org.springframework.context.support.ClassPathXmlApplicationContext</node>
+            <node x="781.0" y="88.0">org.springframework.core.io.support.ResourcePatternResolver</node>
+            <node x="1391.1499999999999" y="450.0">org.springframework.beans.factory.BeanNameAware</node>
+            <node x="1010.1499999999999" y="450.0">org.springframework.context.support.AbstractRefreshableApplicationContext</node>
+            <node x="1294.0" y="88.0">org.springframework.context.MessageSource</node>
+            <node x="266.0" y="88.0">org.springframework.beans.factory.ListableBeanFactory</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.core.env.EnvironmentCapable">
+              <point x="52.25" y="-19.0" />
+              <point x="820.75" y="156.0" />
+              <point x="1163.0" y="156.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractXmlApplicationContext" target="org.springframework.context.support.AbstractRefreshableConfigApplicationContext">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractRefreshableConfigApplicationContext" target="org.springframework.beans.factory.BeanNameAware">
+              <point x="137.33333333333326" y="-19.0" />
+              <point x="1365.7916666666665" y="513.0" />
+              <point x="1488.6499999999999" y="513.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractRefreshableConfigApplicationContext" target="org.springframework.context.support.AbstractRefreshableApplicationContext">
+              <point x="0.0" y="-19.0" />
+              <point x="1228.4583333333333" y="513.0" />
+              <point x="1190.6499999999999" y="513.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.core.io.support.ResourcePatternResolver" target="org.springframework.core.io.ResourceLoader">
+              <point x="0.0" y="-19.0" />
+              <point x="906.5" y="63.0" />
+              <point x="1394.7849999999999" y="63.0" />
+              <point x="-46.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.beans.factory.HierarchicalBeanFactory" target="org.springframework.beans.factory.BeanFactory">
+              <point x="0.0" y="-19.0" />
+              <point x="123.0" y="63.0" />
+              <point x="208.75" y="63.0" />
+              <point x="-39.25" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractApplicationContext" target="org.springframework.core.io.DefaultResourceLoader">
+              <point x="68.0" y="-19.0" />
+              <point x="1258.6499999999999" y="337.0" />
+              <point x="1809.0" y="337.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractRefreshableConfigApplicationContext" target="org.springframework.beans.factory.InitializingBean">
+              <point x="-137.33333333333326" y="-19.0" />
+              <point x="1091.125" y="513.0" />
+              <point x="900.6499999999999" y="513.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.beans.factory.ListableBeanFactory" target="org.springframework.beans.factory.BeanFactory">
+              <point x="0.0" y="-19.0" />
+              <point x="373.0" y="63.0" />
+              <point x="287.25" y="63.0" />
+              <point x="39.25" y="19.0" />
+            </edge>
+            <edge source="org.springframework.core.io.DefaultResourceLoader" target="org.springframework.core.io.ResourceLoader">
+              <point x="0.0" y="-19.0" />
+              <point x="1809.0" y="63.0" />
+              <point x="1486.7849999999999" y="63.0" />
+              <point x="46.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractRefreshableApplicationContext" target="org.springframework.context.support.AbstractApplicationContext">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ConfigurableApplicationContext" target="org.springframework.context.ApplicationContext">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.beans.factory.BeanNameAware" target="org.springframework.beans.factory.Aware">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.beans.factory.HierarchicalBeanFactory">
+              <point x="-87.08333333333337" y="-19.0" />
+              <point x="681.4166666666666" y="166.0" />
+              <point x="123.0" y="166.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ConfigurableApplicationContext" target="java.io.Closeable">
+              <point x="102.66666666666674" y="-19.0" />
+              <point x="871.1666666666667" y="249.0" />
+              <point x="1582.5" y="249.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="java.io.Closeable" target="java.lang.AutoCloseable">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.context.ApplicationEventPublisher">
+              <point x="-17.41666666666663" y="-19.0" />
+              <point x="751.0833333333334" y="146.0" />
+              <point x="630.5" y="146.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.beans.factory.ListableBeanFactory">
+              <point x="-52.25" y="-19.0" />
+              <point x="716.25" y="156.0" />
+              <point x="373.0" y="156.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.context.MessageSource">
+              <point x="87.08333333333326" y="-19.0" />
+              <point x="855.5833333333333" y="166.0" />
+              <point x="1385.0" y="166.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationEventPublisher" target="java.lang.FunctionalInterface">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.ClassPathXmlApplicationContext" target="org.springframework.context.support.AbstractXmlApplicationContext">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContext" target="org.springframework.core.io.support.ResourcePatternResolver">
+              <point x="17.41666666666663" y="-19.0" />
+              <point x="785.9166666666666" y="146.0" />
+              <point x="906.5" y="146.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.support.AbstractApplicationContext" target="org.springframework.context.ConfigurableApplicationContext">
+              <point x="-68.0" y="-19.0" />
+              <point x="1122.6499999999999" y="337.0" />
+              <point x="768.5" y="337.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ConfigurableApplicationContext" target="org.springframework.context.Lifecycle">
+              <point x="-102.66666666666674" y="-19.0" />
+              <point x="665.8333333333333" y="249.0" />
+              <point x="580.5" y="249.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.002924576706003" x="521.0" y="365.0" />
+          <SelectedNodes>
+            <node>org.springframework.context.support.AbstractApplicationContext</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/ConfigurableApplicationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-168">
+          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/support/AbstractApplicationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/support/ClassPathXmlApplicationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/META-INF/spring.factories">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="5" column="80" lean-forward="true" selection-start-line="5" selection-start-column="80" selection-end-line="5" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/org/springframework/cloud/client/serviceregistry/AutoServiceRegistrationAutoConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JIGSAW/spring.cloud.commons">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JIGSAW</ID>
+          <OriginalElement>spring.cloud.commons</OriginalElement>
+          <nodes>
+            <node x="" y="">spring.cloud.commons</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="108.0" y="19.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/org.springframework.cloud.client.serviceregistry.AutoServiceRegistration">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>org.springframework.cloud.client.serviceregistry.AutoServiceRegistration</OriginalElement>
+          <nodes>
+            <node x="8.0" y="176.0">com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration</node>
+            <node x="0.0" y="88.0">org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration</node>
+            <node x="31.5" y="0.0">org.springframework.cloud.client.serviceregistry.AutoServiceRegistration</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration" target="org.springframework.cloud.client.serviceregistry.AutoServiceRegistration">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration" target="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="-570.0" y="-139.0" />
+          <SelectedNodes>
+            <node>org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/org/springframework/cloud/client/serviceregistry/Registration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-nacos-discovery/2.1.1.RELEASE/spring-cloud-alibaba-nacos-discovery-2.1.1.RELEASE.jar!/com/alibaba/cloud/nacos/discovery/NacosWatch.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-684">
+          <caret line="35" column="15" lean-forward="false" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/support/DefaultLifecycleProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="62" column="16" lean-forward="false" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/EventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/Lifecycle.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.1.12.RELEASE/spring-beans-5.1.12.RELEASE.jar!/org/springframework/beans/factory/Aware.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/ApplicationContextAware.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="50" lean-forward="true" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/org/springframework/cloud/client/serviceregistry/AutoServiceRegistration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/2.1.11.RELEASE/spring-boot-2.1.11.RELEASE.jar!/org/springframework/boot/web/context/WebServerInitializedEvent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="63" lean-forward="false" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.1.12.RELEASE/spring-core-5.1.12.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.12.RELEASE/spring-aop-5.1.12.RELEASE.jar!/org/springframework/aop/framework/CglibAopProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="474" column="0" lean-forward="false" selection-start-line="474" selection-start-column="0" selection-end-line="474" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.12.RELEASE/spring-aop-5.1.12.RELEASE.jar!/org/springframework/aop/framework/adapter/MethodBeforeAdviceInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <marker date="1580560458058" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560458058" expanded="false" signature="165:425" ph="..." />
+            <marker date="1580560458058" expanded="true" signature="643:739" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="804:917" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.12.RELEASE/spring-aop-5.1.12.RELEASE.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <marker date="1580560458058" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560458058" expanded="false" signature="157:598" ph="..." />
+            <marker date="1580560458058" expanded="true" signature="1275:1625" ph="{...}" />
+            <marker date="1580560458058" expanded="false" signature="1661:1672" ph=" { " />
+            <marker date="1580560458058" expanded="false" signature="1690:1696" ph=" }" />
+            <marker date="1580560458058" expanded="false" signature="1745:1756" ph=" { " />
+            <marker date="1580560458058" expanded="false" signature="1775:1781" ph=" }" />
+            <marker date="1580560458058" expanded="false" signature="1832:1843" ph=" { " />
+            <marker date="1580560458058" expanded="false" signature="1862:1868" ph=" }" />
+            <marker date="1580560458058" expanded="false" signature="1905:1916" ph=" { " />
+            <marker date="1580560458058" expanded="false" signature="1935:1941" ph=" }" />
+            <marker date="1580560458058" expanded="false" signature="1983:1994" ph=" { " />
+            <marker date="1580560458058" expanded="false" signature="2016:2022" ph=" }" />
+            <marker date="1580560458058" expanded="false" signature="2073:2084" ph=" { " />
+            <marker date="1580560458058" expanded="false" signature="2111:2117" ph=" }" />
+            <marker date="1580560458058" expanded="true" signature="2178:3090" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="3162:3267" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="3314:3630" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="3696:4160" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="4231:4537" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="4600:4689" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="4742:4888" ph="{...}" />
+            <marker date="1580560458058" expanded="true" signature="4919:5283" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-dubbo/2.1.1.RELEASE/spring-cloud-alibaba-dubbo-2.1.1.RELEASE.jar!/com/alibaba/cloud/dubbo/autoconfigure/DubboServiceRegistrationAutoConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-293">
+          <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+          <folding>
+            <marker date="1580560457299" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560457299" expanded="false" signature="161:2114" ph="..." />
+            <marker date="1580560457299" expanded="true" signature="2116:2671" ph="@{...}" />
+            <marker date="1580560457299" expanded="true" signature="3671:3678" ph="{}" />
+            <marker date="1580560457299" expanded="true" signature="3684:3765" ph="@{...}" />
+            <marker date="1580560457299" expanded="true" signature="3827:3942" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="4094:4219" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="4300:4550" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="4634:4868" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="4874:5057" ph="@{...}" />
+            <marker date="1580560457299" expanded="true" signature="5088:6567" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="5120:5131" ph="{}" />
+            <marker date="1580560457299" expanded="true" signature="5291:5816" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="5901:6561" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="6573:6719" ph="@{...}" />
+            <marker date="1580560457299" expanded="true" signature="6788:7785" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="6910:6921" ph="{}" />
+            <marker date="1580560457299" expanded="true" signature="7081:7489" ph="{...}" />
+            <marker date="1580560457299" expanded="true" signature="7541:7779" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/HelloController.java" />
+    <entry file="uml://JAVA/org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration</OriginalElement>
+          <nodes>
+            <node x="276.0666666666667" y="0.0">org.springframework.context.ApplicationEvent</node>
+            <node x="499.3166666666667" y="0.0">java.lang.FunctionalInterface</node>
+            <node x="92.06666666666672" y="0.0">java.util.EventListener</node>
+            <node x="326.5666666666667" y="264.0">com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration</node>
+            <node x="0.0" y="88.0">org.springframework.cloud.client.serviceregistry.AutoServiceRegistration</node>
+            <node x="318.5666666666667" y="176.0">org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration</node>
+            <node x="492.00000000000006" y="88.0">org.springframework.cloud.client.serviceregistry.Registration</node>
+            <node x="751.6666666666667" y="0.0">org.springframework.beans.factory.Aware</node>
+            <node x="264.00000000000006" y="88.0">org.springframework.context.ApplicationListener</node>
+            <node x="678.6666666666667" y="88.0">org.springframework.context.ApplicationContextAware</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.springframework.context.ApplicationListener" target="java.lang.FunctionalInterface">
+              <point x="69.33333333333337" y="-19.0" />
+              <point x="437.3333333333334" y="63.0" />
+              <point x="604.8166666666667" y="63.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationListener" target="org.springframework.context.ApplicationEvent">
+              <point x="0.0" y="-19.0" />
+              <point x="368.00000000000006" y="63.0" />
+              <point x="371.5666666666667" y="63.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationListener" target="java.util.EventListener">
+              <point x="-69.33333333333331" y="-19.0" />
+              <point x="298.66666666666674" y="63.0" />
+              <point x="174.06666666666672" y="63.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.context.ApplicationContextAware" target="org.springframework.beans.factory.Aware">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration" target="org.springframework.context.ApplicationContextAware">
+              <point x="115.125" y="-19.0" />
+              <point x="587.1916666666667" y="151.0" />
+              <point x="807.1666666666667" y="151.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration" target="org.springframework.cloud.client.serviceregistry.AutoServiceRegistration">
+              <point x="-115.125" y="-19.0" />
+              <point x="356.9416666666667" y="151.0" />
+              <point x="122.0" y="151.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration" target="org.springframework.context.ApplicationListener">
+              <point x="-38.375" y="-19.0" />
+              <point x="433.6916666666667" y="151.0" />
+              <point x="368.00000000000006" y="151.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration" target="org.springframework.cloud.client.serviceregistry.Registration">
+              <point x="38.375" y="-19.0" />
+              <point x="510.4416666666667" y="151.0" />
+              <point x="569.0" y="151.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration" target="org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="26.0" y="107.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/EventObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-709">
+          <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/ApplicationEvent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+          <folding>
+            <marker date="1580560459214" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459214" expanded="false" signature="413:424" ph=" { " />
+            <marker date="1580560459214" expanded="false" signature="438:444" ph=" }" />
+            <marker date="1580560459214" expanded="false" signature="482:493" ph=" { " />
+            <marker date="1580560459214" expanded="false" signature="515:521" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/context/ApplicationListener.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
+          <folding>
+            <marker date="1580560459214" expanded="false" signature="0:104" ph="/.../" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/2.2.1.RELEASE/spring-cloud-commons-2.2.1.RELEASE.jar!/org/springframework/cloud/client/serviceregistry/AbstractAutoServiceRegistration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="93" column="26" lean-forward="false" selection-start-line="93" selection-start-column="26" selection-end-line="93" selection-end-column="26" />
+          <folding>
+            <marker date="1580560461618" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560461618" expanded="false" signature="172:1052" ph="..." />
+            <marker date="1580560461618" expanded="true" signature="1716:1734" ph="/**...*/" />
+            <marker date="1580560461618" expanded="true" signature="1833:1888" ph="{...}" />
+            <marker date="1580560461618" expanded="true" signature="2018:2111" ph="{...}" />
+            <marker date="1580560461618" expanded="false" signature="2158:2169" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="2189:2195" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="2264:2275" ph=" { " />
+            <marker date="1580560461618" expanded="true" signature="2292:2298" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="2304:2322" ph="/**...*/" />
+            <marker date="1580560461618" expanded="true" signature="2393:2750" ph="{...}" />
+            <marker date="1580560461618" expanded="true" signature="2851:2959" ph="{...}" />
+            <marker date="1580560461618" expanded="true" signature="2965:2983" ph="/**...*/" />
+            <marker date="1580560461618" expanded="false" signature="3042:3053" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="3077:3083" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="3089:3107" ph="/**...*/" />
+            <marker date="1580560461618" expanded="false" signature="3161:3172" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="3189:3195" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="3231:3242" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="3266:3272" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="3298:3972" ph="{...}" />
+            <marker date="1580560461618" expanded="true" signature="4023:4273" ph="{...}" />
+            <marker date="1580560461618" expanded="true" signature="4279:4297" ph="/**...*/" />
+            <marker date="1580560461618" expanded="true" signature="4414:4432" ph="/**...*/" />
+            <marker date="1580560461618" expanded="false" signature="4494:4505" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="4549:4555" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="4561:4579" ph="/**...*/" />
+            <marker date="1580560461618" expanded="false" signature="4643:4654" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="4695:4701" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="4707:4725" ph="/**...*/" />
+            <marker date="1580560461618" expanded="false" signature="4783:4794" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="4849:4855" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="4861:4879" ph="/**...*/" />
+            <marker date="1580560461618" expanded="false" signature="4929:4940" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5018:5024" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="5067:5078" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5090:5096" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="5128:5139" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5165:5171" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="5213:5224" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5244:5250" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="5277:5288" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5306:5312" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="5339:5350" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5359:5365" ph=" }" />
+            <marker date="1580560461618" expanded="false" signature="5420:5431" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5459:5465" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="5596:5607" ph=" { " />
+            <marker date="1580560461618" expanded="true" signature="5661:5667" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="5709:5879" ph="{...}" />
+            <marker date="1580560461618" expanded="false" signature="5912:5923" ph=" { " />
+            <marker date="1580560461618" expanded="false" signature="5979:5985" ph=" }" />
+            <marker date="1580560461618" expanded="true" signature="6029:6201" ph="{...}" />
+            <marker date="1580560461618" expanded="true" signature="6226:6508" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-nacos-discovery/2.1.1.RELEASE/spring-cloud-alibaba-nacos-discovery-2.1.1.RELEASE.jar!/com/alibaba/cloud/nacos/registry/NacosAutoServiceRegistration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="40" column="58" lean-forward="false" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+          <folding>
+            <marker date="1580560460275" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460275" expanded="false" signature="156:613" ph="..." />
+            <marker date="1580560460275" expanded="true" signature="1045:1161" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="1167:1185" ph="/**...*/" />
+            <marker date="1580560460275" expanded="false" signature="1235:1246" ph=" { " />
+            <marker date="1580560460275" expanded="false" signature="1271:1277" ph=" }" />
+            <marker date="1580560460275" expanded="true" signature="1329:1606" ph="{...}" />
+            <marker date="1580560460275" expanded="false" signature="1667:1678" ph=" { " />
+            <marker date="1580560460275" expanded="false" signature="1690:1696" ph=" }" />
+            <marker date="1580560460275" expanded="true" signature="1728:2056" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="2098:2238" ph="{...}" />
+            <marker date="1580560460275" expanded="false" signature="2279:2290" ph=" { " />
+            <marker date="1580560460275" expanded="false" signature="2345:2351" ph=" }" />
+            <marker date="1580560460275" expanded="false" signature="2386:2397" ph=" { " />
+            <marker date="1580560460275" expanded="false" signature="2472:2478" ph=" }" />
+            <marker date="1580560460275" expanded="true" signature="2514:2684" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/SpringCloudNacosSampleProviderApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="360">
+          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="252">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-nacos-discovery/2.1.1.RELEASE/spring-cloud-alibaba-nacos-discovery-2.1.1.RELEASE.jar!/com/alibaba/cloud/nacos/registry/NacosServiceRegistry.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <marker date="1580560460275" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560460275" expanded="false" signature="156:602" ph="..." />
+            <marker date="1580560460275" expanded="true" signature="972:1124" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="1178:1984" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="2040:2796" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="2822:2829" ph="{}" />
+            <marker date="1580560460275" expanded="true" signature="2899:3689" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="3746:4495" ph="{...}" />
+            <marker date="1580560460275" expanded="true" signature="4578:4970" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-dubbo/2.1.1.RELEASE/spring-cloud-alibaba-dubbo-2.1.1.RELEASE.jar!/META-INF/spring.factories">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-dubbo/2.1.1.RELEASE/spring-cloud-alibaba-dubbo-2.1.1.RELEASE.jar!/com/alibaba/cloud/dubbo/autoconfigure/DubboServiceAutoConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="37" column="29" lean-forward="false" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-alibaba-dubbo/2.1.1.RELEASE/spring-cloud-alibaba-dubbo-2.1.1.RELEASE.jar!/com/alibaba/cloud/dubbo/autoconfigure/DubboServiceRegistrationNonWebApplicationAutoConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="67" column="35" lean-forward="true" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/java/com/gupaoedu/book/nacos/bootstrap/HelloServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1076">
+          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1109">
+          <caret line="68" column="19" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="68" selection-end-column="19" />
           <folding />
         </state>
       </provider>
