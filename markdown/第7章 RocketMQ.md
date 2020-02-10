@@ -1,6 +1,6 @@
 # 消息中间件——RocketMQ
 
-## 1. 整体介绍
+## 9.1 整体介绍
 
 RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消息中间件（也称消息队列），经过阿里巴巴多年双11验证，由阿里巴巴开源捐献给Apache的顶级项目。
 
@@ -34,63 +34,9 @@ RocketMQ是一个低延迟、高可靠、可伸缩、易于使用的分布式消
 
 ### 如何使用
 
-RocketMQ集成在Spring Cloud Alibaba 中使用，有2种方式可以方便使用：springboot集成的RocketMQ组件、SpringCloudStream集成的RocketMQ组件，当然直接使用RocketMQ的API也是可以的。
+RocketMQ 已集成在Spring Cloud Alibaba ，有两种方式可以方便使用：Spring Cloud Stream 的统一消息模型、兼容 Spring Boot 集成的RocketMQ组件。
 
-- 使用`rocketMQTemplate`发送消息
-
-Step1 pom.xml中引入jar包
-
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>com.alibaba.cloud</groupId>
-    <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
-</dependency>
-```
-
-Step2 配置application.yml
-
-```yml
-spring:
-  cloud:
-    stream:
-      rocketmq:
-        binder:
-          name-server: 127.0.0.1:9876
-server:
-  port: 8081
-```
-
-Step3 使用模板发送消息
-
-```java
-@Autowired
-private RocketMQTemplate rocketMQTemplate;
-
-@GetMapping(value = "/hello")
-public String hello(String msg) {
-    MessageBuilder builder = MessageBuilder.withPayload(msg);
-    Message message = builder.build();
-    rocketMQTemplate.send("TopicTest", message);
-    return "Hello RocketMQ，send " + msg;
-}
-```
-
-`msg`是消息内容，访问`/hello`接口时会使用`RocketMQTemplate`发送到`TopicTest`这个`Topic`中。
-
-`RocketMQTemplate`是在springboot中就支持的方式，当然，除了使用`RocketMQTemplate`，也支持使用`SpringCloudStream`的方式来发消息。
-
-
-
-- 使用`SpringCloudStream`发送消息
+- 发送消息
 
 Step1 pom.xml中引入jar包
 
@@ -171,44 +117,7 @@ rocketmq:
 
 
 
-- 使用`@RocketMQMessageListener`消费消息
-
-Step1 pom.xml中引入jar包
-
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>com.alibaba.cloud</groupId>
-    <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
-</dependency>
-```
-
-Step3 定义消息监听
-
-```java
-@Component
-@RocketMQMessageListener(topic = "TopicTest", consumerGroup = "CONSUMER_GROUP_TOPIC_TEST")
-public class MessageListener implements RocketMQListener<String> {
-    @Override
-    public void onMessage(String s) {
-        System.out.println("TopicTest receive: " + s + ", receiveTime = " + System.currentTimeMillis());
-    }
-}
-```
-
-`@RocketMQMessageListener`是在springboot中就支持的方式，当然，除了使用`@RocketMQMessageListener`，也支持使用`SpringCloudStream`的方式来发消息。
-
-
-
-- 使用`SpringCloudStream`消费消息
+- 消费消息
 
 Step1 pom.xml中引入jar包
 
@@ -268,300 +177,713 @@ public class Application {
 
 
 
-前面分别简单介绍了Springboot中和SpringCloudStream中如何发送和消息消息，那在平常开发过程中该如何选择呢？笔者个人偏好喜欢使用Springboot集成的`RocketMQTemplate`和`@RocketMQMessageListener`注解等，优点是开发简单更便捷，包装的API更贴合RocketMQ的功能和概念。SpringCloudStream是统一消息模型，在编程模型上是一种好的设计，优点是多数情况下更换消息中间件业务代码仅需修改配置，例如从使用kafka换成RocketMQ，但笔者认为在实际开发过程中并不是很实用，主要原因是消息中间件通常不会轻易变更，也很少会在一个应用中使用多个消息中间件。
+## 9.2 Spring Cloud Stream RocketMQ
+
+Spring Cloud Stream是 Spring Cloud 体系内的一个框架，用于构建与共享消息传递系统连接的高度可伸缩的事件驱动微服务，其目的是为了简化消息业务在 Spring Cloud 应用程序中的开发。
+
+应用程序通过Spring Cloud Stream注入的输入和输出通道与消息中间件通信，消息道通过特定于中间件的绑定器实现连接到外部代理。
 
 
 
-### 技术原理
-
-前面演示的demo中引入了`spring-cloud-starter-stream-rocketmq`，maven会传递依赖`rocketmq-spring-boot-2.0.2.jar`、`spring-cloud-stream-binder-rocketmq-2.1.1.RELEASE.jar`，从名字上也能看出来是SpringBoot自动装配机制来集成RocketMQ。
-
-找到`spring-cloud-stream-binder-rocketmq-2.1.1.RELEASE.jar`中的`META-INF\spring.factories`文件
-
-```
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.alibaba.cloud.stream.binder.rocketmq.config.RocketMQComponent4BinderAutoConfiguration
-```
-
-根据spring.factories中的配置找到RocketMQComponent4BinderAutoConfiguration类，其中定义了`RocketMQTemplate`这个Bean。
-
-```java
-@Bean(destroyMethod = "destroy")
-@ConditionalOnMissingBean
-public RocketMQTemplate rocketMQTemplate(DefaultMQProducer mqProducer,
-			ObjectMapper objectMapper) {
-		RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
-		rocketMQTemplate.setProducer(mqProducer);
-		rocketMQTemplate.setObjectMapper(objectMapper);
-		return rocketMQTemplate;
-}
-```
-
-**`RocketMQTemplate`依赖`DefaultMQProducer`这个Bean，Bean的定义也是在RocketMQAutoConfiguration类中。`DefaultMQProducer`是RocketMQ提供的客户端API，`RocketMQTemplate`中所有发送消息的接口都是封装了它。**
-
-```java
-@Bean
-@ConditionalOnMissingBean(DefaultMQProducer.class)
-public DefaultMQProducer defaultMQProducer() {
-    DefaultMQProducer producer;
-    String configNameServer = environment.resolveRequiredPlaceholders(
-      "${spring.cloud.stream.rocketmq.binder.name-server:${rocketmq.producer.name-server:}}");
-    String ak = environment.resolveRequiredPlaceholders(
-      "${spring.cloud.stream.rocketmq.binder.access-key:${rocketmq.producer.access-key:}}");
-    String sk = environment.resolveRequiredPlaceholders(
-      "${spring.cloud.stream.rocketmq.binder.secret-key:${rocketmq.producer.secret-key:}}");
-    if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
-      producer = new DefaultMQProducer(RocketMQBinderConstants.DEFAULT_GROUP,
-                                       new AclClientRPCHook(new SessionCredentials(ak, sk)));
-      producer.setVipChannelEnabled(false);
-    }
-    else {
-      producer = new DefaultMQProducer(RocketMQBinderConstants.DEFAULT_GROUP);
-    }
-    if (StringUtils.isEmpty(configNameServer)) {
-      configNameServer = RocketMQBinderConstants.DEFAULT_NAME_SERVER;
-    }
-    producer.setNamesrvAddr(configNameServer);
-    return producer;
-}
-```
-
-DefaultMQProducer的参数只需要设置3个：NameServer的地址、access-key、secret-key。access-key和secret-key是RocketMQ用来做权限控制的，在Broker端配置，如果没有可以不设置。
+![spring-cloud-stream_0](image/spring-cloud-stream_0.png)
 
 
 
-RocketMQComponent4BinderAutoConfiguration类是由SpringCloudStream提供，兼容了SpringBoot的自动装配，在SpringBoot中是由RocketMQAutoConfiguration类完成对RocketMQ的自动装配。SpringBoot装配在`rocketmq-spring-boot-2.0.2.jar`完成，这个jar包也是被maven传递依赖了，这两个jar包都能完成RocketMQ的自动装配，但SpringCloudStream需要兼容解决冲突问题。
+Spring Cloud Stream官方提供了Kafka Binder和RabbitMQ Binder用于集成Kafka和RabbitMQ，Spring Cloud Alibaba中加入了RocketMQ Binder用于集成RocketMQ到Spring Cloud Stream。
+
+Spring Cloud Stream 核心由四部分构成：Spring Framework 中的**Spring Messaging**和**Spring Integration**、Spring Cloud Stream中的**Binders**和**Bindings**。
+
+- Spring Messaging：Spring Framework 中统一消息的编程模型，其核心对象如下：
+  - Message：消息对象，包含消息头 Header 和消息体 Payload 
+  - MessageChannel：消息通道接口，用于接收消息，提供 send 方法可以将消息发送至消息通道
+  - MessageHandler：消息处理器接口，用于处理消息逻辑。
+- Spring Integration：Spring Framework 中用于支持企业集成的一种扩展机制，作用是提供一个简单的模型来构建企业集成解决方案，对Spring Messaging进行了扩展。
+  - MessageDispatcher：消息分发接口，用于分发消息和添加删除消息处理器
+  - MessageRouter：消息路由接口，定义默认的输出消息通道
+  - Filter：消息的过滤注解，用于配置消息过滤表达式
+  - Aggregator：消息的聚合注解，用于多条消息聚合成一条
+  - Splitter：消息的分割，用于一条消息拆分成多条
+- Binders：负责与外部消息中间件系统集成的组件。
+  - doBindProducer：绑定消息中间件客户端发送消息的API模块
+  - doBindConsumer：绑定消息中间件客户端接收消息的API模块
+- Bindings：外部消息中间件系统与应用程序提供的消息生产者和消费者（由Binders创建）之间的桥梁。
+
+
+
+### Spring Cloud Stream 消息发送流程
+
+Spring Cloud Stream RocketMQ的架构图如下：
+
+![spring-cloud-stream_2](image/spring-cloud-stream_2.png)
+
+架构图中间部分是RocketMQ Binder的实现，简单点说就是RocketMQ Binder使用RocketMQ 客户端提供的 API 接口做了转换和映射来遵循Spring Cloud Stream Binder的 标准协议。
+
+
+
+Spring Cloud Stream的Output发送消息的流程细节如下：
+
+![spring-cloud-stream_1](image/spring-cloud-stream_1.jpg)
+
+- 业务代码中调用 MessageChannel 接口的 Send() 方法
 
 ```java
-@Configuration
-@AutoConfigureAfter(RocketMQAutoConfiguration.class)
-@ConditionalOnMissingBean(DefaultMQProducer.class)
-public class RocketMQComponent4BinderAutoConfiguration {
+public interface MessageChannel {
+			long INDEFINITE_TIMEOUT = -1;
+			
+			default boolean send(Message<?> message) {
+        		return send(message, INDEFINITE_TIMEOUT);
+      }
+      
+      boolean send(Message<?> message, long timeout);
 }
 ```
 
-通过`@AutoConfigureAfter`指定了加载顺序，如果先加载SpringCloudStream装配，就会加载完成后再加载SpringBoot装配。SpringBoot装配代码这里就不详细分析了，和前面的类似。
+AbstractMessageChannel 是消息通道的基本实现类，提供发送消息和接收消息的公用方法。
 
 ```java
-public class RocketMQAutoConfiguration {
-  	// 省略...
-  
-		@Bean(destroyMethod = "destroy")
-    @ConditionalOnBean(DefaultMQProducer.class)
-    @ConditionalOnMissingBean(RocketMQTemplate.class)
-    public RocketMQTemplate rocketMQTemplate(DefaultMQProducer mqProducer, ObjectMapper rocketMQMessageObjectMapper) {
-        RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
-        rocketMQTemplate.setProducer(mqProducer);
-        rocketMQTemplate.setObjectMapper(rocketMQMessageObjectMapper);
-        return rocketMQTemplate;
-    }
-}
-```
-
-通过`@ConditionalOnMissingBean`，RocketMQTemplate的Bean前面SpringCloudStream包里已经加载存在了，到这里就不会再重复加载，这是Spring里一种很好的向下兼容设计。
-
-
-
-初始化消息监听器的过程要复杂很多，其中涉及更多spring容器的知识。RocketMQAutoConfiguration类引入了另外一个配置类ListenerContainerConfiguration。
-
-```java
-@Import({ JacksonFallbackConfiguration.class, ListenerContainerConfiguration.class })
-public class RocketMQAutoConfiguration {
-}
-
-@Configuration
-public class ListenerContainerConfiguration implements ApplicationContextAware, SmartInitializingSingleton {
-  	@Override
-    public void afterSingletonsInstantiated() {
-      	// 用了@RocketMQMessageListener注解的Bean
-        Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(RocketMQMessageListener.class);
-
-        if (Objects.nonNull(beans)) {
-            beans.forEach(this::registerContainer);
-        }
-    }
-}
-
-public interface SmartInitializingSingleton {
-    void afterSingletonsInstantiated();
-}
-```
-
-ListenerContainerConfiguration类实现了SmartInitializingSingleton接口，SmartInitializingSingleton接口由spring容器提供，仅定义了afterSingletonsInstantiated()方法，作用是spring容器等所有单例Bean初始化完成之后进行回调。在回调过程中，获取所有使用了`@RocketMQMessageListener`注解的Bean，调用registerContainer()方法对这些Bean进行注册，这些Bean都是消息监听器，分别监听不同Topic的消息。
-
-```java
-private void registerContainer(String beanName, Object bean) {
-    Class<?> clazz = AopProxyUtils.ultimateTargetClass(bean);
-
-    if (!RocketMQListener.class.isAssignableFrom(bean.getClass())) {
-        throw new IllegalStateException(clazz + " is not instance of " + RocketMQListener.class.getName());
-    }
-
-    RocketMQMessageListener annotation = clazz.getAnnotation(RocketMQMessageListener.class);
-    validate(annotation);
-
-    String containerBeanName = String.format("%s_%s", DefaultRocketMQListenerContainer.class.getName(),
-        counter.incrementAndGet());
-    GenericApplicationContext genericApplicationContext = (GenericApplicationContext) applicationContext;
-		// DefaultRocketMQListenerContainer初始化Bean
-    genericApplicationContext.registerBean(containerBeanName, DefaultRocketMQListenerContainer.class,
-        () -> createRocketMQListenerContainer(bean, annotation));
-    DefaultRocketMQListenerContainer container = genericApplicationContext.getBean(containerBeanName,
-        DefaultRocketMQListenerContainer.class);
-    if (!container.isRunning()) {
-        try {
-            container.start();
-        } catch (Exception e) {
-            log.error("Started container failed. {}", container, e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    log.info("Register the listener to container, listenerBeanName:{}, containerBeanName:{}", beanName, containerBeanName);
-}
-```
-
-这里的关键代码是通过createRocketMQListenerContainer(bean, annotation)生成了DefaultRocketMQListenerContainer对象，并完成注册Bean的过程，以及start()启动。DefaultRocketMQListenerContainer是一个包装类，持有消息监听器RocketMQListener的实例。
-
-```java
-private DefaultRocketMQListenerContainer createRocketMQListenerContainer(Object bean, RocketMQMessageListener annotation) {
-    DefaultRocketMQListenerContainer container = new DefaultRocketMQListenerContainer();
-    container.setNameServer(rocketMQProperties.getNameServer());
-    container.setTopic(environment.resolvePlaceholders(annotation.topic()));
-    container.setConsumerGroup(environment.resolvePlaceholders(annotation.consumerGroup()));
-    container.setRocketMQMessageListener(annotation);
-    container.setRocketMQListener((RocketMQListener) bean);
-    container.setObjectMapper(objectMapper);
-    return container;
-}
-```
-
-DefaultRocketMQListenerContainer类实现InitializingBean接口，InitializingBean接口也是spring容器提供，仅定义了afterPropertiesSet()方法，作用是在初始化bean的时候都会执行该方法。
-
-**DefaultMQPushConsumer是RocketMQ提供的客户端API，在DefaultRocketMQListenerContainer初始化Bean的时候完成了对其初始化。**
-
-```java
-public class DefaultRocketMQListenerContainer implements InitializingBean,
-    RocketMQListenerContainer, SmartLifecycle, ApplicationContextAware {
+public abstract class AbstractMessageChannel extends IntegrationObjectSupport
+		implements MessageChannel, TrackableComponent, ChannelInterceptorAware, 					
+    MessageChannelMetrics, ConfigurableMetricsAware<AbstractMessageChannelMetrics> {
+		// 省略...
       
 		@Override
-    public void afterPropertiesSet() throws Exception {
-        initRocketMQPushConsumer();
-        this.messageType = getMessageType();
-    }
-    
-    private void initRocketMQPushConsumer() throws MQClientException {
-        // 准备注册钩子函数
-        RPCHook rpcHook = RocketMQUtil.getRPCHookByAkSk(applicationContext.getEnvironment(),
-            this.rocketMQMessageListener.accessKey(), this.rocketMQMessageListener.secretKey());
-        boolean enableMsgTrace = rocketMQMessageListener.enableMsgTrace();
-      	// 初始化DefaultMQPushConsumer
-        if (Objects.nonNull(rpcHook)) {
-            consumer = new DefaultMQPushConsumer(consumerGroup, rpcHook, new AllocateMessageQueueAveragely(),
-                enableMsgTrace, this.applicationContext.getEnvironment().
-                resolveRequiredPlaceholders(this.rocketMQMessageListener.customizedTraceTopic()));
-            consumer.setVipChannelEnabled(false);
-            consumer.setInstanceName(RocketMQUtil.getInstanceName(rpcHook, consumerGroup));
-        } else {
-            log.debug("Access-key or secret-key not configure in " + this + ".");
-            consumer = new DefaultMQPushConsumer(consumerGroup, enableMsgTrace,
-                    this.applicationContext.getEnvironment().
-                    resolveRequiredPlaceholders(this.rocketMQMessageListener.customizedTraceTopic()));
-        }
-
-        consumer.setNamesrvAddr(nameServer);
-        consumer.setConsumeThreadMax(consumeThreadMax);
-        if (consumeThreadMax < consumer.getConsumeThreadMin()) {
-            consumer.setConsumeThreadMin(consumeThreadMax);
-        }
-				
-      	// 消息模式:集群消费 or 广播消费
-        switch (messageModel) {
-            case BROADCASTING:
-                consumer.setMessageModel(org.apache.rocketmq.common.protocol.heartbeat.MessageModel.BROADCASTING);
-                break;
-            case CLUSTERING:
-                consumer.setMessageModel(org.apache.rocketmq.common.protocol.heartbeat.MessageModel.CLUSTERING);
-                break;
-            default:
-                throw new IllegalArgumentException("Property 'messageModel' was wrong.");
-        }
-				// 消费过滤方式
-        switch (selectorType) {
-            case TAG:
-                consumer.subscribe(topic, selectorExpression);
-                break;
-            case SQL92:
-                consumer.subscribe(topic, MessageSelector.bySql(selectorExpression));
-                break;
-            default:
-                throw new IllegalArgumentException("Property 'selectorType' was wrong.");
-        }
-				// 消费模式: 顺序消费 or 并发消费
-        switch (consumeMode) {
-            case ORDERLY:
-                consumer.setMessageListener(new DefaultMessageListenerOrderly());
-                break;
-            case CONCURRENTLY:
-                consumer.setMessageListener(new DefaultMessageListenerConcurrently());
-                break;
-            default:
-                throw new IllegalArgumentException("Property 'consumeMode' was wrong.");
-        }
-
-        if (rocketMQListener instanceof RocketMQPushConsumerLifecycleListener) {
-            ((RocketMQPushConsumerLifecycleListener) rocketMQListener).prepareStart(consumer);
-        }
-    }  
+		public boolean send(Message<?> messageArg, long timeout) {
+					// 省略...
+					boolean sent = false;
+					sent = doSend(message, timeout);
+					return sent;
+		}
+      
+    protected abstract boolean doSend(Message<?> message, long timeout);  
 }
 ```
 
-RocketMQ提供了两种消费模式：顺序消费、并发消费，顺序消费的默认监听器是DefaultMessageListenerOrderly类，并发消费的默认监听器是DefaultMessageListenerConcurrently类，客户端收到RocketMQ的消息是先回调默认监听器。无论是哪种消费模式，在默认监听器中收到消息都会再回调我们在业务代码中定义的消息监听器RocketMQListener。
+
+
+- 消息发送到 AbstractSubscribableChannel 类实现的 doSend() 方法
 
 ```java
-public class DefaultMessageListenerOrderly implements MessageListenerOrderly {
-    @SuppressWarnings("unchecked")
+public abstract class AbstractSubscribableChannel extends AbstractMessageChannel
+      implements SubscribableChannel, SubscribableChannelManagement {
+  		// 省略...
+  
+  		@Override
+      protected boolean doSend(Message<?> message, long timeout) {
+          try {
+            return getRequiredDispatcher().dispatch(message);
+          }
+          catch (MessageDispatchingException e) {
+            	// 省略...
+          }
+      }
+}
+```
+
+
+
+- 通过消息分发类MessageDispatcher把消息分发给MessageHandler
+
+```java
+private MessageDispatcher getRequiredDispatcher() {
+   MessageDispatcher dispatcher = getDispatcher();
+   return dispatcher;
+}
+
+protected abstract MessageDispatcher getDispatcher();
+```
+
+从 AbstractSubscribableChannel 的实现类 DirectChannel ，拿到MessageDispatcher的实现类UnicastingDispatcher
+
+```java
+public class DirectChannel extends AbstractSubscribableChannel {
+  	// 省略...
+  	@Override
+    protected UnicastingDispatcher getDispatcher() {
+      	return this.dispatcher;
+    }
+}
+```
+
+调用 dispatch() 方法把消息分发给各个MessageHandler
+
+```java
+public class UnicastingDispatcher extends AbstractDispatcher {
+  		// 省略...	
+  		@Override
+      public final boolean dispatch(final Message<?> message) {
+          if (this.executor != null) {
+              Runnable task = createMessageHandlingTask(message);
+              this.executor.execute(task);
+              return true;
+          }
+          return this.doDispatch(message);
+      }
+  
+  		private boolean doDispatch(Message<?> message) {
+        		// 省略...
+            boolean success = false;
+            Iterator<MessageHandler> handlerIterator = this.getHandlerIterator(message);
+            while (!success && handlerIterator.hasNext()) {
+                MessageHandler handler = handlerIterator.next();
+                try {
+                    handler.handleMessage(message);
+                    success = true; // we have a winner.
+                }
+                catch (Exception e) {
+                  	// 省略...
+                }
+            }
+            return success;
+      }
+}
+```
+
+遍历所有MessageHandler，调用handleMessage() 处理消息。 
+
+```java
+private final OrderedAwareCopyOnWriteArraySet<MessageHandler> handlers =
+			new OrderedAwareCopyOnWriteArraySet<MessageHandler>();
+
+private Iterator<MessageHandler> getHandlerIterator(Message<?> message) {
+   if (this.loadBalancingStrategy != null) {
+      return this.loadBalancingStrategy.getHandlerIterator(message, this.getHandlers());
+   }
+   return this.getHandlers().iterator();
+}
+
+protected Set<MessageHandler> getHandlers() {
+		return this.handlers.asUnmodifiableSet();
+}
+```
+
+查看 MessageHandler 从哪里来的，也就是 handlers 列表中的MessageHandler 如何添加的？
+
+```java
+public abstract class AbstractSubscribableChannel extends AbstractMessageChannel
+			implements SubscribableChannel, SubscribableChannelManagement {
+  		// 省略...		
+  
+  		@Override
+      public boolean subscribe(MessageHandler handler) {
+          MessageDispatcher dispatcher = getRequiredDispatcher();
+          boolean added = dispatcher.addHandler(handler);
+          adjustCounterIfNecessary(dispatcher, added ? 1 : 0);
+          return added;
+      }
+}
+```
+
+- AbstractMessageChannelBinder 在初始化Binding时，会创建并初始化 SendingHandler ，调用subscribe() 添加到 handlers 列表。
+
+```java
+public abstract class AbstractMessageChannelBinder<C extends ConsumerProperties, P extends ProducerProperties, PP extends ProvisioningProvider<C, P>>
+      extends AbstractBinder<MessageChannel, C, P> implements
+      PollableConsumerBinder<MessageHandler, C>, ApplicationEventPublisherAware {
+  		// 省略...
+  
+  		@Override
+      public final Binding<MessageChannel> doBindProducer(final String destination,
+            MessageChannel outputChannel, final P producerProperties)
+            throws BinderException {
+        		// 省略...		
+        
+        		// 创建Producer的MessageHandler
+        		final MessageHandler producerMessageHandler;
+        		producerMessageHandler = createProducerMessageHandler(producerDestination,
+									producerProperties, outputChannel, errorChannel);
+        
+        		// 创建SendingHandler并调用subscribe
+        		((SubscribableChannel) outputChannel)
+									.subscribe(new SendingHandler(producerMessageHandler,
+									HeaderMode.embeddedHeaders
+                  .equals(producerProperties.getHeaderMode()),
+									this.headersToEmbed, useNativeEncoding(producerProperties)));
+        		// 省略...	
+      }
+}
+```
+
+Producer的MessageHandler 是由消息中间件 Binder 来完成，Spring Cloud Stream提供了创建 MessageHandler 的规范，接下来会详细讲到 RocketMQ Binder 的具体实现过程。
+
+AbstractMessageChannelBinder 的初始化由AbstractBindingLifecycle 在Spring 容器加载所有bean并完成初始化之后完成。
+
+
+
+### RocketMQ Binder 集成消息发送
+
+AbstractMessageChannelBinder 类中提供了创建 MessageHandler 的规范，createProducerMessageHandler方法在初始化Binder的时候会加载。
+
+```java
+public abstract class AbstractMessageChannelBinder<C extends ConsumerProperties, P extends ProducerProperties, PP extends ProvisioningProvider<C, P>>
+		extends AbstractBinder<MessageChannel, C, P> implements
+		PollableConsumerBinder<MessageHandler, C>, ApplicationEventPublisherAware {
+  	// 省略...	
+  
+    protected abstract MessageHandler createProducerMessageHandler(
+          ProducerDestination destination, P producerProperties,
+          MessageChannel errorChannel) throws Exception;
+}
+```
+
+RocketMQMessageChannelBinder 类根据规范完成RocketMQMessageHandler的创建和初始化RocketMQMessageHandler是消息处理器 MessageHandler 的具体实现，RocketMQMessageHandler在RocketMQ Binder中的作用是转化消息格式并发送消息。
+
+```java
+public class RocketMQMessageChannelBinder extends
+      AbstractMessageChannelBinder<ExtendedConsumerProperties<RocketMQConsumerProperties>, ExtendedProducerProperties<RocketMQProducerProperties>, RocketMQTopicProvisioner>
+      implements
+      ExtendedPropertiesBinder<MessageChannel, RocketMQConsumerProperties, RocketMQProducerProperties> {
+  		// 省略...
+  		
+  		@Override
+      protected MessageHandler createProducerMessageHandler(ProducerDestination destination,
+          ExtendedProducerProperties<RocketMQProducerProperties> producerProperties,
+          MessageChannel errorChannel) throws Exception {
+        
+        	RocketMQTemplate rocketMQTemplate;
+          rocketMQTemplate = new RocketMQTemplate();
+          rocketMQTemplate.setObjectMapper(this.getApplicationContext()
+              .getBeansOfType(ObjectMapper.class).values().iterator().next());
+          DefaultMQProducer producer;
+          producer = new DefaultMQProducer(producerGroup);
+          // 初始化DefaultMQProducer  省略... 
+          rocketMQTemplate.setProducer(producer);
+
+          RocketMQMessageHandler messageHandler = new RocketMQMessageHandler(
+              rocketMQTemplate, destination.getName(), producerGroup,
+              producerProperties.getExtension().getTransactional(),
+              instrumentationManager);
+          messageHandler.setBeanFactory(this.getApplicationContext().getBeanFactory());
+          messageHandler.setSync(producerProperties.getExtension().getSync());
+
+          if (errorChannel != null) {
+            messageHandler.setSendFailureChannel(errorChannel);
+          }
+          return messageHandler;
+      }
+}
+```
+
+ RocketMQMessageHandler 中持有 RocketMQTemplate 对象，RocketMQTemplate 是对RocketMQ 客户端API的封装，Spring Boot中已经支持RocketMQTemplate，Spring Cloud Stream对其兼容。
+
+DefaultMQProducer 是由RocketMQ 客户端提供的API，发送消息到RocketMQ 消息服务器都是由它来完成。
+
+```java
+DefaultMQProducer producer;
+String ak = mergedProperties.getAccessKey();
+String sk = mergedProperties.getSecretKey();
+if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
+   RPCHook rpcHook = new AclClientRPCHook(
+         new SessionCredentials(ak, sk));
+   producer = new DefaultMQProducer(producerGroup, rpcHook,
+         mergedProperties.isEnableMsgTrace(),
+         mergedProperties.getCustomizedTraceTopic());
+   producer.setVipChannelEnabled(false);
+   producer.setInstanceName(RocketMQUtil.getInstanceName(rpcHook,
+         destination.getName() + "|" + UtilAll.getPid()));
+}
+else {
+   producer = new DefaultMQProducer(producerGroup);
+   producer.setVipChannelEnabled(
+         producerProperties.getExtension().getVipChannelEnabled());
+}
+producer.setNamesrvAddr(mergedProperties.getNameServer());
+producer.setSendMsgTimeout(
+      producerProperties.getExtension().getSendMessageTimeout());
+producer.setRetryTimesWhenSendFailed(
+      producerProperties.getExtension().getRetryTimesWhenSendFailed());
+producer.setRetryTimesWhenSendAsyncFailed(producerProperties
+      .getExtension().getRetryTimesWhenSendAsyncFailed());
+producer.setCompressMsgBodyOverHowmuch(producerProperties.getExtension()
+      .getCompressMessageBodyThreshold());
+producer.setRetryAnotherBrokerWhenNotStoreOK(
+      producerProperties.getExtension().isRetryNextServer());
+producer.setMaxMessageSize(
+      producerProperties.getExtension().getMaxMessageSize());
+```
+
+
+
+### RocketMQ Binder 集成消息订阅
+
+AbstractMessageChannelBinder 类中提供了创建 MessageProducer 的协议，createConsumerEndpoint方法在初始化Binder的时候会加载。
+
+```java
+public abstract class AbstractMessageChannelBinder<C extends ConsumerProperties, P extends ProducerProperties, PP extends ProvisioningProvider<C, P>>
+		extends AbstractBinder<MessageChannel, C, P> implements
+		PollableConsumerBinder<MessageHandler, C>, ApplicationEventPublisherAware {
+		// 省略...
+  	@Override
+		public final Binding<MessageChannel> doBindConsumer(String name, String group,
+				MessageChannel inputChannel, final C properties) throws BinderException {
+      		// 省略...	
+      		MessageProducer consumerEndpoint = null;
+      		consumerEndpoint = createConsumerEndpoint(destination, group, properties);
+					consumerEndpoint.setOutputChannel(inputChannel);
+      
+      		// 省略...	
+    }
+  	
+		protected abstract MessageProducer createConsumerEndpoint(
+      	ConsumerDestination destination, String group, C properties) throws Exception;
+}
+```
+
+同样由RocketMQMessageChannelBinder 类根据协议完成RocketMQInboundChannelAdapter的创建和初始化。
+
+```java
+public class RocketMQMessageChannelBinder extends
+		AbstractMessageChannelBinder<ExtendedConsumerProperties<RocketMQConsumerProperties>, ExtendedProducerProperties<RocketMQProducerProperties>, RocketMQTopicProvisioner>
+		implements
+		ExtendedPropertiesBinder<MessageChannel, RocketMQConsumerProperties, RocketMQProducerProperties> {
+  	// 省略...
+
     @Override
-    public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
-        for (MessageExt messageExt : msgs) {
-            log.debug("received msg: {}", messageExt);
+    protected MessageProducer createConsumerEndpoint(ConsumerDestination destination,
+          String group,
+          ExtendedConsumerProperties<RocketMQConsumerProperties> consumerProperties)
+          throws Exception {
+      		
+         RocketMQListenerBindingContainer listenerContainer = new RocketMQListenerBindingContainer(
+               consumerProperties, rocketBinderConfigurationProperties, this);
+         // 省略...
+
+         RocketMQInboundChannelAdapter rocketInboundChannelAdapter = new RocketMQInboundChannelAdapter(
+               listenerContainer, consumerProperties, instrumentationManager);
+         // 省略...
+         return rocketInboundChannelAdapter;
+    }
+}
+```
+
+RocketMQInboundChannelAdapter 是适配器，需要适配Spring Framework中的重试和回调机制，它在RocketMQ Binder中的作用是订阅消息并转化消息格式。RocketMQListenerBindingContainer 是对RocketMQ 客户端API的封装，适配器中持有它的对象。
+
+```java
+public class RocketMQListenerBindingContainer
+      implements InitializingBean, RocketMQListenerContainer, SmartLifecycle {
+  		
+  		private RocketMQListener rocketMQListener;		
+  
+  		@Override
+      public void afterPropertiesSet() throws Exception {
+        initRocketMQPushConsumer();
+      }
+  
+  		private void initRocketMQPushConsumer() throws MQClientException {
+          String ak = rocketBinderConfigurationProperties.getAccessKey();
+          String sk = rocketBinderConfigurationProperties.getSecretKey();
+          if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
+            RPCHook rpcHook = new AclClientRPCHook(new SessionCredentials(ak, sk));
+            consumer = new DefaultMQPushConsumer(consumerGroup, rpcHook,
+                new AllocateMessageQueueAveragely(),
+                rocketBinderConfigurationProperties.isEnableMsgTrace(),
+                rocketBinderConfigurationProperties.getCustomizedTraceTopic());
+            consumer.setInstanceName(RocketMQUtil.getInstanceName(rpcHook,
+                topic + "|" + UtilAll.getPid()));
+            consumer.setVipChannelEnabled(false);
+          }
+          else {
+            consumer = new DefaultMQPushConsumer(consumerGroup,
+                rocketBinderConfigurationProperties.isEnableMsgTrace(),
+                rocketBinderConfigurationProperties.getCustomizedTraceTopic());
+          }
+
+          consumer.setNamesrvAddr(nameServer);
+          consumer.setConsumeThreadMax(rocketMQConsumerProperties.getConcurrency());
+          consumer.setConsumeThreadMin(rocketMQConsumerProperties.getConcurrency());
+
+          switch (messageModel) {
+          case BROADCASTING:
+            consumer.setMessageModel(
+                org.apache.rocketmq.common.protocol.heartbeat.MessageModel.BROADCASTING);
+            break;
+          case CLUSTERING:
+            consumer.setMessageModel(
+                org.apache.rocketmq.common.protocol.heartbeat.MessageModel.CLUSTERING);
+            break;
+          default:
+            throw new IllegalArgumentException("Property 'messageModel' was wrong.");
+          }
+
+          switch (selectorType) {
+          case TAG:
+            consumer.subscribe(topic, selectorExpression);
+            break;
+          case SQL92:
+            consumer.subscribe(topic, MessageSelector.bySql(selectorExpression));
+            break;
+          default:
+            throw new IllegalArgumentException("Property 'selectorType' was wrong.");
+          }
+
+          switch (consumeMode) {
+          case ORDERLY:
+            consumer.setMessageListener(new DefaultMessageListenerOrderly());
+            break;
+          case CONCURRENTLY:
+            consumer.setMessageListener(new DefaultMessageListenerConcurrently());
+            break;
+          default:
+            throw new IllegalArgumentException("Property 'consumeMode' was wrong.");
+          }
+
+          if (rocketMQListener instanceof RocketMQPushConsumerLifecycleListener) {
+            ((RocketMQPushConsumerLifecycleListener) rocketMQListener)
+                .prepareStart(consumer);
+          }
+      }
+}
+```
+
+RocketMQ提供了两种消费模式：顺序消费、并发消费，RocketMQ 客户端API 中顺序消费的默认监听器是DefaultMessageListenerOrderly类，并发消费的默认监听器是DefaultMessageListenerConcurrently类，无论是哪种消费模式，监听器收到消息后都会回调RocketMQListener。
+
+```java
+public class DefaultMessageListenerConcurrently
+      implements MessageListenerConcurrently {
+
+   @SuppressWarnings("unchecked")
+   @Override
+   public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
+         ConsumeConcurrentlyContext context) {
+      // 省略...
+     
+      for (MessageExt messageExt : msgs) {
+         try {
+            rocketMQListener
+                  .onMessage(RocketMQUtil.convertToSpringMessage(messageExt));
+         }
+         catch (Exception e) {
+            context.setDelayLevelWhenNextConsume(delayLevelWhenNextConsume);
+            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+         }
+      }
+      return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+   }
+}
+```
+
+RocketMQListener 也是Spring Boot中已支持的RocketMQ 组件，Spring Cloud Stream对其兼容。
+
+在适配器 RocketMQInboundChannelAdapter  中创建和初始化了RocketMQListener的实现类。
+
+```java
+public class RocketMQInboundChannelAdapter extends MessageProducerSupport {
+  	// 省略...
+  
+  	@Override
+    protected void onInit() {
+      	// 省略...
+        BindingRocketMQListener listener = new BindingRocketMQListener();
+        rocketMQListenerContainer.setRocketMQListener(listener);
+    }
+  
+  	protected class BindingRocketMQListener
+			implements RocketMQListener<Message>, RetryListener {
+
+		@Override
+		public void onMessage(Message message) {
+        boolean enableRetry = RocketMQInboundChannelAdapter.this.retryTemplate != null;
+        if (enableRetry) {
+          RocketMQInboundChannelAdapter.this.retryTemplate.execute(context -> {
+            RocketMQInboundChannelAdapter.this.sendMessage(message);
+            return null;
+          }, (RecoveryCallback<Object>) 	RocketMQInboundChannelAdapter.this.recoveryCallback);
+        }
+        else {
+          RocketMQInboundChannelAdapter.this.sendMessage(message);
+        }
+		}
+	}
+}
+```
+
+DefaultMessageListenerOrderly 对象收到RocketMQ 消息，会先回调 BindingRocketMQListener 的onMessage方法，再调用 RocketMQInboundChannelAdapter 父类中的sendMessage方法将消息发送出去DirectChannel。
+
+
+
+### Spring Cloud Stream 消息订阅流程
+
+对于Spring Cloud Stream 的消息模型来说，接收消息中间件的消息也是发布/订阅模型，接收到的消息先发送到MessageChannel ，由订阅的MessageChannel 通过Dispatcher转发到对应的 MessageHandler 进行处理。
+
+
+
+- RocketMQInboundChannelAdapter  调用sendMessage() 发送消息
+
+```java
+public abstract class MessageProducerSupport extends AbstractEndpoint implements MessageProducer, TrackableComponent,
+      SmartInitializingSingleton {
+        private final MessagingTemplate messagingTemplate = new MessagingTemplate();
+        private volatile MessageChannel outputChannel;
+        // 省略...
+        
+        protected void sendMessage(Message<?> messageArg) {
+            // 省略...
             try {
-                long now = System.currentTimeMillis();
-                // 回调业务代码中定义的消息监听器RocketMQListener
-                rocketMQListener.onMessage(doConvertMessage(messageExt));
-                long costTime = System.currentTimeMillis() - now;
-                log.info("consume {} cost: {} ms", messageExt.getMsgId(), costTime);
-            } catch (Exception e) {
-                log.warn("consume message failed. messageExt:{}", messageExt, e);
-                context.setSuspendCurrentQueueTimeMillis(suspendCurrentQueueTimeMillis);
-                return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
+              	this.messagingTemplate.send(getOutputChannel(), message);
+            }
+            catch (RuntimeException e) {
             }
         }
-        return ConsumeOrderlyStatus.SUCCESS;
-    }
+        
+        @Override
+        public MessageChannel getOutputChannel() {
+            // 省略...
+            return this.outputChannel;
+        }
 }
 ```
 
-业务代码中接收消息才会如此简单，回顾一下前面Demo中接收消息的代码。
+getOutputChannel() 拿到的 MessageChannel 是初始化RocketMQ Binder时传入的DirectChannel，对应例子中的Input通道。
+
+MessagingTemplate 继承了GenericMessagingTemplate 类，实际执行了doSend() 方法发送消息。
 
 ```java
-@Component
-@RocketMQMessageListener(topic = "TopicTest", consumerGroup = "CONSUMER_GROUP_TOPIC_TEST")
-public class MessageListener implements RocketMQListener<String> {
+public class GenericMessagingTemplate extends AbstractDestinationResolvingMessagingTemplate<MessageChannel>
+		implements BeanFactoryAware {
+  	// 省略...
+  
     @Override
-    public void onMessage(String s) {
-        System.out.println("TopicTest receive: " + s + ", receiveTime = " + System.currentTimeMillis());
+    protected final void doSend(MessageChannel channel, Message<?> message) {
+        doSend(channel, message, sendTimeout(message));
+    }
+
+    protected final void doSend(MessageChannel channel, Message<?> message, long timeout) {
+      	// 省略...
+      	boolean sent = (timeout >= 0 ? channel.send(messageToSend, timeout) : channel.send(messageToSend));
     }
 }
 ```
 
-SpringCloudStream的Binder模式在此就不再介绍了，接下来笔者将为大家重点讲解RocketMQ中的常见的使用场景和技术原理，以及RocketMQ的架构设计。
+由于MessageChannel 的实例是 DirectChannel 对象，就复用了前面讲Spring Cloud Stream消息发送流程中提到的流程，通过消息分发类MessageDispatcher把消息分发给MessageHandler 。
+
+消息到了DirectChannel 对应的消息处理器是 StreamListenerMessageHandler ，在消息处理器中回调使用了@StreamListener注解的业务方法。
+
+```java
+public class StreamListenerMessageHandler extends AbstractReplyProducingMessageHandler {
+	 // 省略... 
+  
+   private final InvocableHandlerMethod invocableHandlerMethod;
+
+   @Override
+   protected Object handleRequestMessage(Message<?> requestMessage) {
+      try {
+         return this.invocableHandlerMethod.invoke(requestMessage);
+      }
+      catch (Exception e) {
+         // 省略...
+      }
+   }
+}
+```
+
+InvocableHandlerMethod 中持有BeanFactory、Method、MethodParameter等对象使用Java反射机制完成回调。那么，StreamListenerMessageHandler 怎么和使用@StreamListener注解的业务方法关联上的呢？
+
+```java
+public class StreamListenerAnnotationBeanPostProcessor implements BeanPostProcessor,
+      ApplicationContextAware, SmartInitializingSingleton {
+      // 省略...
+        
+      @Override
+      public final void afterSingletonsInstantiated() {
+        	// 省略...
+          for (StreamListenerHandlerMethodMapping mapping : mappedBindingEntry.getValue())						{		
+            	// 创建InvocableHandlerMethod 
+            	final InvocableHandlerMethod invocableHandlerMethod = 				
+                 				this.messageHandlerMethodFactory
+												.createInvocableHandlerMethod(mapping.getTargetBean(),
+													checkProxy(mapping.getMethod(), mapping.getTargetBean()));
+            	// 创建StreamListenerMessageHandler
+            	StreamListenerMessageHandler streamListenerMessageHandler = 
+                  	new StreamListenerMessageHandler(invocableHandlerMethod,
+													resolveExpressionAsBoolean(mapping.getCopyHeaders(),
+													"copyHeaders"),
+                          this.springIntegrationProperties
+													.getMessageHandlerNotPropagatedHeaders());
+          }
+      }
+}
+```
+
+在Spring 容器管理的所有单例对象初始化完成之后，遍历StreamListenerHandlerMethodMapping 进行StreamListenerMessageHandler 和 InvocableHandlerMethod 的创建和初始化。
+
+StreamListenerHandlerMethodMapping 从类名看显而易见，保存了StreamListener和HandlerMethod的映射关系。根据代码逐渐往上找，创建映射关系也是在StreamListenerAnnotationBeanPostProcessor类。
+
+```java
+public class StreamListenerAnnotationBeanPostProcessor implements BeanPostProcessor,
+      ApplicationContextAware, SmartInitializingSingleton {
+      // 省略...
+        
+      @Override
+      public final Object postProcessAfterInitialization(Object bean, final String beanName)
+          throws BeansException {
+          Class<?> targetClass = AopUtils.isAopProxy(bean) ? AopUtils.getTargetClass(bean)
+              : bean.getClass();
+          Method[] uniqueDeclaredMethods = ReflectionUtils
+              .getUniqueDeclaredMethods(targetClass);
+          for (Method method : uniqueDeclaredMethods) {
+              StreamListener streamListener = AnnotatedElementUtils
+                  .findMergedAnnotation(method, StreamListener.class);
+              if (streamListener != null && !method.isBridge()) {
+                  this.streamListenerCallbacks.add(() -> {
+                    	// 处理 @StreamListener
+                    	this.doPostProcess(streamListener, method, bean);
+                  });
+              }
+          }
+          return bean;
+      }
+}
+        
+```
+
+StreamListenerAnnotationBeanPostProcessor 找到所有使用@StreamListener的Method，并创建StreamListenerHandlerMethodMapping对象，保存映射关系到集合中。
+
+```java
+private void doPostProcess(StreamListener streamListener, Method method,
+      Object bean) {
+   // 省略... 
+   StreamListenerSetupMethodOrchestrator streamListenerSetupMethodOrchestrator = orchestratorOptional
+         .get();
+   streamListenerSetupMethodOrchestrator
+         .orchestrateStreamListenerSetupMethod(streamListener, method, bean);
+}
+
+@Override
+public void orchestrateStreamListenerSetupMethod(StreamListener streamListener,
+      Method method, Object bean) {
+  	// 省略... 
+  	registerHandlerMethodOnListenedChannel(method, streamListener, bean);
+}
+
+private final MultiValueMap<String, StreamListenerHandlerMethodMapping> 	
+  	mappedListenerMethods = new LinkedMultiValueMap<>();
+
+private void registerHandlerMethodOnListenedChannel(Method method,
+				StreamListener streamListener, Object bean) {
+  	// 省略... 
+  	// 保存StreamListenerHandlerMethodMapping
+		StreamListenerAnnotationBeanPostProcessor.this.mappedListenerMethods.add(
+					streamListener.value(),
+					new StreamListenerHandlerMethodMapping(bean, method,
+							streamListener.condition(), defaultOutputChannel,
+							streamListener.copyHeaders()));
+}
+```
+
+到此，Spring Cloud Stream RocketMQ 相关知识介绍完了，其他内容不再展开，总结一下前面的内容。
+
+- Spring Cloud Stream 提供了简单易用的消息编程模型，内部基于发布/订阅模型实现。
+- Spring Cloud Stream 的Binder提供标准协议，不同的消息中间件都可以按照标准协议接入进来。
+- Binder 提供 bindConsumer 和 bindProducer 两个方法，分别用于构造生产者和消费者。
 
 
 
-## 2. 为什么放弃Zookeeper选择NameServer
+接下来笔者将为大家重点讲解RocketMQ的架构设计、RocketMQ中的常见的功能和场景、在Spring Cloud Stream中如何使用、以及RocketMQ的技术原理。
 
-不得不说几句与Kafka的渊源，kafka是一款高性能的消息中间件，由于kafka不支持消费失败重试、定时消息、事务消息，顺序消息也有明显缺陷，难以支撑淘宝交易、订单、充值等复杂场景，淘宝中间件团队参考Kafka之后重新设计并用java编写了RocketMQ，所以在RocketMQ中会有一些概念和kafka相似。
+
+
+## 9.3 为什么放弃Zookeeper选择NameServer
+
+介绍RocketMQ的架构设计，不得不说几句与Kafka的渊源，kafka是一款高性能的消息中间件，由于kafka不支持消费失败重试、定时消息、事务消息，顺序消息也有明显缺陷，难以支撑淘宝交易、订单、充值等复杂场景，淘宝中间件团队参考Kafka之后重新设计并用java编写了RocketMQ，所以在RocketMQ中会有一些概念和kafka相似。
 
 在分布式服务SOA架构中，服务发现机制是必备的。服务实例有多个，且数量是动态变化的。注册中心会提供服务管理，服务调用方在注册中心获取到服务提供者的信息，从而进行远程调用。
 
@@ -621,7 +943,7 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 
 
 
-## 3. 如何实现顺序消息
+## 9.4 如何实现顺序消息
 
 ### 顺序消息的场景
 
@@ -696,7 +1018,7 @@ RocketMQ的顺序消息分2种情况，局部有序和全局有序，前面的�
 
 #### 顺序发送
 
-RocketMQ中消息发送有三种方式：同步、异步、单向。同步发送需要等待broker服务器的返回结果，异步发送网络请求不会阻塞当前线程，单向发送原理和异步一致，没有回调
+RocketMQ中消息发送有三种方式：同步、异步、单向。
 
 - 同步：发送网络请求后会同步等待broker服务器的返回结果，支持发送失败重试，适用于较重要的消息通知场景。
 - 异步：异步发送网络请求不会阻塞当前线程，不支持失败重试，适用于对响应时间要求更高的场景。
@@ -845,7 +1167,7 @@ try {
 
 
 
-## 4. 如何实现事务消息
+## 9.5 如何实现事务消息
 
 ### 事务消息的场景
 
@@ -983,7 +1305,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 
 
-##5. 高性能设计
+##9.6 高性能设计
 
 RocketMQ以高性能主要得益于其在数据存储设计以及动态伸缩的能力。
 
@@ -991,7 +1313,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 ### 数据存储设计
 
-RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计。而数据存储的核心有3部分组成：commitlog数据存储文件、consumequeue消费队列文件、index索引文件。
+RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设计。而数据存储的核心由两部分组成：commitlog数据存储文件、consumequeue消费队列文件。
 
 从Producer将消息发送到broker服务器，broker会把所有消息存储在CommitLog文件，再由CommitLog转发到ConsumeQueue文件提供给各个Consumer消费。整体流程图如下：
 
@@ -1019,10 +1341,10 @@ RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所�
 | **2**    | MAGICCODE                   | 消息magic code，区分数据消息和空消息                         | 4                  |
 | **3**    | BODYCRC                     | 消息体的CRC，当broker重启时会校验                            | 4                  |
 | **4**    | QUEUEID                     | 区分同一个topic的不同queue                                   | 4                  |
-| **5**    | FLAG                        | 不处理                                                       | 4                  |
+| **5**    | FLAG                        | 未使用                                                       | 4                  |
 | **6**    | QUEUEOFFSET                 | queue中的消息偏移量，即queue中的消息个数，*20=物理偏移量     | 8                  |
 | **7**    | PHYSICALOFFSET              | 在commitlog中的物理起始偏移量                                | 8                  |
-| **8**    | SYSFLAG                     | 消息标志，指名消息是事务状态等消息特征                       | 4                  |
+| **8**    | SYSFLAG                     | 消息标志，消息是事务状态等消息特征                           | 4                  |
 | **9**    | BORNTIMESTAMP               | Producer的时间戳                                             | 8                  |
 | **10**   | BORNHOST(IP+HOST)           | Producer地址                                                 | 8                  |
 | **11**   | STORETIMESTAMP              | 存储时间戳                                                   | 8                  |
@@ -1055,10 +1377,6 @@ ConsumeQueue负责存储消费者队列文件，在消息写入到commitlog文�
 
 
 
-#### 零拷贝
-
-
-
 #### 消息跳跃读
 
 消费broker中存储消息的实际工作就是读取文件，前面讲了消息队列文件的设计，这是一种数据结构上的设计。为了高性能读数据，除此之外还使用了操作系统中的page cache机制。RocketMQ读取消息依赖操作系统PageCache，PageCache命中率越高则读性能越高，操作系统会尽量预读数据，使得应用直接访问磁盘的概率降低。消息队列文件的读取流程如下：
@@ -1068,6 +1386,14 @@ ConsumeQueue负责存储消费者队列文件，在消息写入到commitlog文�
 3. 如果命中cache，上次缓存的数据则有效，操作系统认为顺序读盘，则继续扩大缓存的数据范围，将之前缓存的数据页往后几页数据再读取到cache中。
 
 在计算机系统中，CPU、RAM、DISK的速度不相同，按速度高低排列为：CPU>RAM>DISK。CPU与RAM之间、RAM与DISK之间的速度和容量差异是指数级。为了在速度和容量上折中，在CPU与RAM之间使用CPU cache以提高访存速度，在RAM与磁盘之间，操作系统使用page cache提高系统对文件的访问速度。
+
+#### 零拷贝
+
+通常情况下对文件的读写，要多经历一次数据拷贝，例如写文件数据要从用户态拷贝到内核态，再由内核态写入物理文件。所谓零拷贝，指的是用户态与内核态不存在拷贝。
+
+RocketMQ中的文件读写主要就是通过Java NIO中MappedByteBuffer来进行文件映射。利用了Java NIO中的FileChannel模型，可以直接将物理文件映射到缓冲区PageCache，少了一次数据拷贝过程，提高读写速度。
+
+
 
 
 
@@ -1098,7 +1424,7 @@ ConsumeQueue负责存储消费者队列文件，在消息写入到commitlog文�
 
 
 
-## 6. 高可用设计
+## 9.7 高可用设计
 
 计算机系统的可用性用平均无故障时间来度量，系统的可用性越高，则平均无故障时间越长。高可用性也是分布式中间件的重要特性，RocketMQ的高可用设计主要从集群管理、消息发送、消息存储、消息消费四个方面体现。
 
@@ -1570,7 +1896,7 @@ RocketMQ不支持任意时间精确的延迟消息，仅支持1s、5s、10s、30
 
 
 
-## 附录
+## 9.8 附录
 
 ### 基本概念
 
