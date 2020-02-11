@@ -13,12 +13,22 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1109">
-              <caret line="68" column="19" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="68" selection-end-column="19" />
+            <state relative-caret-position="605">
+              <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -27,8 +37,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1076">
-              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="39" />
+            <state relative-caret-position="468">
+              <caret line="44" column="23" lean-forward="false" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -81,11 +91,11 @@
   <component name="MavenRunner">
     <option name="jreName" value="1.8" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="282" />
-    <option name="y" value="57" />
-    <option name="width" value="1621" />
-    <option name="height" value="940" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="286" />
+    <option name="y" value="34" />
+    <option name="width" value="1625" />
+    <option name="height" value="973" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -155,7 +165,6 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,12 +177,34 @@
               <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-cloud-nacos-sample" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-cloud-nacos-sample" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-nacos-sample-provider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -313,14 +344,16 @@
       <workItem from="1580826507937" duration="1247000" />
       <workItem from="1580970443361" duration="8129000" />
       <workItem from="1580991229799" duration="1446000" />
+      <workItem from="1581351161672" duration="344000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12756000" />
+    <option name="totallyTimeSpent" value="13100000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -330,21 +363,21 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26877683" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22693133" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5819861" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5819861" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -432,7 +465,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -480,7 +512,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -654,7 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -662,7 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="14" column="99" lean-forward="false" selection-start-line="14" selection-start-column="99" selection-end-line="14" selection-end-column="99" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -670,7 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="15" column="80" lean-forward="true" selection-start-line="15" selection-start-column="80" selection-end-line="15" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -678,7 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -686,7 +713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -867,7 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-168">
           <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -875,7 +900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,7 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,7 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="5" column="80" lean-forward="true" selection-start-line="5" selection-start-column="80" selection-end-line="5" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -961,7 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-684">
           <caret line="35" column="15" lean-forward="false" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -983,7 +1004,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -991,7 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1006,7 +1025,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1035,12 +1053,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <marker date="1580560458058" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1580560458058" expanded="false" signature="165:425" ph="..." />
-            <marker date="1580560458058" expanded="true" signature="643:739" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="804:917" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1048,31 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <marker date="1580560458058" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1580560458058" expanded="false" signature="157:598" ph="..." />
-            <marker date="1580560458058" expanded="true" signature="1275:1625" ph="{...}" />
-            <marker date="1580560458058" expanded="false" signature="1661:1672" ph=" { " />
-            <marker date="1580560458058" expanded="false" signature="1690:1696" ph=" }" />
-            <marker date="1580560458058" expanded="false" signature="1745:1756" ph=" { " />
-            <marker date="1580560458058" expanded="false" signature="1775:1781" ph=" }" />
-            <marker date="1580560458058" expanded="false" signature="1832:1843" ph=" { " />
-            <marker date="1580560458058" expanded="false" signature="1862:1868" ph=" }" />
-            <marker date="1580560458058" expanded="false" signature="1905:1916" ph=" { " />
-            <marker date="1580560458058" expanded="false" signature="1935:1941" ph=" }" />
-            <marker date="1580560458058" expanded="false" signature="1983:1994" ph=" { " />
-            <marker date="1580560458058" expanded="false" signature="2016:2022" ph=" }" />
-            <marker date="1580560458058" expanded="false" signature="2073:2084" ph=" { " />
-            <marker date="1580560458058" expanded="false" signature="2111:2117" ph=" }" />
-            <marker date="1580560458058" expanded="true" signature="2178:3090" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="3162:3267" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="3314:3630" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="3696:4160" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="4231:4537" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="4600:4689" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="4742:4888" ph="{...}" />
-            <marker date="1580560458058" expanded="true" signature="4919:5283" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1080,27 +1067,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-293">
           <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
-          <folding>
-            <marker date="1580560457299" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1580560457299" expanded="false" signature="161:2114" ph="..." />
-            <marker date="1580560457299" expanded="true" signature="2116:2671" ph="@{...}" />
-            <marker date="1580560457299" expanded="true" signature="3671:3678" ph="{}" />
-            <marker date="1580560457299" expanded="true" signature="3684:3765" ph="@{...}" />
-            <marker date="1580560457299" expanded="true" signature="3827:3942" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="4094:4219" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="4300:4550" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="4634:4868" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="4874:5057" ph="@{...}" />
-            <marker date="1580560457299" expanded="true" signature="5088:6567" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="5120:5131" ph="{}" />
-            <marker date="1580560457299" expanded="true" signature="5291:5816" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="5901:6561" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="6573:6719" ph="@{...}" />
-            <marker date="1580560457299" expanded="true" signature="6788:7785" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="6910:6921" ph="{}" />
-            <marker date="1580560457299" expanded="true" signature="7081:7489" ph="{...}" />
-            <marker date="1580560457299" expanded="true" signature="7541:7779" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1194,13 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
-          <folding>
-            <marker date="1580560459214" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1580560459214" expanded="false" signature="413:424" ph=" { " />
-            <marker date="1580560459214" expanded="false" signature="438:444" ph=" }" />
-            <marker date="1580560459214" expanded="false" signature="482:493" ph=" { " />
-            <marker date="1580560459214" expanded="false" signature="515:521" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1208,9 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-          <folding>
-            <marker date="1580560459214" expanded="false" signature="0:104" ph="/.../" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1218,62 +1174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
           <caret line="93" column="26" lean-forward="false" selection-start-line="93" selection-start-column="26" selection-end-line="93" selection-end-column="26" />
-          <folding>
-            <marker date="1580560461618" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1580560461618" expanded="false" signature="172:1052" ph="..." />
-            <marker date="1580560461618" expanded="true" signature="1716:1734" ph="/**...*/" />
-            <marker date="1580560461618" expanded="true" signature="1833:1888" ph="{...}" />
-            <marker date="1580560461618" expanded="true" signature="2018:2111" ph="{...}" />
-            <marker date="1580560461618" expanded="false" signature="2158:2169" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="2189:2195" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="2264:2275" ph=" { " />
-            <marker date="1580560461618" expanded="true" signature="2292:2298" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="2304:2322" ph="/**...*/" />
-            <marker date="1580560461618" expanded="true" signature="2393:2750" ph="{...}" />
-            <marker date="1580560461618" expanded="true" signature="2851:2959" ph="{...}" />
-            <marker date="1580560461618" expanded="true" signature="2965:2983" ph="/**...*/" />
-            <marker date="1580560461618" expanded="false" signature="3042:3053" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="3077:3083" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="3089:3107" ph="/**...*/" />
-            <marker date="1580560461618" expanded="false" signature="3161:3172" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="3189:3195" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="3231:3242" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="3266:3272" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="3298:3972" ph="{...}" />
-            <marker date="1580560461618" expanded="true" signature="4023:4273" ph="{...}" />
-            <marker date="1580560461618" expanded="true" signature="4279:4297" ph="/**...*/" />
-            <marker date="1580560461618" expanded="true" signature="4414:4432" ph="/**...*/" />
-            <marker date="1580560461618" expanded="false" signature="4494:4505" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="4549:4555" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="4561:4579" ph="/**...*/" />
-            <marker date="1580560461618" expanded="false" signature="4643:4654" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="4695:4701" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="4707:4725" ph="/**...*/" />
-            <marker date="1580560461618" expanded="false" signature="4783:4794" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="4849:4855" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="4861:4879" ph="/**...*/" />
-            <marker date="1580560461618" expanded="false" signature="4929:4940" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5018:5024" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="5067:5078" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5090:5096" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="5128:5139" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5165:5171" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="5213:5224" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5244:5250" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="5277:5288" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5306:5312" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="5339:5350" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5359:5365" ph=" }" />
-            <marker date="1580560461618" expanded="false" signature="5420:5431" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5459:5465" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="5596:5607" ph=" { " />
-            <marker date="1580560461618" expanded="true" signature="5661:5667" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="5709:5879" ph="{...}" />
-            <marker date="1580560461618" expanded="false" signature="5912:5923" ph=" { " />
-            <marker date="1580560461618" expanded="false" signature="5979:5985" ph=" }" />
-            <marker date="1580560461618" expanded="true" signature="6029:6201" ph="{...}" />
-            <marker date="1580560461618" expanded="true" signature="6226:6508" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1281,24 +1181,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="40" column="58" lean-forward="false" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
-          <folding>
-            <marker date="1580560460275" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1580560460275" expanded="false" signature="156:613" ph="..." />
-            <marker date="1580560460275" expanded="true" signature="1045:1161" ph="{...}" />
-            <marker date="1580560460275" expanded="true" signature="1167:1185" ph="/**...*/" />
-            <marker date="1580560460275" expanded="false" signature="1235:1246" ph=" { " />
-            <marker date="1580560460275" expanded="false" signature="1271:1277" ph=" }" />
-            <marker date="1580560460275" expanded="true" signature="1329:1606" ph="{...}" />
-            <marker date="1580560460275" expanded="false" signature="1667:1678" ph=" { " />
-            <marker date="1580560460275" expanded="false" signature="1690:1696" ph=" }" />
-            <marker date="1580560460275" expanded="true" signature="1728:2056" ph="{...}" />
-            <marker date="1580560460275" expanded="true" signature="2098:2238" ph="{...}" />
-            <marker date="1580560460275" expanded="false" signature="2279:2290" ph=" { " />
-            <marker date="1580560460275" expanded="false" signature="2345:2351" ph=" }" />
-            <marker date="1580560460275" expanded="false" signature="2386:2397" ph=" { " />
-            <marker date="1580560460275" expanded="false" signature="2472:2478" ph=" }" />
-            <marker date="1580560460275" expanded="true" signature="2514:2684" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1306,15 +1188,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1348,7 +1221,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="426">
           <caret line="37" column="29" lean-forward="false" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1356,7 +1228,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
           <caret line="67" column="35" lean-forward="true" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1364,24 +1235,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1076">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="39" />
+        <state relative-caret-position="468">
+          <caret line="44" column="23" lean-forward="false" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1109">
-          <caret line="68" column="19" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="68" selection-end-column="19" />
+        <state relative-caret-position="605">
+          <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spring-cloud-nacos-sample-provider/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
           <folding />
         </state>
       </provider>

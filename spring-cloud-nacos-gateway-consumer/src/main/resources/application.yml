@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-cloud-nacos-gateway-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.128:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: false
+      routes:
+        - id: nacos-gateway-provider
+          uri: lb://spring-cloud-nacos-gateway-provider
+          predicates:
+           - Path=/nacos/**
+          filters:
+           - StripPrefix=1
+server:
+  port: 8888
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
