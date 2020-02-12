@@ -1296,6 +1296,23 @@ Sentinel 的理念是开发者只需要关注资源的定义，当资源定义�
   }
   ```
 
+- step3 修改application.yml配置
+
+  ```yml
+  spring:
+    cloud:
+      sentinel:
+        transport:
+          port: 8719
+          dashboard: 127.0.0.1:7777
+      nacos:
+        discovery:
+          server-addr: 127.0.0.1:8848
+  
+    application:
+      name: gupao
+  ```
+
 到此，Sentinel 的各种流控降级规则已经集成到Nacos进行管理，可以通过Nacos的控制台进行修改。
 
 <img src="image/sentinel-dashboard_6.jpg" alt="sentinel-dashboard_6" style="zoom:50%;" />
