@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping(value = "/hello")
-//    @SentinelResource(value = "HelloWorld", blockHandler = "blockHandler")
+    @SentinelResource(value = "HelloWorld", blockHandler = "blockHandler")
     public String hello() {
         return "Hello Sentinel";
     }
@@ -20,5 +20,10 @@ public class TestController {
     public String blockHandler(BlockException ex) {
         System.out.println("处理限流异常 !!!");
         return "block !!!";
+    }
+
+    @SentinelResource(value = "demo")
+    public void demo(String name, Integer age) {
+
     }
 }

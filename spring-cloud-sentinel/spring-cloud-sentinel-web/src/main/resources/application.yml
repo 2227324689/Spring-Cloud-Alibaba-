@@ -3,4 +3,11 @@ spring:
     sentinel:
       transport:
         port: 8719
-        dashboard: localhost:7777
+        dashboard: localhost:7778
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+  application:
+    name: gupao
+

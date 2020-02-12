@@ -778,10 +778,6 @@ DegradeSlot总结
 
 ### 7.5.2 如何使用
 
-Gateway网关代码中的配置，定义资源。
-
-
-
 开发过程中仅需要在业务代码定义好资源名称，热点参数限流规则在Sentinel 控制台中新增、编辑和删除。
 
 在创建热点参数限流规则可以设置资源名称、参数索引、阈值、统计窗口时长、参数例外项、是否集群限流。
@@ -1240,19 +1236,183 @@ SystemSlot的代码总结如下：
 
 ## 7.8 动态规则配置
 
-Sentinel 的理念是开发者只需要关注资源的定义，当资源定义成功后可以动态增加各种流控降级规则。
+Sentinel 的理念是开发者只需要关注资源的定义，当资源定义成功后可以动态增加各种流控降级规则。Sentinel 提供DataSource扩展的方式修改规则配置，DataSource扩展的实现有push模式和pull模式，推荐设置规则后将规则推送到统一的规则中心。
+
+生产环境下一般更常用的是 push 模式的数据源。对于 push 模式的数据源,如远程配置中心（ZooKeeper, Nacos, Apollo等等），推送的操作不应由 Sentinel 客户端进行，而应该经控制台统一进行管理，直接进行推送，数据源仅负责获取配置中心推送的配置并更新到本地。
+
+
+
+<img src="image/sentinel-dashboard_7.png" alt="sentinel-dashboard_7" style="zoom:50%;" />
+
+
+
+接下来以Sentinel集成到Nacos中举例，Nacos相关知识详见第五章。
 
 
 
 ### 7.8.1 业务应用注册Nacos
 
-业务应用启动时注册Nacos，Nacos将Sentinel规则配置推送到业务应用，再加载到内存。
+业务应用启动时注册Nacos，Nacos将Sentinel规则配置推送到业务应用，再加载到本地内存中。
+
+- step1 pom.xml中加入jar包
+
+  ```xml
+  <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+  </dependency>
+  
+  <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+  </dependency>
+  
+  <dependency>
+      <groupId>com.alibaba.csp</groupId>
+      <artifactId>sentinel-datasource-nacos</artifactId>
+  </dependency>
+  ```
+
+- step2 应用启动时加载Nacos配置，将配置信息转换成Sentinel规则加载。
+
+  ```java
+  @SpringBootApplication
+  public class Application {
+  
+      public static void main(String[] args) {
+          SpringApplication.run(Application.class, args);
+      }
+  
+      @PostConstruct
+      private static void loadRules() {
+          String remoteAddress = "127.0.0.1:8848";
+          String groupId = "DEFAULT_GROUP";
+          String dataId = "gupao-sentinel";
+          ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new NacosDataSource<>(remoteAddress, groupId, dataId,
+                  source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
+                  }));
+          FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
+      }
+  }
+  ```
+
+到此，Sentinel 的各种流控降级规则已经集成到Nacos进行管理，可以通过Nacos的控制台进行修改。
+
+<img src="image/sentinel-dashboard_6.jpg" alt="sentinel-dashboard_6" style="zoom:50%;" />
+
+虽然Nacos控制台提供了修改配置的能力，但笔者强烈不建议这么操作，手动修改配置危险系数高。可以通过Sentinel 控制台集成Nacos，所有新增编辑规则操作都在Sentinel 控制台上完成。在Sentinel 控制台编辑规则后，会推送到Nacos，Nacos会推送给业务应用进行更新本地内存中保存的规则。
 
 
 
 ### 7.8.2 Sentinel 控制台集成Nacos
 
-虽然Nacos控制台提供了修改配置的能力，但笔者强烈不建议这么操作，手动修改配置危险系数高。可以通过Sentinel 控制台集成Nacos，在Sentinel 控制台编辑规则后，会推送到Nacos，再由Nacos推送给业务应用。
+- 下载Sentinel 控制台的源码，从官网`https://github.com/alibaba/Sentinel`下载源码，代码在sentinel-dashboard目录中。
+
+- 修改源码，加入Nacos相关配置
+
+  - Step1 修改pom.xml中sentinel-datasource-nacos的依赖，去除`<scope>test</scope>`。
+
+    ```xml
+    <!-- for Nacos rule publisher sample -->
+    <dependency>
+        <groupId>com.alibaba.csp</groupId>
+        <artifactId>sentinel-datasource-nacos</artifactId>
+        <!--<scope>test</scope>-->
+    </dependency>
+    ```
+
+  - Step2 修改`webapp/resources/app/scripts/directives/sidebar/sidebar.html`
+
+    ```html
+    <li ui-sref-active="active" ng-if="!entry.isGateway">
+      <a ui-sref="dashboard.flowV1({app: entry.app})">
+        <i class="glyphicon glyphicon-filter"></i>&nbsp;&nbsp;流控规则</a>
+    </li>
+    ```
+
+    修改为：
+
+    ```html
+    <li ui-sref-active="active" ng-if="!entry.isGateway">
+      <a ui-sref="dashboard.flow({app: entry.app})">
+        <i class="glyphicon glyphicon-filter"></i>&nbsp;&nbsp;流控规则</a>
+    </li>
+    ```
+
+  - Step3 添加对Nacos的扩展代码
+
+    - 创建Nacos的配置类，Nacos的SERVER_ADDR、GROUP_ID、DATA_ID根据实际情况修改。GROUP_ID、DATA_ID需要对应业务应用注册的名称。
+
+    ```java
+    @Configuration
+    public class NacosConfig {
+      
+      	public static final String GROUP_ID = "DEFAULT_GROUP";
+        public static final String DATA_ID = "-sentinel";
+    
+        @Bean
+        public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
+            return JSON::toJSONString;
+        }
+    
+        @Bean
+        public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
+            return s -> JSON.parseArray(s, FlowRuleEntity.class);
+        }
+    
+        @Bean
+        public ConfigService nacosConfigService() throws Exception {
+            Properties properties = new Properties();
+            properties.put(PropertyKeyConst.SERVER_ADDR, "localhost");
+            return ConfigFactory.createConfigService(properties);
+        }
+    }
+    ```
+
+    - 创建Nacos配置拉取的实现类
+
+    ```java
+    @Component("flowRuleNacosProvider")
+    public class FlowRuleNacosProvider implements DynamicRuleProvider<List<FlowRuleEntity>> {
+    
+        @Autowired
+        private ConfigService configService;
+        @Autowired
+        private Converter<String, List<FlowRuleEntity>> converter;
+    
+        @Override
+        public List<FlowRuleEntity> getRules(String appName) throws Exception {
+            String rules = configService.getConfig(appName + NacosConfig.DATA_ID, NacosConfig.GROUP_ID, 3000);
+            if (StringUtil.isEmpty(rules)) {
+                return new ArrayList<>();
+            }
+            return converter.convert(rules);
+        }
+    }
+    ```
+
+    - 创建Nacos配置推送的实现类
+
+    ```java
+    @Component("flowRuleNacosPublisher")
+    public class FlowRuleNacosPublisher implements DynamicRulePublisher<List<FlowRuleEntity>> {
+    
+        @Autowired
+        private ConfigService configService;
+        @Autowired
+        private Converter<List<FlowRuleEntity>, String> converter;
+    
+        @Override
+        public void publish(String app, List<FlowRuleEntity> rules) throws Exception 		 {
+            if (rules == null) {
+                return;
+            }
+            configService.publishConfig(app + NacosConfig.DATA_ID, NacosConfig.GROUP_ID, converter.convert(rules));
+        }
+    }
+    ```
+
+到此，Sentinel 控制台已集成到Nacos，通过源码启动Sentinel 控制台。Nacos同时还完成对Sentinel 规则持久化的工作，重启Sentinel 控制台之后降级限流规则还在，修改规则业务应用也会立即生效。
 
 
 
