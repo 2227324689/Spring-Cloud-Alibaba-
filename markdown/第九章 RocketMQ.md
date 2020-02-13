@@ -199,7 +199,7 @@ Spring Cloud Stream 架构图如图9-1 所示，应用程序通过Spring Cloud S
 
 
 
-Spring Cloud Stream 核心由四部分构成：Spring Framework 中的**Spring Messaging**和**Spring Integration**、Spring Cloud Stream中的**Binders**和**Bindings**。
+Spring Cloud Stream 的实现是基于发布/订阅机制，核心由四部分构成：Spring Framework 中的**Spring Messaging**和**Spring Integration**、Spring Cloud Stream中的**Binders**和**Bindings**。
 
 - Spring Messaging：Spring Framework 中统一消息的编程模型，其核心对象如下：
   - Message：消息对象，包含消息头 Header 和消息体 Payload 
@@ -243,17 +243,39 @@ Spring Cloud Alibaba RocketMQ的架构图如图9-2，总体分为四个部分：
 
 ### 9.2.1 Spring Cloud Stream 消息发送流程
 
+Spring Cloud Stream 消息发送流程分为发送、订阅、分发、委派、消息处理几个步骤，如图9-3 所示：
+
+<img src="image/rocketmq_architecture_14.jpg" alt="rocketmq_architecture_14" style="zoom:50%;" />
+
+<center>图9-3 Spring Cloud Stream 消息发送流程图</center>
+
+
+
 - 业务代码中调用 MessageChannel 接口的 Send() 方法，例如`source.output().send(message);`
 
 ```java
+public interface Source {
+
+    /**
+     * Name of the output channel.
+     */
+    String OUTPUT = "output";
+
+    /**
+     * @return output channel
+     */
+    @Output(Source.OUTPUT)
+    MessageChannel output();
+}
+
 public interface MessageChannel {
-			long INDEFINITE_TIMEOUT = -1;
-			
-			default boolean send(Message<?> message) {
-        		return send(message, INDEFINITE_TIMEOUT);
-      }
-      
-      boolean send(Message<?> message, long timeout);
+    long INDEFINITE_TIMEOUT = -1;
+
+    default boolean send(Message<?> message) {
+      	return send(message, INDEFINITE_TIMEOUT);
+    }
+
+    boolean send(Message<?> message, long timeout);
 }
 ```
 
@@ -1113,7 +1135,7 @@ public class OrderlyController {
 
 为了简化代码，模拟按顺序依次发送创建、支付、退款消息到`TopicTest`。
 
-这里发送顺序消息的代码，相比9.1.2章节中发送普通消息，修改了两处地方：
+这里发送顺序消息的代码，相比9.1.3章节中发送普通消息的代码，修改了两处地方：
 
 1. spring.propeties配置文件中指定`producer.sync=true`，默认是异步发送，此处改为同步发送。
 2. MessageBuilder 设置Header信息头，表示这是一条顺序消息，将消息固定地发送到第0个消息队列。
@@ -1140,16 +1162,14 @@ public class ConsumerApplication {
 
 ```properties
 server.port=8082
-
 spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
-
 spring.cloud.stream.bindings.input.destination=TopicTest
 spring.cloud.stream.bindings.input.group=test-group1
 # 指定顺序消费
 spring.cloud.stream.rocketmq.bindings.input.consumer.orderly=true
 ```
 
-相比9.1.2章节中消费普通消息，仅修改了spring.properties配置文件`consumer.orderly=true`，默认是并发消费，此处改成顺序消费。
+相比9.1.4章节中消费普通消息，仅修改了spring.properties配置文件`consumer.orderly=true`，默认是并发消费，此处改成顺序消费。
 
 程序运行之后查看控制台日志的输出，也是按顺序打印出来的。
 
@@ -1239,37 +1259,40 @@ RocketMQ 中除顺序消息外，还支持事物消息和延迟消息，非这3�
 轮询机制的原理是路由信息`TopicPublishInfo`中维护了一个计数器`sendWhichQueue`，每发送一次消息需要查询一次路由，计算器就进行+1，通过计算器的值index与队列的数量取模计算来实现轮询算法。
 
 ```java
-// TopicPublishInfo#selectOneMessageQueue
-public MessageQueue selectOneMessageQueue(final String lastBrokerName) {
-  	// 第一次执行时lastBrokerName = null
-    if (lastBrokerName == null) {
-        return selectOneMessageQueue();
-    } else {
-        int index = this.sendWhichQueue.getAndIncrement();
-        for (int i = 0; i < this.messageQueueList.size(); i++) {
-            int pos = Math.abs(index++) % this.messageQueueList.size();
-            if (pos < 0)
-                pos = 0;
-            MessageQueue mq = this.messageQueueList.get(pos);
-          	// 当前选中的Queue所在broker，不是上次发送的broker
-            if (!mq.getBrokerName().equals(lastBrokerName)) {
-                return mq;
+public class TopicPublishInfo {
+    public MessageQueue selectOneMessageQueue(final String lastBrokerName) {
+        // 第一次执行时lastBrokerName = null
+        if (lastBrokerName == null) {
+            return selectOneMessageQueue();
+        } else {
+            int index = this.sendWhichQueue.getAndIncrement();
+            for (int i = 0; i < this.messageQueueList.size(); i++) {
+                int pos = Math.abs(index++) % this.messageQueueList.size();
+                if (pos < 0)
+                    pos = 0;
+                MessageQueue mq = this.messageQueueList.get(pos);
+                // 当前选中的Queue所在broker，不是上次发送的broker
+                if (!mq.getBrokerName().equals(lastBrokerName)) {
+                    return mq;
+                }
             }
+            return selectOneMessageQueue();
         }
-        return selectOneMessageQueue();
     }
-}
 
-public MessageQueue selectOneMessageQueue() {
-    int index = this.sendWhichQueue.getAndIncrement();
-    int pos = Math.abs(index) % this.messageQueueList.size();
-    if (pos < 0)
-      pos = 0;
-    return this.messageQueueList.get(pos);
+    public MessageQueue selectOneMessageQueue() {
+        int index = this.sendWhichQueue.getAndIncrement();
+        int pos = Math.abs(index) % this.messageQueueList.size();
+        if (pos < 0)
+          pos = 0;
+        return this.messageQueueList.get(pos);
+    }
+  
+  	// 省略...
 }
 ```
 
-轮询算法简单好用，但有个弊端。如果选择的队列是在宕机的broker上会导致消息发送失败，即使消息发送重试的时候重新选择队列也可能还是在宕机的broker上，这样无法规避发送失败的情况，所以有了故障规避机制来解决，后续章节会仔细讲解。
+轮询算法简单好用，但有个弊端。如果轮询选择的队列是在宕机的broker上会导致消息发送失败，即使消息发送重试的时候重新选择队列也可能还是在宕机的broker上，这样无法规避发送失败的情况，所以有了故障规避机制来解决，后续9.7.2章节会仔细讲解。
 
 
 
@@ -1284,20 +1307,36 @@ RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费�
 顺序消费也称为有序消费，原理是同一个消息队列只允许Consumer中的一个消费线程拉取消费。Consumer中有个消费线程池，多个线程会同时消费消息。在顺序消费的场景下消费线程请求到broker时会先申请独占锁，拿到锁的请求则允许消费。
 
 ```java
-// ConsumeMessageOrderlyService#ConsumeRequest#run
-
-private final Lock lockConsume = new ReentrantLock();
-
-try {
-    this.processQueue.getLockConsume().lock();
-    if (this.processQueue.isDropped()) {
-        break;
+public class ConsumeMessageOrderlyService implements ConsumeMessageService {
+		// 省略...
+  
+  	class ConsumeRequest implements Runnable {
+      	@Override
+        public void run() {
+          	// 省略...
+          	try {
+                this.processQueue.getLockConsume().lock();
+                if (this.processQueue.isDropped()) {
+                    break;
+                }
+                status = messageListener
+                  	.consumeMessage(Collections.unmodifiableList(msgs), context);
+            } catch (Throwable e) {
+                hasException = true;
+            } finally {
+                this.processQueue.getLockConsume().unlock();
+            }
+        }
     }
-    status = messageListener.consumeMessage(Collections.unmodifiableList(msgs), context);
-} catch (Throwable e) {
-    hasException = true;
-} finally {
-    this.processQueue.getLockConsume().unlock();
+}
+
+public class ProcessQueue {
+  	private final Lock lockConsume = new ReentrantLock();
+  
+  	public Lock getLockConsume() {
+        return lockConsume;
+    }
+  	// 省略...
 }
 ```
 
@@ -1337,7 +1376,7 @@ RocketMQ不保证消息不被重复消费，如果业务对消费重复非常敏
 
 此类问题都是事务问题，可以简单理解为一个表的数据更新后，如何保证另外一个表的数据也更新成功？如果是使用同一个数据库实例，那问题很简单，可以使用本地事务来解决，spring的`@Transactional`注解就能支持。
 
-```
+```sql
 begin transaction 
 	insert into 订单表 values(xxx);
 	update 库存表 set xxx where xxx;
