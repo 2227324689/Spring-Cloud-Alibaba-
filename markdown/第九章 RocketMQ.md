@@ -128,7 +128,40 @@ public class SendController {
 }
 ```
 
-@EnableBinding({Source.class}) 表示绑定配置文件中名称为output的 Binding，发送http请求 `http://localhost:8081/send?msg=tcever` 将消息发送到 RocketMQ 中。
+@EnableBinding({Source.class}) 表示绑定配置文件中名称为output的消息通道Binding，Source类中定义的消息通道名称为output。发送http请求 `http://localhost:8081/send?msg=tcever` 将消息发送到 RocketMQ 中。
+
+实际开发场景中会存在多个发送消息通道，可以自定义消息通道的名称，参考Source类自定义一个接口，修改通道名称和相关配置即可。
+
+```java
+public interface OrderSource {
+
+    String OUTPUT = "orderOutput";
+
+    @Output(OrderSource.OUTPUT)
+    MessageChannel output();
+}
+
+@EnableBinding({Source.class, OrderSource.class})
+@SpringBootApplication
+public class ProducerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ProducerApplication.class, args);
+    }
+}
+```
+
+```properties
+server.port=8081
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.output.destination=TopicTest
+spring.cloud.stream.rocketmq.bindings.output.producer.group=demo-group
+
+spring.cloud.stream.bindings.orderOutput.destination=TopicOrder
+spring.cloud.stream.rocketmq.bindings.orderOutput.producer.group=order-group
+```
+
+到此，就可以添加一个自定义的发送消息通道，使用orderOutput 消息会发送到TopicOrder 中。
 
 
 
@@ -181,7 +214,46 @@ public class ConsumerApplication {
 }
 ```
 
-@EnableBinding({Sink.class}) 表示绑定配置文件中名称为input的 Binding，@StreamListener 表示定义一个消息监听器，接收 RocketMQ 中的消息。
+@EnableBinding({Sink.class}) 表示绑定配置文件中名称为input的 消息通道Binding，Sink类中定义消息通道的名称为input，@StreamListener 表示定义一个消息监听器，接收 RocketMQ 中的消息。
+
+实际开发场景中同样会存在多个接收消息通道，可以自定义消息通道的名称，参考Sink类自定义一个接口，修改通道名称和相关配置即可。
+
+```java
+public interface InputChannel {
+
+    String USER_INPUT = "userInput";
+    String ORDER_INPUT = "orderInput";
+
+    @Input(InputChannel.USER_INPUT)
+    SubscribableChannel userInput();
+
+    @Input(InputChannel.ORDER_INPUT)
+    SubscribableChannel orderInput();
+}
+
+@EnableBinding({ Sink.class, InputChannel.class})
+@SpringBootApplication
+public class Application {
+
+    @StreamListener(value = InputChannel.ORDER_INPUT)
+    public void receive(String receiveMsg) {
+        System.out.println("receive: " + receiveMsg);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
+
+```properties
+server.port=8082
+spring.cloud.stream.rocketmq.binder.name-server=127.0.0.1:9876
+spring.cloud.stream.bindings.orderInput.destination=TopicOrder
+spring.cloud.stream.bindings.orderInput.group=order-group
+```
+
+在自定义的InputChannel 类中定义了两个接收消息通道，使用orderInput 会收到TopicOrder 中的消息。
 
 
 
@@ -193,7 +265,7 @@ Spring Cloud Stream 架构图如图9-1 所示，应用程序通过Spring Cloud S
 
 
 
-![spring-cloud-stream_0](image/spring-cloud-stream_0.png)
+![spring-cloud-stream_0](第九章 RocketMQ.assets/spring-cloud-stream_0.png)
 
 <center>图9-1 Spring Cloud Stream 架构图</center>
 
@@ -231,7 +303,7 @@ Spring Cloud Alibaba RocketMQ的架构图如图9-2，总体分为四个部分：
 - Producer Binder：目标绑定器，对发送通道过来的消息发送到RocketMQ 消息服务器，由Spring Cloud Alibaba团队按照 Spring Cloud Stream的标准协议实现。
 - Consumer Binder：目标绑定器，对接收到RocketMQ 消息服务器的消息推送给订阅通道，由Spring Cloud Alibaba团队按照 Spring Cloud Stream的标准协议实现。
 
-![spring-cloud-stream_2](image/spring-cloud-stream_2.png)
+![spring-cloud-stream_2](第九章 RocketMQ.assets/spring-cloud-stream_2.png)
 
 <center>图9-2 Spring Cloud Alibaba RocketMQ 架构图</center>
 
@@ -245,7 +317,7 @@ Spring Cloud Alibaba RocketMQ的架构图如图9-2，总体分为四个部分：
 
 Spring Cloud Stream 消息发送流程分为发送、订阅、分发、委派、消息处理几个步骤，如图9-3 所示：
 
-<img src="image/rocketmq_architecture_14.jpg" alt="rocketmq_architecture_14" style="zoom:50%;" />
+<img src="第九章 RocketMQ.assets/rocketmq_architecture_14.jpg" alt="rocketmq_architecture_14" style="zoom:50%;" />
 
 <center>图9-3 Spring Cloud Stream 消息发送流程图</center>
 
@@ -809,7 +881,13 @@ DefaultMessageListenerOrderly 对象收到RocketMQ 消息，会先回调 Binding
 
 ### 9.2.4 Spring Cloud Stream 消息订阅流程
 
-对于Spring Cloud Stream 的消息模型来说，接收消息中间件的消息也是发布/订阅模型，接收到的消息先发送到MessageChannel ，由订阅的MessageChannel 通过Dispatcher转发到对应的 MessageHandler 进行处理。
+在Spring Cloud Stream 中接收消息和发送消息的消息模型是一致的，由Binder 中接收到的消息先发送到MessageChannel ，由订阅的MessageChannel 通过Dispatcher转发到对应的 MessageHandler 进行处理。
+
+Spring Cloud Stream 消息接收流程图如9-4 ：
+
+<img src="第九章 RocketMQ.assets/rocketmq_architecture_15.jpg" alt="rocketmq_architecture_15" style="zoom:50%;" />
+
+<center>图9-4 Spring Cloud Stream 消息接收流程图</center>
 
 
 
@@ -1002,11 +1080,11 @@ private void registerHandlerMethodOnListenedChannel(Method method,
 
 常见的消息中间件Kafka、RabbitMQ、RocketMQ 等都是基于发布/订阅机制，消息发送者（Producer）把消息发送到消息服务器，消息消费者（Consumer）从消息服务器订阅感兴趣的消息。这个过程中消息发送者和消息消费者是客户端，消息服务器是服务端，客户端与服务端双方都需要通过注册中心感知对方的存在。
 
-![9-1](image/rocketmq_architecture_1.png)
+![9-1](第九章 RocketMQ.assets/rocketmq_architecture_1.png)
 
-<center>图9-3 RocketMQ 部署架构图</center>
+<center>图9-5 RocketMQ 部署架构图</center>
 
-RocketMQ部署架构上主要分为四部分，如图9-3 所示:
+RocketMQ部署架构上主要分为四部分，如图9-5 所示:
 
 - Producer：消息发布的角色，主要负责把消息发送到Broker，支持分布式集群方式部署。
 - Consumer：消息消费者的角色，主要负责从Broker订阅消息消费，支持分布式集群方式部署。
@@ -1041,11 +1119,11 @@ NameServer是一个非常简单的Topic路由注册中心，其角色类似dubbo
 
 在Kafka中Topic是逻辑概念，分区是物理概念。1个topic可以设置多个分区（partition），每个分区可以设置多个副本（replication），即有1个master分区 + 多个slave分区。
 
-Kafka的部署拓扑图如图9-4：
+Kafka的部署拓扑图如图9-6：
 
-<img src="image/rocketmq_architecture_11.jpg" style="zoom:50%;" />
+<img src="第九章 RocketMQ.assets/rocketmq_architecture_11.jpg" style="zoom:50%;" />
 
-<center>图9-4 Kafka 拓扑图</center>
+<center>图9-6 Kafka 拓扑图</center>
 
 
 
@@ -1055,11 +1133,11 @@ Kafka的部署拓扑图如图9-4：
 
 在RocketMQ中Topic也是逻辑概念，队列是物理概念（对应Kafka中的分区）。1个topic可以设置多个队列（queue），每个队列也可以有多个副本，即有1个master队列 + 多个slave队列。
 
-RocketMQ的部署拓扑图如图9-5：
+RocketMQ的部署拓扑图如图9-7 ：
 
-<img src="image/rocketmq_architecture_12.jpg" style="zoom:50%;" />
+<img src="第九章 RocketMQ.assets/rocketmq_architecture_12.jpg" style="zoom:50%;" />
 
-<center>图9-5 RocketMQ 拓扑图</center>
+<center>图9-7 RocketMQ 拓扑图</center>
 
 为了方便对比，同样创建了一个Topic取名为TopicA，队列是3个，副本数也是2个，但构成Broker集群的实例有9个。
 
@@ -1092,7 +1170,7 @@ NameServer的设计目标是让网络通信变简单，从而使性能得到极�
 
 ### 9.4.1 顺序消息的使用场景
 
-日常中需要保证顺序的应用场景非常多，例如交易系统中的订单创建、支付、退款等流程，先创建订单才能支付，支付完成的订单才能退款，这需要顺序保证先进先出（First In First Out，缩写 FIFO）。例如数据库的BinLog消息，数据库执行新增语句、修改语句，BinLog消息的顺序也必须保证是新增消息、修改消息。
+日常中需要保证顺序的应用场景非常多。例如交易系统中的订单创建、支付、退款等流程，先创建订单才能支付，支付完成的订单才能退款，这需要顺序保证先进先出（First In First Out，缩写 FIFO）。例如数据库的BinLog消息，数据库执行新增语句、修改语句，BinLog消息的顺序也必须保证是新增消息、修改消息。
 
 
 
@@ -1185,7 +1263,7 @@ TopicTest receive: 退款，receiveTime = 1581359411185
 
 RocketMQ的顺序消息分2种情况，局部有序和全局有序，前面的例子就是局部有序场景。
 
-- 局部有序：指发送同一个队列的消息有序，可以在发送消息时指定队列，在消费消息时也按顺序消费。 例如同一个订单ID的消息要保证有序，不同订单ID的消息可以无序，相互不影响。
+- 局部有序：指发送同一个队列的消息有序，可以在发送消息时指定队列，在消费消息时也按顺序消费。 例如同一个订单ID的消息要保证有序，不同订单ID的消息没有约束相互不影响，不同订单ID之间的消息是并行的。
 - 全局有序：设置topic只有1个队列可以来实现全局有序，创建Topic时手动设置。 此类场景极少，性能差通常不推荐使用。
 
 
@@ -1384,9 +1462,7 @@ end transaction
 commit;
 ```
 
-但实际场景不是这么简单，互联网应用的流量大，系统规模通常比较大，会存在许多数据库实例、分库分表等。我们需要修改的表往往不在同一个数据库实例或同一个数据库中，此时就不能使用本地事务来解决问题，这就需要用到分布式事务。
-
-RocketMQ的一大特点就是支持事务消息，支持一些分布式事务场景，下面我们看下RocketMQ事务消息的具体用法。
+但实际场景不是这么简单，互联网应用的流量大，系统规模通常比较大，会存在许多数据库实例、分库分表等。我们需要修改的表往往不在同一个数据库实例或同一个数据库中，此时就不能使用本地事务来解决问题，这就需要用到分布式事务。RocketMQ的一大特点就是支持事务消息，支持一些分布式事务场景，下面我们看下RocketMQ事务消息的具体用法。
 
 
 
@@ -1519,7 +1595,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 本地事务执行成功，发送提交请求消息，消息会投递给Consumer，如图9-6 所示：
 
-![rocketmq_architecture_8](image/rocketmq_architecture_8.jpg)
+![rocketmq_architecture_8](第九章 RocketMQ.assets/rocketmq_architecture_8.jpg)
 
 <center>图9-6 提交事务消息流程图</center>
 
@@ -1527,7 +1603,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 本地事务执行失败，发送回滚请求消息，消息不会投递给Consumer，如图9-7所示：
 
-![rocketmq_architecture_9](image/rocketmq_architecture_9.jpg)
+![rocketmq_architecture_9](第九章 RocketMQ.assets/rocketmq_architecture_9.jpg)
 
 <center>图9-7 回滚事务消息流程图</center>
 
@@ -1535,7 +1611,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 本地事务状态未知，网络故障或Producer宕机，Broker未收到二次确认的消息。由Broker端发请求给Producer发起消息回查，确认提交或回滚。如果消息状态一直未被确认，需要人工介入处理，如图9-8 所示：
 
-![rocketmq_architecture_10](image/rocketmq_architecture_10.jpg)
+![rocketmq_architecture_10](第九章 RocketMQ.assets/rocketmq_architecture_10.jpg)
 
 <center>图9-8 回查事务消息状态-流程图</center>
 
@@ -1545,7 +1621,7 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 
 ##9.6 高性能设计
 
-RocketMQ的高性能设计体现在三个方面：数据存储设计、动态伸缩的能力、消息实时投递。数据存储设计包括顺序写盘、消费队列设计、消息跳跃读、数据零拷贝。动态伸缩的能力包括消息队列扩容、Broker集群扩容。
+经过阿里巴巴多年双11验证，RocketMQ 在稳定的基础上一直保持非常高的性能，这是诸多企业在消息中间件方面选择使用的RocketMQ的重要原因。 RocketMQ的高性能设计体现在三个方面：数据存储设计、动态伸缩的能力、消息实时投递。数据存储设计包括顺序写盘、消费队列设计、消息跳跃读、数据零拷贝。动态伸缩的能力包括消息队列扩容、Broker集群扩容。
 
 
 
@@ -1553,7 +1629,7 @@ RocketMQ以高吞吐量著称，这主要得益于其数据存储方式的设�
 
 RocketMQ 存储设计如图9-9 所示：
 
-![rocketmq_architecture_4](image/rocketmq_architecture_4.png)
+![rocketmq_architecture_4](第九章 RocketMQ.assets/rocketmq_architecture_4.png)
 
 <center>图9-9 RocketMQ 存储设计</center>
 
@@ -1574,7 +1650,7 @@ RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所�
 
 
 
-<img src="image/rocketmq_architecture_13.jpg" alt="rocketmq_architecture_13" style="zoom:50%;" />
+<img src="第九章 RocketMQ.assets/rocketmq_architecture_13.jpg" alt="rocketmq_architecture_13" style="zoom:50%;" />
 
 <center>图9-10 RocketMQ CommitLog 文件</center>
 
@@ -1628,7 +1704,7 @@ ConsumeQueue负责存储消费者队列文件，在消息写入到commitlog文�
 
 在集群模式下，broker会记录客户端对每个消费队列的消费偏移量，定位到ConsumeQueue里相应的记录，并通过CommitLog Offset定位到commitlog里的该条消息，如图9-11 所示：
 
-![rocketmq_architecture_6](image/rocketmq_architecture_6.png)
+![rocketmq_architecture_6](第九章 RocketMQ.assets/rocketmq_architecture_6.png)
 
 <center>图9-11 RocketMQ ConsumeQueue 设计</center>
 
@@ -1656,15 +1732,17 @@ RocketMQ中的文件读写主要就是通过Java NIO中MappedByteBuffer来进行
 
 ### 9.6.5 动态伸缩能力
 
+随着业务增长，线上流量会出现快速增长，经常出现的情况是已有的服务器集群能力不足以支撑现有的流量，此时就需要增加服务器（扩容）。还例如大促、秒杀等活动，流量上涨持续一段时间后又会回归到正常情况，为了避免服务器资源（成本）浪费，此时就需要减少服务器（缩容），这些场景会使用到RocketMQ 中动态伸缩能力。
+
 动态伸缩（水平扩容）能力是分布式应用很重要的能力，RocketMQ中动态伸缩能力主要体现在消息队列扩容和集群扩容两个方面，需要根据实际场景进行选择。
 
-- 消息队列扩容
+- 消息队列扩容/缩容
 
-一个Consumer实例，可以同时消费多个消息队列中的消息。假如一个Topic的消息量特别大，但broker集群水位压力还是很低，就可以对该Topic的消息队列进行扩容，Topic的消息队列数跟消费速度成正比。消息队列数在创建Topic时可以指定，也可以在运行中修改。
+一个Consumer实例，可以同时消费多个消息队列中的消息。如果一个Topic的消息量特别大，但broker集群水位压力还是很低，就可以对该Topic的消息队列进行扩容，Topic的消息队列数跟消费速度成正比。消息队列数在创建Topic时可以指定，也可以在运行中修改。相反，如果一个Topic的消息量特别小，但该Topic的消息队列数很多，则可以对该Topic消息队列缩容。
 
-- Broker集群扩容
+- Broker集群扩容/缩容
 
-同样假如一个Topic的消息量特别大，但broker集群水位很高，此时就需要对Broker机器扩容。扩容方式很简单，直接加机器部署Broker即可。新的Broker启动后会向NameServer注册，Producer和Consumer通过NameServer发现新Broker并更新路由信息。
+同样如果一个Topic的消息量特别大，但broker集群水位很高，此时就需要对Broker机器扩容。扩容方式很简单，直接加机器部署Broker即可。新的Broker启动后会向NameServer注册，Producer和Consumer通过NameServer发现新Broker并更新路由信息。相反，如果broker集群水位很低，则可以适当减少broker服务器来节约成本。
 
 
 
@@ -2149,7 +2227,7 @@ RocketMQ的consumer在拉取消息时，broker会判断Master服务器的消息�
 
 
 
-通常故障恢复需要一定的时间，如果不间断的重试，重试又失败的情况下会占用并浪费资源，所以RocketMQ的消费重试机制采用时间衰减的方式。首次在10秒后重试消费，如果消费成功则不再重试，如果消费失败则继续重试消费，第二次在30秒后重试消费，依次类推下去，每次重试的间隔时间都会加长，直到超出最大重试次数（默认16次），则进入死信队列不再重试。重试消费过程中的间隔时间使用了定时消息，重试的消息数据并非直接写入重试队列，而是先写入定时消息队列，再通过定时消息的功能转发到重试队列。
+通常故障恢复需要一定的时间，如果不间断的重试，重试又失败的情况下会占用并浪费资源，所以RocketMQ的消费重试机制采用时间衰减的方式，使用了自身定时消费的能力。首次在10秒后重试消费，如果消费成功则不再重试，如果消费失败则继续重试消费，第二次在30秒后重试消费，依次类推下去，每次重试的间隔时间都会加长，直到超出最大重试次数（默认16次），则进入死信队列不再重试。重试消费过程中的间隔时间使用了定时消息，重试的消息数据并非直接写入重试队列，而是先写入定时消息队列，再通过定时消息的功能转发到重试队列。
 
 RocketMQ 支持定时消息（也称延迟消息），延迟消息是指消息发送之后，等待指定的延迟时间后再进行消费。除了支持消费重试机制以外，延迟消息也适用于一些处理异步任务的场景，例如调用某个服务，调用结果需要异步在1分钟内返回，此时就可以发送一个延迟消息，延迟时间为1分钟，等1分钟后收到该消息去查询上次的调用结果是否返回。
 
@@ -2162,5 +2240,41 @@ RocketMQ不支持任意时间精确的延迟消息，仅支持1s、5s、10s、30
 广播模式的消费进度保存在客户端本地，集群模式的消费进度保存在broker上。集群模式中RocketMQ中采用ACK机制（即消息确认）确保消息一定被消费。在消息投递过程中，不是消息从broker发送到Consumer就算消费成功了，需要Consumer明确给broker返回消费成功状态才算。如果从broker发送到Consumer后，已经完成了业务处理，但在给broker返回消费成功状态之前，Consumer发生宕机或断电断网等情况，broker未收到反馈则不会保存消费进度。Consumer重启之后，消息会重新投递，此时也会出现重复消费的场景，前面讲过消息幂等性需要业务自行保证。
 
 
+
+### 9.7.8 集群部署
+
+RocketMQ 中有四种不同的集群搭建方式：
+
+- 单Master模式
+
+  在9.1.2章节中样例就是采用单Master模式，这种方式风险较大，一旦Broker重启或者宕机时，会导致整个服务不可用。不建议线上环境使用，仅可以用于本地测试。
+
+  
+
+- 多Master模式
+
+  一个集群无Slave，全是Master，例如2个Master或者3个Master，也不建议线上环境使用，这种模式的优缺点如下：
+
+  - 优点：配置简单，单个Master宕机或重启维护对应用无影响，在磁盘配置为RAID10时，即使机器宕机不可恢复情况下，由于RAID10磁盘非常可靠，消息也不会丢（异步刷盘丢失少量消息，同步刷盘一条不丢），性能最高；
+  - 缺点：单台机器宕机期间，这台机器上未被消费的消息在机器恢复之前不可订阅，消息实时性会受到影响。
+
+  
+
+- 异步复制的多Master多Slave模式
+
+  每个Master配置一个Slave，有多对Master-Slave，主从复制采用异步复制方式，主备有短暂消息延迟（毫秒级），这种模式的优缺点如下：
+
+  - 优点：即使磁盘损坏，消息丢失的非常少，且消息实时性不会受影响，同时Master宕机后，消费者仍然可以从Slave消费，而且此过程对应用透明，不需要人工干预，性能同多Master模式几乎一样；
+
+  - 缺点：Master宕机，磁盘损坏情况下会丢失少量消息。
+
+    
+
+- 同步复制的多Master多Slave模式
+
+  每个Master配置一个Slave，有多对Master-Slave，主从复制采用同步复制方式，即只有主备都写成功，才向应用返回成功。线上推荐使用异步刷盘 + 同步复制的多Master多Slave模式，这种模式的优缺点如下：
+
+  - 优点：数据与服务都无单点故障，Master宕机情况下，消息无延迟，服务可用性与数据可用性都非常高；
+  - 缺点：性能比异步复制模式略低（大约低10%左右），发送单个消息的RT会略高。
 
 
