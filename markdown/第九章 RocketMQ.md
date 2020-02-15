@@ -198,7 +198,6 @@ Spring Cloud Stream 架构图如图9-1 所示，应用程序通过Spring Cloud S
 <center>图9-1 Spring Cloud Stream 架构图</center>
 
 
-
 Spring Cloud Stream 的实现是基于发布/订阅机制，核心由四部分构成：Spring Framework 中的**Spring Messaging**和**Spring Integration**、Spring Cloud Stream中的**Binders**和**Bindings**。
 
 - Spring Messaging：Spring Framework 中统一消息的编程模型，其核心对象如下：
@@ -236,7 +235,6 @@ Spring Cloud Alibaba RocketMQ的架构图如图9-2，总体分为四个部分：
 <center>图9-2 Spring Cloud Alibaba RocketMQ 架构图</center>
 
 
-
 以9.1.3章节和9.1.4章节中代码为例，通过源码深入分析Spring Cloud Alibaba RocketMQ。
 
 
@@ -248,7 +246,6 @@ Spring Cloud Stream 消息发送流程分为发送、订阅、分发、委派、
 <img src="image/rocketmq_architecture_14.jpg" alt="rocketmq_architecture_14" style="zoom:50%;" />
 
 <center>图9-3 Spring Cloud Stream 消息发送流程图</center>
-
 
 
 - 业务代码中调用 MessageChannel 接口的 Send() 方法，例如`source.output().send(message);`
@@ -1005,7 +1002,6 @@ private void registerHandlerMethodOnListenedChannel(Method method,
 ![9-1](image/rocketmq_architecture_1.png)
 
 <center>图9-3 RocketMQ 部署架构图</center>
-
 RocketMQ部署架构上主要分为四部分，如图9-3 所示:
 
 - Producer：消息发布的角色，主要负责把消息发送到Broker，支持分布式集群方式部署。
@@ -1048,7 +1044,6 @@ Kafka的部署拓扑图如图9-4：
 <center>图9-4 Kafka 拓扑图</center>
 
 
-
 例如搭建3个Broker构成一个集群，创建了一个Topic取名为TopicA，分区是3个，副本数是2个。图9-4 中part表示分区，M表示Master，S表示Slave。在Kafka中消息只能发送到Master分区中，消息发送给Topic时会发送到具体某个分区。如果是发送给part0就只会发送到Broker0这个实例，再由Broker0同步到Broker1和Broker2中的part0副本中去；如果是发送给part1就只会发送到Broker1这个实例，再由Broker1同步到Broker0和Broker2中的part1副本中去。
 
 
@@ -1060,7 +1055,6 @@ RocketMQ的部署拓扑图如图9-5：
 <img src="image/rocketmq_architecture_12.jpg" style="zoom:50%;" />
 
 <center>图9-5 RocketMQ 拓扑图</center>
-
 为了方便对比，同样创建了一个Topic取名为TopicA，队列是3个，副本数也是2个，但构成Broker集群的实例有9个。
 
 Kafka 与 RocketMQ 两者在概念上相似，但又有明显的差异：
@@ -1524,7 +1518,6 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 <center>图9-6 提交事务消息流程图</center>
 
 
-
 本地事务执行失败，发送回滚请求消息，消息不会投递给Consumer，如图9-7所示：
 
 ![rocketmq_architecture_9](image/rocketmq_architecture_9.jpg)
@@ -1532,13 +1525,11 @@ RocketMQ采用了2PC的方案来提交事务消息，第一阶段Producer向brok
 <center>图9-7 回滚事务消息流程图</center>
 
 
-
 本地事务状态未知，网络故障或Producer宕机，Broker未收到二次确认的消息。由Broker端发请求给Producer发起消息回查，确认提交或回滚。如果消息状态一直未被确认，需要人工介入处理，如图9-8 所示：
 
 ![rocketmq_architecture_10](image/rocketmq_architecture_10.jpg)
 
 <center>图9-8 回查事务消息状态-流程图</center>
-
 
 
 
@@ -1560,7 +1551,6 @@ RocketMQ 存储设计如图9-9 所示：
 
 
 
-
 ### 9.6.1 顺序写盘
 
 commitlog文件是负责存储消息数据的文件，所有Topic的消息都会先存在`{ROCKETMQ_HOME}/store/commitlog`文件夹下的文件中，消息数据写入`commitlog`文件是加锁串行追加写入。
@@ -1577,7 +1567,6 @@ RocketMQ 为了保证消息发送的高吞吐量，使用单个文件存储所�
 <img src="image/rocketmq_architecture_13.jpg" alt="rocketmq_architecture_13" style="zoom:50%;" />
 
 <center>图9-10 RocketMQ CommitLog 文件</center>
-
 
 
 文件名这样设计的目的是为了在消费消息时能够根据偏移量offset快速定位到消息存储在某个commitlog文件，从而加快消息检索速度。
@@ -1631,7 +1620,6 @@ ConsumeQueue负责存储消费者队列文件，在消息写入到commitlog文�
 ![rocketmq_architecture_6](image/rocketmq_architecture_6.png)
 
 <center>图9-11 RocketMQ ConsumeQueue 设计</center>
-
 
 
 ### 9.6.3 消息跳跃读

@@ -1,0 +1,17 @@
+
+spring:
+  application:
+    name: spring-cloud-sentinel-dynamic
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 192.168.216.128:7777
+      datasource:
+        - nacos:
+            server-addr: 192.168.216.128:8848
+            data-id: ${spring.application.name}-sentinel-flow
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+server:
+  port: 8888
