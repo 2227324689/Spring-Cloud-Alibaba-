@@ -37,3 +37,38 @@ Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案。�
 
 ## 源码说明
 
+* Dubbo部分的案例代码
+  * user-service/order-service 用于dubbo协议通信的模拟
+  * spi 分析Dubbo中SPI机制的实现
+  * springboot-consumer/springboot-provider，dubbo集成springboot的功能演示
+  * spring-cloud-dubbo-consumer/spring-cloud-dubbo-provider，spring cloud dubbo的功能演示
+* Spring Boot部分案例代码
+  * redis-spring-boot-starter， 基于Spring Boot自动装配手写starter
+  * spring -boot-conditional ， spring中的Conditional条件控制
+* Nacos作为服务注册发现的案例代码
+  * spring-boot-dubbo-nacos-sample，springboot集成dubbo实现服务注册
+  * spring-boot-nacos-discovery，springboot集成nacos作为服务消费者
+  * spring-cloud-nacos-consumer，spring cloud nacos集成dubbo作为服务消费者
+  * spring-cloud-nacos-sample，spring cloud nacos集成dubbo实现服务注册及rpc通信的案例。
+* Nacos作为配置中心的案例代码
+  * spring-cloud-nacos-config，spring cloud nacos实现配置中心
+* Sentinel案例代码
+  * spring-cloud-sentinel-dubbo-consumer， spring cloud 集成dubbo实现dubbo服务限流的消费者
+  * spring-cloud-sentinel-dubbo-provider,spring cloud 集成dubbo实现dubbo服务限流的服务提供者
+  * spring-cloud-sentinel-dynamic-rule，spring cloud sentinel实现动态规则限流。
+  * spring-cloud-sentinel-sample，spring cloud sentinel限流的基本使用。
+  * sentinel-dashboard，改造过后的sentinel-dashboard，可以实现限流规则的持久化。
+* RocketMQ案例代码
+  * spring-cloud-rocketmq ， spring cloud 集成rocketmq的案例演示。
+* Seata分布式事务解决方案的案例代码。
+  * seata-sample。 分布式事务的代码集合。
+* Spring Cloud Gateway网关案例代码。
+  * spring-cloud-gateway-sample. 网关入口
+  * spring-cloud-gateway-service.  作为网关被调用的服务。
+
+
+
+
+
+
+
