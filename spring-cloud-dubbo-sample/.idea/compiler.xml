@@ -6,14 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-cloud-dubbo-sample-provider" />
         <module name="spring-cloud-dubbo-sample-api" />
+        <module name="spring-cloud-dubbo-sample-provider" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="spring-cloud-dubbo-sample-provider" options="" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="spring-cloud-dubbo-sample" target="1.8" />
+      <module name="spring-cloud-dubbo-sample-api" target="1.7" />
+      <module name="spring-cloud-dubbo-sample-provider" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

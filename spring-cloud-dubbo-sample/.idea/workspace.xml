@@ -1,177 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb5fe750-f4e8-4d94-8218-9de3e9bbcff2" name="Default Changelist" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
+    <list default="true" id="65abd9ae-605a-4f70-82e8-bf2bb50182d6" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/spring-cloud-dubbo-sample-api/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-99">
-              <caret line="23" selection-start-line="23" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/common/extension/ExtensionLoader.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="487" selection-start-line="487" selection-end-line="487" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/config/ServiceConfig.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25155">
-              <caret line="702" selection-start-line="702" selection-end-line="702" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="936">
-              <caret line="39" column="21" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="39" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.telnet.TelnetHandler">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.http.HttpBinder">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.exchange.Exchanger">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.Dispatcher">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.Codec2">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.registry.RegistryFactory">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>findConfigedHosts</find>
-      <find>createExtension(</find>
-      <find>injectE</find>
+      <find>getCon</find>
     </findStrings>
   </component>
-  <component name="Git.Settings">
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-api/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/main/java/com/gupaoedu/book/springcloud/springclouddubbosampleprovider/SpringCloudDubboSampleProviderApplication.java" />
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-api/src/main/java/com/gupaoedu/book/springcloud/IHelloService.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/main/java/com/gupaoedu/book/springcloud/springclouddubbosampleprovider/HelloServiceImpl.java" />
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-dubbo-sample-api/src/main/java/com/gupaoedu/book/springcloud/Protocol$Adaptive.java" />
-      </list>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
     </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="E:/software/apache-maven-3.3.9" />
-        <option name="userSettingsFile" value="E:\software\apache-maven-3.3.9\conf\settings.xml" />
+        <option name="localRepository" value="D:\repository" />
+        <option name="mavenHome" value="D:/software/apache-maven-3.5.3" />
       </MavenGeneralSettings>
     </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
-      </MavenImportingSettings>
-    </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="spring-cloud-dubbo-sample-api" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="spring-cloud-dubbo-sample-api" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="spring-cloud-dubbo-sample-provider" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="spring-cloud-dubbo-sample-provider" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
   </component>
   <component name="MavenRunner">
     <option name="jreName" value="1.8" />
-    <option name="vmOptions" value="-DarchetypeCatalog=internal" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="175" />
-    <option name="y" value="43" />
-    <option name="width" value="1653" />
-    <option name="height" value="1004" />
+    <option name="x" value="290" />
+    <option name="y" value="30" />
+    <option name="width" value="1623" />
+    <option name="height" value="1002" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Performance</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Usability</id>
+          </State>
+          <State>
+            <id>Android Lint for Kotlin</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>JBoss Seam issues</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Pages Navigation Model</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,153 +122,26 @@
               <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
               <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="springcloud" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="springclouddubbosampleprovider" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-cloud-dubbo-sample" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-dubbo-sample-provider" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.apache.dubbo:dubbo:2.7.3" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.apache.dubbo:dubbo:2.7.3" type="70bed36:NamedLibraryElementNode" />
-              <item name="dubbo-2.7.3.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.apache.dubbo:dubbo:2.7.3" type="70bed36:NamedLibraryElementNode" />
-              <item name="dubbo-2.7.3.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.apache.dubbo:dubbo:2.7.3" type="70bed36:NamedLibraryElementNode" />
-              <item name="dubbo-2.7.3.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="internal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-cloud-dubbo-sample" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SearchEverywhereHistoryKey" value="RpcCon&#9;PSI&#9;JAVA://org.apache.dubbo.rpc.RpcContext&#10;RpcContext&#9;FILE&#9;jar://D:/repository/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/com/alibaba/dubbo/rpc/RpcContext.class" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -340,889 +156,573 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
     <configuration name="SpringCloudDubboSampleProviderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="spring-cloud-dubbo-sample-provider" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupaoedu.book.springcloud.springclouddubbosampleprovider.SpringCloudDubboSampleProviderApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <module name="spring-cloud-dubbo-sample-provider" />
+      <envs />
     </configuration>
-    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.9" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8">
-      <option name="UPDATING_POLICY" value="restart-server" />
-      <deployment />
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="_Default_(Template)_Project" />
-      </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="56437" />
-      </RunnerSettings>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
     </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eb5fe750-f4e8-4d94-8218-9de3e9bbcff2" name="Default Changelist" comment="" />
-      <created>1578375164741</created>
+      <changelist id="65abd9ae-605a-4f70-82e8-bf2bb50182d6" name="Default" comment="" />
+      <created>1582644697913</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1578375164741</updated>
-      <workItem from="1578375166242" duration="12035000" />
-      <workItem from="1578455114891" duration="15545000" />
-      <workItem from="1578679350914" duration="387000" />
+      <updated>1582644697913</updated>
+      <workItem from="1582644699144" duration="140000" />
+      <workItem from="1582720779138" duration="95000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27967000" />
+    <option name="totallyTimeSpent" value="235000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="175" y="43" width="1653" height="1004" extended-state="0" />
-    <editor active="true" />
+    <frame x="290" y="30" width="1623" height="1002" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4993895" visible="true" weight="0.35736877" />
-      <window_info id="Structure" order="1" sideWeight="0.50061053" side_tool="true" weight="0.35736877" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info id="Designer" order="5" />
-      <window_info id="Image Layers" order="6" />
-      <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.43589744" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4041514" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32967034" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.21821631" />
-      <window_info anchor="right" id="LuaJ" order="4" />
-      <window_info anchor="right" id="Palette" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="CDI" order="7" />
-      <window_info anchor="right" id="Database" order="8" />
-      <window_info anchor="right" id="Palette&#9;" order="9" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
-      <window_info anchor="right" id="Bean Validation" order="11" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951644" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Web" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4993895" visible="true" weight="0.35736877" />
-      <window_info id="Structure" order="2" sideWeight="0.50061053" side_tool="true" weight="0.35736877" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Designer" order="6" />
-      <window_info id="Image Layers" order="7" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.43589744" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.51282054" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32967034" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" />
-      <window_info anchor="right" id="Bean Validation" order="0" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="4" weight="0.21821631" />
-      <window_info anchor="right" id="LuaJ" order="5" />
-      <window_info anchor="right" id="Palette" order="6" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="CDI" order="8" />
-      <window_info anchor="right" id="Database" order="9" />
-      <window_info anchor="right" id="Palette&#9;" order="10" />
-      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24984187" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/test/java/com/gupaoedu/book/springcloud/springclouddubbosampleprovider/SpringCloudDubboSampleProviderApplicationTests.java" />
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_211/jre/lib/rt.jar!/sun/nio/ch/SocketChannelImpl.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/rpc/protocol/rest/RpcContextFilter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="807" column="65" selection-start-line="807" selection-start-column="65" selection-end-line="807" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-api/src/main/java/com/gupaoedu/book/springcloud/IHelloService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="8" selection-start-line="8" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-dependencies/Greenwich.SR2/spring-cloud-dependencies-Greenwich.SR2.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1053" />
-      </provider>
-    </entry>
-    <entry file="uml://MAVEN/com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT</OriginalElement>
-          <nodes>
-            <node x="0.0" y="794.5">com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT</node>
-            <node x="374.5" y="772.5">org.springframework.cloud:spring-cloud-starter:jar:unknown</node>
-            <node x="349.0" y="860.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE</node>
-            <node x="630.0" y="998.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE</node>
-            <node x="892.0" y="499.1636363636368">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE</node>
-            <node x="1233.0" y="468.8833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-ribbon:jar:2.1.3.RELEASE</node>
-            <node x="1552.0" y="591.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-ribbon:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-archaius:jar:2.1.3.RELEASE</node>
-            <node x="910.5" y="608.727272727273">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE</node>
-            <node x="1288.5" y="290.00000000000006">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE</node>
-            <node x="1606.0" y="396.5636363636363">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE/org.springframework:spring-beans:jar:5.1.9.RELEASE</node>
-            <node x="1278.5" y="512.8833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.aspectj:aspectjweaver:jar:1.9.4</node>
-            <node x="1265.0" y="382.3833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0</node>
-            <node x="1613.5" y="547.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/io.github.openfeign.form:feign-form:jar:3.8.0</node>
-            <node x="1612.0" y="6.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE</node>
-            <node x="1797.0" y="119.72727272727298">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-beans:jar:5.1.5.RELEASE</node>
-            <node x="1287.0" y="0.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-core:jar:5.1.5.RELEASE</node>
-            <node x="1579.5" y="443.5636363636363">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/commons-fileupload:commons-fileupload:jar:1.4</node>
-            <node x="1798.5" y="443.5636363636363">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/commons-fileupload:commons-fileupload:jar:1.4/commons-io:commons-io:jar:2.2</node>
-            <node x="1623.0" y="777.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.slf4j:slf4j-api:jar:1.7.26</node>
-            <node x="968.0" y="998.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3</node>
-            <node x="1276.5" y="556.8833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE</node>
-            <node x="1613.0" y="503.50000000000006">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-aop:jar:4.3.16.RELEASE</node>
-            <node x="1606.0" y="256.5636363636363">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE</node>
-            <node x="1287.0" y="138.00000000000006">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:4.3.16.RELEASE</node>
-            <node x="1287.0" y="202.00000000000006">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE</node>
-            <node x="1590.5" y="70.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE</node>
-            <node x="1287.0" y="64.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE</node>
-            <node x="1298.5" y="1042.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.javassist:javassist:jar:3.20.0-GA</node>
-            <node x="1297.5" y="910.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/io.netty:netty-all:jar:4.1.25.Final</node>
-            <node x="1309.0" y="998.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/com.google.code.gson:gson:jar:2.8.5</node>
-            <node x="1290.0" y="816.8833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.yaml:snakeyaml:jar:1.20</node>
-            <node x="901.0" y="1156.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3</node>
-            <node x="1209.0" y="1150.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3</node>
-            <node x="1168.0" y="1086.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure-compatible:jar:2.7.3</node>
-            <node x="962.5" y="904.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.netty:netty-all:jar:4.1.38.Final</node>
-            <node x="951.0" y="1236.1636363636367">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0</node>
-            <node x="1290.5" y="1194.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0/io.github.openfeign:feign-core:jar:9.7.0</node>
-            <node x="1290.0" y="1258.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0/io.github.openfeign:feign-jaxrs:jar:9.7.0</node>
-            <node x="662.5" y="576.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE</node>
-            <node x="950.5" y="437.227272727273">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE</node>
-            <node x="1276.5" y="666.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE/org.springframework:spring-context:jar:5.1.9.RELEASE</node>
-            <node x="899.5" y="206.0636363636363">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-autoconfigure:jar:2.1.7.RELEASE</node>
-            <node x="897.0" y="860.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE</node>
-            <node x="1274.5" y="954.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3</node>
-            <node x="1605.5" y="972.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/ch.qos.logback:logback-core:jar:1.2.3</node>
-            <node x="1623.0" y="928.5">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/org.slf4j:slf4j-api:jar:1.7.25</node>
-            <node x="1282.0" y="860.8833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2</node>
-            <node x="1623.0" y="713.0">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.slf4j:slf4j-api:jar:1.7.26</node>
-            <node x="1619.5" y="866.8833333333337">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.apache.logging.log4j:log4j-api:jar:2.11.2</node>
-            <node x="1290.5" y="750.6636363636368">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.slf4j:jul-to-slf4j:jar:1.7.26</node>
-            <node x="921.0" y="753.1636363636368">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/javax.annotation:javax.annotation-api:jar:1.3.2</node>
-            <node x="952.0" y="162.0636363636363">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE</node>
-            <node x="1294.0" y="246.00000000000006">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE/org.springframework:spring-jcl:jar:5.1.9.RELEASE</node>
-            <node x="955.0" y="797.1636363636368">com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.yaml:snakeyaml:jar:1.23</node>
-            <node x="332.5" y="728.5">com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-api:jar:1.0-SNAPSHOT</node>
-            <node x="302.0" y="816.5">org.springframework.cloud:spring-cloud-starter-zookeeper-discovery:jar:unknown</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE">
-              <point x="-94.5" y="-0.0" />
-              <point x="872.0" y="620.727272727273" />
-              <point x="852.0" y="588.5" />
-              <point x="78.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/io.github.openfeign.form:feign-form:jar:3.8.0">
-              <point x="75.0" y="3.0" />
-              <point x="1512.0" y="397.3833333333337" />
-              <point x="1532.0" y="553.5" />
-              <point x="-51.0" y="-6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE">
-              <point x="78.5" y="-3.428571428571445" />
-              <point x="852.0" y="585.0714285714287" />
-              <point x="872.0" y="449.227272727273" />
-              <point x="-54.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-beans:jar:5.1.5.RELEASE">
-              <point x="52.5" y="-0.0" />
-              <point x="1777.0" y="18.0" />
-              <point x="-58.5" y="-6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-ribbon:jar:2.1.3.RELEASE">
-              <point x="113.0" y="6.0" />
-              <point x="1138.0" y="480.8833333333337" />
-              <point x="-107.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure-compatible:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3">
-              <point x="-172.0" y="-0.0" />
-              <point x="1138.0" y="1098.5" />
-              <point x="1118.0" y="1017.3571428571429" />
-              <point x="37.0" y="6.857142857142833" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE">
-              <point x="75.0" y="-9.0" />
-              <point x="1512.0" y="385.3833333333337" />
-              <point x="1532.0" y="24.0" />
-              <point x="-52.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE/org.springframework:spring-beans:jar:5.1.9.RELEASE">
-              <point x="51.5" y="-6.0" />
-              <point x="1512.0" y="296.00000000000006" />
-              <point x="1532.0" y="408.5636363636363" />
-              <point x="-58.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="54.5" y="-6.0" />
-              <point x="1118.0" y="443.227272727273" />
-              <point x="1138.0" y="73.0" />
-              <point x="-53.0" y="-3.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.aspectj:aspectjweaver:jar:1.9.4">
-              <point x="94.5" y="6.0" />
-              <point x="1118.0" y="626.727272727273" />
-              <point x="1138.0" y="524.8833333333337" />
-              <point x="-61.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/com.google.code.gson:gson:jar:2.8.5">
-              <point x="37.0" y="-0.0" />
-              <point x="-31.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.yaml:snakeyaml:jar:1.20">
-              <point x="37.0" y="-6.857142857142861" />
-              <point x="1118.0" y="1003.6428571428572" />
-              <point x="1138.0" y="834.8833333333337" />
-              <point x="-50.0" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="3.0" />
-              <point x="1148.0" y="79.0" />
-              <point x="1148.0" y="209.20000000000005" />
-              <point x="-53.0" y="-4.8" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.slf4j:slf4j-api:jar:1.7.26" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="0.0" y="12.0" />
-              <point x="0.0" y="-12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="58.0" y="-6.0" />
-              <point x="1512.0" y="866.8833333333337" />
-              <point x="1532.0" y="728.0" />
-              <point x="-41.5" y="3.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-autoconfigure:jar:2.1.7.RELEASE">
-              <point x="-113.0" y="-6.0" />
-              <point x="872.0" y="505.1636363636368" />
-              <point x="872.0" y="224.0636363636363" />
-              <point x="-105.5" y="6.0" />
-            </edge>
-            <edge source="com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT" target="com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-api:jar:1.0-SNAPSHOT">
-              <point x="141.0" y="-9.0" />
-              <point x="302.0" y="740.5" />
-              <point x="-123.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0">
-              <point x="113.0" y="-6.0" />
-              <point x="1138.0" y="394.3833333333337" />
-              <point x="-75.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-autoconfigure:jar:2.1.7.RELEASE">
-              <point x="78.5" y="-6.857142857142833" />
-              <point x="852.0" y="581.6428571428572" />
-              <point x="872.0" y="212.0636363636363" />
-              <point x="-105.5" y="-6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE/org.springframework:spring-jcl:jar:5.1.9.RELEASE">
-              <point x="53.0" y="6.0" />
-              <point x="1118.0" y="180.0636363636363" />
-              <point x="1138.0" y="258.00000000000006" />
-              <point x="-46.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3">
-              <point x="-131.0" y="-6.0" />
-              <point x="1138.0" y="1156.5" />
-              <point x="1118.0" y="1020.7857142857143" />
-              <point x="37.0" y="10.285714285714278" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE">
-              <point x="37.0" y="-10.285714285714278" />
-              <point x="1118.0" y="1000.2142857142858" />
-              <point x="1138.0" y="574.8833333333337" />
-              <point x="-63.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE">
-              <point x="94.5" y="-6.0" />
-              <point x="1118.0" y="614.727272727273" />
-              <point x="1138.0" y="308.00000000000006" />
-              <point x="-51.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.slf4j:jul-to-slf4j:jar:1.7.26">
-              <point x="108.0" y="-8.0" />
-              <point x="1138.0" y="762.6636363636368" />
-              <point x="-49.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-74.0" y="-6.0" />
-              <point x="53.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.netty:netty-all:jar:4.1.38.Final">
-              <point x="111.0" y="-4.800000000000011" />
-              <point x="872.0" y="916.5" />
-              <point x="-42.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0/io.github.openfeign:feign-core:jar:9.7.0">
-              <point x="54.0" y="-6.0" />
-              <point x="1118.0" y="1242.1636363636367" />
-              <point x="1138.0" y="1206.5" />
-              <point x="-49.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-63.5" y="-6.0" />
-              <point x="1138.0" y="562.8833333333337" />
-              <point x="1138.0" y="223.60000000000008" />
-              <point x="-53.0" y="9.6" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE">
-              <point x="111.0" y="-9.599999999999994" />
-              <point x="872.0" y="517.1636363636368" />
-              <point x="-113.0" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/io.netty:netty-all:jar:4.1.25.Final" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.netty:netty-all:jar:4.1.38.Final">
-              <point x="-42.5" y="-6.0" />
-              <point x="42.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="4.800000000000011" />
-              <point x="1138.0" y="218.80000000000007" />
-              <point x="1118.0" y="176.0636363636363" />
-              <point x="53.0" y="2.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/org.slf4j:slf4j-api:jar:1.7.25" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="-41.5" y="-8.0" />
-              <point x="1542.0" y="932.5" />
-              <point x="1542.0" y="795.0" />
-              <point x="-41.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/io.github.openfeign.form:feign-form:jar:3.8.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="-51.0" y="6.0" />
-              <point x="1532.0" y="565.5" />
-              <point x="1532.0" y="716.0" />
-              <point x="-41.5" y="-9.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.apache.logging.log4j:log4j-api:jar:2.11.2">
-              <point x="58.0" y="6.0" />
-              <point x="-45.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE/org.springframework:spring-context:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE">
-              <point x="0.0" y="-12.0" />
-              <point x="0.0" y="12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/commons-fileupload:commons-fileupload:jar:1.4">
-              <point x="75.0" y="-3.0" />
-              <point x="1512.0" y="391.3833333333337" />
-              <point x="1532.0" y="455.5636363636363" />
-              <point x="-85.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0">
-              <point x="111.0" y="9.599999999999994" />
-              <point x="872.0" y="1248.1636363636367" />
-              <point x="-54.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2">
-              <point x="108.0" y="-0.0" />
-              <point x="-58.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="-0.0" />
-              <point x="1138.0" y="150.00000000000006" />
-              <point x="1118.0" y="172.0636363636363" />
-              <point x="53.0" y="-2.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-core:jar:5.1.5.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="0.0" y="12.0" />
-              <point x="0.0" y="-12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/io.netty:netty-all:jar:4.1.25.Final">
-              <point x="37.0" y="-3.4285714285714164" />
-              <point x="1118.0" y="1007.0714285714287" />
-              <point x="1138.0" y="928.5" />
-              <point x="-42.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.yaml:snakeyaml:jar:1.23">
-              <point x="78.5" y="6.857142857142833" />
-              <point x="852.0" y="595.3571428571429" />
-              <point x="872.0" y="809.1636363636368" />
-              <point x="-50.0" y="-0.0" />
-            </edge>
-            <edge source="com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE">
-              <point x="141.0" y="9.0" />
-              <point x="302.0" y="872.5" />
-              <point x="-107.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE/org.springframework:spring-beans:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE">
-              <point x="0.0" y="-12.0" />
-              <point x="0.0" y="12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/ch.qos.logback:logback-core:jar:1.2.3">
-              <point x="65.5" y="6.0" />
-              <point x="1512.0" y="972.5" />
-              <point x="1532.0" y="984.5" />
-              <point x="-59.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-aop:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE">
-              <point x="-51.5" y="-6.0" />
-              <point x="1532.0" y="509.50000000000006" />
-              <point x="1512.0" y="308.00000000000006" />
-              <point x="51.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-autoconfigure:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE">
-              <point x="0.0" y="12.0" />
-              <point x="0.0" y="-12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="78.5" y="-10.285714285714278" />
-              <point x="852.0" y="578.2142857142858" />
-              <point x="872.0" y="174.0636363636363" />
-              <point x="-53.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-aop:jar:4.3.16.RELEASE">
-              <point x="63.5" y="8.0" />
-              <point x="1512.0" y="576.8833333333337" />
-              <point x="1532.0" y="521.5" />
-              <point x="-51.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:4.3.16.RELEASE">
-              <point x="26.5" y="12.0" />
-              <point x="26.5" y="-12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.javassist:javassist:jar:3.20.0-GA">
-              <point x="37.0" y="3.428571428571445" />
-              <point x="1118.0" y="1013.9285714285716" />
-              <point x="1138.0" y="1054.5" />
-              <point x="-41.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.slf4j:jul-to-slf4j:jar:1.7.26" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="49.5" y="-0.0" />
-              <point x="1512.0" y="762.6636363636368" />
-              <point x="1532.0" y="722.0" />
-              <point x="-41.5" y="-3.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3">
-              <point x="104.0" y="-0.0" />
-              <point x="-131.0" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure:jar:2.7.3/org.apache.dubbo:dubbo-spring-boot-autoconfigure-compatible:jar:2.7.3">
-              <point x="0.0" y="-12.0" />
-              <point x="0.0" y="12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="75.0" y="9.0" />
-              <point x="1512.0" y="403.3833333333337" />
-              <point x="1532.0" y="783.0" />
-              <point x="-41.5" y="-6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0/io.github.openfeign:feign-jaxrs:jar:9.7.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0/io.github.openfeign:feign-core:jar:9.7.0">
-              <point x="0.0" y="-12.0" />
-              <point x="0.0" y="12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot:jar:2.1.7.RELEASE/org.springframework:spring-context:jar:5.1.9.RELEASE">
-              <point x="54.5" y="6.0" />
-              <point x="1118.0" y="455.227272727273" />
-              <point x="1138.0" y="678.0" />
-              <point x="-63.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3">
-              <point x="108.0" y="8.0" />
-              <point x="1138.0" y="966.5" />
-              <point x="-65.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE">
-              <point x="107.0" y="-6.0" />
-              <point x="610.0" y="866.5" />
-              <point x="630.0" y="588.5" />
-              <point x="-78.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/io.github.openfeign:feign-jaxrs2:jar:9.7.0/io.github.openfeign:feign-jaxrs:jar:9.7.0">
-              <point x="54.0" y="6.0" />
-              <point x="1118.0" y="1254.1636363636367" />
-              <point x="1138.0" y="1270.5" />
-              <point x="-50.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="0.0" y="12.0" />
-              <point x="0.0" y="-12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3">
-              <point x="111.0" y="-0.0" />
-              <point x="-37.0" y="-0.0" />
-            </edge>
-            <edge source="com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT" target="org.springframework.cloud:spring-cloud-starter-zookeeper-discovery:jar:unknown">
-              <point x="141.0" y="3.0" />
-              <point x="-154.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE">
-              <point x="107.0" y="6.0" />
-              <point x="610.0" y="878.5" />
-              <point x="-111.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE">
-              <point x="63.5" y="-8.0" />
-              <point x="1512.0" y="560.8833333333337" />
-              <point x="1532.0" y="88.0" />
-              <point x="-74.0" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/commons-fileupload:commons-fileupload:jar:1.4" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/commons-fileupload:commons-fileupload:jar:1.4/commons-io:commons-io:jar:2.2">
-              <point x="85.0" y="-0.0" />
-              <point x="-57.0" y="-0.0" />
-            </edge>
-            <edge source="com.gupaoedu.book.springcloud:spring-cloud-dubbo-sample-provider:0.0.1-SNAPSHOT" target="org.springframework.cloud:spring-cloud-starter:jar:unknown">
-              <point x="141.0" y="-3.0" />
-              <point x="302.0" y="784.5" />
-              <point x="-81.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/org.slf4j:slf4j-api:jar:1.7.25">
-              <point x="65.5" y="-6.0" />
-              <point x="1512.0" y="960.5" />
-              <point x="1532.0" y="948.5" />
-              <point x="-41.5" y="8.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-core:jar:5.1.5.RELEASE">
-              <point x="-52.5" y="-6.0" />
-              <point x="53.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE">
-              <point x="63.5" y="-0.0" />
-              <point x="1512.0" y="568.8833333333337" />
-              <point x="1532.0" y="274.5636363636363" />
-              <point x="-58.5" y="6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE/org.springframework:spring-aop:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-51.5" y="-6.0" />
-              <point x="1138.0" y="296.00000000000006" />
-              <point x="1118.0" y="184.0636363636363" />
-              <point x="53.0" y="10.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/javax.annotation:javax.annotation-api:jar:1.3.2">
-              <point x="78.5" y="3.428571428571445" />
-              <point x="852.0" y="591.9285714285716" />
-              <point x="872.0" y="765.1636363636368" />
-              <point x="-84.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-beans:jar:5.1.5.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE">
-              <point x="-58.5" y="6.0" />
-              <point x="1777.0" y="268.5636363636363" />
-              <point x="58.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-core:jar:5.1.5.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="-6.0" />
-              <point x="1138.0" y="6.0" />
-              <point x="1118.0" y="164.0636363636363" />
-              <point x="53.0" y="-10.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:2.1.7.RELEASE">
-              <point x="0.0" y="12.0" />
-              <point x="0.0" y="-12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-26.5" y="-12.0" />
-              <point x="-26.5" y="12.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="-9.6" />
-              <point x="1158.0" y="204.40000000000003" />
-              <point x="1158.0" y="85.0" />
-              <point x="-53.0" y="9.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-ribbon:jar:2.1.3.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-ribbon:jar:2.1.3.RELEASE/org.springframework.cloud:spring-cloud-netflix-archaius:jar:2.1.3.RELEASE">
-              <point x="107.0" y="-0.0" />
-              <point x="1512.0" y="480.8833333333337" />
-              <point x="1532.0" y="603.5" />
-              <point x="-112.5" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.3">
-              <point x="111.0" y="4.800000000000011" />
-              <point x="872.0" y="1168.5" />
-              <point x="-104.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-expression:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="-9.0" />
-              <point x="1138.0" y="67.0" />
-              <point x="1118.0" y="168.0636363636363" />
-              <point x="53.0" y="-6.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE">
-              <point x="78.5" y="10.285714285714278" />
-              <point x="852.0" y="598.7857142857143" />
-              <point x="872.0" y="872.5" />
-              <point x="-108.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/ch.qos.logback:logback-classic:jar:1.2.3/org.slf4j:slf4j-api:jar:1.7.25" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:2.1.7.RELEASE/org.apache.logging.log4j:log4j-to-slf4j:jar:2.11.2/org.slf4j:slf4j-api:jar:1.7.26">
-              <point x="-41.5" y="-0.0" />
-              <point x="1532.0" y="940.5" />
-              <point x="1532.0" y="734.0" />
-              <point x="-41.5" y="9.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.yaml:snakeyaml:jar:1.20" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE/org.yaml:snakeyaml:jar:1.23">
-              <point x="-50.0" y="-6.0" />
-              <point x="1138.0" y="822.8833333333337" />
-              <point x="1118.0" y="809.1636363636368" />
-              <point x="50.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-beans:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:4.3.16.RELEASE">
-              <point x="-58.5" y="-6.0" />
-              <point x="1532.0" y="262.5636363636363" />
-              <point x="1512.0" y="150.00000000000006" />
-              <point x="53.0" y="-0.0" />
-            </edge>
-            <edge source="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.springframework.cloud:spring-cloud-openfeign-core:jar:2.1.3.RELEASE/io.github.openfeign.form:feign-form-spring:jar:3.8.0/org.springframework:spring-web:jar:5.1.5.RELEASE/org.springframework:spring-core:jar:5.1.5.RELEASE" target="com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/com.alibaba.cloud:spring-cloud-alibaba-dubbo:jar:2.1.1.RELEASE/org.apache.dubbo:dubbo:jar:2.7.3/org.springframework:spring-context:jar:4.3.16.RELEASE/org.springframework:spring-core:jar:5.1.9.RELEASE">
-              <point x="-53.0" y="6.0" />
-              <point x="1138.0" y="18.0" />
-              <point x="1138.0" y="214.00000000000006" />
-              <point x="-53.0" y="-0.0" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="1.0" x="226.0" y="383.0" />
-          <SelectedNodes>
-            <node>com.alibaba.cloud:spring-cloud-starter-dubbo:jar:2.1.1.RELEASE/org.springframework.boot:spring-boot-starter:jar:2.1.7.RELEASE</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>All</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-api/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/main/java/com/gupaoedu/book/springcloud/springclouddubbosampleprovider/SpringCloudDubboSampleProviderApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-starter-dubbo/2.1.1.RELEASE/spring-cloud-starter-dubbo-2.1.1.RELEASE.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-starter-zookeeper-discovery/2.1.2.RELEASE/spring-cloud-starter-zookeeper-discovery-2.1.2.RELEASE.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-starter-dubbo/2.1.1.RELEASE/spring-cloud-starter-dubbo-2.1.1.RELEASE.jar!/META-INF/maven/com.alibaba.cloud/spring-cloud-starter-dubbo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/cloud/spring-cloud-starter-dubbo/2.1.1.RELEASE/spring-cloud-starter-dubbo-2.1.1.RELEASE.jar!/META-INF/maven/com.alibaba.cloud/spring-cloud-starter-dubbo/pom.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/main/java/com/gupaoedu/book/springcloud/springclouddubbosampleprovider/HelloServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        <state relative-caret-position="252">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-            <element signature="e#588#589#0" expanded="true" />
+            <marker date="1580560459887" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459887" expanded="false" signature="158:749" ph="..." />
+            <marker date="1580560459887" expanded="true" signature="1024:1031" ph="{}" />
+            <marker date="1580560459887" expanded="true" signature="1115:2315" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="2396:3400" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="3447:3604" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_211/src.zip!/java/sql/Driver.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/rpc/RpcContext.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="89" column="18" selection-start-line="89" selection-start-column="18" selection-end-line="89" selection-end-column="18" />
+          <caret line="27" column="79" lean-forward="false" selection-start-line="27" selection-start-column="79" selection-end-line="27" selection-end-column="79" />
+          <folding>
+            <marker date="1580560459887" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459887" expanded="false" signature="144:826" ph="..." />
+            <marker date="1580560459887" expanded="true" signature="957:1057" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="1002:1017" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="1041:1051" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="1169:1269" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="1214:1229" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="1253:1263" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="1686:1704" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="1764:1782" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="1835:1853" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="2029:2036" ph="{}" />
+            <marker date="1580560459887" expanded="false" signature="2085:2096" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2134:2140" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2214:2225" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2260:2266" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2312:2323" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2345:2351" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2394:2405" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2436:2442" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2504:2515" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2537:2543" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2583:2594" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2609:2615" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2647:2658" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2678:2684" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2728:2739" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2762:2768" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="2814:2931" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="2964:2975" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2996:3002" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3048:3059" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3084:3090" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="3137:3257" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="3294:3305" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3335:3341" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3378:3389" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3462:3468" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3528:3539" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3596:3602" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3640:3651" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3708:3714" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3770:3781" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3826:3832" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3864:3875" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3958:3964" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4005:4016" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4033:4039" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4064:4075" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4091:4097" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4130:4141" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4156:4162" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4197:4208" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4231:4237" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4287:4298" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4327:4333" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4376:4387" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4414:4420" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4482:4493" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4530:4536" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4572:4583" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4605:4611" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4661:4672" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4699:4705" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="4768:4929" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="4977:4988" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="5013:5019" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="5086:5151" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="5194:5205" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="5260:5266" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="5305:5473" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="5537:5699" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="5748:5759" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="5785:5791" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="5859:5925" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="5971:5982" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6016:6022" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="6101:6189" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="6233:6244" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6301:6307" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="6346:6357" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6433:6439" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="6474:6774" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="6805:6816" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6883:6889" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="6925:7138" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="7170:7181" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="7250:7256" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="7301:7312" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="7353:7359" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="7423:7596" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="7649:7715" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="7764:7775" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="7799:7805" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="7876:8057" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="8093:8104" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8129:8135" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="8173:8184" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8203:8209" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8263:8426" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="8469:8530" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="8565:8576" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8604:8610" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8616:8634" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="8684:8695" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8724:8730" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8736:8754" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="8804:8815" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8844:8850" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8856:8874" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="8933:9048" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="9111:9533" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="9539:9557" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="9608:9619" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="9639:9645" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="9700:9845" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="9851:9869" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="9923:9934" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="9957:9963" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="10024:10321" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="10391:11902" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="11201:11885" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="11271:11294" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="11307:11325" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="11371:11394" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="11407:11425" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="11466:11489" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="11501:11519" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="11600:11687" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="11813:11871" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="11949:12262" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="12337:12611" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="12674:12685" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="12718:12724" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="12761:12772" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="12850:12856" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="12888:12899" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="12931:12937" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="12980:12991" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="13016:13022" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-netflix-eureka-server/2.1.2.RELEASE/spring-cloud-netflix-eureka-server-2.1.2.RELEASE.jar!/org/springframework/cloud/netflix/eureka/server/InstanceRegistry.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/common/threadlocal/InternalThreadLocal.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="85" column="10" lean-forward="true" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
+        <state relative-caret-position="2736">
+          <caret line="83" column="45" lean-forward="true" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
+          <folding>
+            <marker date="1580560459887" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459887" expanded="false" signature="159:237" ph="..." />
+            <marker date="1580560459887" expanded="true" signature="486:493" ph="{}" />
+            <marker date="1580560459887" expanded="true" signature="530:1531" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="1562:1719" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="1753:1764" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="1797:1803" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="1924:2386" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="2512:2785" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="2812:3048" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="3114:3420" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="3457:3819" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="3851:3862" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3909:3915" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="3985:4420" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="4470:4498" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="4555:4562" ph="{}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/common/config/Environment.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/rpc/protocol/rest/RpcContextFilter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4173">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        <state relative-caret-position="252">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <marker date="1580560459887" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459887" expanded="false" signature="158:749" ph="..." />
+            <marker date="1580560459887" expanded="true" signature="1024:1031" ph="{}" />
+            <marker date="1580560459887" expanded="true" signature="1115:2315" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="2396:3400" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="3447:3604" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/com.alibaba.dubbo.rpc.Protocol">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.cache.CacheFactory">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.ProxyFactory">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.protocol.thrift.ClassNameGenerator">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.InvokerListener">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.Filter">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.cluster.RouterFactory">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.cluster.Merger">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.cluster.ConfiguratorFactory">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.cluster.Cluster">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.zookeeper.ZookeeperTransporter">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.Transporter">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-api/src/main/java/com/gupaoedu/book/springcloud/Protocol$Adaptive.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.rpc.Protocol">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/com/alibaba/dubbo/rpc/RpcContext.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="3" column="5" selection-start-line="3" selection-end-line="3" selection-end-column="5" />
+        <state relative-caret-position="288">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/config/ServiceConfig.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/rpc/RpcContext.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25155">
-          <caret line="702" selection-start-line="702" selection-end-line="702" />
+        <state relative-caret-position="252">
+          <caret line="27" column="79" lean-forward="false" selection-start-line="27" selection-start-column="79" selection-end-line="27" selection-end-column="79" />
+          <folding>
+            <marker date="1580560459887" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459887" expanded="false" signature="144:826" ph="..." />
+            <marker date="1580560459887" expanded="true" signature="957:1057" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="1002:1017" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="1041:1051" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="1169:1269" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="1214:1229" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="1253:1263" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="1686:1704" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="1764:1782" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="1835:1853" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="2029:2036" ph="{}" />
+            <marker date="1580560459887" expanded="false" signature="2085:2096" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2134:2140" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2214:2225" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2260:2266" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2312:2323" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2345:2351" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2394:2405" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2436:2442" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2504:2515" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2537:2543" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2583:2594" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2609:2615" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2647:2658" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2678:2684" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="2728:2739" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2762:2768" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="2814:2931" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="2964:2975" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="2996:3002" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3048:3059" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3084:3090" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="3137:3257" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="3294:3305" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3335:3341" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3378:3389" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3462:3468" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3528:3539" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3596:3602" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3640:3651" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3708:3714" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3770:3781" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3826:3832" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="3864:3875" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3958:3964" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4005:4016" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4033:4039" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4064:4075" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4091:4097" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4130:4141" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4156:4162" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4197:4208" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4231:4237" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4287:4298" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4327:4333" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4376:4387" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4414:4420" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4482:4493" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4530:4536" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4572:4583" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4605:4611" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="4661:4672" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="4699:4705" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="4768:4929" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="4977:4988" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="5013:5019" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="5086:5151" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="5194:5205" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="5260:5266" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="5305:5473" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="5537:5699" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="5748:5759" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="5785:5791" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="5859:5925" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="5971:5982" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6016:6022" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="6101:6189" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="6233:6244" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6301:6307" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="6346:6357" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6433:6439" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="6474:6774" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="6805:6816" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="6883:6889" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="6925:7138" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="7170:7181" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="7250:7256" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="7301:7312" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="7353:7359" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="7423:7596" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="7649:7715" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="7764:7775" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="7799:7805" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="7876:8057" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="8093:8104" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8129:8135" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="8173:8184" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8203:8209" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8263:8426" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="8469:8530" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="8565:8576" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8604:8610" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8616:8634" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="8684:8695" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8724:8730" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8736:8754" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="8804:8815" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="8844:8850" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="8856:8874" ph="/**...*/" />
+            <marker date="1580560459887" expanded="true" signature="8933:9048" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="9111:9533" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="9539:9557" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="9608:9619" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="9639:9645" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="9700:9845" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="9851:9869" ph="/**...*/" />
+            <marker date="1580560459887" expanded="false" signature="9923:9934" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="9957:9963" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="10024:10321" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="10391:11902" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="11201:11885" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="11271:11294" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="11307:11325" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="11371:11394" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="11407:11425" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="11466:11489" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="11501:11519" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="11600:11687" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="11813:11871" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="11949:12262" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="12337:12611" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="12674:12685" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="12718:12724" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="12761:12772" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="12850:12856" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="12888:12899" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="12931:12937" ph=" }" />
+            <marker date="1580560459887" expanded="false" signature="12980:12991" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="13016:13022" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.telnet.TelnetHandler">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.http.HttpBinder">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.exchange.Exchanger">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.Dispatcher">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.remoting.Codec2">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/META-INF/dubbo/internal/org.apache.dubbo.registry.RegistryFactory">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/common/extension/ExtensionLoader.class">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/dubbo/dubbo/2.7.3/dubbo-2.7.3.jar!/org/apache/dubbo/common/threadlocal/InternalThreadLocal.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="487" selection-start-line="487" selection-end-line="487" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="23" selection-start-line="23" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spring-cloud-dubbo-sample-provider/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="39" column="21" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="39" selection-end-column="21" />
+        <state relative-caret-position="8">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <marker date="1580560459887" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1580560459887" expanded="false" signature="159:237" ph="..." />
+            <marker date="1580560459887" expanded="true" signature="486:493" ph="{}" />
+            <marker date="1580560459887" expanded="true" signature="530:1531" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="1562:1719" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="1753:1764" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="1797:1803" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="1924:2386" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="2512:2785" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="2812:3048" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="3114:3420" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="3457:3819" ph="{...}" />
+            <marker date="1580560459887" expanded="false" signature="3851:3862" ph=" { " />
+            <marker date="1580560459887" expanded="false" signature="3909:3915" ph=" }" />
+            <marker date="1580560459887" expanded="true" signature="3985:4420" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="4470:4498" ph="{...}" />
+            <marker date="1580560459887" expanded="true" signature="4555:4562" ph="{}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1241,18 +741,6 @@
         </settings>
       </state>
       <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.8</last-edited>
           <splitter-proportions>
